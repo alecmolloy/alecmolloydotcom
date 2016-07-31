@@ -1,0 +1,19 @@
+{
+  "name": "alecMolloyDotCom",
+  "version": "4.0.0",
+  "scripts": {
+    "main": "node ./app.js",
+    "start": "node ./app.js",
+    "watch": "nodemon"
+  },
+  "dependencies": {
+    "express": "4.14.0",
+    "pug": "^2.0.0-beta4",
+    "monk": "3.1.1",
+    "morgan": "1.7.0",
+    "mongodb": "2.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "1.4.1"
+  }
+}

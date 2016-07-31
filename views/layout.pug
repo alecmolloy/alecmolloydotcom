@@ -1,0 +1,31 @@
+include components.pug
+doctype html
+html
+	head
+		meta(lang="en" charset="utf-8")
+
+		if content.title
+			title alec molloy / #{content.title}
+		else
+			title alec molloy
+
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		meta(name='title', content=content.title)
+		meta(name='description', content=content.description)
+		meta(name='property', content=content.ogImg)
+
+		link(rel='stylesheet', href='/css/stylesheet.css')
+		link(rel="icon" type="img/png" href="/favicon.png")
+	body
+		header
+			.header-breadcrumbs
+				a.header-breadcrumbs-head(href="/") alec molloy
+				if (typeof content.location !== "undefined")
+					- for (var i = 0; i < content.location.length; ++i)
+						a.header-breadcrumbs-crumb(href=content.location[i].address) #{content.location[i].name}
+			nav
+				ul.header-navigation
+					each item in ["portfolio", "blog", "about"]
+						li
+							a(href="/" + item) #{item}
+		block main

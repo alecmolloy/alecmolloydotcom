@@ -1,0 +1,23 @@
+mixin portfolioCard(content)
+	li.portfolio-card
+		a(href=content.URL)
+			img.portfolio-card-img(src="/portfolio/" + content.img)
+			.portfolio-card-title #{content.title}
+			.portfolio-card-description #{content.description} (#{content.date})
+
+mixin blogpost(content)
+	article.blogpost.wrapper
+		.blogpost-hero
+			img#blogpost-hero-image(src="#{content.hero}")
+		.blogpost-hearder
+			h2.blogpost-header-title #{content.title}
+			.blogpost-header-deck #{content.deck}
+			.blogpost-header-byline #{content.byline}
+		#blogpost-content #{content.content}
+
+mixin blogpostPreview(content)
+	li.blogposts-post
+		a.blogposts-post-link(href="/post/" + content.slug)
+			img.blogposts-post-hero(src="/blog/" + content.hero)
+			h2 #{content.title}
+			.blogposts-post-text #{content.preview}

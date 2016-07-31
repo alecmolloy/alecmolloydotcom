@@ -1,0 +1,8 @@
+{
+	"ignore": [
+    	".git",
+    	"node_modules",
+		"data"
+  	],
+	"verbose" : true
+}
