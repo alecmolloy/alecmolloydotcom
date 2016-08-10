@@ -1,4 +1,5 @@
 var express = require("express"),
+	compression = require("compression"),
 	pug = require("pug"),
 	logger = require("morgan");
 
@@ -9,6 +10,7 @@ var db = monk('localhost:27017/alecmolloy');
 
 var app = express();
 
+app.use(compression());
 app.use(function (req, res, next) {
 	req.db = db;
 	next();
