@@ -34,4 +34,7 @@ app.use(function (req, res, next) {
 	next(err);
 });
 
-app.listen(3000);
+if (process.env.NODE_ENV === "production")
+	app.listen(80);
+else
+	app.listen(3000);
