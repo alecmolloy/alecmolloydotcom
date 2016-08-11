@@ -1,14 +1,14 @@
 mixin portfolioCard(content)
 	li.portfolio-card
 		a(href=content.URL)
-			img.portfolio-card-img(src="/portfolio/" + content.img)
+			img.portfolio-card-img(src="/portfolio/" + content.img, alt=content.alt)
 			.portfolio-card-title #{content.title}
 			.portfolio-card-description #{content.description} (#{content.date})
 
 mixin blogpost(content)
 	article.blogpost.wrapper
 		.blogpost-hero
-			img#blogpost-hero-image(src="#{content.hero}")
+			img#blogpost-hero-image(src=content.hero, alt=content.alt)
 		.blogpost-hearder
 			h2.blogpost-header-title #{content.title}
 			.blogpost-header-deck #{content.deck}
@@ -18,6 +18,6 @@ mixin blogpost(content)
 mixin blogpostPreview(content)
 	li.blogposts-post
 		a.blogposts-post-link(href="/post/" + content.slug)
-			img.blogposts-post-hero(src="/blog/" + content.hero)
+			img.blogposts-post-hero(src="/blog/" + content.hero, alt=content.alt)
 			h2 #{content.title}
 			.blogposts-post-text #{content.preview}
