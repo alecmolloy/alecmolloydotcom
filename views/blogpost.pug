@@ -2,7 +2,7 @@ extend layout
 block main
 	article.blogpost.wrapper
 		.blogpost-hero
-			img#blogpost-hero-image(src="/blog/" + content.postContent.hero)
+			img#blogpost-hero-image(src="/blog/" + content.postContent.hero, alt=content.alt)
 		.blogpost-header
 			h2#blogpost-header-title #{content.postContent.title}
 			#blogpost-header-deck #{content.postContent.deck}
