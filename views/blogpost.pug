@@ -2,11 +2,7 @@ extend layout
 block main
 	article.blogpost.wrapper
 		.blogpost-hero
-<<<<<<< d24a40e7a2550a49f2a13dce51430c0ba02d5f1c
-			img#blogpost-hero-image(src="/blog/" + content.postContent.hero, alt=content.alt)
-=======
 			img#blogpost-hero-image(src="/blog/" + content.postContent.hero, alt=content.postContent.alt)
->>>>>>> added alt text to blogposts
 		.blogpost-header
 			h2#blogpost-header-title #{content.postContent.title}
 			#blogpost-header-deck #{content.postContent.deck}
