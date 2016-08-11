@@ -6,7 +6,7 @@ router.get(["/", "/index.html"], function (req, res) {
 	var blog = db.get('blog');
 	var portfolio = db.get('portfolio');
 	blog.find({}, {}, function (e, blogDocs) {
-		portfolio.find({}, {}, function (e, portfolioDocs) {
+		portfolio.find({}, {sort : { _id: 1 }}, function (e, portfolioDocs) {
 			res.render("index", {
 				content: {
 					posts: blogDocs,
@@ -32,7 +32,7 @@ router.get("/about", function (req, res) {
 router.get("/blog", function (req, res) {
 	var db = req.db;
 	var blog = db.get('blog');
-	blog.find({}, {}, function (e, docs) {
+	blog.find({}, {sort : { _id: 1 }}, function (e, docs) {
 		res.render("blog", {
 			content: {
 				posts: docs,
@@ -49,7 +49,7 @@ router.get("/blog", function (req, res) {
 router.get("/portfolio", function (req, res) {
 	var db = req.db;
 	var portfolio = db.get('portfolio');
-	portfolio.find({}, {}, function (e, docs) {
+	portfolio.find({}, {sort : { _id: 1 }}, function (e, docs) {
 		res.render("portfolio", {
 			content: {
 				docs: docs,
