@@ -17,12 +17,12 @@ app.use(function (req, res, next) {
 	next();
 });
 
-app.use(express.static("public"));
 app.set("views", __dirname + "/views");
 app.set("view engine", "pug");
 app.locals.basedir = __dirname;
 app.use(logger("dev"));
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("public"));
+app.use(express.static("public/projects"));
 
 var router = express.Router();
 

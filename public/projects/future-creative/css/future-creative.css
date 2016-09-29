@@ -1,0 +1,19 @@
+section {
+	perspective: 1000000px !important;
+}
+.ambassador {
+	transition: 4s ease-in-out transform !important;
+	transform: rotate3d( 0, 0, 0, 0deg) scale(1.0) translate3D(0,0,0);
+}
+.art img {
+	max-height: 700px !important;
+}
+
+.ambassador:hover {
+	transition: 4s ease-in-out transform !important;
+	transform: rotate3d( 0.0, -2.3, 0.8, 100deg) scale(1.75) translate3D(47px, -300px, -39px) ;
+}
+
+.art-caption {
+	font-family: "Adobe Garamond Pro", "Adobe Caslon Pro","Garamond", Georgia, serif !important;
+}
