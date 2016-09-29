@@ -10,7 +10,7 @@ router.get(["/", "/index.html"], function (req, res) {
 			res.render("index", {
 				content: {
 					posts: blogDocs,
-					portfolio: portfolioDocs,
+					portfolio: portfolioDocs
 				}
 			});
 		});
@@ -21,6 +21,7 @@ router.get("/about", function (req, res) {
 	res.render("about", {
 		content: {
 			title: "about",
+			description: "about the acclaimed web-man alec molloy",
 			location: [{
 				name: "about",
 				address: "/about"
@@ -36,6 +37,7 @@ router.get("/blog", function (req, res) {
 		res.render("blog", {
 			content: {
 				posts: docs,
+				description: "the internet blog of alec molloy",
 				title: "blog",
 				location: [{
 					name: "blog",
@@ -54,6 +56,7 @@ router.get("/portfolio", function (req, res) {
 			content: {
 				docs: docs,
 				title: "portfolio",
+				description: "the e-portfolio of alec molloy",
 				location: [{
 					name: "portfolio",
 					address: "/portfolio"

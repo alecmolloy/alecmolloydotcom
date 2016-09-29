@@ -10,19 +10,25 @@ html(lang="en")
 			title alec molloy
 
 		meta(name='viewport', content='width=device-width, initial-scale=1')
-		meta(name='title', content=content.title)
-		meta(name='description', content=content.description)
-		meta(name='property', content=content.ogImg)
+		if content.ogImg
+			meta(name='description', content=content.description)
+		else
+			meta(name='description', content="the official web presence of alec molloy")
+		if content.ogImg
+			meta(property='og:image', content=content.ogImg)
+		else
+			meta(property='og:image', content="http://alecmolloy.com/favicon.png")
 
 		link(rel='stylesheet', href='/css/stylesheet.css')
 		link(rel="icon" type="img/png" href="/favicon.png")
 	body
 		header
 			.header-breadcrumbs
-				a.header-breadcrumbs-head(href="/") alec molloy
-				if (typeof content.location !== "undefined")
-					- for (var i = 0; i < content.location.length; ++i)
-						a.header-breadcrumbs-crumb(href=content.location[i].address) #{content.location[i].name}
+				h1
+					a.header-breadcrumbs-head(href="/") alec molloy
+					if (typeof content.location !== "undefined")
+						- for (var i = 0; i < content.location.length; ++i)
+							a.header-breadcrumbs-crumb(href=content.location[i].address) #{content.location[i].name}
 			nav
 				ul.header-navigation
 					each item in ["portfolio", "blog", "about"]

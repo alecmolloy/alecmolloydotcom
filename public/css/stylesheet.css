@@ -43,6 +43,12 @@ header {
 	/*	cursor: url('img/mouse.png') 64 64, auto;*/
 }
 
+.header-breadcrumbs h1 {
+	font-weight: normal;
+	font-size: inherit;
+	margin: inherit;
+}
+
 .header-breadcrumbs-head:link,
 .header-breadcrumbs-head:visited{
 	color: #444;
