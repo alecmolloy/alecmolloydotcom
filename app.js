@@ -9,7 +9,7 @@ var monk = require('monk');
 var db = monk('localhost:27017/alecmolloy');
 
 var app = express(),
-port = process.env.PORT || 3000;
+port = process.env.NODE_ENV === "production" ? 80 : 3000;
 
 app.use(compression());
 app.use(function (req, res, next) {
@@ -36,3 +36,4 @@ app.use(function (req, res, next) {
 });
 
 app.listen(port);
+console.log("\nListening on port " + port + "\n")
