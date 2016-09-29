@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta lang="en" charset="utf-8">
+    <title></title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="title" content="Make Music Visualiser" />
+    <meta name="description" content="A basic microphone-controlled sound visualiser. Made by Tommy Säl and Alec Molloy for Kano." />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Make Music Visualiser" />
+    <meta property="twitter:description" content="A basic microphone-controlled sound visualiser. Made by Tommy Säl and Alec Molloy for Kano." />
+    <meta property="twitter:image" content="http://alecmolloy.com/make-music-visualiser/img/og.png" />
+    <meta property="og:url" content="http://alecmolloy.com/make-music-visualiser/" />
+    <meta property="og:image" content="http://alecmolloy.com/make-music-visualiser/img/og.png" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" href="" sizes="32x32">
+    <link rel="icon" type="image/png" href="" sizes="192x192">
+
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #63ccfb;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #playpause {
+			cursor: pointer;
+            position: absolute;
+            left:50%;
+            top:50%;
+            z-index: 1;
+            width:75px;
+            height:75px;
+            transform: translate(-350%, -50%);
+        }
+        #time {
+            position: absolute;
+            left:50%;
+            top:50%;
+            z-index: 1;
+            width:75px;
+            transform: translate(240%, -50%);
+            color: white;
+            font: 1em/1em normal normal "Bariol", "Comic Sans", "Comic Sans MS", sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <img src="img/pause-button.png" id="playpause">
+    <div id="time">0:30</div>
+	<audio id='song' src="sources/my-recording.wav" controls autoplay></audio>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
