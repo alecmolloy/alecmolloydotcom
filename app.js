@@ -8,7 +8,8 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/alecmolloy');
 
-var app = express();
+var app = express(),
+port = process.env.PORT || 3000;
 
 app.use(compression());
 app.use(function (req, res, next) {
@@ -25,7 +26,7 @@ app.use(express.static(__dirname + "/public"));
 
 var router = express.Router();
 
-app.use('/', require("./routes/"));
+app.use("/", require("./routes/"));
 app.use("/post", require("./routes/blog"));
 
 app.use(function (req, res, next) {
@@ -34,7 +35,4 @@ app.use(function (req, res, next) {
 	next(err);
 });
 
-if (process.env.NODE_ENV === "production")
-	app.listen(80);
-else
-	app.listen(3000);
+app.listen(port);
