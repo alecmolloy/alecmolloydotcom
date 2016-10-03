@@ -1,15 +1,24 @@
 var express = require("express"),
+	fs = require("fs"),
+	https = require("https"),
+	http = require("http"),
 	compression = require("compression"),
 	pug = require("pug"),
 	logger = require("morgan");
 
+var credentials = {
+	key: fs.readFileSync("/etc/ssl/private/alecmolloy.key"),
+	cert: fs.readFileSync("/etc/ssl/certs/alecmolloy.crt")
+};
 
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/alecmolloy');
+var mongo = require("mongodb");
+var monk = require("monk");
+var db = monk("localhost:27017/alecmolloy");
 
 var app = express(),
-port = process.env.NODE_ENV === "production" ? 80 : 3000;
+	httpPort = process.env.NODE_ENV === "production" ? 80 : 3000,
+	httpsPort = process.env.NODE_ENV === "production" ? 443 : 3001;
+
 
 app.use(compression());
 app.use(function (req, res, next) {
@@ -35,5 +44,8 @@ app.use(function (req, res, next) {
 	next(err);
 });
 
-app.listen(port);
-console.log("\nListening on port " + port + "\n")
+http.createServer(app).listen(httpPort);
+https.createServer(credentials, app).listen(httpsPort);
+
+console.log("\nListening on http port " + httpPort + "\n")
+console.log("\nListening on https port " + httpsPort + "\n")
