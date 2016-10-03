@@ -1,10 +1,16 @@
 var express = require("express"),
 	fs = require("fs"),
-	https = require("https"),
 	http = require("http"),
+	https = require("https"),
 	compression = require("compression"),
 	pug = require("pug"),
 	logger = require("morgan");
+
+var httpApp = express(),
+	httpsApp = express();
+
+var httpPort = process.env.NODE_ENV === "production" ? 80 : 3000,
+	httpsPort = process.env.NODE_ENV === "production" ? 443 : 3001;
 
 var credentials = {
 	key: fs.readFileSync("/etc/ssl/private/alecmolloy.key"),
@@ -12,41 +18,40 @@ var credentials = {
 	ca: fs.readFileSync("/etc/ssl/certs/intermediate.pem")
 };
 
+httpApp.set("port", httpPort);
+httpApp.get("*", function (req, res, next) {
+	res.redirect("https://" + req.headers.host + "/" + req.path);
+});
+
 var mongo = require("mongodb");
 var monk = require("monk");
 var db = monk("localhost:27017/alecmolloy");
 
-var app = express(),
-	httpPort = process.env.NODE_ENV === "production" ? 80 : 3000,
-	httpsPort = process.env.NODE_ENV === "production" ? 443 : 3001;
-
-
-app.use(compression());
-app.use(function (req, res, next) {
+httpsApp.use(function (req, res, next) {
 	req.db = db;
 	next();
 });
-
-app.set("views", __dirname + "/views");
-app.set("view engine", "pug");
-app.locals.basedir = __dirname;
-app.use(logger("dev"));
-app.use(express.static("public"));
-app.use(express.static("public/projects"));
-
-var router = express.Router();
-
-app.use("/", require("./routes/"));
-app.use("/post", require("./routes/blog"));
-
-app.use(function (req, res, next) {
+httpsApp.set("port", httpsPort);
+httpsApp.set("views", __dirname + "/views");
+httpsApp.set("view engine", "pug");
+httpsApp.use(compression());
+httpsApp.use(logger("dev"));
+httpsApp.use(express.static("public"));
+httpsApp.use(express.static("public/projects"));
+httpsApp.use("/", require("./routes/"));
+httpsApp.use("/post", require("./routes/blog"));
+httpsApp.use(function (req, res, next) {
 	var err = new Error('Not Found');
 	err.status = 404;
 	next(err);
 });
 
-http.createServer(app).listen(httpPort);
-https.createServer(credentials, app).listen(httpsPort);
+http.createServer(httpApp).listen(httpApp.get('port'), function () {
+	console.log("\nListening on http port " + httpApp.get('port') + "\n")
+});
 
-console.log("\nListening on http port " + httpPort + "\n")
-console.log("\nListening on https port " + httpsPort + "\n")
+console.log(httpsPort);
+
+https.createServer(credentials, httpsApp).listen(httpsApp.get('port'), function () {
+	console.log("\nListening on https port " + httpsApp.get('port') + "\n")
+});
