@@ -8,7 +8,8 @@ var express = require("express"),
 
 var credentials = {
 	key: fs.readFileSync("/etc/ssl/private/alecmolloy.key"),
-	cert: fs.readFileSync("/etc/ssl/certs/alecmolloy.crt")
+	cert: fs.readFileSync("/etc/ssl/certs/alecmolloy.crt"),
+	ca: fs.readFileSync("/etc/ssl/certs/intermediate.pem")
 };
 
 var mongo = require("mongodb");
