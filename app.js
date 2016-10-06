@@ -41,9 +41,16 @@ httpsApp.use(express.static("public/projects"));
 httpsApp.use("/", require("./routes/"));
 httpsApp.use("/post", require("./routes/blog"));
 httpsApp.use(function (req, res, next) {
-	var err = new Error('Not Found');
-	err.status = 404;
-	next(err);
+	res.status(404).render("404", {
+		content: {
+			title: ":(",
+			description: ":( :( :(",
+			location: [{
+				name: ":(",
+				address: "/404"
+			}]
+		}
+	});
 });
 
 http.createServer(httpApp).listen(httpApp.get('port'), function () {
