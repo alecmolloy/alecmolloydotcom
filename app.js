@@ -53,6 +53,8 @@ httpsApp.use(function (req, res, next) {
 	});
 });
 
+httpsApp.locals.basedir = __dirname;
+
 http.createServer(httpApp).listen(httpApp.get('port'), function () {
 	console.log("\nListening on http port " + httpApp.get('port') + "\n")
 });
