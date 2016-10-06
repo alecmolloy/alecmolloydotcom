@@ -59,8 +59,6 @@ http.createServer(httpApp).listen(httpApp.get('port'), function () {
 	console.log("\nListening on http port " + httpApp.get('port') + "\n")
 });
 
-console.log(httpsPort);
-
 https.createServer(credentials, httpsApp).listen(httpsApp.get('port'), function () {
 	console.log("\nListening on https port " + httpsApp.get('port') + "\n")
 });
