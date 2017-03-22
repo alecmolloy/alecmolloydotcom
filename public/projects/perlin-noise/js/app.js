@@ -3,21 +3,23 @@ var dpr = window.devicePixelRatio || 1;
 var canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-//canvas.width = canvas.width * dpr;
-//canvas.height = canvas.height * dpr;
-//canvas.style.width = (canvas.width / dpr) + 'px';
-//canvas.style.height = (canvas.height / dpr) + 'px';
+canvas.width = canvas.width * dpr;
+canvas.height = canvas.height * dpr;
+//canvas.width    = 100;
+//canvas.height   = 100;
+canvas.style.width = (canvas.width / dpr) + 'px';
+canvas.style.height = (canvas.height / dpr) + 'px';
 
 var ctx = canvas.getContext('2d');
 
-var perlin = new Perlin({
-    dimensions: 3,
-    cellSize: 20,
+//drawMultiRadiantCircle(canvas.width / 2, canvas.height / 2, canvas.width/2, colours);
+
+var perlin = new Perlin2D({
+    cellSize: 200,
     canvas: canvas,
     ctx: ctx,
     showLattice: false,
-    colour: false,
-    animation: true
+    colour: false
 });
 
 function setupStats() {
@@ -25,8 +27,7 @@ function setupStats() {
     var params = {
         showLattice: perlin.showLattice,
         cellSize: perlin.cellSize,
-        colour: perlin.colour,
-        animating: perlin.animating
+        colour: perlin.colour
     };
     var gui = new dat.GUI({
         height: 5 * 32 - 1
@@ -65,12 +66,6 @@ function setupStats() {
             });
         }); // check if the number of segments needs to be changed}
 
-
 }
 
-function animate() {
-    perlin.advance(2);
-    window.requestAnimationFrame(animate);
-}
-
-animate();
+    setupStats();
