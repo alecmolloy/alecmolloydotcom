@@ -13,12 +13,12 @@ var httpPort = process.env.NODE_ENV === "production" ? 80 : 3000,
 	httpsPort = process.env.NODE_ENV === "production" ? 443 : 3001;
 
 var credentials = {
-	key: fs.readFileSync("/etc/ssl/private/alecmolloy.key"),
-	cert: fs.readFileSync("/etc/ssl/certs/alecmolloy.crt"),
-	ca: fs.readFileSync("/etc/ssl/certs/intermediate.pem")
+	cert: fs.readFileSync("./sslcert/fullchain.pem"),
+	key: fs.readFileSync("./sslcert/privkey.pem")
 };
 
 httpApp.set("port", httpPort);
+httpApp.get("/.well-known/", express.static('static/.well-known'));
 httpApp.get("*", function (req, res, next) {
 	res.redirect("https://" + req.headers.host + req.path);
 });
