@@ -1,0 +1,22 @@
+{
+  "apps" : [{
+      "name"      : "alecmolloy",
+      "script"    : "app.js",
+      "env_production" : {
+        "NODE_ENV": "production"
+      },
+      "instances" : 4,
+      "autorestart": true
+    }
+  ],
+  "deploy" : {
+    "production" : {
+      "user" : "ubuntu",
+      "host" : "alecmolloy",
+      "ref"  : "origin/master",
+      "repo" : "git@github.com:alecmolloy/alecmolloydotcom.git",
+      "path" : "/home/ubuntu/alecmolloy",
+      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+} 
