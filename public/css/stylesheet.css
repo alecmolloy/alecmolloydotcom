@@ -274,6 +274,51 @@ section + section:before {
 	color: #888;
 }
 
+/* Login */
+
+.login .form-group {
+	margin: auto .5em;
+}
+
+.login input {
+	border: none;
+	border-bottom: 1px solid #ddd;
+	color: inherit;
+	font-family: inherit;
+	font-size: 1em;
+}
+
+.login input:active,
+.login input:focus {
+	outline: none;
+}
+
+.login .login-label {
+	font-size: .8em;
+	color: #888;
+}
+
+.login .login-button{
+	background-color: transparent;
+	border: 1px solid #888;
+	color: #444;
+	font: inherit;
+	font-size: .8em;
+	margin: 1em 0;
+	padding: 0 1em;
+}
+
+.login .login-button:active,
+.login .login-button:focus {
+	outline: none;
+}
+
+.login .login-createAccount {
+	font-size: .8em;
+	color: #888;
+	padding: 0 1em;
+	text-decoration: none;
+}
 
 /* Blog */
 

@@ -1,10 +1,15 @@
-var express = require("express"),
+var compression = require("compression"),
+	bodyParser = require("body-parser"),
+	cookieParser = require("cookie-parser"),
+	express = require("express"),
+	flash = require("connect-flash"),
 	fs = require("fs"),
 	http = require("http"),
 	https = require("https"),
-	compression = require("compression"),
-	pug = require("pug"),
 	logger = require("morgan");
+	session = require("express-session"),
+	passport = require("passport"),
+	pug = require("pug");
 
 var httpApp = express(),
 	httpsApp = express();
@@ -36,9 +41,19 @@ httpsApp.set("views", __dirname + "/views");
 httpsApp.set("view engine", "pug");
 httpsApp.use(compression());
 httpsApp.use(logger("dev"));
+httpsApp.use(cookieParser()); // read cookies (for auth)
+httpsApp.use(bodyParser()); // get information from html forms
+httpsApp.use(express.static("img"));
 httpsApp.use(express.static("public"));
 httpsApp.use(express.static("public/projects"));
-httpsApp.use("/", require("./routes/"));
+
+// require('./config/passport')(passport); // pass passport for configuration
+httpsApp.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+httpsApp.use(passport.initialize());
+httpsApp.use(passport.session()); // persistent login sessions
+httpsApp.use(flash()); // use connect-flash for flash messages stored in session
+
+httpsApp.use("/", require("./routes/")(httpsApp, passport)); // load our routes and pass in our app and fully configured passport
 httpsApp.use("/post", require("./routes/blog"));
 httpsApp.use(function (req, res, next) {
 	res.status(404).render("404", {

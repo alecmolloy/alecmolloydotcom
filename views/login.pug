@@ -1,0 +1,14 @@
+extend layout
+block main
+	.wrapper.login
+		// todo implement flash messages
+		form
+			.form-group
+				input(type="text" name="email")
+				.login-label email
+			.form-group
+				input(type="password" name="password")
+				.login-label password
+			.form-group
+				button.login-button(type="submit") get in here
+				a.login-createAccount(href="/404") create account
