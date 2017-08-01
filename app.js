@@ -29,8 +29,10 @@ httpApp.get("*", function (req, res, next) {
 });
 
 var mongo = require("mongodb");
+var mongoose = require("mongoose");
 var monk = require("monk");
 var db = monk("localhost:27017/alecmolloy");
+mongoose.connect("localhost:27017/alecmolloy"); 
 
 httpsApp.use(function (req, res, next) {
 	req.db = db;
@@ -47,7 +49,7 @@ httpsApp.use(express.static("img"));
 httpsApp.use(express.static("public"));
 httpsApp.use(express.static("public/projects"));
 
-// require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 httpsApp.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 httpsApp.use(passport.initialize());
 httpsApp.use(passport.session()); // persistent login sessions
