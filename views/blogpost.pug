@@ -1,8 +1,9 @@
 extend layout
 block main
 	article.blogpost.wrapper
-		.blogpost-hero
-			img#blogpost-hero-image(src="/blog/" + content.postContent.hero, alt=content.postContent.alt)
+		if content.postContent != null
+			.blogpost-hero
+				img#blogpost-hero-image(src="/blog/" + content.postContent.hero, alt=content.postContent.alt)
 		.blogpost-header
 			h2#blogpost-header-title #{content.postContent.title}
 			#blogpost-header-deck #{content.postContent.deck}
