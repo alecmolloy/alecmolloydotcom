@@ -27,9 +27,11 @@ export default ({
         <div id="root">
           ${body}
         </div>
+        <span id="dvd-logo">alec</span>
       </body>
       
-      <script src="/assets/bundle.js"></script>
+      <script src="/bundle.js"></script>
+      <script src="/special-effects.js"></script>
     </html>
   `
 }
