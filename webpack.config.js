@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   target: 'node',
   externals: [nodeExternals()],
   entry: './src/server.tsx',
