@@ -5,5 +5,7 @@
 /node_modules/
 /data/
 npm-debug.log
-alecmolloy.sublime-project
 sslcert/
+.env
+/src/public/projects/
+/dist/
