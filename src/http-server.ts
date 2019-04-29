@@ -6,7 +6,7 @@ export function runHttpServer () {
   const port = process.env.NODE_ENV === "production" ? 80 : 3000
 
   app.set("port", port)
-  app.get("/.well-known/", Express.static('static/.well-known'))
+  app.get("/.well-known/", Express.static('./dist/.well-known'))
   app.get("*", (req, res) => {
     res.redirect("https://" + req.headers.host + req.path)
   })
