@@ -13,25 +13,30 @@ export default ({
 }: Template ) => {
   return `
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang='en'>
       <head>
         <title>${title}</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="${ogDescription}" />
-        <meta name="og:image" content="${ogImg}" />
-        <link rel="icon" type="img=png" href="/favicon.png" />
-        <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" />
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content='${ogDescription}' />
+        <meta name='og:image' content='${ogImg}' />
+        <link rel='icon' type='img=png' href='/favicon.png' />
+        <link rel='stylesheet' type='text/css' href='/css/stylesheet.css' />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20430545-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-20430545-1');
+        </script>
       </head>
       <body>
-        <div id="root">
+        <div id='root'>
           ${body}
         </div>
-        <span id="dvd-logo">alec</span>
       </body>
-      
-      <script src="/bundle.js"></script>
-      <script src="/special-effects.js"></script>
+      <script src='/bundle.js'></script>
     </html>
   `
 }

@@ -36,6 +36,7 @@ article h1 {
 header {
 	margin: auto;
 	max-width: 34em;
+	width: 100%;
 }
 
 .header-breadcrumbs {
@@ -44,7 +45,7 @@ header {
 	/*	cursor: url('img/mouse.png') 64 64, auto;*/
 }
 
-.header-breadcrumbs h1 {
+.header-breadcrumbs-head {
 	font-weight: normal;
 	font-size: inherit;
 	margin: inherit;
@@ -97,7 +98,8 @@ header :visited {
 
 .wrapper {
 	margin: 1em auto 0;
-	max-width: 26em;
+	max-width: 49em;
+	width: 100%;
 	padding: 1em;
 }
 
@@ -108,6 +110,7 @@ main {
 
 main {
 	max-width: 49em;
+	width: 100%;
 }
 
 .logo {
@@ -386,6 +389,6 @@ section + section:before {
 		top: 0;
 		left: 0;
 		overflow: visible;
-		font-family: "Comic Sans MS", cursive;
 		padding-bottom: 5px;
+		display: none;
 }

@@ -18,9 +18,8 @@ const credentials = {
 	key: fs.readFileSync("./sslcert/privkey.pem")
 }
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true })
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+mongoose.connect(`${process.env.MONGO_URL}alecsoft`, { useNewUrlParser: true })
+mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.set("port", port)
 app.use(compression())
