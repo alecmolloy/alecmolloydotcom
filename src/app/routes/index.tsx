@@ -16,21 +16,6 @@ export default Express.Router()
 .use('/portfolio', Portfolio)
 
 .get('/blog', (req, res) => {
-	// var db = req.db;
-	// var blog = db.get('blog');
-	// blog.find({}, {sort : { _id: 1 }}, function (e, docs) {
-	// 	res.render('blog', {
-	// 		content: {
-	// 			posts: docs,
-	// 			description: 'the internet blog of alec molloy',
-	// 			title: 'blog',
-	// 			location: [{
-	// 				name: 'blog',
-	// 				address: '/blog'
-	// 			}]
-	// 		}
-	// 	});
-	// });
 })
 
 .use('/portfolio', Portfolio)

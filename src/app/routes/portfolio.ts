@@ -9,15 +9,8 @@ export default express.Router()
 		PortfolioModel.find({})
 			.then((items) => {
 				res.send(template({
-					body: renderToString(Portfolio(items)),
+					body: renderToString(Portfolio({portfolio: items})),
 				}))
 			})
 			.catch(console.log)
 	})
-
-	// .get('/:id', (req, res) => {
-	// 	let id = req.params.id
-	// 	// PortfolioItem.findById(id, function(err, todo) {
-	// 	//   res.json(todo)
-	// 	// })
-	// })

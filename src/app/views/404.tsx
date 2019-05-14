@@ -8,7 +8,7 @@ export default React.memo(function () {
         <div
           className='wrapper'
         >
-          <p>404 :(</p>
+          <p>404 :~(</p>
         </div>
       </>
     )

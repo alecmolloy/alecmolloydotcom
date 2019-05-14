@@ -22,7 +22,7 @@ export default ({
         <meta name='og:image' content='${ogImg}' />
         <link rel='icon' type='img=png' href='/favicon.png' />
         <link rel='stylesheet' type='text/css' href='/css/stylesheet.css' />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20430545-1"></script>
+        <script async src='https://www.googletagmanager.com/gtag/js?id=UA-20430545-1'></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

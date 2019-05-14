@@ -1,8 +1,0 @@
-extend layout
-block main
-	ol.work.wrapper
-		- for (var i = 0; i < 4; ++i)
-			+portfolioCard(content.portfolio[i])
-	ol.blogposts.wrapper
-		each post in content.posts
-			+blogpostPreview(post)

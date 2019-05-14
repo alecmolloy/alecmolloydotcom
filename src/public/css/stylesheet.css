@@ -63,7 +63,7 @@ header {
 
 
 .header-breadcrumbs-crumb::before {
-	content: " / ";
+	content: ' / ';
 }
 
 
@@ -162,7 +162,7 @@ main {
 }
 
 .blogpost h3::before {
-	content: "§ ";
+	content: '§ ';
 	font-weight: 600;
 	font-style: italic;
 }
@@ -364,7 +364,7 @@ section + section:before {
 		margin-left: 13em;
 	}
 	.blogpost h3::before {
-		content: "§ ";
+		content: '§ ';
 		display: block;
 		height: 0;
 		position: relative;

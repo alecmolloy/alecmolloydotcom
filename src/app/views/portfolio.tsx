@@ -4,8 +4,43 @@ import Header from './header'
 
 const breadcrumbs = [ 'portfolio' ]
 
-export default function (PortfolioModel: Array<Portfolio>) {
-  console.log(PortfolioModel)
+export const portfolioCard = (item: Portfolio) => {
+  return (
+    <li
+      id={item.name}
+      className='portfolio-card'
+      style={{
+        flex: '1 0',
+        maxWidth: '7.5em',
+      }}
+    >
+      <a
+        href={item.URL}
+      >
+        <img
+          className='portfolio-card-img'
+          src={`portfolio/${item.imgURL}`}
+        />
+        <div
+          className='portfolio-card-title'
+        >
+          {item.title}
+        </div>
+        <div
+          className='portfolio-card-description'
+        >
+          {item.description}, ({item.date})
+        </div>
+      </a>
+    </li>
+  )
+}
+
+export interface PortfolioProps {
+  portfolio: Array<Portfolio>
+}
+
+export default function (props: PortfolioProps) {
   return (
     <>
       {Header(breadcrumbs)}
@@ -17,37 +52,7 @@ export default function (PortfolioModel: Array<Portfolio>) {
           flexWrap: 'wrap',
         }}
       >
-        {PortfolioModel.map(element => {
-          return (
-            <li
-              id={element.name}
-              className='portfolio-card'
-              style={{
-                flex: '1 0',
-                maxWidth: '7.5em',
-              }}
-            >
-              <a
-                href={element.URL}
-              >
-                <img
-                  className='portfolio-card-img'
-                  src={`portfolio/${element.imgURL}`}
-                />
-                <div
-                  className='portfolio-card-title'
-                >
-                  {element.title}
-                </div>
-                <div
-                  className='portfolio-card-description'
-                >
-                  {element.description}, ({element.date})
-                </div>
-              </a>
-            </li>
-          )
-        })}
+        {props.portfolio.map(item => portfolioCard(item))}
       </ol>
     </>
   )
