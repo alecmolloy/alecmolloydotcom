@@ -1,25 +1,23 @@
 import * as React from 'react'
-import Header from './header'
+import { BlogPost } from '../../schemas/blogpost'
 import { Portfolio } from '../../schemas/portfolio-items'
-import { portfolioCard } from './portfolio';
-import { BlogPostPreview, blogPostPreview } from './blog'
+import { blogPostPreview } from './blog'
+import Header from './header'
+import { portfolioCard } from './portfolio'
 
 export interface IndexProps {
   portfolio: Array<Portfolio>
-  blogposts: Array<BlogPostPreview>  
+  blogposts: Array<BlogPost>
 }
 
-export default React.memo(function (props: IndexProps) {
-    return (
-      <>
-        {Header()}
-        <ol className='work wrapper'>
-          {props.portfolio.map(item => portfolioCard(item))}
-        </ol>
-        <ol className='blogposts wrapper'>
-          {props.blogposts.map(blogpost => blogPostPreview(blogpost))}
-        </ol>
-      </>
-    )
-  }
-)
+export const IndexTemplate = (props: IndexProps) => {
+  return (
+    <>
+      {Header()}
+      <ol className='work wrapper'>{props.portfolio.map((item) => portfolioCard(item))}</ol>
+      <ol className='blogposts wrapper'>
+        {props.blogposts.map((blogpost) => blogPostPreview(blogpost))}
+      </ol>
+    </>
+  )
+}

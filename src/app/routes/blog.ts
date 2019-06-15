@@ -1,27 +1,33 @@
 import * as express from 'express'
-import { PortfolioModel } from '../../schemas/portfolio-items'
-import template from '../../template'
 import { renderToString } from 'react-dom/server'
-import Portfolio from '../views/portfolio'
-import blogPost from '../views/blogPost'
+import { BlogPostModel } from '../../schemas/blogpost'
+import template from '../../template'
+import { BlogTemplate } from '../views/blog'
+import { BlogPostTemplate } from '../views/blogPost'
 
-export default express.Router()
-	.get('/', (req, res) => {
-		PortfolioModel.find({})
-			.then((items) => {
-				res.send(template({
-					body: renderToString(Portfolio({portfolio: items})),
-				}))
-			})
-			.catch(console.log)
-	})
+export const BlogRoutes = express
+  .Router()
+  .get('/', (req, res) => {
+    BlogPostModel.find({})
+      .then((blogPosts) => {
+        res.send(
+          template({
+            body: renderToString(BlogTemplate(blogPosts)),
+          }),
+        )
+      })
+      .catch(console.log)
+  })
 
-	.get('/:slug', (req, res) => {
-		let slug = req.params.slug as string
-		PortfolioModel.find({slug})
-			.then((value) => {
-				res.send(template({
-					body: renderToString(blogPost(value)),
-				}))
-			})
-	})
+  .get('/:slug', (req, res) => {
+    let slug = req.params.slug as string
+    BlogPostModel.findById({ slug }).then((blogPost) => {
+      if (blogPost != null) {
+        res.send(
+          template({
+            body: renderToString(BlogPostTemplate(blogPost)),
+          }),
+        )
+      }
+    })
+  })

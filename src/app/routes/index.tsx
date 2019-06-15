@@ -1,21 +1,21 @@
-import * as React from 'react'
 import * as Express from 'express'
+import * as React from 'react'
 import { renderToString } from 'react-dom/server'
 import template from '../../template'
-import About from '../views/about'
-import Portfolio from './portfolio'
+import { AboutTemplate } from '../views/about'
+import { BlogRoutes } from './blog'
+import { PortfolioRoutes } from './portfolio'
 
 export default Express.Router()
 
-.get(['/', '/about'], (req, res) => {
-	res.send(template({
-		body: renderToString(<About />),
-  }))
-})
+  .get(['/', '/about'], (req, res) => {
+    res.send(
+      template({
+        body: renderToString(<AboutTemplate />),
+      }),
+    )
+  })
 
-.use('/portfolio', Portfolio)
+  .use('/portfolio', PortfolioRoutes)
 
-.get('/blog', (req, res) => {
-})
-
-.use('/portfolio', Portfolio)
+  .use('/blog', BlogRoutes)

@@ -5,7 +5,12 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": false,
     "sourceMap": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "alwaysStrict": true
   }
 }

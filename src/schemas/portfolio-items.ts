@@ -43,5 +43,8 @@ export const PortfolioSchema = new mongoose.Schema({
   },
 })
 
-
-export const PortfolioModel: mongoose.Model<Portfolio> = mongoose.model<Portfolio>('Portfolio', PortfolioSchema, 'portfolio')
+export const PortfolioModel: mongoose.Model<Portfolio> = mongoose.model<Portfolio>(
+  'Portfolio',
+  PortfolioSchema,
+  'portfolio',
+)

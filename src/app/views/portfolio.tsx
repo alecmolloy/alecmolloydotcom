@@ -2,11 +2,12 @@ import * as React from 'react'
 import { Portfolio } from '../../schemas/portfolio-items'
 import Header from './header'
 
-const breadcrumbs = [ 'portfolio' ]
+const breadcrumbs = ['portfolio']
 
 export const portfolioCard = (item: Portfolio) => {
   return (
     <li
+      key={item.name}
       id={item.name}
       className='portfolio-card'
       style={{
@@ -14,21 +15,10 @@ export const portfolioCard = (item: Portfolio) => {
         maxWidth: '7.5em',
       }}
     >
-      <a
-        href={item.URL}
-      >
-        <img
-          className='portfolio-card-img'
-          src={`portfolio/${item.imgURL}`}
-        />
-        <div
-          className='portfolio-card-title'
-        >
-          {item.title}
-        </div>
-        <div
-          className='portfolio-card-description'
-        >
+      <a href={item.URL}>
+        <img className='portfolio-card-img' src={`portfolio/${item.imgURL}`} />
+        <div className='portfolio-card-title'>{item.title}</div>
+        <div className='portfolio-card-description'>
           {item.description}, ({item.date})
         </div>
       </a>
@@ -40,7 +30,7 @@ export interface PortfolioProps {
   portfolio: Array<Portfolio>
 }
 
-export default function (props: PortfolioProps) {
+export default function(props: PortfolioProps) {
   return (
     <>
       {Header(breadcrumbs)}
@@ -52,7 +42,7 @@ export default function (props: PortfolioProps) {
           flexWrap: 'wrap',
         }}
       >
-        {props.portfolio.map(item => portfolioCard(item))}
+        {props.portfolio.map((item) => portfolioCard(item))}
       </ol>
     </>
   )

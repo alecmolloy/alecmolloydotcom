@@ -2,17 +2,18 @@ import * as mongoose from 'mongoose'
 
 export interface BlogPost extends mongoose.Document {
   title: string
-  created: Date
-  deck: string
   slug: string
+  deck: string
   byline: string
-  contentPreview: string
-  contentLocation: string
+  content: string
   heroImageURL: string
   heroImageAlt: string
+  created: Date
+  contentPreview: string
+  contentLocation: string
 }
 
-export const PortfolioSchema = new mongoose.Schema({
+export const BlogPostSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     required: true,
@@ -45,5 +46,7 @@ export const PortfolioSchema = new mongoose.Schema({
   },
 })
 
-
-export const PortfolioModel: mongoose.Model<Portfolio> = mongoose.model<Portfolio>('Portfolio', PortfolioSchema, 'portfolio')
+export const BlogPostModel: mongoose.Model<BlogPost> = mongoose.model<BlogPost>(
+  'BlogPost',
+  BlogPostSchema,
+)

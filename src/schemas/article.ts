@@ -2,17 +2,17 @@ import * as mongoose from 'mongoose'
 
 const PortfolioItem = new mongoose.Schema({
   portfolio_name: {
-      type: String
+    type: String,
   },
   portfolio_title: {
-      type: String
+    type: String,
   },
   portfolio_description: {
-      type: String
+    type: String,
   },
   portfolio_date: {
-      type: String
-  }
-});
+    type: String,
+  },
+})
 
-module.exports = mongoose.model('PortfolioItem', PortfolioItem);
+module.exports = mongoose.model('PortfolioItem', PortfolioItem)
