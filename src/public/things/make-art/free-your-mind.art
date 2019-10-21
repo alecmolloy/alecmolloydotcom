@@ -1,0 +1,64 @@
+self.cancelAnimationFrame(self.cancelID)
+stroke 0
+
+# Outer bit consts
+Vertices = 30
+Rings = 30
+
+pulsingSpeed = 10000
+distortionSpeed = 8500
+rotationSpeed = 12500
+backgroundColorRotationSpeed = 200
+
+timeStart = Date.now()
+
+render = () => 
+    delta = Date.now() - timeStart
+    CentreOffset = 400 - (Math.sin(delta / pulsingSpeed) * 400)
+    getPointMap = (_x, _y, innerRadius, outerRadius, rings, vertices) =>
+        clear()
+        background rotate blue, delta / backgroundColorRotationSpeed
+        pointMap = new Array(rings)
+        # Create vertice index
+        for ring in [0 ... rings]
+            distance = (((ring / rings) * (outerRadius - innerRadius)) + innerRadius) *(ring / rings)
+            pointMap[ring] = new Array(vertices)
+            for vertex in [0 ... vertices]
+                angle = ((vertex / vertices) * (Math.PI * 2))
+                angle += (ring / vertices) * (Math.PI)
+                angle += Math.sin(delta / rotationSpeed)
+                angle += (Math.sin(delta / distortionSpeed) / 1000) *
+                x = (Math.cos(angle) * distance) + _x
+                y = (Math.sin(angle) * distance) + _y
+                pointMap[ring][vertex] = {x, y}
+
+    drawTriangles = (pointMap) =>
+        for r in [0 ... pointMap.length - 1]
+            currentRing = pointMap[r]
+            nextRing = pointMap[r + 1]
+            for v in [0 ... pointMap[r].length]
+                vertex0 = currentRing[v]
+                vertex1 = if v is pointMap[r].length - 1 then vertex1 = currentRing[0] else currentRing[v + 1]
+                vertex2 = nextRing[v]
+                moveTo vertex0.x, vertex0.y
+                color rotate green, ((vertex0.x * r / 10) / 10) + Date.now()/ 100
+                polygon vertex1.x - vertex0.x, vertex1.y - vertex0.y, vertex2.x - vertex0.x, vertex2.y - vertex0.y, close
+
+    # draw outer triangles
+    pointMap = getPointMap(250, 250, CentreOffset, 500, Rings, Vertices)
+    drawTriangles(pointMap)
+
+    if delta % 10000 > 9990
+        font 'sans-serif', 180
+        bold()
+        color white
+        moveTo 250, 150
+        text 'FREE'
+        moveTo 250, 310
+        text 'YOUR'
+        moveTo 250, 470
+        text 'MIND'
+
+    self.cancelID = self.requestAnimationFrame(render)
+render()
+

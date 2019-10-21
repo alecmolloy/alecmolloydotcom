@@ -1,0 +1,113 @@
+
+stroke 0
+
+# Background
+background lighten blue, 33
+
+# Sky
+color 'rgba(77, 103, 128,1)'
+moveTo 0, 140
+polygon 125,12.5, 250, 16, 375, 31.5, 500, 30, 500, -200, 0, -200, true
+color 'rgba(92, 125, 150,1)'
+moveTo 0, 90
+polygon 125,11, 250, 13, 375, 31.5, 500, 20, 500, -200, 0, -200, true
+
+# Black sky gradient
+for y in [ 0 .. 70]
+    moveTo 0, y
+    color 'rgba(7, 12, 14,' + (70 - y) / 65 + ')'
+    rectangle stage.width, 1
+
+# Blue Water gradient
+for y in [ 300 .. 500]
+    moveTo 0, y
+    color 'rgba(0, 3, 30,' + (y - 300) / 190 + ')'
+    rectangle stage.width, 1
+
+# Bridge Feet
+bridgeFeet = (x, y, supportWidth) ->
+    moveTo x, y
+    stroke 20, 'rgba(30, 30, 30, .91)'
+    line supportWidth
+
+    move 0, 60
+    line supportWidth, 0
+
+    move -20, 60
+    line supportWidth + 30, 0
+    move 20, -120
+
+    line -20, 200
+    move supportWidth
+    line 20, 200
+
+for i in [ 0 .. 9]
+    bridgeFeet(-20 + (i * 60), 370 - i * 20, 70)
+
+# Bridge Top
+moveTo 500, 750
+color null
+stroke 95, 'rgba(246, 229, 185, 1)'
+ellipse 700, 500, 1
+stroke 3, brown
+ellipse 657, 457, 1
+ellipse 668.5, 463, 1
+ellipse 680, 469, 1
+
+ellipse 775, 563, 1
+ellipse 762, 556, 1
+ellipse 751, 549, 1
+
+# Floorboards
+for i in [ 0 .. 14 ] 
+    moveTo (200 * i/10) - 30, 410 * Math.pow(i, -.15)
+    stroke 1, brown
+    line 70, 17
+
+for i in [ 0 .. 11 ] 
+    moveTo (200 * i/10) - 30, 410 * Math.pow(i, -.17)
+    stroke 1, brown
+    line 60, 15
+
+
+# Rain
+stroke 'rgba(0,0,0,.3)', .5
+for i in [ 0 .. 120 ]
+    moveTo Math.random() * 500, Math.random() * 500 + 150
+    line (Math.random() * 20) + 30, -300
+
+# Top Right Name
+moveTo stage.width - 70, 30
+color red
+stroke 1, black
+rectangle 30, 150
+color black
+square 0
+font 11
+move 15,20; text '大'
+move 0, 15; text 'は'
+move 0, 15; text 'し'
+move 0, 15; text 'あ'
+move 0, 15; text 'た'
+move 0, 15; text 'け'
+move 0, 15; text 'の'
+move 0, 15; text '夕'
+move 0, 15; text '立'
+
+# Bottom Left Name
+color red
+moveTo 30, stage.height - 140
+stroke 1, black
+rectangle 30, 110
+color black; square 0;
+font 16
+move 14,21; text '歌'
+move 0, 26; text '川'
+move 0, 26; text '広'
+move 0, 26; text '重'
+
+# Border
+moveTo 0,0,
+stroke 25, 'rgb(238, 219, 176)'
+color 0
+square stage.width

@@ -1,0 +1,87 @@
+# Implementation of my Perlin2D.js code, available here: https://github.com/alecmolloy/Perlin.js/blob/master/js/Perlin2D.js
+# View the Javascript demo here: http://alecmolloy.com/perlin-noise/
+stroke 0
+class Perlin2D 
+    constructor: () ->
+        @cellSize = 100
+        @height = stage.height
+        @width = stage.width
+
+        @createLatticeArray()
+        @drawPerlin()
+
+    dotProduct : (ix, iy, x, y) ->
+        x /= this.cellSize;
+        y /= this.cellSize;
+
+        # Precomputed (or otherwise) gradient vectors at each grid point X,Y
+        gradient = this.lattice.grid;
+
+        # Compute the distance vector
+        dx = x - ix;
+        dy = y - iy;
+
+        value = (dx * gradient[iy][ix][0] + dy * gradient[iy][ix][1]);
+
+        # Compute the dot-product
+        return value;
+
+    createLatticeArray : ->
+        # Create a 2D array for the lattice
+        this.lattice = {
+            width: Math.ceil(this.width / this.cellSize) + 1,
+            height: Math.ceil(this.height / this.cellSize) + 1
+        }
+
+        this.lattice.grid = new Array(this.lattice.height);
+        for i in [0 .. this.lattice.height]
+            this.lattice.grid[i] = new Array(this.lattice.width);
+
+        # Fill the lattice with random gradient vectors
+        for cellY in [0 .. this.lattice.height]
+            for cellX in [0 .. this.lattice.height]
+                angle = Math.floor(Math.random() * 16) / 16 * Math.PI * 2;
+                this.lattice.grid[cellY][cellX] = [Math.cos(angle), Math.sin(angle)];
+
+    calculatePoint : (x, y) ->
+        # Calculate the displacement of the corners of the lattice cell relative to the current pixel
+        x0 = Math.floor(x / this.cellSize);
+        x1 = x0 + 1;
+        y0 = Math.floor(y / this.cellSize);
+        y1 = y0 + 1;
+
+        # Interpolation weight
+        sx = x / this.cellSize - x0;
+        sy = y / this.cellSize - y0;
+
+        # Calculate the gradient values at the sample point by taking the dot product of the displacement vectors and their respective gradient vectors
+        n00 = this.dotProduct(x0, y0, x, y);
+        n10 = this.dotProduct(x1, y0, x, y);
+        n01 = this.dotProduct(x0, y1, x, y);
+        n11 = this.dotProduct(x1, y1, x, y);
+
+        # Interpolate the four gradient values at the current pixel
+        ix0 = @fdpoly(n00, n10, sx);
+        ix1 = @fdpoly(n01, n11, sx);
+        value = @fdpoly(ix0, ix1, sy);
+        value += 1 / Math.sqrt(2)
+        value /= (1 / Math.sqrt(2)) * 2;
+
+        return value;
+
+    drawPerlin : ->
+        # Cycle through all pixels
+        for y in [0 .. this.height]
+            for x in [0 .. this.width]
+                c = this.calculatePoint(x, y)
+                c = colour lighten black, c * 100
+                moveTo x, y
+                color = c
+                square 1 
+
+    fdpoly : (a0, a1, w) ->
+        iw = (6 * Math.pow(w, 5)) - (15 * Math.pow(w, 4)) + (10 * Math.pow(w, 3))
+        value = (1 - iw) * a0 + (iw * a1)
+        return value
+
+perlin = new Perlin2D()

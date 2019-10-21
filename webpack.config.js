@@ -1,6 +1,6 @@
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path')
+const nodeExternals = require('webpack-node-externals')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -14,19 +14,18 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-      }
-    ]
+      },
+    ],
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   plugins: [
-    new CopyPlugin([
-      { from: './src/public', to: path.resolve(__dirname, 'dist/public') },
-    ]),
+    new CopyPlugin([{ from: './src/public', to: path.resolve(__dirname, 'dist/public') }]),
+    new CopyPlugin([{ from: './portfolio', to: path.resolve(__dirname, 'dist/portfolio') }]),
   ],
-};
+}

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BlogPost } from '../../schemas/blogpost'
+import { BlogPost } from '../../schemas/blogpost-schema'
 import Header from './header'
 
 export const BlogPostTemplate = (props: BlogPost) => {

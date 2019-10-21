@@ -9,3 +9,4 @@ sslcert/
 .env
 /src/public/projects/
 /dist/
+.DS_STORE

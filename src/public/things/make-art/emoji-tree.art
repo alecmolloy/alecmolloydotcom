@@ -1,0 +1,88 @@
+background blue
+# Play with these blue numbers
+armLength = 31
+iterations = 5 # Might crash if you go over 15!
+degreeChange = 35
+hasBlossoms = 1
+blossomSize = 51
+blossomOpacity = .9
+# ^^^ Play with these blue numbers ^^^
+moveTo 400, 497
+font 126
+text '🏡'
+
+moveTo 40, 90
+text '🌞'
+
+moveTo 40, 90
+text ''
+
+moveTo 75, 498
+font 90
+text '🐕'
+###
+This is a function that draws a tree
+branch, when it completes, it calls itself
+over and over and over again until all the
+tree’s branches have been drawn!
+###
+drawBranch = (x, y, branchesLeft, startAngle) ->
+    if branchesLeft > 0 
+        # Move to where the next branch should
+        # be drawn:
+        moveTo x, y
+
+        # A branch is always blue, but the width
+        # depends on how far from the base it is!
+        stroke red, branchesLeft 
+
+        # A bit of trigonometry here, it’s alright
+        # if you don’t understand this! This 
+        # calculates coordinates for where the 
+        # branch should be drawn to, and where
+        # the next branch should start.
+        dx =  Math.cos(startAngle) * (armLength + (branchesLeft * 15))
+        dy = -Math.sin(startAngle) * (armLength + (branchesLeft * 15))
+
+        # Draw a line to the new coordinates we
+        # just calculated
+        segments = (6 - iterations + branchesLeft)
+        for i in [0 ... segments]
+            move dx / segments, dy / segments
+            font 20
+            text '😑'
+
+        # This block of code only executes if
+        # the current branch has blossoms. You
+        # can change the hasBlossoms variable up
+        # top!
+        if branchesLeft <= 3
+            # Set the drawing color to a nice red
+            color opacity darkpurple, blossomOpacity
+            # Our blossoms shouldn’t have a stroke
+            stroke 0 
+            # Draw the blossom! These big blossoms
+            # overlap over each other to create a
+            # neat effect.
+            organic = blossomSize
+            font organic
+            text '😎'
+
+        # Starts the next branch on the right
+        drawBranch(x + dx, y + dy, branchesLeft - 1, startAngle - Math.PI / 180 * degreeChange) 
+        # Starts the next branch on the left
+        drawBranch(x + dx, y + dy, branchesLeft - 1, startAngle + Math.PI / 180 * degreeChange)
+
+###
+Finally we call our function and see what
+happens. Play with the numbers at the top of
+the function and see how they change the tree
+###
+drawBranch(stage.width * .5, 517, iterations, Math.PI / 2, length)
+###
+moveTo 0, 520
+for i in [0 .. 130]
+    move random 0, 8, true
+    font random 50, 90
+    text '🌱'
+###

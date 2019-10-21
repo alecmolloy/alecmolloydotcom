@@ -11,6 +11,7 @@
     "noImplicitThis": true,
     "strict": true,
     "strictNullChecks": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "moduleResolution": "node"
   }
 }

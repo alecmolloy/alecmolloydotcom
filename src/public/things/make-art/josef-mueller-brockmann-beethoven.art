@@ -1,0 +1,62 @@
+x = 115
+y = 350
+
+background white
+stroke black
+band = [0, 1, 1, 2, 2, 3, 3, 4, 5, 6, 7] 
+width = [0, 10, 20, 40, 80, 160, 320, 320]
+radii = [0, 0, 0, 5 + 1, 5 + 1, 15 + 2, 15 + 2, 35 + 3, 75 + 4, 155 + 5, 315 + 6 ]
+startEnd = [
+    [0, 0], # 0
+    [ 3/16,- 1/8  ], # 1
+    [ 1, 1 - 1/4  ], # 1
+    [ 1/8,   - 1/4  ], # 2
+    [ 1, 1/2], # 2
+    [ 0,- 7/16 ], # 3
+    [ 1, 1/4], # 3
+    [ 1,- 1/2 ], # 4
+    [ 1,- 1/4 ], # 5
+    [ 1,- 9/16 ], # 6
+    [ 0, 2]  # 7
+]
+
+# Draw the arcs
+color null # set fill to none
+moveTo x, y # move to the coordinate set above
+for i in [ 1 .. 10 ] # there are 10 arcs, but only 7 bands
+    bandNum = band[i] # some bands have multiple arcs, so this checks to see which band the arc is in
+    bandWidth = width[bandNum] / 2 # the band's width is determined by which arc it is in
+    edge = 128 + (radii[i]- bandWidth/2) # finally, we need to know what the edge of the previous arc is from so we can properly space the arcs
+
+    stroke bandWidth # set the stroke
+    arc edge + (bandWidth) + 1, startEnd[i][0], startEnd[i][1], false # and draw the arc!
+
+
+# Beethoven text
+color black
+stroke 0
+font "Akzidenz-Grotesk Next, Helvetica, sans-serif", 20
+moveTo x-53, y - 32
+text "beethoven"
+
+# Information text
+color gray 
+moveTo x, y
+for i in [0 .. 16]
+    if (i != 5 and i != 8 and i != 12 )
+        rectangle (random 30, 100), 3.5
+    if (i is 0 or i is 6 or i is 7 or i is 9 or i is 13 )
+        move -8, 0
+        rectangle random(-35, -20), 3.5
+        move 8 
+    move 0, 5.5
+
+###
+# Guides: turn off the triple hash signs to see the grid!
+stroke 1, lightblue
+moveTo x, 0
+line 0, 500
+moveTo 0, y
+line 500, 0
+stroke black
+###

@@ -1,0 +1,19 @@
+color '#f7b371'
+stroke 40, '#956645'
+ellipse 170,200
+color '#956645'
+stroke 0
+
+
+arc 70, 1, 0
+
+moveTo 175, 140
+ellipse 15, 15
+
+moveTo 325, 140
+ellipse 15, 15
+
+moveTo 250,130
+color '#585756'
+stroke 40, '#2d2d2b'
+arc 138, 0,1

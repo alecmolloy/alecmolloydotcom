@@ -1,0 +1,60 @@
+# Play with me! What happens when I go up?
+generations = 4
+
+background white
+production = (axiom, generations) ->
+    if generations > 0 
+        successor = ''
+        for token in axiom
+            switch token
+                when 'F' then successor += 'F-F+F+FF-F-F+F'
+                else successor += token
+        return production(successor, --generations)
+    return axiom
+
+translator = (axiom, turtle) ->
+    for token in axiom
+        switch token
+            when 'F'
+                turtle.F()
+            when 'f'
+                turtle.f()
+            when '+'
+                turtle.right()
+            when '-'
+                turtle.left()
+
+Turtle = (@x, @y, @α, @d) ->
+
+Turtle::F = ->
+    moveTo @x, @y
+    xprime = @x + @d * Math.cos(@α / 180 * Math.PI)
+    yprime = @y + @d * Math.sin(@α / 180 * Math.PI)
+    stroke 0
+    color rotate red, @x* .99
+    square 1
+    moveTo xprime, yprime
+    @x = xprime
+    @y = yprime
+
+Turtle::f = ->
+    xprime = @x + Math.cos(@α / 180 * Math.PI)
+    yprime = @y + Math.sin(@α / 180 * Math.PI)
+    @x = xprime
+    @y = yprime
+    moveTo @x, @y
+
+Turtle::right = ->
+    @α += 90
+
+Turtle::left = ->
+    @α -= 90
+
+turtle = new Turtle(150, 350, 0, 200 / Math.pow(4, generations))
+translator(production('F-F-F-F', generations), turtle)
+
+moveTo 250, 465
+font 'Adobe Caslon Pro', 25
+color black
+italic true
+text 'fig. 2: ouroboros'

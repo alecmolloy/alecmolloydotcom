@@ -1,0 +1,40 @@
+stroke 0
+for x in [0 .. stage.width / 20]
+    for y in [0 .. stage.height / 20]
+        moveTo x * 20, y * 20
+        colour lighten darkblue, y * 3
+        square 20
+
+
+colour white
+for x in [0 .. stage.width / 20]
+    for y in [0 .. stage.height / 20]
+        if Math.random() > 0.7
+            moveTo x * 20, y * 20;
+            rectangle 40, 10 
+
+moveTo 0, stage.height * .85
+
+colour red
+stroke 10
+polygon stage.width * .75, - stage.height *.65, stage.width + 10, - stage.height * .3, stage.width + 10, stage.height * .25, 0, stage.height / 4, close
+
+stroke 1
+colour white
+moveTo 17, 7
+rectangle 36, 141
+
+moveTo 20, 10
+rectangle 30, 135
+color '#113';
+move 15, 30; text '葛'
+move 0, 30; text '飾'
+move 0, 30; text '北'
+move 0, 30; text '斎'
+
+font 15
+move 36, -35
+text '凱'
+move 0, 20; text '風'
+move 0, 20; text '快'
+move 0, 20; text '晴'

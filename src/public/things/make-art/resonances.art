@@ -1,0 +1,30 @@
+background black
+stroke 0
+_color = 'rgb(240, 36, 50)'
+r = 70
+
+stroke r * 2, _color
+move 0, -90
+line 0, 4 * r
+stroke 0
+color black
+
+for x in [-r ... r]
+    for y in [0 ... r * 4]
+        if (y + random(0, r * 4) > r * 4)
+            moveTo 250 + x, 160 + y
+            square 1
+moveTo 250, 160
+color _color
+
+circle r
+color white
+word = "RÉSONANCES"
+font 'FUTURA', 40
+bold true
+for i in [0 ... word.length]
+    j = -1
+    if i % 2 > 0
+        j = 1
+    moveTo 120 + j * 40 + i * 30, 60 + i * 45 + (j * -15)
+    text word[i]

@@ -1,6 +1,6 @@
 import * as express from 'express'
 import { renderToString } from 'react-dom/server'
-import { BlogPostModel } from '../../schemas/blogpost'
+import { BlogPostModel } from '../../schemas/blogpost-schema'
 import template from '../../template'
 import { BlogTemplate } from '../views/blog'
 import { BlogPostTemplate } from '../views/blogPost'

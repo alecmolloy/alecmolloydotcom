@@ -1,0 +1,170 @@
+# Setup
+background '#F5F5DC'
+color mix yellow, red
+stroke 0
+circle 242
+
+# Outer bit consts
+Vertices = 96
+Rings = 24
+CentreOffset = 40
+
+# Inner bit consts
+Petals = 24
+
+getPointMap = (_x, _y, innerRadius, outerRadius, rings, vertices) =>
+    pointMap = new Array(rings)
+    # Create vertice index
+    for ring in [0 ... rings]
+        distance = ((ring / rings) * (outerRadius - innerRadius)) + innerRadius
+        pointMap[ring] = new Array(vertices)
+        for vertex in [0 ... vertices]
+            angle = ((vertex / vertices) * (Math.PI * 2))
+            angle += (ring / vertices) * (Math.PI)
+            x = (Math.cos(angle) * distance) + _x
+            y = (Math.sin(angle) * distance) + _y
+            pointMap[ring][vertex] = {x, y}
+
+drawTriangles = (pointMap, c) =>
+    for r in [0 ... pointMap.length - 1]
+        currentRing = pointMap[r]
+        nextRing = pointMap[r + 1]
+        for v in [0 ... pointMap[r].length]
+            vertex0 = currentRing[v]
+            vertex1 = if v is pointMap[r].length - 1 then vertex1 = currentRing[0] else currentRing[v + 1]
+            vertex2 = nextRing[v]
+            moveTo vertex0.x, vertex0.y
+            color c()
+            polygon vertex1.x - vertex0.x, vertex1.y - vertex0.y, vertex2.x - vertex0.x, vertex2.y - vertex0.y, close
+
+# draw outer triangles
+pointMap = getPointMap(250, 250, CentreOffset, 250, Rings, Vertices)
+drawTriangles(pointMap, () => darken(darkgreen, Math.random() * 20))
+
+# draw rose triangles
+rosePointMap = getPointMap(250, 250, CentreOffset - 10, CentreOffset + 6, 2, 24)
+drawTriangles(rosePointMap, () => '#954710')
+moveTo 250, 250
+circle CentreOffset - 10
+
+# draw petals in the rose
+maxDistance = CentreOffset - 13
+for petal in [0 ... Petals]
+    moveTo 250, 250
+    angle = (petal / Petals) * Math.PI * 2
+    color mix(yellow, red, random(30, 50))
+    for distance in [0 ... maxDistance]
+        x = (Math.cos(angle) * distance) + 250
+        y = (Math.sin(angle) * distance) + 250
+        moveTo x, y
+        stroke 0
+        circle 3
+
+# draw lines to separate petals in rose
+for petal in [0 ... Petals]
+    moveTo 250, 250
+    angle = ((petal / Petals) * Math.PI * 2) + ((.5 / Petals) * Math.PI * 2)
+    x = (Math.cos(angle) * maxDistance) + 250
+    y = (Math.sin(angle) * maxDistance) + 250
+    moveTo 250, 250
+    stroke 1.75, '#954710'
+    lineTo x, y
+
+# draw marble centre
+stroke 0
+color '#154d31'
+
+# Implementation of my Perlin2D.js code, available here: https://github.com/alecmolloy/Perlin.js/blob/master/js/Perlin2D.js
+# View the Javascript demo here: http://alecmolloy.com/perlin-noise/ 
+stroke 0
+class Perlin2D 
+    constructor: (@cellSize) ->
+        @cellSize = @cellSize || 100
+        @width = stage.width
+        @height = stage.height
+
+        @createLatticeArray()
+
+    dotProduct : (ix, iy, x, y) =>
+        x /= this.cellSize;
+        y /= this.cellSize;
+
+        # Precomputed (or otherwise) gradient vectors at each grid point X,Y
+        gradient = this.lattice.grid;
+
+        # Compute the distance vector
+        dx = x - ix;
+        dy = y - iy;
+
+        value = (dx * gradient[iy][ix][0] + dy * gradient[iy][ix][1]);
+
+        # Compute the dot-product
+        return value;
+
+    createLatticeArray : =>
+        # Create a 2D array for the lattice
+        this.lattice = {
+            width: Math.ceil(this.width / this.cellSize) + 1,
+            height: Math.ceil(this.height / this.cellSize) + 1
+        }
+
+        this.lattice.grid = new Array(this.lattice.height);
+        for i in [0 .. this.lattice.height]
+            this.lattice.grid[i] = new Array(this.lattice.width);
+
+        # Fill the lattice with random gradient vectors
+        for cellY in [0 .. this.lattice.height]
+            for cellX in [0 .. this.lattice.height]
+                angle = Math.floor(Math.random() * 16) / 16 * Math.PI * 2;
+                this.lattice.grid[cellY][cellX] = [Math.cos(angle), Math.sin(angle)];
+
+
+    calculatePoint : (x, y) =>
+        # Calculate the displacement of the corners of the lattice cell relative to the current pixel
+        x0 = Math.floor(x / this.cellSize);
+        x1 = x0 + 1;
+        y0 = Math.floor(y / this.cellSize);
+        y1 = y0 + 1;
+
+        # Interpolation weight
+        sx = x / this.cellSize - x0;
+        sy = y / this.cellSize - y0;
+
+        # Calculate the gradient values at the sample point by taking the dot product of the displacement vectors and their respective gradient vectors
+        n00 = this.dotProduct(x0, y0, x, y);
+        n10 = this.dotProduct(x1, y0, x, y);
+        n01 = this.dotProduct(x0, y1, x, y);
+        n11 = this.dotProduct(x1, y1, x, y);
+
+        # Interpolate the four gradient values at the current pixel
+        ix0 = @fdpoly(n00, n10, sx);
+        ix1 = @fdpoly(n01, n11, sx);
+        value = @fdpoly(ix0, ix1, sy);
+        value += 1 / Math.sqrt(2)
+        value /= (1 / Math.sqrt(2)) * 2;
+
+        return value;
+
+    drawPerlin : (x, y, color1, color2) =>
+        # Cycle through all pixels
+        c = this.calculatePoint(x, y)
+        c = colour mix(color1, color2, c*100)
+        moveTo x, y
+        color = c
+        square .5
+
+    fdpoly : (a0, a1, w) ->
+        iw = (6 * Math.pow(w, 5)) - (15 * Math.pow(w, 4)) + (10 * Math.pow(w, 3))
+        value = (1 - iw) * a0 + (iw * a1)
+        return value
+
+perlin = new Perlin2D(5)
+
+for y in [-CentreOffset .. CentreOffset] by .5
+    for x in [-CentreOffset .. CentreOffset] by .5
+        #draw green central circle
+        if (16 > Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2.0)))
+            perlin.drawPerlin(x + 250, y + 250, darkgreen, darken(darkgreen, 20))
+        #draw green circle around rose
+        if (CentreOffset + .5 >= Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2.0)) and CentreOffset - 2 <= Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2.0)))
+            perlin.drawPerlin(x + 250, y + 250, darken(darkgreen, 10), lighten(darkgreen, 10), -20)

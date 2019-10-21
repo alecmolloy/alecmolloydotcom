@@ -1,0 +1,133 @@
+# Get the current time
+now = new Date(Date.now())
+millisecond = now.getMilliseconds()
+second = (now.getSeconds()) + (millisecond / 1000)
+minute = (now.getMinutes()) + (second / 60)
+hour = (now.getHours()) + (minute / 60)
+date = now.getDate()
+day = now.getDay()
+appleRed = '#ff626e'
+handWidth = 7
+
+# Set background to black
+background black
+stroke 0
+moveTo 'center', 'center'
+
+# Minute marks
+stroke 1, '#838383' 
+for a in [1..60]
+    rad = ((360 / 60) * a) * (Math.PI / 180)
+    moveTo 'center', 'center',
+    x = Math.sin(rad) * 100
+    y = Math.cos(rad) * 100
+    move x, y
+    x = stage.width / 2 + Math.sin(rad) * 93
+    y = stage.width / 2 + Math.cos(rad) * 93
+    lineTo x, y
+
+# Hour marks
+stroke 4, white
+for a in [1..12]
+    rad = ((360 / 12) * a) * (Math.PI / 180)
+    moveTo 'center', 'center',
+    x = Math.sin(rad) * 100
+    y = Math.cos(rad) * 100
+    move x, y
+    x = stage.width / 2 + Math.sin(rad) * 93
+    y = stage.width / 2 + Math.cos(rad) * 93
+    lineTo x, y
+
+timeToRadians = (input, unit) ->
+    switch unit
+        when 'hour'
+            if (input >= 12)
+                input -= 12
+            outOf = 12
+        when 'minute', 'second' then outOf = 60
+        else return 0
+
+    return ((input / outOf) * 2 * Math.PI) - (Math.PI / 2)
+
+# Date text
+dayText = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+
+font 'San Francisco Display, Helvetica, Arial', 14
+moveTo 'center', 'center'
+move 40, 5
+color white
+text dayText[day]
+
+move 23
+if (date < 10)
+    move -4
+color appleRed
+text date
+
+# Hour Hand
+moveTo 'center', 'center'
+hourX = Math.cos(timeToRadians(hour, 'hour'))
+hourY = Math.sin(timeToRadians(hour, 'hour'))
+
+move 0 - hourX * 1, 0 - hourY * 1
+stroke 0
+color white
+circle handWidth / 2
+
+stroke handWidth / 2
+line hourX*14.5, hourY*14.5
+move hourX*14.5, hourY*14.5
+color white
+stroke 0
+circle handWidth / 2
+stroke handWidth
+line hourX*31.5, hourY*31.5
+
+moveTo 'center', 'center'
+move hourX*46, hourY*46
+color white
+stroke 0
+circle handWidth / 2
+
+# Minute hand
+moveTo 'center', 'center'
+minuteX = Math.cos(timeToRadians(minute, 'minute'))
+minuteY = Math.sin(timeToRadians(minute, 'minute'))
+
+move 0 - minuteX * 1, 0 - minuteY * 1
+stroke 0
+color white
+circle handWidth / 2
+
+moveTo 'center', 'center'
+
+stroke handWidth / 2
+line minuteX*14.5, minuteY*14.5
+move minuteX*14.5, minuteY*14.5
+color white
+stroke 0
+circle handWidth / 2
+stroke handWidth
+line minuteX*73.5, minuteY*73.5
+
+moveTo 'center', 'center'
+move minuteX*88, minuteY*88
+color white
+stroke 0
+circle handWidth / 2
+
+# Second hand
+moveTo 'center', 'center'
+# hand
+stroke 1.25, appleRed
+secondX = Math.cos(timeToRadians(second, 'second'))
+secondY = Math.sin(timeToRadians(second, 'second'))
+
+line secondX*100, secondY*100
+line 0 - secondX*16, 0 - secondY*16
+# Circle
+stroke 3, appleRed
+color black
+circle 1.5
+
+moveTo 1000,1000
