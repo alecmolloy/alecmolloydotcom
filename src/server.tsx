@@ -27,7 +27,10 @@ const credentials: https.ServerOptions =
       }
 
 mongoose.set('useCreateIndex', true)
-mongoose.connect(`${process.env.MONGO_URL}alecsoft`, { useNewUrlParser: true })
+mongoose.connect(`${process.env.MONGO_URL}alecsoft`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
 app.set('port', port)
 app.use(compression())
