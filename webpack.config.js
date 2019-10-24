@@ -24,8 +24,5 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  plugins: [
-    new CopyPlugin([{ from: './src/public', to: path.resolve(__dirname, 'dist/public') }]),
-    new CopyPlugin([{ from: './portfolio', to: path.resolve(__dirname, 'dist/portfolio') }]),
-  ],
+  plugins: [new CopyPlugin([{ from: './src/public', to: path.resolve(__dirname, 'dist/public') }])],
 }
