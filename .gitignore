@@ -6,6 +6,7 @@
 /data/
 npm-debug.log
 sslcert/
+*.pem
 .env
 /src/public/projects/
 /dist/
