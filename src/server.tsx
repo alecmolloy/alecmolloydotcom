@@ -3,6 +3,7 @@ import * as express from 'express'
 import * as fs from 'fs'
 import * as https from 'https'
 import * as mongoose from 'mongoose'
+import * as mongodb from 'mongodb'
 import * as logger from 'morgan'
 import * as path from 'path'
 import errorHandling from './app/routes/errorHandling'
@@ -15,19 +16,13 @@ const app = express()
 
 const port = process.env.NODE_ENV === 'production' ? 443 : 3001
 
-const credentials: https.ServerOptions =
-  process.env.NODE_ENV === 'production'
-    ? {
-        cert: fs.readFileSync('./sslcert/fullchain.pem'),
-        key: fs.readFileSync('./sslcert/privkey.pem'),
-      }
-    : {
-        cert: fs.readFileSync('./sslcert/localhost.crt'),
-        key: fs.readFileSync('./sslcert/localhost.key'),
-      }
+const credentials: https.ServerOptions = {
+  cert: fs.readFileSync('./sslcert/fullchain.pem'),
+  key: fs.readFileSync('./sslcert/privkey.pem'),
+}
 
 mongoose
-  .connect(`${process.env.MONGO_URL}alecsoft`, {
+  .connect(process.env.MONGO_URL as string, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -35,7 +30,7 @@ mongoose
   .then(() => {
     console.log('Database connection successful')
   })
-  .catch((err) => {
+  .catch((err: mongodb.MongoError) => {
     console.error('Database connection error', err)
   })
 
