@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { BlogPost } from '../../schemas/blogpost-schema'
-import { Portfolio } from '../../schemas/portfolio-items-schema'
+import { PortfolioItem } from '../../schemas/portfolio-items-schema'
 import { blogPostPreview } from './blog'
 import Header from './header'
 import { PortfolioCard } from './portfolio'
 
 export interface IndexProps {
-  portfolio: Array<Portfolio>
+  portfolio: Array<PortfolioItem>
   blogposts: Array<BlogPost>
 }
 

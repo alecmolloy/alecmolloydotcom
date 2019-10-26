@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose'
 
-export interface Portfolio extends mongoose.Document {
+export interface PortfolioItem extends mongoose.Document {
   title: string
   createdAt: Date
   name: string
@@ -53,8 +53,8 @@ export const PortfolioSchema = new mongoose.Schema({
   },
 })
 
-export const PortfolioModel: mongoose.Model<Portfolio> = mongoose.model<Portfolio>(
-  'Things',
+export const PortfolioModel: mongoose.Model<PortfolioItem> = mongoose.model<PortfolioItem>(
+  'Th ings',
   PortfolioSchema,
   'portfolio',
 )

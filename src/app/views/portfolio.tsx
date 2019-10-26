@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { Portfolio } from '../../schemas/portfolio-items-schema'
+import { PortfolioItem, PortfolioModel } from '../../schemas/portfolio-items-schema'
 import Header from './header'
 
 const breadcrumbs = ['things']
 
-export const PortfolioCard: React.FunctionComponent<{ item: Portfolio }> = ({ item }) => {
+export const PortfolioCard: React.FunctionComponent<{ item: PortfolioItem }> = ({ item }) => {
   return (
     <li
       key={item.name}
@@ -44,10 +44,18 @@ export const PortfolioCard: React.FunctionComponent<{ item: Portfolio }> = ({ it
 }
 
 export interface PortfolioProps {
-  items: Array<Portfolio>
+  items: Array<PortfolioItem>
 }
 
 export const PortfolioItems = ({ items }: PortfolioProps) => {
+  console.log(
+    PortfolioModel.find({}, function(err, cursor) {
+      cursor.forEach(function(doc) {
+        console.log(doc)
+      })
+    }),
+  )
+
   items.sort((a, b) => {
     if (a.ongoingIndex != null || b.ongoingIndex != null) {
       const aIndex: number = a.ongoingIndex != null ? a.ongoingIndex : -1
