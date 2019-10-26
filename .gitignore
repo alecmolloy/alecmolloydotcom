@@ -10,3 +10,4 @@ sslcert/
 /src/public/projects/
 /dist/
 .DS_STORE
+ecosystem.config.js
