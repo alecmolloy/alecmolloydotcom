@@ -43,13 +43,11 @@ export const PortfolioCard: React.FunctionComponent<{ item: PortfolioItem }> = (
   )
 }
 
-export interface PortfolioProps {
-  // items: Array<PortfolioItem>
-}
-
-export const PortfolioItems = async ({  }: PortfolioProps) => {
-  const items = await PortfolioModel.find({}, null, { limit: undefined, sort: '+orderDate' })
-  console.log({ items })
+export const PortfolioItems = async () => {
+  const items = await PortfolioModel.find({}, null, {
+    limit: undefined,
+    sort: '+orderDate',
+  })
 
   items.sort((a, b) => {
     if (a.ongoingIndex != null || b.ongoingIndex != null) {
