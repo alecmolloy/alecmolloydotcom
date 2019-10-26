@@ -32,7 +32,6 @@ export const MakeArtItemSchema = new mongoose.Schema({
 })
 
 export const MakeArtItemModel: mongoose.Model<MakeArtItem> = mongoose.model<MakeArtItem>(
-  'MakeArtItems',
+  'makeArtItem',
   MakeArtItemSchema,
-  'make-art',
 )

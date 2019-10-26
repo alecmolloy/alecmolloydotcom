@@ -3,7 +3,6 @@ import * as React from 'react'
 import { renderToString } from 'react-dom/server'
 import template from '../../template'
 import { AboutTemplate } from '../views/about'
-import { BlogRoutes } from './blog'
 import { PortfolioRoutes } from './portfolio-routes'
 import { UnderConstruction } from '../views/under-construction'
 
@@ -33,5 +32,3 @@ export default Express.Router()
   })
 
   .use('/things', PortfolioRoutes)
-
-  .use('/blog', BlogRoutes)

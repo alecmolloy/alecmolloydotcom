@@ -12,7 +12,7 @@ export interface PortfolioItem extends mongoose.Document {
   orderDate: Date
 }
 
-export const PortfolioSchema = new mongoose.Schema({
+export const PortfolioItemSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     required: true,
@@ -54,7 +54,6 @@ export const PortfolioSchema = new mongoose.Schema({
 })
 
 export const PortfolioModel: mongoose.Model<PortfolioItem> = mongoose.model<PortfolioItem>(
-  'Th ings',
-  PortfolioSchema,
-  'portfolio',
+  'portfolioItem',
+  PortfolioItemSchema,
 )

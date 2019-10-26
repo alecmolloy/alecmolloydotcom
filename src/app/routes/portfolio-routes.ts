@@ -8,17 +8,12 @@ import { MakeArtItemModel } from '../../schemas/make-art-items-schema'
 
 export const PortfolioRoutes = express
   .Router()
-  .get('/', (req, res) => {
-    PortfolioModel.find({})
-      .sort('-orderDate')
-      .then((items) => {
-        res.send(
-          template({
-            body: renderToString(PortfolioItems({ items })),
-          }),
-        )
-      })
-      .catch(console.error)
+  .get('/', async (req, res) => {
+    res.send(
+      template({
+        body: renderToString(await PortfolioItems({})),
+      }),
+    )
   })
 
   .get(['/make-art'], (req, res) => {
