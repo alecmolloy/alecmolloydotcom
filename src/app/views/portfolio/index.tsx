@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { PortfolioItem, PortfolioModel } from '../../schemas/portfolio-items-schema'
-import Header from './header'
+import { PortfolioItem, PortfolioModel } from '../../../schemas/portfolio-items-schema'
+import Header from '../header'
 
 const breadcrumbs = ['things']
 
@@ -44,17 +44,12 @@ export const PortfolioCard: React.FunctionComponent<{ item: PortfolioItem }> = (
 }
 
 export interface PortfolioProps {
-  items: Array<PortfolioItem>
+  // items: Array<PortfolioItem>
 }
 
-export const PortfolioItems = ({ items }: PortfolioProps) => {
-  console.log(
-    PortfolioModel.find({}, function(err, cursor) {
-      cursor.forEach(function(doc) {
-        console.log(doc)
-      })
-    }),
-  )
+export const PortfolioItems = async ({  }: PortfolioProps) => {
+  const items = await PortfolioModel.find({}, null, { limit: undefined, sort: '+orderDate' })
+  console.log({ items })
 
   items.sort((a, b) => {
     if (a.ongoingIndex != null || b.ongoingIndex != null) {
