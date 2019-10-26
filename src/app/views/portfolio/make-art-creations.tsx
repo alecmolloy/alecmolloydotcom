@@ -1,5 +1,9 @@
 import * as React from 'react'
-import { MakeArtItem } from '../../../schemas/make-art-items-schema'
+import {
+  MakeArtItem,
+  MakeArtItemSchema,
+  MakeArtItemModel,
+} from '../../../schemas/make-art-items-schema'
 import Header from './../header'
 import * as Moment from 'moment'
 
@@ -41,11 +45,12 @@ export const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({ it
   )
 }
 
-export interface MakeArtCreationsProps {
-  items: Array<MakeArtItem>
-}
+export const MakeArtCreations = async () => {
+  const items = await MakeArtItemModel.find({}, null, {
+    limit: undefined,
+    sort: '+orderDate',
+  })
 
-export const MakeArtCreations = ({ items }: MakeArtCreationsProps) => {
   return (
     <>
       {Header(breadcrumbs)}
