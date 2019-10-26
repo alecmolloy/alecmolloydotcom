@@ -120,94 +120,8 @@ main {
   padding: 0 1em;
 }
 
-.blogpost-hero,
-.blogpost-hero img {
-  width: 100%;
-  display: block;
-}
-
-#blogpost-header {
-  /*	color: rgba(242, 66, 0, .8);*/
-  padding: 0 0 1em;
-}
-
-.blogpost h2 {
-  font-size: 3em;
-  line-height: 1em;
-  margin: 0.166em 0.1em 0;
-  padding: 0 0.1em;
-}
-
-.blogpost #blogpost-header-deck {
-  font-size: 1.5em;
-  line-height: 1em;
-  margin: 0.3333em 0 0.6666em;
-  padding: 0 0.3333em;
-  color: #444;
-  font-style: italic;
-}
-
-.blogpost #blogpost-header-byline {
-  font-size: 1em;
-  font-style: italic;
-  line-height: 1em;
-  margin: 0.5em;
-  color: #888;
-  border-top: 1px dashed #444;
-  padding: 0.5em 0 0;
-}
-
-.blogpost h3 {
-  font-size: 1.17em;
-  font-weight: 600;
-  margin: 1.71em 0 0 0;
-  padding: 0 0.427em;
-}
-
-.blogpost h3::before {
-  content: '§ ';
-  font-weight: 600;
-  font-style: italic;
-}
-
-.blogpost h3 + p {
-  margin-top: 0;
-}
-
-.blogpost p {
-  margin-left: 0;
-  margin-bottom: 0;
-  padding: 0 0.5em;
-}
-
-.blogpost blockquote {
-  font-size: 0.8em;
-  line-height: 1.25em;
-  font-style: italic;
-  margin: 1.25em 0;
-  margin-left: 1.25em;
-  padding-left: 1.875em;
-  padding-right: 0.625em;
-  border-left: 1px solid #444;
-}
-
-.blogpost blockquote.short {
-  color: #666;
-  font-size: 1.25em;
-  line-height: 1.5em;
-  font-style: italic;
-  margin: 2em 0;
-  margin-left: 0em;
-  padding-left: 0.4em;
-  padding-right: 0.4em;
-  text-align: center;
-  border-left: none;
-}
-
 .about :link,
-.about :visited,
-.blogpost a:link,
-.blogpost a:visited {
+.about :visited {
   text-decoration: none;
   background-image: none;
   color: #444;
@@ -273,13 +187,6 @@ main {
   }
   section + section:before {
     margin-left: 13em;
-  }
-  .blogpost h3::before {
-    content: '§ ';
-    display: block;
-    height: 0;
-    position: relative;
-    right: 1em;
   }
 }
 
