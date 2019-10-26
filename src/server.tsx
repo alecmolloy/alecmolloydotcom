@@ -26,12 +26,19 @@ const credentials: https.ServerOptions =
         key: fs.readFileSync('./sslcert/localhost.key'),
       }
 
-mongoose.set('useCreateIndex', true)
-mongoose.connect(`${process.env.MONGO_URL}alecsoft`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'))
+mongoose
+  .connect(`${process.env.MONGO_URL}alecsoft`, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Database connection successful')
+  })
+  .catch((err) => {
+    console.error('Database connection error', err)
+  })
+
 app.set('port', port)
 app.use(compression())
 app.use(logger('dev'))
