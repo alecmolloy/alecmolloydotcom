@@ -14,8 +14,8 @@ export const AboutTemplate = () => {
           and managed mobile healthcare at <a href='http://mindoktor.se'>Min Doktor</a>.
         </p>
         <p>
-          Currently I am between London and Los Angeles, building the future of interface design
-          with Utopia.
+          Currently I am between Los Angeles and London, building the future of interface design
+          with <a href='https://utopia.app'>Utopia</a> 🤙.
         </p>
       </div>
     </>
