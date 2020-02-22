@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as Express from 'express'
 import * as http from 'http'
 

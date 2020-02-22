@@ -16,6 +16,11 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
   ],
+  ignorePatterns: ['src/public/*', 'dist/*'],
+  env: {
+    browser: true,
+    node: true,
+  },
   rules: {
     // Built-in eslint rules
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
@@ -134,7 +139,6 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/no-var-requires': 'off',
   },
-  ignorePatterns: ['src/public/', 'dist/'],
   settings: {
     react: {
       version: '16.12',

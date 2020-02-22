@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import * as compression from 'compression'
 import * as express from 'express'
 import * as fs from 'fs'
