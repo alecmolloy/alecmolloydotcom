@@ -1,11 +1,7 @@
 import * as React from 'react'
-import {
-  MakeArtItem,
-  MakeArtItemSchema,
-  MakeArtItemModel,
-} from '../../../schemas/make-art-items-schema'
 import Header from './../header'
 import * as Moment from 'moment'
+import { MakeArtItem, MakeArtItems } from '../../../data/make-art-items'
 
 const breadcrumbs = ['things', 'make-art']
 
@@ -46,11 +42,6 @@ export const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({ it
 }
 
 export const MakeArtCreations = async () => {
-  const items = await MakeArtItemModel.find({}, null, {
-    limit: undefined,
-    sort: '+orderDate',
-  })
-
   return (
     <>
       {Header(breadcrumbs)}
@@ -63,10 +54,10 @@ export const MakeArtCreations = async () => {
         <p>
           My favorite creative tool is Make Art: a tool built by Tancredi Trugenberger for Kano. I
           worked at Kano from 2014 until 2016, where I used this tool to make sketches of ideas, and
-          see if I could get them to render without crashing my browser. I wrote most of the tool's
-          learning challenges, which taught programming and graphics concepts to beginner coders.
-          The creations below are a sample of my best work in the tool, many of which been remixed
-          hundreds of times by Kano World users.
+          see if I could get them to render without crashing my browser. I wrote most of the
+          tool&lsquo;s learning challenges, which taught programming and graphics concepts to
+          beginner coders. The creations below are a sample of my best work in the tool, many of
+          which been remixed hundreds of times by Kano World users.
         </p>
         <p>
           The tool still is available at <a href='http://art.kano.me'>art.kano.me</a>, and my
@@ -86,8 +77,8 @@ export const MakeArtCreations = async () => {
           listStyle: 'none',
         }}
       >
-        {items.map((item, index) => (
-          <MakeArtCard item={item} />
+        {MakeArtItems.map((item, i) => (
+          <MakeArtCard key={i} item={item} />
         ))}
       </ol>
     </>

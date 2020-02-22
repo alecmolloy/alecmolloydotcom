@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { PortfolioItem, PortfolioModel } from '../../../schemas/portfolio-items-schema'
 import Header from '../header'
+import { Things, PortfolioItem } from '../../../data/things'
 
 const breadcrumbs = ['things']
 
@@ -43,27 +43,13 @@ export const PortfolioCard: React.FunctionComponent<{ item: PortfolioItem }> = (
   )
 }
 
-export const PortfolioItems = async () => {
-  const items = await PortfolioModel.find({}, null, {
-    limit: undefined,
-    sort: '+orderDate',
-  })
-
-  items.sort((a, b) => {
-    if (a.ongoingIndex != null || b.ongoingIndex != null) {
-      const aIndex: number = a.ongoingIndex != null ? a.ongoingIndex : -1
-      const bIndex: number = b.ongoingIndex != null ? b.ongoingIndex : -1
-      return aIndex < bIndex ? 1 : aIndex > bIndex ? -1 : 0
-    } else {
-      return 0
-    }
-  })
+export const PortfolioItems = () => {
   return (
     <>
       {Header(breadcrumbs)}
       <ol className='portfolio-wrapper wrapper'>
-        {items.map((item) => (
-          <PortfolioCard item={item} />
+        {Things.map((item, i) => (
+          <PortfolioCard key={i} item={item} />
         ))}
       </ol>
     </>
