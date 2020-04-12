@@ -13,12 +13,19 @@ require('dotenv').config()
 
 const app = express()
 
-const port = process.env.NODE_ENV === 'production' ? 443 : 3001
+const production = process.env.NODE_ENV === 'production'
 
-const credentials: https.ServerOptions = {
-  cert: fs.readFileSync('./sslcert/fullchain.pem'),
-  key: fs.readFileSync('./sslcert/privkey.pem'),
-}
+const port = production ? 443 : 3001
+
+const credentials: https.ServerOptions = production
+  ? {
+      cert: fs.readFileSync('/etc/letsencrypt/live/alecmolloy.com/fullchain.pem'),
+      key: fs.readFileSync('/etc/letsencrypt/live/alecmolloy.com/privkey.pem'),
+    }
+  : {
+      cert: fs.readFileSync('./sslcert/fullchain.pem'),
+      key: fs.readFileSync('./sslcert/privkey.pem'),
+    }
 
 app.set('port', port)
 app.use(compression())
@@ -32,3 +39,4 @@ https.createServer(credentials, app).listen(app.get('port'), function() {
 })
 
 runHttpServer()
+
