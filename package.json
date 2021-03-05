@@ -8,7 +8,8 @@
     "start": "webpack --watch & nodemon ./dist/bundle.js",
     "start:dev": "webpack-dev-server",
     "watch": "webpack --watch",
-    "eslint-check": "eslint --quiet --config .eslintrc.js --ext .ts --ext .tsx src"
+    "eslint-check": "eslint --quiet --config .eslintrc.js --ext .ts --ext .tsx src",
+    "build": "webpack"
   },
   "dependencies": {
     "compression": "1.7.4",

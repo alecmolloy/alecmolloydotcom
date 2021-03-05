@@ -15,7 +15,7 @@ export const Things: Array<PortfolioItem> = [
     title: 'Utopia',
     description:
       'Creative technology @ Utopia: A next-generation design tool for building production-ready React UIs',
-    date: '2017–present',
+    date: '2017–2020',
     URL: 'https://utopia.app',
     imgURL: 'utopia.png',
     orderDate: new Date(946684800000),
@@ -53,9 +53,9 @@ export const Things: Array<PortfolioItem> = [
   },
   {
     name: 'the-sad-times',
-    title: 'The Sad Times',
+    title: 'The Quiet Times',
     description:
-      "From 2015 to not that long ago I was sad and didn't do too many creative things outside of work",
+      "From 2015 to not that long ago I didn't do too many creative things outside of work",
     date: 'Mid 2015–recently',
     URL: '///darkness/',
     imgURL: 'the-sad-times.png',
