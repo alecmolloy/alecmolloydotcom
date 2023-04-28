@@ -1,0 +1,47 @@
+{
+  "env": { "browser": true },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true,
+      "jsx": true
+    }
+  },
+  "plugins": ["react", "react-hooks"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime"
+  ],
+  "rules": {
+    "no-console": [
+      "error",
+      { "allow": ["info", "warn", "error"] }
+    ],
+    "no-unused-expressions": "warn",
+    "array-callback-return": "warn",
+    "no-param-reassign": "error",
+    "react/jsx-no-comment-textnodes": "error",
+    "react/jsx-key": [
+      "error",
+      { "checkFragmentShorthand": true }
+    ],
+    "no-useless-escape": "warn",
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "no-shadow": ["error", { "builtinGlobals": true }],
+    "react/prop-types": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "18.0"
+    }
+  },
+  "globals": {
+    "require": true,
+    "document": true,
+    "console": true
+  }
+}

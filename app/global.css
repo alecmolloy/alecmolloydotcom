@@ -1,0 +1,49 @@
+/* Boilerplate */
+
+body * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  font-size: 22px;
+  width: 100%;
+  line-height: 1.5em;
+  -webkit-font-smoothing: antialiased;
+  color: #444;
+  font-family: serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+/* Text Templates */
+.wrapper {
+  margin: 1em auto 0;
+  max-width: 34em;
+  width: 100%;
+  padding: 0 0.5rem;
+}
+
+@media (min-width: 80em) {
+  .wrapper {
+    max-width: 50em;
+  }
+}
+
+.things-wrapper {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 500px) {
+  .things-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
