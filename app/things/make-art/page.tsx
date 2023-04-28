@@ -15,9 +15,9 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
         style={{ textDecoration: 'none', color: 'initial' }}
       >
         <div>
-          <Img
+          <img
             alt={item.title}
-            src={item.thumbnail}
+            src={item.thumbnail.src}
             style={{
               width: '100%',
               height: '100%',

@@ -25,9 +25,9 @@ const ThingsCard: React.FunctionComponent<{
           color: '#444',
         }}
       >
-        <Img
+        <img
           alt={item.title}
-          src={item.img}
+          src={item.img.src}
           width={400}
           height={300}
           style={{

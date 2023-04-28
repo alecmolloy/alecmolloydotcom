@@ -16,23 +16,18 @@
     "plugin:react/jsx-runtime"
   ],
   "rules": {
-    "no-console": [
-      "error",
-      { "allow": ["info", "warn", "error"] }
-    ],
+    "no-console": ["error", { "allow": ["info", "warn", "error"] }],
     "no-unused-expressions": "warn",
     "array-callback-return": "warn",
     "no-param-reassign": "error",
     "react/jsx-no-comment-textnodes": "error",
-    "react/jsx-key": [
-      "error",
-      { "checkFragmentShorthand": true }
-    ],
+    "react/jsx-key": ["error", { "checkFragmentShorthand": true }],
     "no-useless-escape": "warn",
     "no-var": "warn",
     "prefer-const": "warn",
     "no-shadow": ["error", { "builtinGlobals": true }],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "@next/next/no-img-element": "off"
   },
   "settings": {
     "react": {
