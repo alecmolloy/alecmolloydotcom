@@ -1,9 +1,8 @@
-import HeaderLayout from './header/layout'
+import { Header } from './Header'
 
 const NotFound = () => {
   return (
     <>
-      <HeaderLayout />
       <div className='wrapper'>
         <p>404 :~(</p>
       </div>

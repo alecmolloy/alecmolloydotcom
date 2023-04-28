@@ -1,10 +1,8 @@
 import { ThingsItem, ThingsItems } from '@/data/things'
 import Img from 'next/image'
 import * as React from 'react'
-import HeaderLayout from '../header/layout'
 import Link from 'next/link'
-
-const breadcrumbs = ['things']
+import { Header } from '../Header'
 
 const ThingsCard: React.FunctionComponent<{
   item: ThingsItem
@@ -68,7 +66,7 @@ const ThingsCard: React.FunctionComponent<{
 const Things = () => {
   return (
     <>
-      <HeaderLayout breadcrumbs={breadcrumbs} />
+      <Header breadcrumbs={['things']} />
       <ol
         className='wrapper things-wrapper'
         style={{

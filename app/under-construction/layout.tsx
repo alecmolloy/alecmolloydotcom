@@ -1,16 +1,11 @@
 import type React from 'react'
-import HeaderLayout from '../header/layout'
+import { Header } from '../Header'
 
-interface Props extends React.PropsWithChildren {
-  breadcrumbs?: string[]
-}
-
-const UnderConstructionLayout: React.FunctionComponent<Props> = ({
-  children,
-  breadcrumbs,
-}) => (
+const UnderConstructionLayout: React.FunctionComponent<
+  React.PropsWithChildren
+> = ({ children }) => (
   <>
-    <HeaderLayout breadcrumbs={breadcrumbs} />
+    <Header breadcrumbs={['elements-3d']} />
     <div className='wrapper' style={{ textAlign: 'center' }}>
       <hr
         style={{

@@ -7,7 +7,9 @@ interface Props {
 
 const navLinks = ['about', 'things']
 
-const HeaderLayout: React.FunctionComponent<Props> = ({ breadcrumbs = [] }) => {
+export const Header: React.FunctionComponent<Props> = ({
+  breadcrumbs = [],
+}) => {
   let link = ''
   return (
     <header className='wrapper'>
@@ -82,5 +84,3 @@ const HeaderLayout: React.FunctionComponent<Props> = ({ breadcrumbs = [] }) => {
     </header>
   )
 }
-
-export default HeaderLayout

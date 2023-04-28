@@ -1,11 +1,9 @@
-import HeaderLayout from '@/app/header/layout'
+import { Header } from '@/app/Header'
 import { MakeArtItem, MakeArtItems } from '@/data/make-art'
 import Moment from 'moment'
 import Img from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
-
-const breadcrumbs = ['things', 'make art']
 
 const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
   item,
@@ -49,7 +47,7 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
 const MakeArtCreations = async () => {
   return (
     <>
-      <HeaderLayout breadcrumbs={breadcrumbs} />
+      <Header breadcrumbs={['things', 'make-art']} />
       <div
         className='wrapper'
         style={{
