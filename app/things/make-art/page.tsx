@@ -1,8 +1,7 @@
 import { Header } from '@/app/Header'
+import { Link } from '@/components/Link'
 import { MakeArtItem, MakeArtItems } from '@/data/make-art'
 import Moment from 'moment'
-import Img from 'next/image'
-import Link from 'next/link'
 import * as React from 'react'
 
 const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
@@ -66,9 +65,9 @@ const MakeArtCreations = async () => {
         </p>
         <p>
           The tool still is available at{' '}
-          <a href='http://art.kano.me'>art.kano.me</a>, and my creations on{' '}
-          <a href='https://world.kano.me/users/alec'>world.kano.me</a> but sadly
-          both are poorly maintained, so I’ve archived them here.
+          <Link href='http://art.kano.me'>art.kano.me</Link>, and my creations
+          on <Link href='https://world.kano.me/users/alec'>world.kano.me</Link>{' '}
+          but sadly both are poorly maintained, so I’ve archived them here.
         </p>
       </div>
       <ol

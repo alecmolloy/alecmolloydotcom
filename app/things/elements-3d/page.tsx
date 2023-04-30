@@ -1,4 +1,5 @@
 import UnderConstructionLayout from '@/app/under-construction/layout'
+import { Link } from '@/components/Link'
 import type React from 'react'
 
 const Elements3D: React.FunctionComponent = () => (
@@ -8,8 +9,8 @@ const Elements3D: React.FunctionComponent = () => (
       world.
     </p>
     <p>
-      <a href='https://twitter.com/alecmolloy'>Tweet the webmaster</a> if you
-      want a showing.
+      <Link href='https://twitter.com/alecmolloy'>Tweet the webmaster</Link> if
+      you want a showing.
     </p>
   </UnderConstructionLayout>
 )

@@ -1,7 +1,6 @@
+import { Link } from '@/components/Link'
 import { ThingsItem, ThingsItems } from '@/data/things'
-import Img from 'next/image'
 import * as React from 'react'
-import Link from 'next/link'
 import { Header } from '../Header'
 
 const ThingsCard: React.FunctionComponent<{
