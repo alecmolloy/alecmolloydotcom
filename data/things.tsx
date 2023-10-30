@@ -1,4 +1,5 @@
 import { StaticImageData } from 'next/image'
+import * as React from 'react'
 import captioningMyself from '../public/images/things/captioning-myself.jpg'
 import elements3d from '../public/images/things/elements-3d.jpg'
 import floater from '../public/images/things/floater.png'
@@ -7,11 +8,12 @@ import perlinNoise from '../public/images/things/perlin-noise.png'
 import sleepSound from '../public/images/things/sleep-sound.png'
 import utopia from '../public/images/things/utopia.png'
 import y2k from '../public/images/things/y2k.png'
+import portaitOfFiveCubes from '../public/images/things/portrait-of-five-cubes.png'
 
 export interface ThingsItem {
   title: string
   name: string
-  description: string
+  description: React.ReactNode
   date: string
   URL: string
   img: StaticImageData
@@ -96,5 +98,21 @@ export const ThingsItems: Array<ThingsItem> = [
     URL: '/things/floater/index.html',
     img: floater,
     orderDate: new Date(1435791600000),
+  },
+  {
+    name: 'portrait-of-five-cubes',
+    title: 'Portrait of Five Cubes',
+    description: (
+      <>
+        After Dale Seymour’s Portrait of Five Cubes,{' '}
+        <a href='https://momath.org/home/math-monday-11-22-10/'>
+          pictured here
+        </a>
+      </>
+    ),
+    date: '2014',
+    URL: '/things/portrait-of-five-cubes/index.html',
+    img: portaitOfFiveCubes,
+    orderDate: new Date(1414687470209),
   },
 ]
