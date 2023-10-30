@@ -102,14 +102,7 @@ export const ThingsItems: Array<ThingsItem> = [
   {
     name: 'portrait-of-five-cubes',
     title: 'Portrait of Five Cubes',
-    description: (
-      <>
-        After Dale Seymour’s Portrait of Five Cubes,{' '}
-        <a href='https://momath.org/home/math-monday-11-22-10/'>
-          pictured here
-        </a>
-      </>
-    ),
+    description: `After Dale Seymour’s “Portrait of Five Cubes”`,
     date: '2014',
     URL: '/things/portrait-of-five-cubes/index.html',
     img: portaitOfFiveCubes,
