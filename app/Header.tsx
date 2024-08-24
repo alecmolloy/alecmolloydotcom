@@ -1,6 +1,6 @@
 import { Link } from '../components/Link'
 import React from 'react'
-import { instrumentSerif, workSans } from './layout'
+import { instrumentSerif, workSans } from './fonts'
 
 interface Props {
   breadcrumbs?: string[]
