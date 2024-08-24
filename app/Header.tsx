@@ -1,30 +1,37 @@
 import { Link } from '../components/Link'
 import React from 'react'
+import { instrumentSerif, workSans } from './layout'
 
 interface Props {
   breadcrumbs?: string[]
 }
 
-const navLinks = ['about', 'things']
+const navLinks = ['about', 'work']
 
 export const Header: React.FunctionComponent<Props> = ({
   breadcrumbs = [],
 }) => {
   let link = ''
   return (
-    <header className='wrapper'>
+    <header
+      className='wrapper'
+      style={{
+        textAlign: 'center',
+      }}
+    >
       <h1
         style={{
           lineHeight: '1.1em',
           marginBottom: '0.5rem',
         }}
+        className={instrumentSerif.className}
       >
         <Link
           key='/'
           href='/'
           style={{ color: '#444', textDecoration: 'none' }}
         >
-          alecmolloy
+          Alec Molloy
         </Link>
         {breadcrumbs.map((breadcrumb) => {
           link += `${breadcrumb}/`
@@ -57,15 +64,18 @@ export const Header: React.FunctionComponent<Props> = ({
             padding: 0,
             margin: '0 auto',
             color: '#aaa',
+            display: 'flex',
+            columnGap: '1em',
+            justifyContent: 'center',
           }}
         >
           {navLinks.map((navLink) => (
             <li
               key={navLink}
+              className={workSans.className}
               style={{
                 listStyle: 'none',
                 display: 'inline',
-                paddingRight: '1em',
               }}
             >
               <Link

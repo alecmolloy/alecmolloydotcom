@@ -10,7 +10,7 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
   return (
     <li key={item.title} id={item.title}>
       <Link
-        href={`/things/make-art/${item.code}`}
+        href={`/work/make-art/${item.code}`}
         style={{ textDecoration: 'none', color: 'initial' }}
       >
         <div>
@@ -46,7 +46,7 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
 const MakeArtCreations = async () => {
   return (
     <>
-      <Header breadcrumbs={['things', 'make-art']} />
+      <Header breadcrumbs={['work', 'make-art']} />
       <div
         className='wrapper'
         style={{

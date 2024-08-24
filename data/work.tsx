@@ -1,16 +1,16 @@
 import { StaticImageData } from 'next/image'
 import * as React from 'react'
-import captioningMyself from '../public/images/things/captioning-myself.jpg'
-import elements3d from '../public/images/things/elements-3d.jpg'
-import floater from '../public/images/things/floater.png'
-import makeArt from '../public/images/things/make-art.png'
-import perlinNoise from '../public/images/things/perlin-noise.png'
-import sleepSound from '../public/images/things/sleep-sound.png'
-import utopia from '../public/images/things/utopia.png'
-import y2k from '../public/images/things/y2k.png'
-import portaitOfFiveCubes from '../public/images/things/portrait-of-five-cubes.png'
+import captioningMyself from '../public/images/work/captioning-myself.jpg'
+import elements3d from '../public/images/work/elements-3d.jpg'
+import floater from '../public/images/work/floater.png'
+import makeArt from '../public/images/work/make-art.png'
+import perlinNoise from '../public/images/work/perlin-noise.png'
+import sleepSound from '../public/images/work/sleep-sound.png'
+import utopia from '../public/images/work/utopia.png'
+import y2k from '../public/images/work/y2k.png'
+import portaitOfFiveCubes from '../public/images/work/portrait-of-five-cubes.png'
 
-export interface ThingsItem {
+export interface WorkItem {
   title: string
   name: string
   description: React.ReactNode
@@ -21,7 +21,7 @@ export interface ThingsItem {
   orderDate: Date
 }
 
-export const ThingsItems: Array<ThingsItem> = [
+export const WorkItems: Array<WorkItem> = [
   {
     name: 'utopia',
     title: 'Utopia',
@@ -38,7 +38,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Elements 3D',
     description: 'Sketchpad for generative 3D creations',
     date: '2015',
-    URL: '/things/elements-3d',
+    URL: '/work/elements-3d',
     img: elements3d,
     orderDate: new Date(1569884400000),
     ongoingIndex: 3,
@@ -48,7 +48,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Make Art Creations',
     description: "Kano's online canvas for drawing with code",
     date: '2014–present',
-    URL: '/things/make-art',
+    URL: '/work/make-art',
     img: makeArt,
     orderDate: new Date(946684800000),
     ongoingIndex: 1,
@@ -68,7 +68,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Sleep Sound in CSS',
     description: "Jamie xx's Sleep Sound music video in pure CSS",
     date: 'May 2015',
-    URL: '/things/sleep-sound/index.html',
+    URL: '/work/sleep-sound/index.html',
     img: sleepSound,
     orderDate: new Date(1430438400000),
   },
@@ -77,7 +77,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Perlin.js',
     description: 'Perlin noise implementation in Canvas 2D',
     date: 'July 2015',
-    URL: '/things/perlin-js/index.html',
+    URL: '/work/perlin-js/index.html',
     img: perlinNoise,
     orderDate: new Date(1435708800000),
   },
@@ -86,7 +86,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Now Thats What I Call Y2K',
     description: 'Projector installation and music visualiser',
     date: 'April 2015',
-    URL: '/things/y2k/index.html',
+    URL: '/work/y2k/index.html',
     img: y2k,
     orderDate: new Date(1427929200000),
   },
@@ -95,7 +95,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Floater',
     description: '3D Music Visualiser',
     date: '2015',
-    URL: '/things/floater/index.html',
+    URL: '/work/floater/index.html',
     img: floater,
     orderDate: new Date(1435791600000),
   },
@@ -104,7 +104,7 @@ export const ThingsItems: Array<ThingsItem> = [
     title: 'Portrait of Five Cubes',
     description: `After Dale Seymour’s “Portrait of Five Cubes”`,
     date: '2014',
-    URL: '/things/portrait-of-five-cubes/index.html',
+    URL: '/work/portrait-of-five-cubes/index.html',
     img: portaitOfFiveCubes,
     orderDate: new Date(1414687470209),
   },

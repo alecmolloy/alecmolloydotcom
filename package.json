@@ -1,6 +1,6 @@
 {
   "name": "alecmolloydotcom",
-  "version": "6.0.0",
+  "version": "7.0.0",
   "private": false,
   "scripts": {
     "dev": "next dev",
@@ -8,17 +8,19 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "dependencies": {
-    "@types/node": "18.16.1",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
+  "devDependencies": {
+    "@types/node": "22.5.0",
+    "@types/react": "18.3.4",
+    "@types/react-dom": "18.3.0",
     "eslint": "8.39.0",
-    "eslint-config-next": "13.3.1",
-    "moment": "2.29.4",
-    "next": "13.3.1",
-    "prettier": "2.8.8",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.4"
+    "eslint-config-next": "13.3.1"
+  },
+  "dependencies": {
+    "moment": "2.30.1",
+    "next": "14.2.6",
+    "prettier": "3.3.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.5.4"
   }
 }

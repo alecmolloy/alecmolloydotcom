@@ -1,10 +1,10 @@
 import { Link } from '@/components/Link'
-import { ThingsItem, ThingsItems } from '@/data/things'
+import { WorkItem, WorkItems } from '@/data/work'
 import * as React from 'react'
 import { Header } from '../Header'
 
-const ThingsCard: React.FunctionComponent<{
-  item: ThingsItem
+export const WorkCard: React.FunctionComponent<{
+  item: WorkItem
 }> = ({ item }) => {
   return (
     <li
@@ -62,12 +62,12 @@ const ThingsCard: React.FunctionComponent<{
   )
 }
 
-const Things = () => {
+const Work = () => {
   return (
     <>
-      <Header breadcrumbs={['things']} />
+      <Header breadcrumbs={['work']} />
       <ol
-        className='wrapper things-wrapper'
+        className='wrapper work-wrapper'
         style={{
           display: 'grid',
           listStyle: 'none',
@@ -78,12 +78,12 @@ const Things = () => {
           margin: '1rem auto',
         }}
       >
-        {ThingsItems.map((item, i) => (
-          <ThingsCard key={i} item={item} />
+        {WorkItems.map((item, i) => (
+          <WorkCard key={i} item={item} />
         ))}
       </ol>
     </>
   )
 }
 
-export default Things
+export default Work
