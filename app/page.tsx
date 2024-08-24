@@ -1,8 +1,8 @@
+import { WorkItems } from '@/data/work'
 import Head from 'next/head'
 import React from 'react'
+import { workSans } from './fonts'
 import { Header } from './Header'
-import { workSans } from './layout'
-import { WorkItems } from '@/data/work'
 import { WorkCard } from './work/page'
 
 const Index: React.FunctionComponent = () => {

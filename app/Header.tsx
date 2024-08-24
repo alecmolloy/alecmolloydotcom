@@ -1,5 +1,5 @@
-import { Link } from '../components/Link'
 import React from 'react'
+import { Link } from '../components/Link'
 import { instrumentSerif, workSans } from './fonts'
 
 interface Props {
