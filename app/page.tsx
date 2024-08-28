@@ -19,8 +19,8 @@ const Index: React.FunctionComponent = () => {
         <link rel='icon' type='img=png' href='/favicon.png' />
         <meta name='og:image' content='http://alecmolloy.com/favicon.png' />
       </Head>
-      <Header />
       <HeroArtwork />
+      <Header />
       <About />
       <Portfolio />
       <Contact />

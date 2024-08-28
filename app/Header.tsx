@@ -14,17 +14,13 @@ export const Header: React.FunctionComponent<Props> = () => {
       top='0'
       direction='column'
       width='100vw'
-      style={{ zIndex: 1 }}
+      pt='6'
     >
-      <Txt size='8' className={instrumentSerif.className} align='center'>
-        <Link
-          key='/'
-          href='/'
-          style={{ color: '#444', textDecoration: 'none' }}
-        >
+      <Link key='/' href='/' style={{ color: '#444', textDecoration: 'none' }}>
+        <Txt size='9' className={instrumentSerif.className} align='center'>
           Alec Molloy
-        </Link>
-      </Txt>
+        </Txt>
+      </Link>
       <Navigation />
     </Flex>
   )

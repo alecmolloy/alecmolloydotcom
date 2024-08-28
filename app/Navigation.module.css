@@ -16,16 +16,6 @@
 .Link {
   all: unset;
   display: block;
-  text-decoration: none;
-  font-family: var(--font-work-sans);
-  padding: 8px 12px;
-  outline: none;
-  user-select: none;
-  font-weight: 500;
-  line-height: 1;
-  border-radius: 4px;
-  font-size: 18px;
-  color: var(--gray-9);
   &:focus {
     box-shadow: 0 0 0 2px var(--gray-7);
   }
@@ -33,4 +23,10 @@
     color: white;
     background-color: var(--gray-9);
   }
+
+  padding: 8px 12px;
+  outline: none;
+  user-select: none;
+  line-height: 1;
+  border-radius: 4px;
 }
