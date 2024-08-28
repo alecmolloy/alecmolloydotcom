@@ -1,5 +1,9 @@
+import { instrumentSerif, workSans } from './fonts'
+import '@radix-ui/themes/styles.css'
 import './global.css'
+import './theme.css'
 import type React from 'react'
+import { Theme } from '@radix-ui/themes'
 
 export default function RootLayout({
   children,
@@ -8,7 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body className={[workSans.variable, instrumentSerif.variable].join(' ')}>
+        <Theme>{children}</Theme>
+      </body>
     </html>
   )
 }

@@ -8,12 +8,13 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "@react-three"],
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "plugin:@react-three/recommended"
   ],
   "rules": {
     "no-console": ["error", { "allow": ["info", "warn", "error"] }],
@@ -27,7 +28,8 @@
     "prefer-const": "warn",
     "no-shadow": ["error", { "builtinGlobals": true }],
     "react/prop-types": "off",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "react/no-unknown-property": "off"
   },
   "settings": {
     "react": {

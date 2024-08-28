@@ -2,12 +2,13 @@ import { Link } from '@/components/Link'
 import { WorkItem, WorkItems } from '@/data/work'
 import * as React from 'react'
 import { Header } from '../Header'
+import { Flex } from '@radix-ui/themes'
 
 export const WorkCard: React.FunctionComponent<{
   item: WorkItem
 }> = ({ item }) => {
   return (
-    <li
+    <Flex
       key={item.name}
       id={item.name}
       style={{
@@ -58,7 +59,7 @@ export const WorkCard: React.FunctionComponent<{
           {item.description}
         </div>
       </Link>
-    </li>
+    </Flex>
   )
 }
 

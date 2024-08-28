@@ -1,31 +1,22 @@
+import { Flex, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import { Link } from '../components/Link'
-import { instrumentSerif, workSans } from './fonts'
+import { instrumentSerif } from './fonts'
+import { Navigation } from './Navigation'
 
-interface Props {
-  breadcrumbs?: string[]
-}
+interface Props {}
 
-const navLinks = ['about', 'work']
-
-export const Header: React.FunctionComponent<Props> = ({
-  breadcrumbs = [],
-}) => {
-  let link = ''
+export const Header: React.FunctionComponent<Props> = () => {
   return (
-    <header
-      className='wrapper'
-      style={{
-        textAlign: 'center',
-      }}
+    <Flex
+      id='header'
+      position='absolute'
+      top='0'
+      direction='column'
+      width='100vw'
+      style={{ zIndex: 1 }}
     >
-      <h1
-        style={{
-          lineHeight: '1.1em',
-          marginBottom: '0.5rem',
-        }}
-        className={instrumentSerif.className}
-      >
+      <Txt size='8' className={instrumentSerif.className} align='center'>
         <Link
           key='/'
           href='/'
@@ -33,64 +24,8 @@ export const Header: React.FunctionComponent<Props> = ({
         >
           Alec Molloy
         </Link>
-        {breadcrumbs.map((breadcrumb) => {
-          link += `${breadcrumb}/`
-          return (
-            <React.Fragment key={link}>
-              <span
-                style={{
-                  color: '#888',
-                }}
-              >
-                {' '}
-                /{' '}
-              </span>
-              <Link
-                href={`/${link}`}
-                style={{
-                  color: '#888',
-                  textDecoration: 'none',
-                }}
-              >
-                {breadcrumb}
-              </Link>
-            </React.Fragment>
-          )
-        })}
-      </h1>
-      <nav>
-        <ul
-          style={{
-            padding: 0,
-            margin: '0 auto',
-            color: '#aaa',
-            display: 'flex',
-            columnGap: '1em',
-            justifyContent: 'center',
-          }}
-        >
-          {navLinks.map((navLink) => (
-            <li
-              key={navLink}
-              className={workSans.className}
-              style={{
-                listStyle: 'none',
-                display: 'inline',
-              }}
-            >
-              <Link
-                href={`/${navLink}`}
-                style={{
-                  color: '#888',
-                  textDecoration: 'none',
-                }}
-              >
-                {navLink}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+      </Txt>
+      <Navigation />
+    </Flex>
   )
 }
