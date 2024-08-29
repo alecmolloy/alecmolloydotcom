@@ -16,7 +16,6 @@ const NavText = ({
     weight='medium'
     style={{
       textDecoration: 'none',
-      color: 'var(--international-orange-a9)',
       ...style,
     }}
     {...props}
@@ -30,7 +29,7 @@ export const Navigation = () => (
     <NavigationMenu.List className={styles.MenuList}>
       <NavigationMenu.Item onClick={() => window.scrollTo({ top: 0 })}>
         <NavigationMenu.Link className={styles.Link} href='#'>
-          <NavText>☺</NavText>
+          <NavText>index</NavText>
         </NavigationMenu.Link>
       </NavigationMenu.Item>
 

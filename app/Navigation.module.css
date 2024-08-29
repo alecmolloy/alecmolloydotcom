@@ -16,12 +16,13 @@
 .Link {
   all: unset;
   display: block;
+  color: var(--international-orange-9);
   &:focus {
-    box-shadow: 0 0 0 2px var(--gray-7);
+    box-shadow: 0 0 0 2px var(--international-orange-9);
   }
   &:hover {
     color: white;
-    background-color: var(--gray-9);
+    background-color: var(--international-orange-9);
   }
 
   padding: 8px 12px;
