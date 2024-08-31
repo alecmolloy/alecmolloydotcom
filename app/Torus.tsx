@@ -15,7 +15,7 @@ export const Torus: React.FC = () => {
   return (
     <mesh ref={torusRef} position={[0, 0, 0]}>
       <torusKnotGeometry args={[300, 10, 512, 24, 8, 12]} />
-      <meshStandardMaterial color={'oklch(68.6% 0.261 36.61)'} />
+      <meshStandardMaterial color={'black'} />
     </mesh>
   )
 }
