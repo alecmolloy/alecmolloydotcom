@@ -17,7 +17,7 @@ export const HeroArtwork = () => {
         <Canvas
           orthographic
           camera={{
-            zoom: 4,
+            zoom: 1.5,
             position: [0, 0, 100],
             near: -2048 * 2,
             far: 2048 * 2,

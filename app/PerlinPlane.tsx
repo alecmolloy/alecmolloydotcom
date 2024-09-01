@@ -1,4 +1,4 @@
-import { shaderMaterial, useTexture } from '@react-three/drei'
+import { shaderMaterial, Texture, useTexture } from '@react-three/drei'
 import { extend, ReactThreeFiber, useFrame, useThree } from '@react-three/fiber'
 import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-const TextureSize = 32
+const TextureSize = 16
 const PixelScale = 24
 
 const camera = new THREE.OrthographicCamera(
@@ -70,6 +70,7 @@ export const PerlinPlane = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const ctxRef = useRef<CanvasRenderingContext2D | null>(null)
   const canvasTextureRef = useRef<THREE.CanvasTexture | null>(null)
+  const mousePosition = useRef<null | { x: number; y: number }>(null)
 
   const turtleHorizontalTexture = useTexture(
     '/images/turtle-corner-horizontal.png',
@@ -92,7 +93,9 @@ export const PerlinPlane = () => {
     canvasRef.current = document.createElement('canvas')
     canvasRef.current.width = TextureSize * PixelScale
     canvasRef.current.height = TextureSize * PixelScale
-    ctxRef.current = canvasRef.current.getContext('2d')
+    ctxRef.current = canvasRef.current.getContext('2d', {
+      colorSpace: 'display-p3',
+    })
     canvasTextureRef.current = new THREE.CanvasTexture(
       canvasRef.current,
       undefined,
@@ -126,41 +129,50 @@ export const PerlinPlane = () => {
 
     if (ctxRef.current != null && canvasTextureRef.current != null) {
       const ctx = ctxRef.current
-      ctx.clearRect(0, 0, TextureSize * PixelScale, TextureSize * PixelScale)
-      for (let i = 0; i < pixelBuffer.length; i += 1) {
-        const x = (i % TextureSize) * PixelScale
-        const y = Math.floor(i / TextureSize) * PixelScale
-        ctx.fillStyle = pixelBuffer[i] === 255 ? 'white' : 'black'
-        ctx.fillRect(x, y, PixelScale, PixelScale)
-      }
-
+      ctx.fillStyle = 'white'
+      ctx.fillRect(0, 0, TextureSize * PixelScale, TextureSize * PixelScale)
       // Draw the turtle image
+      ctx.fillStyle = 'black'
       if (turtleHorizontalImageRef.current && turtleVerticalImageRef.current) {
-        for (let x = 1; x < TextureSize; x += 1) {
-          for (let y = 1; y < TextureSize; y += 1) {
-            // Check if any of the surrounding pixels are black
-            const surroundingPixels = [
-              pixelBuffer[(y - 1) * TextureSize + (x - 1)],
-              pixelBuffer[(y - 1) * TextureSize + x],
-              pixelBuffer[y * TextureSize + (x - 1)],
-              pixelBuffer[y * TextureSize + x],
-            ]
-
-            if (surroundingPixels.some((pixel) => pixel === 0)) {
-              ctx.drawImage(
-                x % 2 === 0
-                  ? turtleHorizontalImageRef.current
-                  : turtleVerticalImageRef.current,
-                x * PixelScale - 6,
-                y * PixelScale - 5,
-                12,
-                11,
+        const mouseX = Math.ceil(
+          (mousePosition.current?.x ?? Infinity) * TextureSize,
+        )
+        console.log(mousePosition.current?.x)
+        const mouseY = Math.ceil(
+          (1 - (mousePosition.current?.y ?? Infinity)) * TextureSize,
+        )
+        for (let x = 0; x < TextureSize; x += 1) {
+          for (let y = 0; y < TextureSize; y += 1) {
+            if ((x + y) % 2 === 0) {
+              ctx.fillRect(
+                x * PixelScale,
+                y * PixelScale,
+                PixelScale,
+                PixelScale,
               )
+            }
+            if (x >= 1 && y >= 1) {
+              const standingWaveDirection = (x + y) % 3 === 0
+              // const shouldTheValueBeFlipped =
+              //   pixelBuffer[x + y * TextureSize] > 255 * 0.75
+              const withinMouse =
+                Math.abs(x - mouseX) <= 2 && Math.abs(y - mouseY) <= 2
+              const finalValue = standingWaveDirection
+              if (!withinMouse) {
+                ctx.drawImage(
+                  finalValue
+                    ? turtleHorizontalImageRef.current
+                    : turtleVerticalImageRef.current,
+                  x * PixelScale - 6,
+                  y * PixelScale - 5,
+                  12,
+                  11,
+                )
+              }
             }
           }
         }
       }
-
       canvasTextureRef.current.needsUpdate = true
     }
   })
@@ -171,7 +183,20 @@ export const PerlinPlane = () => {
         <planeGeometry args={[TextureSize, TextureSize]} />
         <perlinNoiseMaterial ref={materialRef} side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[0, 0, 1]}>
+      <mesh
+        position={[0, 0, 0]}
+        onPointerMove={(e) => {
+          if (e.uv != null) {
+            mousePosition.current = {
+              x: e.uv.x,
+              y: e.uv.y,
+            }
+          }
+        }}
+        onPointerLeave={() => {
+          mousePosition.current = null
+        }}
+      >
         <planeGeometry
           args={[TextureSize * PixelScale, TextureSize * PixelScale]}
         />
