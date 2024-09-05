@@ -19,7 +19,7 @@ declare global {
 }
 
 const TextureSize = 16
-const PixelScale = 24
+const PixelScale = 20
 
 const camera = new THREE.OrthographicCamera(
   -TextureSize / 2,
@@ -73,9 +73,11 @@ export const PerlinPlane = () => {
   const mousePosition = useRef<null | { x: number; y: number }>(null)
 
   const turtleHorizontalTexture = useTexture(
-    '/images/turtle-corner-horizontal.png',
+    '/images/turtle-corner-horizontal-square.png',
   )
-  const turtleVerticalTexture = useTexture('/images/turtle-corner-vertical.png')
+  const turtleVerticalTexture = useTexture(
+    '/images/turtle-corner-vertical-square.png',
+  )
   const turtleHorizontalImageRef = useRef<HTMLImageElement | null>(null)
   const turtleVerticalImageRef = useRef<HTMLImageElement | null>(null)
 
@@ -156,7 +158,7 @@ export const PerlinPlane = () => {
               // const shouldTheValueBeFlipped =
               //   pixelBuffer[x + y * TextureSize] > 255 * 0.75
               const withinMouse =
-                Math.abs(x - mouseX) <= 2 && Math.abs(y - mouseY) <= 2
+                Math.abs(x - mouseX) < 2 && Math.abs(y - mouseY) < 2
               const finalValue = standingWaveDirection
               if (!withinMouse) {
                 ctx.drawImage(
@@ -164,9 +166,9 @@ export const PerlinPlane = () => {
                     ? turtleHorizontalImageRef.current
                     : turtleVerticalImageRef.current,
                   x * PixelScale - 6,
-                  y * PixelScale - 5,
+                  y * PixelScale - 6,
                   12,
-                  11,
+                  12,
                 )
               }
             }
