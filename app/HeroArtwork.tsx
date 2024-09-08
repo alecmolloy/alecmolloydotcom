@@ -1,8 +1,9 @@
 'use client'
 import { Container, Flex } from '@radix-ui/themes'
-import { OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { PerlinPlane } from './PerlinPlane'
+import { TurtlePlane } from './TurtlePlane'
+import { Void } from './Void'
 
 export const HeroArtwork = () => {
   return (
@@ -11,20 +12,19 @@ export const HeroArtwork = () => {
         id='hero'
         justify='center'
         align='center'
-        height='80vh'
+        height='72vh'
         style={{ backgroundColor: 'var(--international-orange-9)' }}
       >
         <Canvas
-          orthographic
           camera={{
-            zoom: 1.5,
-            position: [0, 0, 100],
-            near: -2048 * 2,
-            far: 2048 * 2,
+            position: [0, 0, 300],
+            fov: 75,
           }}
         >
-          <PerlinPlane />
+          <Void />
+          <TurtlePlane />
           <OrbitControls />
+          <Environment files='/studio027.exr' background />
         </Canvas>
       </Flex>
     </Container>

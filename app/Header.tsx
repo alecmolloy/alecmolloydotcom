@@ -9,7 +9,7 @@ interface Props {}
 export const Header: React.FunctionComponent<Props> = () => {
   return (
     <Container size='4' position='sticky' top='0'>
-      <Flex id='header' pt='3' pb='4' justify='between'>
+      <Flex id='header' pt='6' pb='6' direction='column'>
         <Link key='/' href='/' style={{ textDecoration: 'none' }}>
           <Txt
             size='9'

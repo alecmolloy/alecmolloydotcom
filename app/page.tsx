@@ -1,5 +1,5 @@
 import { Box } from '@radix-ui/themes'
-import Head from 'next/head'
+import { Metadata } from 'next'
 import React from 'react'
 import { About } from './About'
 import { Contact } from './Contact'
@@ -7,12 +7,11 @@ import { Header } from './Header'
 import { HeroArtwork } from './HeroArtwork'
 import { Portfolio } from './Portfolio'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Alec Molloy‘s Official Home on the Web',
   description: 'The Official Web Presence of Alec Molloy™',
-  icons: ['http://alecmolloy.com/favicon.png'],
   openGraph: {
-    images: ['http://alecmolloy.com/favicon.png'],
+    images: ['/favicon.png'],
   },
 }
 
