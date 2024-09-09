@@ -46,7 +46,7 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
 const MakeArtCreations = async () => {
   return (
     <>
-      <Header breadcrumbs={['work', 'make-art']} />
+      <Header />
       <div
         className='wrapper'
         style={{

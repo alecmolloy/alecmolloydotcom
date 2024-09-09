@@ -66,7 +66,7 @@ export const WorkCard: React.FunctionComponent<{
 const Work = () => {
   return (
     <>
-      <Header breadcrumbs={['work']} />
+      <Header />
       <ol
         className='wrapper work-wrapper'
         style={{

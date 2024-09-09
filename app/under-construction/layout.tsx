@@ -5,7 +5,7 @@ const UnderConstructionLayout: React.FunctionComponent<
   React.PropsWithChildren
 > = ({ children }) => (
   <>
-    <Header breadcrumbs={['elements-3d']} />
+    <Header />
     <div className='wrapper' style={{ textAlign: 'center' }}>
       <hr
         style={{
