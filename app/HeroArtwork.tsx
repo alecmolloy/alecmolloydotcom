@@ -1,32 +1,37 @@
 'use client'
-import { Container, Flex } from '@radix-ui/themes'
+import { Flex } from '@radix-ui/themes'
 import { Environment, OrbitControls } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
+import { HeaderHeight } from './Header'
 import { TurtlePlane } from './TurtlePlane'
 import { Void } from './Void'
 
 export const HeroArtwork = () => {
   return (
-    <Container pb='8'>
-      <Flex
-        id='hero'
-        justify='center'
-        align='center'
-        height='72vh'
-        style={{ backgroundColor: 'var(--international-orange-9)' }}
+    // <Container mb='8' size='4'>
+    <Flex
+      id='hero'
+      justify='center'
+      align='center'
+      height='72vh'
+      style={{
+        backgroundColor: 'var(--international-orange-9)',
+        height: `calc(95vh - ${HeaderHeight}px)`,
+      }}
+    >
+      <Canvas
+        camera={{
+          position: [0, 360, 640],
+          fov: 75,
+          far: 5000,
+        }}
       >
-        <Canvas
-          camera={{
-            position: [0, 0, 300],
-            fov: 75,
-          }}
-        >
-          <Void />
-          <TurtlePlane />
-          <OrbitControls />
-          <Environment files='/studio027.exr' background />
-        </Canvas>
-      </Flex>
-    </Container>
+        <Void />
+        <TurtlePlane />
+        <OrbitControls target={[0, 60, 0]} enableZoom={false} />
+        <Environment files='/studio027.exr' />
+      </Canvas>
+    </Flex>
+    // </Container>
   )
 }

@@ -112,7 +112,6 @@ export const TurtlePlane = () => {
     turtleHorizontalImg &&
     turtleVerticalImg && (
       <mesh
-        position={[0, 0, 0]}
         onPointerMove={(e) => {
           if (e.uv != null) {
             mousePosition.current = {
@@ -124,6 +123,7 @@ export const TurtlePlane = () => {
         onPointerLeave={() => {
           mousePosition.current = null
         }}
+        rotation={[-Math.PI / 2, 0, 0]}
       >
         <planeGeometry
           args={[canvasCellWidth * PixelScale, canvasCellHeight * PixelScale]}
