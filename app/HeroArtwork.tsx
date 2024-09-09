@@ -21,7 +21,7 @@ export const HeroArtwork = () => {
     >
       <Canvas
         camera={{
-          position: [0, 360, 640],
+          position: [0, 512, 640],
           fov: 75,
           far: 5000,
         }}

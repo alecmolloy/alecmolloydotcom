@@ -49,7 +49,7 @@ export function Void() {
           float totalFrames = 66.0;
           float initialLoop = 37.0;
           float loopLength = totalFrames - initialLoop;
-          float currentTime = time * 2.0;
+          float currentTime = time * 1.5;
           float currentFrame;
           
           if (currentTime < totalFrames) {
@@ -144,7 +144,8 @@ export function Void() {
         const wobbleFrequency = 0.75 // Adjust this value to control the speed of the wobble
 
         meshRef.current.rotation.x =
-          Math.sin(clock.elapsedTime * wobbleFrequency) * wobbleAmplitude
+          Math.sin(clock.elapsedTime * wobbleFrequency) * wobbleAmplitude +
+          Math.PI / 4
         meshRef.current.rotation.y =
           Math.cos(clock.elapsedTime * wobbleFrequency * 1.3) * wobbleAmplitude
         meshRef.current.rotation.z =
@@ -168,7 +169,7 @@ export function Void() {
   return (
     <mesh
       ref={meshRef}
-      position={[0, 12, 0]}
+      position={[0, 256, 0]}
       scale={[0.05, 1, 1]}
       geometry={modifiedGeometry}
     >
