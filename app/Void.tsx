@@ -1,10 +1,22 @@
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
-import { useMemo, useRef } from 'react'
+import React from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
 
-export function Void() {
+interface VoidProps {
+  position: [number, number, number]
+  radius: number
+  wobbleAmplitude?: number
+  wobbleFrequency?: number
+}
+
+export const Void: React.FunctionComponent<VoidProps> = ({
+  radius,
+  position,
+  wobbleAmplitude = 0.025,
+  wobbleFrequency = 0.75,
+}) => {
   const bumpTexture = useTexture(
     '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
     (texture) => {
@@ -13,17 +25,17 @@ export function Void() {
     },
   )
 
-  const meshRef = useRef<THREE.Mesh>(null)
-  const noise4D = useMemo(() => createNoise4D(), [])
-  const originalPositions = useRef<Float32Array>()
+  const meshRef = React.useRef<THREE.Mesh>(null)
+  const noise4D = React.useMemo(() => createNoise4D(), [])
+  const originalPositions = React.useRef<Float32Array>()
 
   // Create a render target for the custom bump map
-  const bumpRenderTarget = useMemo(() => {
+  const bumpRenderTarget = React.useMemo(() => {
     return new THREE.WebGLRenderTarget(2048, 1024)
   }, [])
 
   // Create custom shader material for bump map generation
-  const bumpMaterial = useMemo(() => {
+  const bumpMaterial = React.useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
         bumpTexture: { value: bumpTexture },
@@ -88,20 +100,20 @@ export function Void() {
   }, [bumpTexture])
 
   // Create a scene and camera for rendering the bump map
-  const bumpScene = useMemo(() => new THREE.Scene(), [])
-  const bumpCamera = useMemo(
+  const bumpScene = React.useMemo(() => new THREE.Scene(), [])
+  const bumpCamera = React.useMemo(
     () => new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1),
     [],
   )
-  const bumpQuad = useMemo(
+  const bumpQuad = React.useMemo(
     () => new THREE.Mesh(new THREE.PlaneGeometry(2, 2), bumpMaterial),
     [bumpMaterial],
   )
   bumpScene.add(bumpQuad)
 
   // Create a modified geometry with custom UV mapping
-  const modifiedGeometry = useMemo(() => {
-    const geometry = new THREE.IcosahedronGeometry(200, 4)
+  const modifiedGeometry = React.useMemo(() => {
+    const geometry = new THREE.IcosahedronGeometry(radius, 4)
     const uvAttribute = geometry.attributes.uv
     const newUVs = new Float32Array(uvAttribute.count * 2)
 
@@ -116,7 +128,7 @@ export function Void() {
 
     geometry.setAttribute('uv', new THREE.BufferAttribute(newUVs, 2))
     return geometry
-  }, [])
+  }, [radius])
 
   useFrame(({ gl, clock }) => {
     if (meshRef.current && meshRef.current.geometry) {
@@ -133,16 +145,22 @@ export function Void() {
         const z = originalPositions.current[i * 3 + 2]
 
         const time = clock.elapsedTime
+
+        // Original size was 200
+        const scaleFactor = radius / 200
+
         const noise = noise4D(x * 0.1, y * 0.1, z * 0.1, time * 0.1)
 
-        positions.setXYZ(i, x + noise * 4, y + noise * 4, z + noise * 4)
+        positions.setXYZ(
+          i,
+          x + noise * (4 * scaleFactor),
+          y + noise * (4 * scaleFactor),
+          z + noise * (4 * scaleFactor),
+        )
       }
 
       // Add gentle wobble rotation effect
       if (meshRef.current) {
-        const wobbleAmplitude = 0.025 // Adjust this value to control the intensity of the wobble
-        const wobbleFrequency = 0.75 // Adjust this value to control the speed of the wobble
-
         meshRef.current.rotation.x =
           Math.sin(clock.elapsedTime * wobbleFrequency) * wobbleAmplitude +
           Math.PI / 4
@@ -169,7 +187,7 @@ export function Void() {
   return (
     <mesh
       ref={meshRef}
-      position={[0, 256, 0]}
+      position={position}
       scale={[0.05, 1, 1]}
       geometry={modifiedGeometry}
     >

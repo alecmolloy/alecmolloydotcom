@@ -3,7 +3,13 @@ import React from 'react'
 import { workSans } from './fonts'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
-  <Txt as='p' size='6' {...props} className={workSans.className} />
+  <Txt
+    as='p'
+    size='6'
+    {...props}
+    style={{ ...props.style, marginBottom: '1em' }}
+    className={workSans.className}
+  />
 )
 
 export const About = () => (
@@ -19,9 +25,12 @@ export const About = () => (
     // }}
   >
     <P>
-      I am a creative technologist: designing and building tools for the
-      expansion of human consciousness. I’ve built creative tools and
-      educational software at <a href='http://adobe.com'>Adobe</a>,{' '}
+      I am a creative technologist, designing and building tools for the
+      expansion of consciousness.
+    </P>
+    <P>
+      I’ve built creative tools and educational software at{' '}
+      <a href='http://adobe.com'>Adobe</a>,{' '}
       <a href='http://kano.me'>Kano Computing</a>, and{' '}
       <a href='https://utopia.app'>Utopia</a>, and managed mobile healthcare at{' '}
       <a href='http://mindoktor.se'>Min Doktor</a>.

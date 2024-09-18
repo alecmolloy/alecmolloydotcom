@@ -4,6 +4,7 @@ import { Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import { workSans } from './fonts'
 import styles from './Navigation.module.css'
+import { NavigationVoid } from './NavigationVoid'
 
 const NavText = ({
   children,
@@ -27,12 +28,6 @@ const NavText = ({
 export const Navigation = () => (
   <NavigationMenu.Root className={styles.Root}>
     <NavigationMenu.List className={styles.MenuList}>
-      <NavigationMenu.Item onClick={() => window.scrollTo({ top: 0 })}>
-        <NavigationMenu.Link className={styles.Link} href='#'>
-          <NavText>index</NavText>
-        </NavigationMenu.Link>
-      </NavigationMenu.Item>
-
       <NavigationMenu.Item>
         <NavigationMenu.Link className={styles.Link} href='#about'>
           <NavText>about</NavText>
