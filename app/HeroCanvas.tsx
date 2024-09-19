@@ -7,15 +7,13 @@ import { CameraStartY, Scene } from './Scene'
 export const HeroCanvas = () => {
   return (
     <Container id='hero' height='calc(100vh - 45px)'>
-      <Flex px='4' pb='4' direction='column' gap='6' height='100%'>
+      <Flex p='4' direction='column' gap='4' height='100%'>
         <Txt
           style={{
-            fontSize: 64,
-            color: '#CDFF14',
-            lineHeight: '.58em',
-            marginTop: 40,
             whiteSpace: 'nowrap',
           }}
+          size='9'
+          align='center'
           className={instrumentSerif.className}
         >
           Alec Molloy

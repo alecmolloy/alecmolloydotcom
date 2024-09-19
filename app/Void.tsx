@@ -1,5 +1,7 @@
+import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
+import { useGesture } from '@use-gesture/react'
 import React from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
@@ -18,9 +20,31 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   radius,
   position,
   wobbleAmplitude = 0.025,
-  wobbleFrequency = 0.75,
+  wobbleFrequency = 0.5,
   rotationXOffset = Math.PI,
 }) => {
+  const [styles, api] = useSpring(() => ({
+    rotation: [0, 0, 0] as [x: number, y: number, z: number],
+    config: { mass: 1, tension: 170, friction: 26 }, // Add this line
+  }))
+
+  const bind = useGesture({
+    onDrag: ({ delta: [dx, dy] }) => {
+      api.set({
+        rotation: [
+          styles.rotation.get()[0] + dy / 300,
+          styles.rotation.get()[1],
+          styles.rotation.get()[2] - dx / 300,
+        ] as [x: number, y: number, z: number],
+      })
+    },
+    onDragEnd: () => {
+      api.start({
+        rotation: [0, 0, 0] as [x: number, y: number, z: number],
+      })
+    },
+  })
+
   const bumpTexture = useTexture(
     '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
     (texture) => {
@@ -64,7 +88,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   // Create a modified geometry with custom UV mapping
   const modifiedGeometry = React.useMemo(() => {
-    const geometry = new THREE.IcosahedronGeometry(radius, 4)
+    const geometry = new THREE.IcosahedronGeometry(1, 4) // Keep using unit sphere
     const uvAttribute = geometry.attributes.uv
     const newUVs = new Float32Array(uvAttribute.count * 2)
 
@@ -79,6 +103,11 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
     geometry.setAttribute('uv', new THREE.BufferAttribute(newUVs, 2))
     return geometry
+  }, [])
+
+  // Calculate scale based on radius
+  const scale = React.useMemo(() => {
+    return [0.05 * radius, radius, radius] as [number, number, number]
   }, [radius])
 
   useFrame(({ gl, clock }) => {
@@ -97,25 +126,21 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
         const time = clock.elapsedTime
 
-        // Original size was 200
-        const scaleFactor = radius / 200
+        // Apply unique noise to each dimension
+        const noiseX = noise4D(x, y, z, time * 0.1) * 0.03
+        const noiseY = noise4D(y, z, x, time * 0.1) * 0.03
+        const noiseZ = noise4D(z, x, y, time * 0.1) * 0.03
 
-        const noise = noise4D(x * 0.1, y * 0.1, z * 0.1, time * 0.1)
-
-        positions.setXYZ(
-          i,
-          x + noise * (4 * scaleFactor),
-          y + noise * (4 * scaleFactor),
-          z + noise * (4 * scaleFactor),
-        )
+        positions.setXYZ(i, x + noiseX, y + noiseY, z + noiseZ)
       }
+
+      positions.needsUpdate = true
 
       // Add gentle wobble rotation effect
       if (meshRef.current) {
         meshRef.current.rotation.x =
           Math.sin(clock.elapsedTime * wobbleFrequency) * wobbleAmplitude +
-          rotationXOffset +
-          0.25
+          rotationXOffset
         meshRef.current.rotation.y =
           Math.cos(clock.elapsedTime * wobbleFrequency * 1.3) * wobbleAmplitude
         meshRef.current.rotation.z =
@@ -123,8 +148,6 @@ export const Void: React.FunctionComponent<VoidProps> = ({
             wobbleAmplitude +
           Math.PI / 2
       }
-
-      positions.needsUpdate = true
 
       // Update bump material time uniform
       bumpMaterial.uniforms.time.value = clock.elapsedTime
@@ -137,31 +160,30 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   })
 
   return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      scale={[0.05, 1, 1]}
-      geometry={modifiedGeometry}
-    >
-      <MeshTransmissionMaterial
-        transmissionSampler={false}
-        backside={false}
-        samples={16}
-        resolution={2048}
-        transmission={1}
-        roughness={0.15}
-        thickness={20}
-        ior={1.5}
-        chromaticAberration={0.5}
-        anisotropy={0.1}
-        distortion={0.1}
-        clearcoat={1}
-        attenuationDistance={0.5}
-        attenuationColor='#ffffff'
-        color='#444'
-        bumpMap={bumpRenderTarget.texture}
-        bumpScale={6}
-      />
-    </mesh>
+    <a.group position={position} {...styles} {...bind()}>
+      <mesh ref={meshRef} scale={scale} geometry={modifiedGeometry}>
+        <MeshTransmissionMaterial
+          transmissionSampler={false}
+          backside={false}
+          samples={16}
+          resolution={2048}
+          transmission={1}
+          roughness={0.15}
+          thickness={0.5}
+          ior={1.5}
+          chromaticAberration={0.5}
+          anisotropy={0.1}
+          distortion={0.1}
+          distortionScale={0.3}
+          temporalDistortion={0.1}
+          clearcoat={1}
+          attenuationDistance={0.15}
+          attenuationColor='#ffffff'
+          color='#444'
+          bumpMap={bumpRenderTarget.texture}
+          bumpScale={0.05 * radius}
+        />
+      </mesh>
+    </a.group>
   )
 }

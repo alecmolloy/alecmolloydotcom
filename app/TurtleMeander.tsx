@@ -28,6 +28,8 @@ export const TurtleMeander: React.FunctionComponent<TurtleMeanderProps> = ({
       style={{
         position: 'relative',
         height: height * TurtleSize,
+        width: '100%',
+        overflow: 'hidden',
       }}
     >
       <TurtleCanvas

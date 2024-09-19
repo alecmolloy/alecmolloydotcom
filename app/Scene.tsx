@@ -1,10 +1,10 @@
 'use client'
 import { Environment, OrbitControls } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
 import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { TurtlePlane } from './TurtlePlane'
 import { Void } from './Void'
-import { useThree } from '@react-three/fiber'
 
 export const CameraStartY = 1024
 
@@ -34,9 +34,8 @@ export const Scene = () => {
 
   return (
     <>
-      <Void position={[0, 128, 0]} radius={canvasWidth / (1104 / 240)} />
+      <Void radius={Math.min(240, canvasWidth / 2.5)} position={[0, 256, 0]} />
       <TurtlePlane />
-      <OrbitControls target={[0, 128, 0]} enableZoom={false} />
       <Environment
         files='/studio027.exr'
         environmentRotation={environmentRotation}
