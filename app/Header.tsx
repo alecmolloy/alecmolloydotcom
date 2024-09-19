@@ -15,6 +15,7 @@ export const Header: React.FunctionComponent = () => (
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         borderRadius: 1000,
+        boxShadow: '0 0 0 1px #0001 inset',
       }}
     >
       <NavigationVoid />
