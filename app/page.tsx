@@ -5,7 +5,7 @@ import { About } from './About'
 import { Contact } from './Contact'
 import { Footer } from './Footer'
 import { Header } from './Header'
-import { HeroArtwork } from './HeroArtwork'
+import { HeroCanvas } from './HeroCanvas'
 import { LocationsScroller } from './LocationsScroller'
 import { Portfolio } from './Portfolio'
 import { TurtleMeander } from './TurtleMeander'
@@ -22,7 +22,7 @@ const Index: React.FunctionComponent = () => {
   return (
     <>
       <Box style={{ backgroundColor: 'var(--international-orange)' }}>
-        <HeroArtwork />
+        <HeroCanvas />
       </Box>
       <Header />
       <About />
