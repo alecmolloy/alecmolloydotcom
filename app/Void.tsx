@@ -88,7 +88,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   // Create a modified geometry with custom UV mapping
   const modifiedGeometry = React.useMemo(() => {
-    const geometry = new THREE.IcosahedronGeometry(1, 4) // Keep using unit sphere
+    const geometry = new THREE.IcosahedronGeometry(1, 4)
     const uvAttribute = geometry.attributes.uv
     const newUVs = new Float32Array(uvAttribute.count * 2)
 
@@ -126,7 +126,6 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
         const time = clock.elapsedTime
 
-        // Apply unique noise to each dimension
         const noiseX = noise4D(x, y, z, time * 0.1) * 0.03
         const noiseY = noise4D(y, z, x, time * 0.1) * 0.03
         const noiseZ = noise4D(z, x, y, time * 0.1) * 0.03

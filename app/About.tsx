@@ -13,17 +13,7 @@ const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
 )
 
 export const About = () => (
-  <Container
-    size='2'
-    id='about'
-    m='9'
-    // style={{
-    //   maxWidth: '30em',
-    //   margin: '0 auto',
-    //   minHeight: '100vh',
-    //   color: '#7B6667',
-    // }}
-  >
+  <Container size='2' id='about' m='9'>
     <P>
       I am a creative technologist, designing and building tools for the
       expansion of consciousness.

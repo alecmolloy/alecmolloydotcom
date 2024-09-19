@@ -28,7 +28,7 @@ export const Scene = () => {
       0,
       Math.min(1, viewportScrollY / window.innerHeight),
     )
-    const rotationY = normalizedScrollY * Math.PI * 2 // Rotate up to 360 degrees
+    const rotationY = normalizedScrollY * Math.PI * 2
     setEnvironmentRotation(new THREE.Euler(-rotationY, +rotationY / 8, 0))
   }, [viewportScrollY])
 

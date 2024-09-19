@@ -39,22 +39,22 @@ const countryToEmoji = (countryCode: string) => {
 }
 
 export const LocationsScroller: React.FC = () => {
-  const scrollerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number>()
   const [scrollPosition, setScrollPosition] = useState(0)
   const [globalMouseX, setGlobalMouseX] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
+  const [containerWidth, setContainerWidth] = useState(1024)
 
-  // Helper function to normalize a value between 0 and 1
   const normalize = (value: number, min: number, max: number): number => {
     return (value - min) / (max - min)
   }
 
   const animate = useCallback(() => {
-    if (!isHovering && scrollerRef.current) {
+    if (!isHovering && containerRef.current) {
       setScrollPosition((prevPosition) => {
         const newPosition = prevPosition + 1
-        return newPosition >= scrollerRef.current!.scrollWidth / 2
+        return newPosition >= containerRef.current!.scrollWidth / 2
           ? 0
           : newPosition
       })
@@ -83,6 +83,22 @@ export const LocationsScroller: React.FC = () => {
     }
   }, [])
 
+  useEffect(() => {
+    if (containerRef.current != null) {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setContainerWidth(entry.contentRect.width)
+        }
+      })
+
+      resizeObserver.observe(containerRef.current)
+
+      return () => {
+        resizeObserver.disconnect()
+      }
+    }
+  }, [])
+
   const locationText = Array.from(locations.entries()).map(
     ([city, country]) => (
       <span
@@ -95,15 +111,20 @@ export const LocationsScroller: React.FC = () => {
     ),
   )
 
-  // Update function to calculate font weight based on normalized Y position
-  const calculateFontWeight = (x: number): number => {
-    const normalizedX = normalize(x, 0, window.innerWidth)
-    return Math.floor(normalizedX * 500 + 400) // 400 to 900
-  }
+  const calculateFontWeight = useCallback(
+    (x: number): number => {
+      if (containerWidth === 0) {
+        return 400
+      }
+      const normalizedX = normalize(x, 0, containerWidth)
+      return Math.floor(normalizedX * 500 + 400) // 400 to 900
+    },
+    [containerWidth],
+  )
 
   return (
     <Box
-      ref={scrollerRef}
+      ref={containerRef}
       style={{
         width: '100%',
         overflow: 'hidden',
