@@ -4,7 +4,6 @@ import { Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import { workSans } from './fonts'
 import styles from './Navigation.module.css'
-import { NavigationVoid } from './NavigationVoid'
 
 const NavText = ({
   children,

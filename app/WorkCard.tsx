@@ -1,8 +1,7 @@
 import { Link } from '@/components/Link'
-import { WorkItem, WorkItems } from '@/data/work'
-import * as React from 'react'
-import { Header } from '../Header'
+import { WorkItem } from '@/data/work'
 import { Flex } from '@radix-ui/themes'
+import * as React from 'react'
 
 export const WorkCard: React.FunctionComponent<{
   item: WorkItem
@@ -62,29 +61,3 @@ export const WorkCard: React.FunctionComponent<{
     </Flex>
   )
 }
-
-const Work = () => {
-  return (
-    <>
-      <Header />
-      <ol
-        className='wrapper work-wrapper'
-        style={{
-          display: 'grid',
-          listStyle: 'none',
-          overflowY: 'hidden',
-          padding: '0 0.5rem 1em',
-          gridColumnGap: '1rem',
-          gridRowGap: '1rem',
-          margin: '1rem auto',
-        }}
-      >
-        {WorkItems.map((item, i) => (
-          <WorkCard key={i} item={item} />
-        ))}
-      </ol>
-    </>
-  )
-}
-
-export default Work

@@ -1,6 +1,6 @@
 import { WorkItems } from '@/data/work'
 import { Container, Grid } from '@radix-ui/themes'
-import { WorkCard } from './work/page'
+import { WorkCard } from './WorkCard'
 
 export const Portfolio = () => (
   <Container
