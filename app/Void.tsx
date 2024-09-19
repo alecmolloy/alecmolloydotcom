@@ -28,22 +28,29 @@ export const Void: React.FunctionComponent<VoidProps> = ({
     config: { mass: 1, tension: 170, friction: 26 },
   }))
 
-  const bind = useGesture({
-    onDrag: ({ delta: [dx, dy] }) => {
-      api.set({
-        rotation: [
-          styles.rotation.get()[0] + dy / 300,
-          styles.rotation.get()[1],
-          styles.rotation.get()[2] - dx / 300,
-        ] as [x: number, y: number, z: number],
-      })
+  const bind = useGesture(
+    {
+      onDrag: ({ delta: [dx, dy] }) => {
+        api.set({
+          rotation: [
+            styles.rotation.get()[0] + dy / 300,
+            styles.rotation.get()[1],
+            styles.rotation.get()[2] - dx / 300,
+          ] as [x: number, y: number, z: number],
+        })
+      },
+      onDragEnd: () => {
+        api.start({
+          rotation: [0, 0, 0] as [x: number, y: number, z: number],
+        })
+      },
     },
-    onDragEnd: () => {
-      api.start({
-        rotation: [0, 0, 0] as [x: number, y: number, z: number],
-      })
+    {
+      drag: {
+        preventScroll: 0,
+      },
     },
-  })
+  )
 
   const bumpTexture = useTexture(
     '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',

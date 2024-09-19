@@ -21,7 +21,13 @@ export const metadata: Metadata = {
 const Index: React.FunctionComponent = () => {
   return (
     <>
-      <Box style={{ backgroundColor: 'var(--international-orange)' }}>
+      <Box
+        style={{
+          backgroundColor: 'var(--international-orange)',
+          userSelect: 'none',
+          WebkitUserSelect: 'none',
+        }}
+      >
         <HeroCanvas />
       </Box>
       <Header />
