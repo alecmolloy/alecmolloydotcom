@@ -1,6 +1,6 @@
 import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import React from 'react'
 import { createNoise4D } from 'simplex-noise'
@@ -25,7 +25,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 }) => {
   const [styles, api] = useSpring(() => ({
     rotation: [0, 0, 0] as [x: number, y: number, z: number],
-    config: { mass: 1, tension: 170, friction: 26 }, // Add this line
+    config: { mass: 1, tension: 170, friction: 26 },
   }))
 
   const bind = useGesture({
@@ -160,6 +160,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   })
 
   return (
+    // @ts-ignore
     <a.group position={position} {...styles} {...bind()}>
       <mesh ref={meshRef} scale={scale} geometry={modifiedGeometry}>
         <MeshTransmissionMaterial

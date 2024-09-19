@@ -4,9 +4,11 @@ import { Canvas } from '@react-three/fiber'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 
+export const HeaderHeight = 45
+
 export const HeroCanvas = () => {
   return (
-    <Container id='hero' height='calc(100vh - 45px)'>
+    <Container id='hero' height={`calc(100vh - ${HeaderHeight}px)`}>
       <Flex p='4' direction='column' gap='4' height='100%'>
         <Txt
           style={{
