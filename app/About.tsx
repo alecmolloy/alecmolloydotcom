@@ -58,9 +58,9 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         I’m actively seeking new clients and projects that are purpose-driven.
         If you think that’s you, please get in contact: workwith@alecmolloy.com
       </P>
-      <TurtleMeander height={4} />
-      <LocationsScroller />
-      <TurtleMeander height={4} />
     </Container>
+    <TurtleMeander height={4} />
+    <LocationsScroller />
+    <TurtleMeander height={4} />
   </Box>
 )

@@ -1,33 +1,73 @@
 'use client'
-import { Box, Text as Txt } from '@radix-ui/themes'
+import { Box, Flex, Text as Txt } from '@radix-ui/themes'
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { workSans } from './fonts'
 
+const Violator = ({
+  color,
+  children,
+}: {
+  color: string
+  children: React.ReactNode
+}) => (
+  <Box
+    position='absolute'
+    top='-25px'
+    left='-25px'
+    style={{ transform: 'rotate(-15deg)' }}
+  >
+    <Txt
+      size='2'
+      weight='bold'
+      style={{
+        borderRadius: '4px',
+        backgroundColor: color,
+        color: 'white',
+        padding: '2px',
+      }}
+    >
+      {children}
+    </Txt>
+  </Box>
+)
 const locations = new Map([
-  ['Putney', 'GB'],
-  ['Wandsworth', 'GB'],
-  ['Scarsdale', 'US'],
-  ['New Canaan', 'US'],
-  ['Santa Clara', 'US'],
-  ['San Jose', 'US'],
-  ['Upper Haight', 'US'],
-  ['Dalston', 'GB'],
-  ['Highbury', 'GB'],
-  ['Malmö', 'SE'],
-  ['Frederiksberg', 'DK'],
-  ['Stoke Newington', 'GB'],
-  ['Pacific Palisades', 'US'],
-  ['Portland', 'US'],
-  ['Playa del Carmen', 'MX'],
-  ['Alfama', 'PT'],
-  ['Costa da Caparica', 'PT'],
-  ['Figueiró dos Vinhos', 'PT'],
-  ['Oliveri', 'IT'],
-  ['Olhos de Água', 'PT'],
-  ['Assagao', 'IN'],
-  ['Campo de Ourique', 'PT'],
-  ['Tavira', 'PT'],
-  ['Sainte-Agathe-des-Monts', 'CA'],
+  ['Putney', { country: 'GB', violator: null }],
+  ['Wandsworth', { country: 'GB', violator: null }],
+  ['Scarsdale', { country: 'US', violator: null }],
+  [
+    'New Canaan',
+    {
+      country: 'US',
+      violator: (
+        <Violator color='var(--international-orange)'>Currently!</Violator>
+      ),
+    },
+  ],
+  ['Santa Clara', { country: 'US', violator: null }],
+  ['San Jose', { country: 'US', violator: null }],
+  ['Upper Haight', { country: 'US', violator: null }],
+  ['Dalston', { country: 'GB', violator: null }],
+  ['Highbury', { country: 'GB', violator: null }],
+  ['Malmö', { country: 'SE', violator: null }],
+  ['Frederiksberg', { country: 'DK', violator: null }],
+  ['Stoke Newington', { country: 'GB', violator: null }],
+  ['Pacific Palisades', { country: 'US', violator: null }],
+  ['Portland', { country: 'US', violator: null }],
+  ['Alfama', { country: 'PT', violator: null }],
+  ['Costa da Caparica', { country: 'PT', violator: null }],
+  ['Figueiró dos Vinhos', { country: 'PT', violator: null }],
+  ['Oliveri', { country: 'IT', violator: null }],
+  ['Olhos de Água', { country: 'PT', violator: null }],
+  ['Assagao', { country: 'IN', violator: null }],
+  ['Campo de Ourique', { country: 'PT', violator: null }],
+  ['Tavira', { country: 'PT', violator: null }],
+  [
+    'Sainte-Agathe-des-Monts',
+    {
+      country: 'CA',
+      violator: <Violator color='var(--ultramarine)'>Soon…</Violator>,
+    },
+  ],
 ])
 
 const countryToEmoji = (countryCode: string) => {
@@ -49,12 +89,11 @@ export const LocationsScroller: React.FC = () => {
   const normalize = (value: number, min: number, max: number): number => {
     return (value - min) / (max - min)
   }
-
   const animate = useCallback(() => {
     if (!isHovering && containerRef.current) {
       setScrollPosition((prevPosition) => {
         const newPosition = prevPosition + 1
-        return newPosition >= containerRef.current!.scrollWidth / 2
+        return newPosition >= containerRef.current!.children[0].clientWidth / 2
           ? 0
           : newPosition
       })
@@ -99,18 +138,6 @@ export const LocationsScroller: React.FC = () => {
     }
   }, [])
 
-  const locationText = Array.from(locations.entries()).map(
-    ([city, country]) => (
-      <span
-        key={city}
-        title={countryToEmoji(country)}
-        style={{ cursor: 'default' }}
-      >
-        {city}&nbsp;&nbsp;·&nbsp;&nbsp;
-      </span>
-    ),
-  )
-
   const calculateFontWeight = useCallback(
     (x: number): number => {
       if (containerWidth === 0) {
@@ -123,43 +150,48 @@ export const LocationsScroller: React.FC = () => {
   )
 
   return (
-    <Box
+    <Flex
       ref={containerRef}
+      height='128px'
       style={{
-        width: '100%',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
       }}
+      direction='row'
+      align='center'
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      <Box
+      <Flex
         style={{
-          display: 'inline-block',
           transform: `translateX(-${scrollPosition}px)`,
         }}
       >
-        <Txt
-          size='8'
-          className={workSans.className}
-          style={{
-            display: 'inline-block',
-            fontWeight: calculateFontWeight(globalMouseX),
-          }}
-        >
-          {locationText}
-        </Txt>
-        <Txt
-          size='8'
-          className={workSans.className}
-          style={{
-            display: 'inline-block',
-            fontWeight: calculateFontWeight(globalMouseX),
-          }}
-        >
-          {locationText}
-        </Txt>
-      </Box>
-    </Box>
+        {[0, 1].map((i) => (
+          <Flex
+            key={i}
+            direction='row'
+            style={{
+              fontWeight: calculateFontWeight(globalMouseX),
+            }}
+          >
+            {Array.from(locations.entries()).map(
+              ([city, { country, violator }]) => (
+                <Txt
+                  size='8'
+                  className={workSans.className}
+                  key={city}
+                  title={countryToEmoji(country)}
+                  style={{ cursor: 'default', position: 'relative' }}
+                >
+                  {violator}
+                  {city}&nbsp;&nbsp;·&nbsp;&nbsp;
+                </Txt>
+              ),
+            )}
+          </Flex>
+        ))}
+      </Flex>
+    </Flex>
   )
 }
