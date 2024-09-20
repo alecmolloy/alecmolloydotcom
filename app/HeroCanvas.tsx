@@ -1,5 +1,4 @@
 'use client'
-// possibly remove^^
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { Canvas } from '@react-three/fiber'
 import { instrumentSerif } from './fonts'

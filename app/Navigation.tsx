@@ -16,9 +16,10 @@ const navLinkHeight = 60
 export const Navigation: React.FunctionComponent = () => {
   const [activeSection, setActiveSection] = React.useState<Section | null>(null)
   const [hoveredSection, setHoveredSection] = useState<Section | null>(null)
-  const [isScrolling, setIsScrolling] = useState(false)
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false)
   const navRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const navMenuRef = useRef<HTMLElement | null>(null)
+  const autoScrollTimeoutRef = useRef<number | null>(null)
 
   const [indicatorProps, api] = useSpring(() => ({
     width: navLinkHeight,
@@ -26,62 +27,73 @@ export const Navigation: React.FunctionComponent = () => {
     config: { tension: 300, friction: 30 },
   }))
 
-  const getActiveSectionIndicatorPosition = React.useCallback(() => {
-    const currentSection = hoveredSection ?? activeSection
-    if (
-      currentSection &&
-      navRefs.current[currentSection] &&
-      navMenuRef.current
-    ) {
-      const element = navRefs.current[currentSection]
-      const navMenuRect = navMenuRef.current.getBoundingClientRect()
-      const rect = element?.getBoundingClientRect()
-      return {
-        width: rect?.width ?? 0,
-        x: (rect?.left ?? 0) - navMenuRect.left,
+  const getActiveSectionIndicatorPosition = React.useCallback(
+    (currentSection: Section | null) => {
+      if (
+        currentSection &&
+        navRefs.current[currentSection] &&
+        navMenuRef.current
+      ) {
+        const element = navRefs.current[currentSection]
+        const navMenuRect = navMenuRef.current.getBoundingClientRect()
+        const rect = element?.getBoundingClientRect()
+        return {
+          width: rect?.width ?? 0,
+          x: (rect?.left ?? 0) - navMenuRect.left,
+        }
+      } else {
+        return {}
       }
-    } else {
-      return {}
-    }
-  }, [hoveredSection, activeSection])
+    },
+    [],
+  )
 
   useEffect(() => {
-    api.start(getActiveSectionIndicatorPosition())
-  }, [api, getActiveSectionIndicatorPosition, activeSection])
+    api.start(
+      getActiveSectionIndicatorPosition(hoveredSection ?? activeSection),
+    )
+  }, [api, getActiveSectionIndicatorPosition, activeSection, hoveredSection])
 
   React.useEffect(() => {
-    let scrollTimeout: number
-
     const handleScroll = () => {
-      if (isScrolling) return
+      if (!isAutoScrolling) {
+        const currentSection = sections.find((section) => {
+          const element = document.getElementById(section)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            return rect.top <= 100 && rect.bottom >= 100
+          }
+          return false
+        })
+        setActiveSection(currentSection ?? null)
+      }
+    }
 
-      const currentSection = sections.find((section) => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isAutoScrolling])
+
+  // Add this new effect
+  React.useEffect(() => {
+    const determineInitialActiveSection = () => {
+      for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
           const rect = element.getBoundingClientRect()
-          return rect.top <= 100 && rect.bottom >= 100
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(section)
+            api.set(getActiveSectionIndicatorPosition(section))
+            return
+          }
         }
-        return false
-      })
-      setActiveSection(currentSection ?? null)
+      }
+      setActiveSection(sections[0])
     }
 
-    const onScrollEnd = () => {
-      setIsScrolling(false)
-      handleScroll()
-    }
-
-    const debouncedHandleScroll = () => {
-      clearTimeout(scrollTimeout)
-      scrollTimeout = window.setTimeout(onScrollEnd, 100)
-    }
-
-    window.addEventListener('scroll', debouncedHandleScroll)
-    return () => {
-      window.removeEventListener('scroll', debouncedHandleScroll)
-      clearTimeout(scrollTimeout)
-    }
-  }, [isScrolling])
+    determineInitialActiveSection()
+  }, [api, getActiveSectionIndicatorPosition])
 
   return (
     <Flex
@@ -161,9 +173,20 @@ export const Navigation: React.FunctionComponent = () => {
                     e.preventDefault()
                     const targetElement = document.getElementById(section)
                     if (targetElement) {
-                      setIsScrolling(true)
+                      setIsAutoScrolling(true)
                       setActiveSection(section)
-                      api.start(getActiveSectionIndicatorPosition())
+                      api.start(
+                        getActiveSectionIndicatorPosition(
+                          hoveredSection ?? activeSection,
+                        ),
+                      )
+                      if (autoScrollTimeoutRef.current) {
+                        clearTimeout(autoScrollTimeoutRef.current)
+                      }
+                      autoScrollTimeoutRef.current = window.setTimeout(() => {
+                        setIsAutoScrolling(false)
+                        autoScrollTimeoutRef.current = null
+                      }, 500)
                       targetElement.scrollIntoView({ behavior: 'smooth' })
                     }
                   }}
