@@ -31,7 +31,7 @@ const Index: React.FunctionComponent = () => {
       <Box position='relative'>
         <Header />
         <About id='about' />
-        <Portfolio id='work' />
+        <Portfolio id='portfolio' />
         <Contact id='contact' />
       </Box>
     </>
