@@ -16,6 +16,7 @@ const navLinkHeight = 60
 export const Navigation: React.FunctionComponent = () => {
   const [activeSection, setActiveSection] = React.useState<Section | null>(null)
   const [hoveredSection, setHoveredSection] = useState<Section | null>(null)
+  const [isScrolling, setIsScrolling] = useState(false)
   const navRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const navMenuRef = useRef<HTMLElement | null>(null)
 
@@ -26,7 +27,7 @@ export const Navigation: React.FunctionComponent = () => {
   }))
 
   const getActiveSectionIndicatorPosition = React.useCallback(() => {
-    const currentSection = hoveredSection || activeSection
+    const currentSection = hoveredSection ?? activeSection
     if (
       currentSection &&
       navRefs.current[currentSection] &&
@@ -46,10 +47,14 @@ export const Navigation: React.FunctionComponent = () => {
 
   useEffect(() => {
     api.start(getActiveSectionIndicatorPosition())
-  }, [api, getActiveSectionIndicatorPosition])
+  }, [api, getActiveSectionIndicatorPosition, activeSection])
 
   React.useEffect(() => {
+    let scrollTimeout: number
+
     const handleScroll = () => {
+      if (isScrolling) return
+
       const currentSection = sections.find((section) => {
         const element = document.getElementById(section)
         if (element) {
@@ -58,16 +63,25 @@ export const Navigation: React.FunctionComponent = () => {
         }
         return false
       })
-      if (activeSection == null) {
-        api.start(getActiveSectionIndicatorPosition())
-      }
       setActiveSection(currentSection ?? null)
     }
-    handleScroll()
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [activeSection, api, getActiveSectionIndicatorPosition])
+    const onScrollEnd = () => {
+      setIsScrolling(false)
+      handleScroll()
+    }
+
+    const debouncedHandleScroll = () => {
+      clearTimeout(scrollTimeout)
+      scrollTimeout = window.setTimeout(onScrollEnd, 100)
+    }
+
+    window.addEventListener('scroll', debouncedHandleScroll)
+    return () => {
+      window.removeEventListener('scroll', debouncedHandleScroll)
+      clearTimeout(scrollTimeout)
+    }
+  }, [isScrolling])
 
   return (
     <Flex
@@ -120,8 +134,11 @@ export const Navigation: React.FunctionComponent = () => {
                   userSelect: 'none',
                   borderRadius: 1000,
                 }}
-                onMouseEnter={() => setHoveredSection(section)}
-                onMouseLeave={() => setHoveredSection(null)}
+                onMouseOver={() => setHoveredSection(section)}
+                onMouseOut={() => setHoveredSection(null)}
+                onTouchEnd={() =>
+                  setTimeout(() => setHoveredSection(null), 100)
+                }
                 ref={(el) => {
                   if (el != null) {
                     navRefs.current[section] = el
@@ -137,6 +154,18 @@ export const Navigation: React.FunctionComponent = () => {
                     alignItems: 'center',
                     color: '#000',
                     height: navLinkHeight,
+                    WebkitTapHighlightColor: 'transparent',
+                    outline: 'none',
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const targetElement = document.getElementById(section)
+                    if (targetElement) {
+                      setIsScrolling(true)
+                      setActiveSection(section)
+                      api.start(getActiveSectionIndicatorPosition())
+                      targetElement.scrollIntoView({ behavior: 'smooth' })
+                    }
                   }}
                 >
                   {section === 'hero' ? (
@@ -185,14 +214,7 @@ export const Navigation: React.FunctionComponent = () => {
               height: navLinkHeight,
               borderRadius: 1000,
               pointerEvents: 'none',
-              backgroundImage:
-                hoveredSection != null
-                  ? `radial-gradient(
-                ellipse,
-                color-mix(in lch, var(--international-orange) 80%, transparent),
-                color-mix(in lch, var(--international-orange) 30%, transparent)
-              )`
-                  : `radial-gradient(
+              backgroundImage: `radial-gradient(
                                   ellipse,
                                   color-mix(in lch, var(--international-orange) 50%, transparent),
                                   transparent

@@ -4,7 +4,7 @@ import Netscape from '../public/ns-best-1.gif'
 
 export const Footer = () => {
   return (
-    <Container py='8'>
+    <Container py='8' px='4'>
       <Grid columns='12' gap='4'>
         <Flex
           gridColumn='span 9'
@@ -19,7 +19,10 @@ export const Footer = () => {
             width={88}
             height={31}
           />
-          <a href='http://jigsaw.w3.org/css-validator/check/referer'>
+          <a
+            href={`http://jigsaw.w3.org/css-validator/check/referer?uri=${typeof window !== 'undefined' ? encodeURIComponent(window.location.href) : ''}`}
+            title='Absolutely not valid CSS, lol I wish.'
+          >
             <img
               style={{ border: 0, width: 88, height: 31 }}
               src='http://jigsaw.w3.org/css-validator/images/vcss'
