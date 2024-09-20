@@ -11,7 +11,7 @@ export const HeroCanvas = () => {
       <Flex p='4' pb='8' direction='column' gap='4' height='100%'>
         <Txt
           style={{
-            whiteSpace: 'nowrap',
+            whiteSpace: 'pre-wrap',
           }}
           mt='4'
           mb='0'
@@ -19,7 +19,7 @@ export const HeroCanvas = () => {
           align='center'
           className={instrumentSerif.className}
         >
-          Alec Molloy’s Website, 2024
+          Alec&nbsp;Molloy Dot&nbsp;Com
         </Txt>
         <Canvas
           orthographic
