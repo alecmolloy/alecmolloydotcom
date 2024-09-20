@@ -1,8 +1,14 @@
-import { Container } from '@radix-ui/themes'
+import { Box, Container } from '@radix-ui/themes'
+import React from 'react'
+import { Footer } from './Footer'
+import { Section } from './Header'
 
-export const Contact = () => (
-  <Container py='8'>
-    <h1>Want to get in touch?</h1>
-    <p>Drop me a line at workwith@alecmolloy.com.</p>
-  </Container>
+export const Contact: React.FunctionComponent<{ id: Section }> = ({ id }) => (
+  <Box py='8' id={id}>
+    <Container size='2' m='9' minHeight='100vh'>
+      <h1>Want to get in touch?</h1>
+      <p>Drop me a line at workwith@alecmolloy.com.</p>
+    </Container>
+    <Footer />
+  </Box>
 )

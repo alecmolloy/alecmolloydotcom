@@ -3,23 +3,13 @@ import { Flex } from '@radix-ui/themes'
 import { Environment } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import Link from 'next/link'
-import React from 'react'
-import { HeaderHeight } from './HeroCanvas'
 import { Void } from './Void'
 
-export const NavigationVoid = () => {
-  const [showNavigation, setShowNavigation] = React.useState(false)
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const scrollThreshold = window.innerHeight - HeaderHeight
-      setShowNavigation(window.scrollY >= scrollThreshold)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
+export const NavigationVoid = ({
+  showNavigation,
+}: {
+  showNavigation: boolean
+}) => {
   return (
     <Link
       onClick={() => window.scrollTo({ top: 0 })}
@@ -32,12 +22,13 @@ export const NavigationVoid = () => {
         top='0'
         left='0'
         style={{
-          borderRadius: 1000,
-          backgroundImage: 'radial-gradient(circle, #0003, #0000)',
+          borderRadius: '100%',
+          backgroundImage:
+            'radial-gradient(circle, color-mix(in lch, var(--international-orange) 30%, transparent), transparent)',
           width: 48 + 4,
           height: 48 + 4,
           opacity: showNavigation ? 0 : 1,
-          transition: 'opacity 1s ease-in-out',
+          transition: 'opacity 0.3s ease-in-out',
         }}
       />
       <Canvas
@@ -45,7 +36,7 @@ export const NavigationVoid = () => {
           width: 48 + 4,
           height: 48 + 4,
           opacity: showNavigation ? 1 : 0,
-          transition: 'opacity 1s ease-in-out',
+          transition: 'opacity 0.3s ease-in-out',
         }}
         orthographic
         camera={{

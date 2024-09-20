@@ -114,7 +114,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   // Calculate scale based on radius
   const scale = React.useMemo(() => {
-    return [0.05 * radius, radius, radius] as [number, number, number]
+    return [0.125 * radius, radius, radius] as [number, number, number]
   }, [radius])
 
   useFrame(({ gl, clock }) => {

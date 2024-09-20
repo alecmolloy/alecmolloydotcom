@@ -1,9 +1,9 @@
-import { instrumentSerif, workSans } from './fonts'
+import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
+import type React from 'react'
+import { instrumentSerif, workSans } from './fonts'
 import './global.css'
 import './theme.css'
-import type React from 'react'
-import { Theme } from '@radix-ui/themes'
 
 export default function RootLayout({
   children,

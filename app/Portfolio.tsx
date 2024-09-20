@@ -1,11 +1,13 @@
 import { WorkItems } from '@/data/work'
 import { Container, Grid } from '@radix-ui/themes'
+import React from 'react'
+import { Section } from './Header'
 import { WorkCard } from './WorkCard'
 
-export const Portfolio = () => (
+export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   <Container
     size='4'
-    id='portfolio'
+    id={id}
     style={{
       minHeight: '100vh',
     }}

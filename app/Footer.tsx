@@ -19,6 +19,13 @@ export const Footer = () => {
             width={88}
             height={31}
           />
+          <a href='http://jigsaw.w3.org/css-validator/check/referer'>
+            <img
+              style={{ border: 0, width: 88, height: 31 }}
+              src='http://jigsaw.w3.org/css-validator/images/vcss'
+              alt='Valid CSS!'
+            />
+          </a>
           <Txt size='2' style={{ color: 'var(--slate-11)' }}>
             © {new Date().getFullYear()} Alec Molloy. All rights reserved.
           </Txt>

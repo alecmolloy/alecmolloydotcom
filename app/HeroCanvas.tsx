@@ -1,4 +1,5 @@
 'use client'
+// possibly remove^^
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { Canvas } from '@react-three/fiber'
 import { instrumentSerif } from './fonts'
@@ -8,7 +9,7 @@ export const HeaderHeight = 45
 
 export const HeroCanvas = () => {
   return (
-    <Container id='hero' height={`calc(100vh - ${HeaderHeight}px)`}>
+    <Container height={`calc(100vh - ${HeaderHeight}px)`}>
       <Flex p='4' direction='column' gap='4' height='100%'>
         <Txt
           style={{

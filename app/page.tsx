@@ -3,12 +3,9 @@ import { Metadata } from 'next'
 import React from 'react'
 import { About } from './About'
 import { Contact } from './Contact'
-import { Footer } from './Footer'
 import { Header } from './Header'
 import { HeroCanvas } from './HeroCanvas'
-import { LocationsScroller } from './LocationsScroller'
 import { Portfolio } from './Portfolio'
-import { TurtleMeander } from './TurtleMeander'
 
 export const metadata: Metadata = {
   title: 'Alec Molloy’s Official Home on the Web',
@@ -22,6 +19,7 @@ const Index: React.FunctionComponent = () => {
   return (
     <>
       <Box
+        id='hero'
         style={{
           backgroundColor: 'var(--international-orange)',
           userSelect: 'none',
@@ -30,14 +28,12 @@ const Index: React.FunctionComponent = () => {
       >
         <HeroCanvas />
       </Box>
-      <Header />
-      <About />
-      <TurtleMeander height={4} />
-      <LocationsScroller />
-      <TurtleMeander height={4} />
-      <Portfolio />
-      <Contact />
-      <Footer />
+      <Box position='relative'>
+        <Header />
+        <About id='about' />
+        <Portfolio id='work' />
+        <Contact id='contact' />
+      </Box>
     </>
   )
 }
