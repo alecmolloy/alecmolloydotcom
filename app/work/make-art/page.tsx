@@ -1,4 +1,4 @@
-import { Header } from '@/app/Header'
+import { Navigation } from '@/app/Navigation'
 import { Link } from '@/components/Link'
 import { MakeArtItem, MakeArtItems } from '@/data/make-art'
 import Moment from 'moment'
@@ -46,7 +46,7 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
 const MakeArtCreations = async () => {
   return (
     <>
-      <Header />
+      <Navigation />
       <div
         className='wrapper'
         style={{

@@ -1,7 +1,7 @@
 import { Box, Container, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import { workSans } from './fonts'
-import { Section } from './Header'
+import { Section } from './Navigation'
 import { LocationsScroller } from './LocationsScroller'
 import { TurtleMeander } from './TurtleMeander'
 

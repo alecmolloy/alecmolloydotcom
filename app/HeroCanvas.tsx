@@ -5,21 +5,21 @@ import { Canvas } from '@react-three/fiber'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 
-export const HeaderHeight = 45
-
 export const HeroCanvas = () => {
   return (
-    <Container height={`calc(100vh - ${HeaderHeight}px)`}>
-      <Flex p='4' direction='column' gap='4' height='100%'>
+    <Container height={`calc(100vh - 32px)`}>
+      <Flex p='4' pb='8' direction='column' gap='4' height='100%'>
         <Txt
           style={{
             whiteSpace: 'nowrap',
           }}
+          mt='4'
+          mb='0'
           size='9'
           align='center'
           className={instrumentSerif.className}
         >
-          Alec Molloy
+          Alec Molloy’s Website, 2024
         </Txt>
         <Canvas
           orthographic

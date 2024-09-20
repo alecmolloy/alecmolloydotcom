@@ -1,7 +1,7 @@
 import { Box, Container } from '@radix-ui/themes'
 import React from 'react'
 import { Footer } from './Footer'
-import { Section } from './Header'
+import { Section } from './Navigation'
 
 export const Contact: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   <Box py='8' id={id}>

@@ -11,16 +11,16 @@ import { Void } from './Void'
 export const sections = ['hero', 'about', 'portfolio', 'contact'] as const
 export type Section = (typeof sections)[number]
 
-const headerBoxSize = 60
+const navLinkHeight = 60
 
-export const Header: React.FunctionComponent = () => {
+export const Navigation: React.FunctionComponent = () => {
   const [activeSection, setActiveSection] = React.useState<Section | null>(null)
   const [hoveredSection, setHoveredSection] = useState<Section | null>(null)
   const navRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const navMenuRef = useRef<HTMLElement | null>(null)
 
   const [indicatorProps, api] = useSpring(() => ({
-    width: headerBoxSize,
+    width: navLinkHeight,
     x: 0,
     config: { tension: 300, friction: 30 },
   }))
@@ -77,7 +77,6 @@ export const Header: React.FunctionComponent = () => {
       style={{ zIndex: 1, height: 0 }}
     >
       <Flex
-        id='header'
         direction='row'
         align='center'
         m='4'
@@ -137,14 +136,14 @@ export const Header: React.FunctionComponent = () => {
                     padding: section === 'hero' ? 0 : '0 12px',
                     alignItems: 'center',
                     color: '#000',
-                    height: headerBoxSize,
+                    height: navLinkHeight,
                   }}
                 >
                   {section === 'hero' ? (
                     <Canvas
                       style={{
-                        width: headerBoxSize,
-                        height: headerBoxSize,
+                        width: navLinkHeight,
+                        height: navLinkHeight,
                         opacity: activeSection !== 'hero' ? 1 : 0,
                         transition: 'opacity 0.3s ease-in-out',
                       }}
@@ -183,7 +182,7 @@ export const Header: React.FunctionComponent = () => {
             style={{
               position: 'absolute',
               left: 0,
-              height: headerBoxSize,
+              height: navLinkHeight,
               borderRadius: 1000,
               pointerEvents: 'none',
               backgroundImage:

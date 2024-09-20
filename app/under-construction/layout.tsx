@@ -1,11 +1,11 @@
 import type React from 'react'
-import { Header } from '../Header'
+import { Navigation } from '../Navigation'
 
 const UnderConstructionLayout: React.FunctionComponent<
   React.PropsWithChildren
 > = ({ children }) => (
   <>
-    <Header />
+    <Navigation />
     <div className='wrapper' style={{ textAlign: 'center' }}>
       <hr
         style={{

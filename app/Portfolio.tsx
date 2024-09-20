@@ -1,7 +1,7 @@
 import { WorkItems } from '@/data/work'
 import { Container, Grid } from '@radix-ui/themes'
 import React from 'react'
-import { Section } from './Header'
+import { Section } from './Navigation'
 import { WorkCard } from './WorkCard'
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
