@@ -2,11 +2,13 @@ import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
 import fragmentShader from './void.frag'
 import vertexShader from './void.vert'
+
+type InteractionState = null | 'hovered' | 'grabbing'
 
 interface VoidProps {
   position: [number, number, number]
@@ -28,9 +30,13 @@ export const Void: React.FunctionComponent<VoidProps> = ({
     config: { mass: 1, tension: 170, friction: 26 },
   }))
 
+  const [interactionState, setInteractionState] =
+    useState<InteractionState>(null)
+
   const bind = useGesture(
     {
       onDrag: ({ delta: [dx, dy] }) => {
+        setInteractionState('grabbing')
         api.set({
           rotation: [
             styles.rotation.get()[0] + dy / 300,
@@ -40,6 +46,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
         })
       },
       onDragEnd: () => {
+        setInteractionState('hovered')
         api.start({
           rotation: [0, 0, 0] as [x: number, y: number, z: number],
         })
@@ -51,6 +58,15 @@ export const Void: React.FunctionComponent<VoidProps> = ({
       },
     },
   )
+
+  useEffect(() => {
+    document.body.style.cursor =
+      interactionState === 'grabbing'
+        ? 'grabbing'
+        : interactionState === 'hovered'
+          ? 'grab'
+          : 'auto'
+  }, [interactionState])
 
   const bumpTexture = useTexture(
     '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
@@ -167,8 +183,20 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   return (
     // @ts-ignore
-    <a.group position={position} {...styles} {...bind()}>
-      <mesh ref={meshRef} scale={scale} geometry={modifiedGeometry}>
+    <a.group
+      position={position}
+      {...styles}
+      {...bind()}
+      onPointerOver={() => setInteractionState('hovered')}
+      onPointerOut={() => setInteractionState(null)}
+    >
+      <mesh
+        ref={meshRef}
+        scale={scale}
+        geometry={modifiedGeometry}
+        onPointerOver={() => setInteractionState('hovered')}
+        onPointerOut={() => setInteractionState(null)}
+      >
         <MeshTransmissionMaterial
           transmissionSampler={false}
           backside={false}
