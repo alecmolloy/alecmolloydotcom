@@ -10,7 +10,7 @@ void main() {
   float totalFrames = 66.0;
   float initialLoop = 37.0;
   float loopLength = totalFrames - initialLoop;
-  float currentTime = time * 1.5;
+  float currentTime = time * 1.0;
   float currentFrame;
   
   if (currentTime < totalFrames) {
