@@ -68,13 +68,18 @@ export const Void: React.FunctionComponent<VoidProps> = ({
           : 'auto'
   }, [interactionState])
 
-  const bumpTexture = useTexture(
+  const frontTexture = useTexture(
     '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
     (texture) => {
       texture.minFilter = THREE.NearestFilter
       texture.magFilter = THREE.NearestFilter
     },
   )
+
+  const backTexture = useTexture('/void/jnanam-bandhah.png', (texture) => {
+    texture.minFilter = THREE.NearestFilter
+    texture.magFilter = THREE.NearestFilter
+  })
 
   const meshRef = React.useRef<THREE.Mesh>(null)
   const noise4D = React.useMemo(() => createNoise4D(), [])
@@ -89,13 +94,14 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   const bumpMaterial = React.useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
-        bumpTexture: { value: bumpTexture },
+        frontTexture: { value: frontTexture },
+        backTexture: { value: backTexture },
         time: { value: 0 },
       },
       vertexShader,
       fragmentShader,
     })
-  }, [bumpTexture])
+  }, [frontTexture, backTexture])
 
   // Create a scene and camera for rendering the bump map
   const bumpScene = React.useMemo(() => new THREE.Scene(), [])
@@ -130,7 +136,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   // Calculate scale based on radius
   const scale = React.useMemo(() => {
-    return [0.125 * radius, radius, radius] as [number, number, number]
+    return [radius, radius, 0.125 * radius] as [number, number, number]
   }, [radius])
 
   useFrame(({ gl, clock }) => {
@@ -162,13 +168,14 @@ export const Void: React.FunctionComponent<VoidProps> = ({
       if (meshRef.current) {
         meshRef.current.rotation.x =
           Math.sin(clock.elapsedTime * wobbleFrequency) * wobbleAmplitude +
-          rotationXOffset
+          rotationXOffset -
+          Math.PI / 2
         meshRef.current.rotation.y =
           Math.cos(clock.elapsedTime * wobbleFrequency * 1.3) * wobbleAmplitude
         meshRef.current.rotation.z =
           Math.sin(clock.elapsedTime * wobbleFrequency * 0.7) *
-            wobbleAmplitude +
-          Math.PI / 2
+            wobbleAmplitude -
+          Math.PI
       }
 
       // Update bump material time uniform
@@ -197,6 +204,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
         onPointerOver={() => setInteractionState('hovered')}
         onPointerOut={() => setInteractionState(null)}
       >
+        {/* <meshBasicMaterial map={uvGridTexture} />{' '} */}
         <MeshTransmissionMaterial
           transmissionSampler={false}
           backside={false}

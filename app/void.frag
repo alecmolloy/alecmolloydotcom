@@ -1,4 +1,5 @@
-uniform sampler2D bumpTexture;
+uniform sampler2D frontTexture;
+uniform sampler2D backTexture;
 uniform float time;
 varying vec2 vUv;
 
@@ -27,18 +28,27 @@ void main() {
   
   vec2 offset = vec2(column * frameSize.x, (10.0 - row) * frameSize.y); // Flip rows
 
-  vec2 targetSize = vec2((57.0 * 13.0) / 2048.0, (57.0 * 13.0) / 1024.0);
-  vec2 targetCenter = vec2(0.5, 0.5);
-  vec2 targetStart = targetCenter - targetSize * 0.5;
-  vec2 targetEnd = targetCenter + targetSize * 0.5;
+  vec2 frontSize = vec2((57.0 * 13.0) / 2048.0, (57.0 * 13.0) / 1024.0);
+  vec2 frontCenter = vec2(0.25, 0.5);
+  vec2 frontStart = frontCenter - frontSize * 0.5;
+  vec2 frontEnd = frontCenter + frontSize * 0.5;
 
-  if (vUv.x >= targetStart.x && vUv.x <= targetEnd.x && vUv.y >= targetStart.y && vUv.y <= targetEnd.y) {
-    vec2 remappedUV = (vUv - targetStart) / targetSize;
+  vec2 backSize = vec2((47.0 * 3.0) / 2048.0, (10.0 * 3.0) / 1024.0);
+  vec2 backCenter = vec2(0.75, 0.5);
+  vec2 backStart = backCenter - backSize * 0.5;
+  vec2 backEnd = backCenter + backSize * 0.5;
+
+  if (vUv.x >= frontStart.x && vUv.x <= frontEnd.x && vUv.y >= frontStart.y && vUv.y <= frontEnd.y) {
+    vec2 remappedUV = (vUv - frontStart) / frontSize;
     
     vec2 frameUV = fract(remappedUV) * frameSize + offset;
     
-    vec4 texColor = texture2D(bumpTexture, frameUV);
+    vec4 texColor = texture2D(frontTexture, frameUV);
     
+    gl_FragColor = texColor * (0.8 + 0.2 * random(remappedUV));
+  } else if (vUv.x >= backStart.x && vUv.x <= backEnd.x && vUv.y >= backStart.y && vUv.y <= backEnd.y) {
+    vec2 remappedUV = (vUv - backStart) / backSize;
+    vec4 texColor = texture2D(backTexture, remappedUV);
     gl_FragColor = texColor * (0.8 + 0.2 * random(remappedUV));
   } else {
     gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
