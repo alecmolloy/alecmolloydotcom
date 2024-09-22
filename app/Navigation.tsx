@@ -206,7 +206,7 @@ export const Navigation: React.FunctionComponent = () => {
                         far: 5000,
                       }}
                     >
-                      <Environment files='/studio027.exr' />
+                      <Environment files='/studio027-small.exr' />
                       <Void
                         position={[0, 0, 0]}
                         radius={24}
