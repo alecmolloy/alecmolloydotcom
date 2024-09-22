@@ -76,7 +76,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
     },
   )
 
-  const backTexture = useTexture('/void/jnanam-bandhah.png', (texture) => {
+  const backTexture = useTexture('/void/ajnanam-bandhah.png', (texture) => {
     texture.minFilter = THREE.NearestFilter
     texture.magFilter = THREE.NearestFilter
   })
