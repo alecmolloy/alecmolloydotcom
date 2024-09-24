@@ -6,8 +6,8 @@
     attributeName="transform"
     attributeType="XML"
     type="rotate"
-    from="-359 400 400"
-    to="1 400 400"
+    from="360 400 400"
+    to="0 400 400"
     dur="40s"
     repeatCount="indefinite"
   />

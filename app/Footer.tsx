@@ -37,7 +37,7 @@ export const Footer = () => {
           <img
             src='/im-confused-too.svg'
             alt='Made in UK, But Raised in US, And also Irish. ¯\_(ツ)_/¯ '
-            title='Authorized to work in the USA, EU, UK without a visa.'
+            title='But I am authorized to work in the USA, EU, UK without a visa :)'
             width={200}
             height={200}
           />
