@@ -2,7 +2,7 @@ import { Size, useThree } from '@react-three/fiber'
 import React from 'react'
 import * as THREE from 'three'
 
-const PixelScale = 20
+const PixelScale = 24
 
 function getCanvasCellularDimensions(size: Size) {
   return {

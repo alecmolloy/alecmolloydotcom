@@ -5,8 +5,8 @@ import { useGesture } from '@use-gesture/react'
 import React, { useState, useEffect } from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
-import fragmentShader from './void.frag'
-import vertexShader from './void.vert'
+import fragmentShader from './shaders/void.frag'
+import vertexShader from './shaders/void.vert'
 
 type InteractionState = null | 'hovered' | 'grabbing'
 
