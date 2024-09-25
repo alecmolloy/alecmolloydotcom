@@ -1,6 +1,9 @@
 uniform sampler2D tDiffuse;
 uniform vec3 darkColor;
 uniform vec3 lightColor;
+uniform vec2 resolution;
+uniform float pixelSize;
+
 varying vec2 vUv;
 
 const float bayerMatrix[256] = float[256](
@@ -23,12 +26,17 @@ const float bayerMatrix[256] = float[256](
 );
 
 void main() {
-  vec4 texel = texture2D(tDiffuse, vUv);
+  // Calculate the scaled UV coordinates
+  vec2 scaledUv = floor(vUv * resolution / pixelSize) * pixelSize / resolution;
+  
+  // Sample the texture using the scaled UV coordinates
+  vec4 texel = texture2D(tDiffuse, scaledUv);
   float gray = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
   
-  int x = int(mod(gl_FragCoord.x, 16.0));
-  int y = int(mod(gl_FragCoord.y, 16.0));
-  float threshold = bayerMatrix[y * 16 + x] / 256.0;
+  // Calculate the Bayer matrix index
+  ivec2 bayerCoord = ivec2(mod(gl_FragCoord.xy / pixelSize, 16.0));
+  int bayerIndex = bayerCoord.y * 16 + bayerCoord.x;
+  float threshold = bayerMatrix[bayerIndex] / 256.0;
   
   vec3 finalColor = gray < threshold ? darkColor : lightColor;
   gl_FragColor = vec4(finalColor, 1.0);

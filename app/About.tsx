@@ -1,6 +1,6 @@
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
-import Image from 'next/image'
 import React from 'react'
+import DitheredImage from './DitheredImage'
 import { workSans } from './fonts'
 import { LocationsScroller } from './LocationsScroller'
 import { Section } from './Navigation'
@@ -27,18 +27,25 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       <Grid columns={{ initial: '1', xs: '7' }} gap={{ initial: '4', md: '7' }}>
         <Flex
           gridColumn={{ initial: '1', xs: '2 / span 2' }}
-          justify={{ initial: 'center', xs: 'end' }}
-          align='start'
+          justify={{ initial: 'center', xs: 'start' }}
+          align='end'
+          direction='column'
         >
           <img
-            src='/alec-glass.png'
+            src='/alec-glass-blue.png'
             alt='Alec Molloy'
-            height='auto'
             style={{
               width: '100%',
               maxWidth: 256,
               imageRendering: 'pixelated',
             }}
+          />
+          <DitheredImage
+            imageUrl='/alec-glass.jpg'
+            darkColor='#0060ff'
+            lightColor='#f3ebe1'
+            maxWidth={256}
+            pixelSize={2}
           />
         </Flex>
         <Box gridColumn={{ initial: '1', xs: '4 / span 4' }}>
