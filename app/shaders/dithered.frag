@@ -31,13 +31,21 @@ void main() {
   
   // Sample the texture using the scaled UV coordinates
   vec4 texel = texture2D(tDiffuse, scaledUv);
+  
   float gray = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+  
+  // Apply a more aggressive tone mapping curve
+  gray = pow(gray, 2.2);
+  gray = smoothstep(0.2, 0.8, gray);
+  gray = clamp(gray, 0.0, 1.0);
   
   // Calculate the Bayer matrix index
   ivec2 bayerCoord = ivec2(mod(gl_FragCoord.xy / pixelSize, 16.0));
   int bayerIndex = bayerCoord.y * 16 + bayerCoord.x;
   float threshold = bayerMatrix[bayerIndex] / 256.0;
   
-  vec3 finalColor = gray < threshold ? darkColor : lightColor;
+  vec3 finalColor = threshold >= gray  ? darkColor : lightColor;
+  
+  // Debug output
   gl_FragColor = vec4(finalColor, 1.0);
 }

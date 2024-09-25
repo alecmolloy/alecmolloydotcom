@@ -31,15 +31,6 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
           align='end'
           direction='column'
         >
-          <img
-            src='/alec-glass-blue.png'
-            alt='Alec Molloy'
-            style={{
-              width: '100%',
-              maxWidth: 256,
-              imageRendering: 'pixelated',
-            }}
-          />
           <DitheredImage
             imageUrl='/alec-glass.jpg'
             darkColor='#0060ff'

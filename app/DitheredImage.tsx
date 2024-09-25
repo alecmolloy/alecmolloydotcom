@@ -52,12 +52,11 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
   }, [maxWidth, imageUrl])
 
   return (
-    <div ref={containerRef} style={{ width: '100%' }}>
+    <div ref={containerRef} style={{ maxWidth, width: '100%' }}>
       <Canvas
         style={{ width: canvasSize.width, height: canvasSize.height }}
         orthographic
         camera={{ zoom: 1, position: [0, 0, 100] }}
-        gl={{ toneMapping: THREE.LinearToneMapping }}
       >
         <DitheredMesh
           imageUrl={imageUrl}
@@ -77,7 +76,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
   pixelSize,
 }) => {
   const mesh = useRef<THREE.Mesh>(null)
-  const { size } = useThree()
+  const { size, gl, scene } = useThree()
   const texture = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
 
   useEffect(() => {
@@ -86,11 +85,11 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
         uniforms: {
           tDiffuse: { value: texture },
           darkColor: {
-            value: new THREE.Color(darkColor).convertSRGBToLinear(),
-          }, // Add this line
+            value: new THREE.Color(darkColor).convertLinearToSRGB(),
+          },
           lightColor: {
-            value: new THREE.Color(lightColor).convertSRGBToLinear(),
-          }, // Add this line
+            value: new THREE.Color(lightColor).convertLinearToSRGB(),
+          },
           resolution: { value: new THREE.Vector2(size.width, size.height) },
           pixelSize: { value: pixelSize },
           textureSize: {
