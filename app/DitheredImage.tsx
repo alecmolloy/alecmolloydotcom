@@ -5,19 +5,26 @@ import * as THREE from 'three'
 import fragmentShader from './shaders/dithered.frag'
 import vertexShader from './shaders/dithered.vert'
 
-interface DitheredImageProps {
+interface DitheredMeshProps {
+  /** The URL of the image to be dithered. */
   imageUrl: string
+  /** The color used for dark pixels in the dithered image. */
   darkColor: string
+  /** The color used for light pixels in the dithered image. */
   lightColor: string
-  maxWidth: number
-  pixelSize: number // Add this line
+  /** The size of each pixel in the dithered output. */
+  pixelSize: number
+  /** The gamma correction factor to apply to the image. */
+  gammaCorrection: number
+  /** The lower bound for tone mapping, should be in the range [0, 1]. */
+  toneMapLow: number
+  /** The upper bound for tone mapping, should be in the range [0, 1]. */
+  toneMapHigh: number
 }
 
-interface DitheredMeshProps {
-  imageUrl: string
-  darkColor: string
-  lightColor: string
-  pixelSize: number // Add this line
+interface DitheredImageProps extends DitheredMeshProps {
+  /** The maximum width of the dithered image container. */
+  maxWidth: number
 }
 
 const DitheredImage: React.FC<DitheredImageProps> = ({
@@ -25,7 +32,10 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
   darkColor,
   lightColor,
   maxWidth,
-  pixelSize, // Add this line
+  pixelSize,
+  gammaCorrection,
+  toneMapLow,
+  toneMapHigh,
 }) => {
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
@@ -62,7 +72,10 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
           imageUrl={imageUrl}
           darkColor={darkColor}
           lightColor={lightColor}
-          pixelSize={pixelSize} // Add this line
+          pixelSize={pixelSize}
+          gammaCorrection={gammaCorrection}
+          toneMapLow={toneMapLow}
+          toneMapHigh={toneMapHigh}
         />
       </Canvas>
     </div>
@@ -74,6 +87,9 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
   darkColor,
   lightColor,
   pixelSize,
+  gammaCorrection,
+  toneMapLow,
+  toneMapHigh,
 }) => {
   const mesh = useRef<THREE.Mesh>(null)
   const { size, gl, scene } = useThree()
@@ -95,6 +111,9 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
           textureSize: {
             value: new THREE.Vector2(texture.image.width, texture.image.height),
           },
+          gammaCorrection: { value: gammaCorrection },
+          toneMapLow: { value: THREE.MathUtils.clamp(toneMapLow, 0.0, 1.0) },
+          toneMapHigh: { value: THREE.MathUtils.clamp(toneMapHigh, 0.0, 1.0) },
         },
         vertexShader,
         fragmentShader,
@@ -106,7 +125,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
       const aspectRatio = texture.image.height / texture.image.width
       mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
     }
-  }, [texture, darkColor, lightColor, size, pixelSize])
+  }, [texture, darkColor, lightColor, size, pixelSize, toneMapLow, toneMapHigh])
 
   useEffect(() => {
     const handleResize = () => {

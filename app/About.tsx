@@ -80,6 +80,9 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
             lightColor='#f3ebe1'
             maxWidth={221}
             pixelSize={2}
+            gammaCorrection={2.2}
+            toneMapLow={0.2}
+            toneMapHigh={0.8}
           />
         </Flex>
       </Grid>
