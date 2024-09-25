@@ -14,12 +14,10 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   >
     <Grid
       className='wrapper work-wrapper'
-      gapX='4'
-      gapY='6'
+      gap={{ initial: '4', md: '7' }}
       columns={{
         initial: '1',
-        md: '2',
-        lg: '3',
+        xs: '9',
       }}
       style={{
         overflowY: 'hidden',

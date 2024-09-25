@@ -24,22 +24,8 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       px={{ initial: '4', xs: '0' }}
       style={{ paddingTop: 128 }}
     >
-      <Grid columns={{ initial: '1', xs: '7' }} gap={{ initial: '4', md: '7' }}>
-        <Flex
-          gridColumn={{ initial: '1', xs: '2 / span 2' }}
-          justify={{ initial: 'center', xs: 'start' }}
-          align='end'
-          direction='column'
-        >
-          <DitheredImage
-            imageUrl='/alec-glass.jpg'
-            darkColor='#0060ff'
-            lightColor='#f3ebe1'
-            maxWidth={256}
-            pixelSize={2}
-          />
-        </Flex>
-        <Box gridColumn={{ initial: '1', xs: '4 / span 4' }}>
+      <Grid columns={{ initial: '1', xs: '9' }} gap={{ initial: '4', md: '7' }}>
+        <Box gridColumn={{ initial: '1', xs: '2 / span 5' }}>
           <P>
             I am a creative technologist, designing and building tools for the
             expansion of consciousness.
@@ -82,6 +68,20 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
             workwith@alecmolloy.com
           </P>
         </Box>
+        <Flex
+          gridColumn={{ initial: '1', xs: 'span 2' }}
+          justify={{ initial: 'center', xs: 'start' }}
+          align='end'
+          direction='column'
+        >
+          <DitheredImage
+            imageUrl='/alec-glass.jpg'
+            darkColor='#0060ff'
+            lightColor='#f3ebe1'
+            maxWidth={221}
+            pixelSize={2}
+          />
+        </Flex>
       </Grid>
     </Container>
 

@@ -10,10 +10,9 @@ export const WorkCard: React.FunctionComponent<{
     <Flex
       key={item.name}
       id={item.name}
-      style={{
-        gridColumn: 'span 1',
-        maxWidth: '400px',
-        margin: '0 auto',
+      gridColumn={{
+        initial: 'span 1',
+        xs: 'span 3',
       }}
     >
       <Link
