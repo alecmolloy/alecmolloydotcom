@@ -38,7 +38,10 @@ export const Scene = () => {
 
   return (
     <>
-      <Void radius={Math.min(240, canvasWidth / 2.5)} position={[0, 256, 0]} />
+      <Void
+        radius={Math.min(240, canvasWidth / 2.75, size.height / 3)}
+        position={[0, 256, 0]}
+      />
       <TurtlePlane />
       <Environment map={envMap} environmentRotation={environmentRotation} />
     </>

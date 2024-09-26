@@ -6,14 +6,18 @@ import { CameraStartY, Scene } from './Scene'
 
 export const HeroCanvas = () => {
   return (
-    <Container height={`calc(100vh - 32px)`}>
-      <Flex p='4' pb='8' direction='column' gap='4' height='100%'>
+    <Container
+      height={{
+        initial: 'calc(100vh - 96px)',
+        md: 'calc(100vh - 32px)',
+      }}
+    >
+      <Flex px='4' pb='8' direction='column' height='100%'>
         <Txt
           style={{
             whiteSpace: 'pre-wrap',
           }}
-          mt='4'
-          mb='0'
+          my={{ initial: '4', sm: '4' }}
           size='9'
           align='center'
           className={instrumentSerif.className}

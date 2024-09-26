@@ -217,7 +217,7 @@ export const Navigation: React.FunctionComponent = () => {
                   ) : (
                     <Txt
                       className={workSans.className}
-                      size='5'
+                      size={{ initial: '4', sm: '5' }}
                       weight='medium'
                       style={{
                         textDecoration: 'none',
