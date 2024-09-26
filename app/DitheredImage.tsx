@@ -1,5 +1,5 @@
 'use client'
-import { Canvas, useLoader, useThree } from '@react-three/fiber'
+import { Canvas, useLoader, useThree, useFrame } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/dithered.frag'
@@ -94,6 +94,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
   const mesh = useRef<THREE.Mesh>(null)
   const { size, gl, scene } = useThree()
   const texture = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
+  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
 
   useEffect(() => {
     if (mesh.current) {
@@ -114,18 +115,26 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
           gammaCorrection: { value: gammaCorrection },
           toneMapLow: { value: THREE.MathUtils.clamp(toneMapLow, 0.0, 1.0) },
           toneMapHigh: { value: THREE.MathUtils.clamp(toneMapHigh, 0.0, 1.0) },
+          time: { value: 0 }, // Initialize time uniform
         },
         vertexShader,
         fragmentShader,
       })
 
       mesh.current.material = material
+      materialRef.current = material // Store the material reference
 
       // Adjust mesh scale to fit the canvas
       const aspectRatio = texture.image.height / texture.image.width
       mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
     }
   }, [texture, darkColor, lightColor, size, pixelSize, toneMapLow, toneMapHigh])
+
+  useFrame(({ clock }) => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.time.value = clock.getElapsedTime() // Update time uniform
+    }
+  })
 
   useEffect(() => {
     const handleResize = () => {
