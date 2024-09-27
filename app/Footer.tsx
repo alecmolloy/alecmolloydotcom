@@ -1,6 +1,13 @@
 import { Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import Img from 'next/image'
 import Netscape from '../public/ns-best-1.gif'
+import { workSans } from './fonts'
+import styled from 'styled-components'
+
+const SocialLinkProps = {
+  className: workSans.className,
+  style: { color: '#0008', textDecoration: 'none' },
+}
 
 export const Footer = () => {
   return (
@@ -13,6 +20,21 @@ export const Footer = () => {
           align='start'
           justify='end'
         >
+          <a
+            href='https://x.com/alecmolloy'
+            target='_blank'
+            {...SocialLinkProps}
+          >
+            Twitter
+          </a>
+          <a
+            href='https://waveymaus.tumblr.com'
+            target='_blank'
+            {...SocialLinkProps}
+          >
+            Tumblr
+          </a>
+
           <Img
             src={Netscape}
             alt='This page is best viewed in Netscape Navigator 3.0'

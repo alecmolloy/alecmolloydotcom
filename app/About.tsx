@@ -82,6 +82,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
             purpose-driven. If you think that's you, please get in contact:
             workwith@alecmolloy.com
           </P>
+          <P>ʕ •ᴥ•ʔ</P>
         </Box>
       </Grid>
     </Container>
