@@ -3,6 +3,7 @@ import { Container, Grid } from '@radix-ui/themes'
 import React from 'react'
 import { Section } from './Navigation'
 import { WorkCard } from './WorkCard'
+import { defaultGridProps } from './theme'
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   <Container
@@ -11,20 +12,10 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
     style={{
       minHeight: '100vh',
     }}
+    my='9'
+    py='9'
   >
-    <Grid
-      className='wrapper work-wrapper'
-      gap={{ initial: '4', md: '7' }}
-      columns={{
-        initial: '1',
-        xs: '9',
-      }}
-      style={{
-        overflowY: 'hidden',
-        padding: '0 0.5rem 1em',
-        margin: '1rem auto',
-      }}
-    >
+    <Grid {...defaultGridProps} className='wrapper work-wrapper'>
       {WorkItems.map((item, i) => (
         <WorkCard key={i} item={item} />
       ))}

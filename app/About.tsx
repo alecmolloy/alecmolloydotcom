@@ -5,6 +5,7 @@ import { workSans } from './fonts'
 import { LocationsScroller } from './LocationsScroller'
 import { Section } from './Navigation'
 import { TurtleMeander } from './TurtleMeander'
+import { defaultGridProps } from './theme'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -24,10 +25,15 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       px={{ initial: '4', xs: '0' }}
       style={{ paddingTop: 128 }}
     >
-      <Grid columns={{ initial: '1', xs: '9' }} gap={{ initial: '4', md: '7' }}>
+      <Grid {...defaultGridProps}>
         <Flex
-          gridColumn={{ initial: '1', xs: '2 / span 3' }}
-          justify={{ initial: 'center', xs: 'start' }}
+          gridColumn={{
+            initial: '2 / span 4',
+            xs: '1 / span 3',
+            md: '2 / span 3',
+          }}
+          pb={{ initial: '6', xs: '0' }}
+          justify={{ initial: 'start', xs: 'start' }}
           align='end'
           direction='column'
         >
@@ -36,14 +42,14 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => (
             darkColor='#285EF6'
             lightColor='#F2EBE2'
             maxWidth={352}
-            pixelSize={2}
+            pixelSize={1}
             gammaCorrection={0.925}
             toneMapLow={0.075}
             toneMapHigh={0.75}
           />
         </Flex>
 
-        <Box gridColumn={{ initial: '1', xs: 'span 4' }}>
+        <Box gridColumn={{ initial: '1 / span 6', xs: 'span 6', md: 'span 4' }}>
           <P>
             I am a creative technologist, designing and building tools for the
             expansion of consciousness.

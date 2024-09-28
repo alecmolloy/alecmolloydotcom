@@ -52,6 +52,13 @@ export const Footer = () => {
             />
           </a>
           <Txt size='2' style={{ color: 'var(--slate-11)' }}>
+            “Turtle” Optical Illusion Pattern based on the work of{' '}
+            <a href='https://www.ritsumei.ac.jp/~akitaoka/kame-e.html'>
+              Akiyoshi Kitaoka
+            </a>
+            .
+          </Txt>
+          <Txt size='2' style={{ color: 'var(--slate-11)' }}>
             © {new Date().getFullYear()} Alec Molloy. All rights reserved.
           </Txt>
         </Flex>
