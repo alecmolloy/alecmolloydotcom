@@ -6,6 +6,7 @@ import { LocationsScroller } from './LocationsScroller'
 import { Section } from './Navigation'
 import { defaultGridProps } from './theme'
 import { TurtleMeander } from './TurtleMeander'
+import DitheredImage from './DitheredImage'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -38,11 +39,12 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             align='end'
             direction='column'
           >
-            <DitheredImageWrapper
+            <DitheredImage
               imageUrl='/alec-colorful.png'
               darkColor='#285EF6'
               lightColor='#F2EBE2'
               maxWidth={352}
+              pixelSize={1.5}
               gammaCorrection={0.925}
               toneMapLow={0.075}
               toneMapHigh={0.75}

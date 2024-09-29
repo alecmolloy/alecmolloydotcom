@@ -4,7 +4,6 @@ import React from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/dithered.frag'
 import vertexShader from './shaders/dithered.vert'
-import { SpringValue } from '@react-spring/web'
 
 interface DitheredMeshProps {
   /** The URL of the image to be dithered. */
@@ -14,7 +13,7 @@ interface DitheredMeshProps {
   /** The color used for light pixels in the dithered image. */
   lightColor: string
   /** The size of each pixel in the dithered output. */
-  pixelSize: SpringValue<number>
+  pixelSize: number
   /** The gamma correction factor to apply to the image. */
   gammaCorrection: number
   /** The lower bound for tone mapping, should be in the range [0, 1]. */
@@ -109,23 +108,22 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
             value: new THREE.Color(lightColor).convertLinearToSRGB(),
           },
           resolution: { value: new THREE.Vector2(size.width, size.height) },
-          pixelSize: { value: pixelSize.get() },
+          pixelSize: { value: pixelSize },
           textureSize: {
             value: new THREE.Vector2(texture.image.width, texture.image.height),
           },
           gammaCorrection: { value: gammaCorrection },
           toneMapLow: { value: THREE.MathUtils.clamp(toneMapLow, 0.0, 1.0) },
           toneMapHigh: { value: THREE.MathUtils.clamp(toneMapHigh, 0.0, 1.0) },
-          time: { value: 0 }, // Initialize time uniform
+          time: { value: 0 },
         },
         vertexShader,
         fragmentShader,
       })
 
       mesh.current.material = material
-      materialRef.current = material // Store the material reference
+      materialRef.current = material
 
-      // Adjust mesh scale to fit the canvas
       const aspectRatio = texture.image.height / texture.image.width
       mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
     }
@@ -133,8 +131,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.pixelSize.value = pixelSize.get() // Update pixelSize uniform
-      materialRef.current.uniforms.time.value = clock.getElapsedTime() // Update time uniform
+      materialRef.current.uniforms.time.value = clock.getElapsedTime()
     }
   })
 
@@ -149,7 +146,6 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
           size.height,
         )
 
-        // Update mesh scale on resize
         const aspectRatio = texture.image.height / texture.image.width
         mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
       }
