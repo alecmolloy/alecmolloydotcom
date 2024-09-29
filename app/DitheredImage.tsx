@@ -1,9 +1,10 @@
 'use client'
-import { Canvas, useLoader, useThree, useFrame } from '@react-three/fiber'
-import React, { useEffect, useRef, useState } from 'react'
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import React from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/dithered.frag'
 import vertexShader from './shaders/dithered.vert'
+import { SpringValue } from '@react-spring/web'
 
 interface DitheredMeshProps {
   /** The URL of the image to be dithered. */
@@ -13,7 +14,7 @@ interface DitheredMeshProps {
   /** The color used for light pixels in the dithered image. */
   lightColor: string
   /** The size of each pixel in the dithered output. */
-  pixelSize: number
+  pixelSize: SpringValue<number>
   /** The gamma correction factor to apply to the image. */
   gammaCorrection: number
   /** The lower bound for tone mapping, should be in the range [0, 1]. */
@@ -37,10 +38,10 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
   toneMapLow,
   toneMapHigh,
 }) => {
-  const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 })
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [canvasSize, setCanvasSize] = React.useState({ width: 0, height: 0 })
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     const updateSize = () => {
       if (containerRef.current) {
         const containerWidth = containerRef.current.clientWidth
@@ -91,12 +92,12 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
   toneMapLow,
   toneMapHigh,
 }) => {
-  const mesh = useRef<THREE.Mesh>(null)
-  const { size, gl, scene } = useThree()
+  const mesh = React.useRef<THREE.Mesh>(null)
+  const { size } = useThree()
   const texture = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
-  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
+  const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (mesh.current) {
       const material = new THREE.ShaderMaterial({
         uniforms: {
@@ -108,7 +109,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
             value: new THREE.Color(lightColor).convertLinearToSRGB(),
           },
           resolution: { value: new THREE.Vector2(size.width, size.height) },
-          pixelSize: { value: pixelSize },
+          pixelSize: { value: pixelSize.get() },
           textureSize: {
             value: new THREE.Vector2(texture.image.width, texture.image.height),
           },
@@ -132,11 +133,12 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
+      materialRef.current.uniforms.pixelSize.value = pixelSize.get() // Update pixelSize uniform
       materialRef.current.uniforms.time.value = clock.getElapsedTime() // Update time uniform
     }
   })
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleResize = () => {
       if (
         mesh.current &&
