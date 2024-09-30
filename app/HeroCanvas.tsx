@@ -53,6 +53,7 @@ export const HeroCanvas = () => {
             height='100%'
           >
             <Txt
+              className={workSans.className}
               size='5'
               weight='medium'
               style={{
@@ -61,7 +62,7 @@ export const HeroCanvas = () => {
                 cursor: 'default',
               }}
             >
-              NYC / Lisbon
+              N.Y.C. / Lisbon
             </Txt>
             <a
               className={['header-button', workSans.className].join(' ')}

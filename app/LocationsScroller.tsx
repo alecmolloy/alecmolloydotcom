@@ -3,71 +3,30 @@ import { Box, Flex, Text as Txt } from '@radix-ui/themes'
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { workSans } from './fonts'
 
-const Violator = ({
-  color,
-  children,
-}: {
-  color: string
-  children: React.ReactNode
-}) => (
-  <Box
-    position='absolute'
-    top='-25px'
-    left='-25px'
-    style={{ transform: 'rotate(-15deg)' }}
-  >
-    <Txt
-      size='2'
-      weight='bold'
-      style={{
-        borderRadius: '4px',
-        backgroundColor: color,
-        color: 'white',
-        padding: '2px',
-      }}
-    >
-      {children}
-    </Txt>
-  </Box>
-)
 const locations = new Map([
-  ['Putney', { country: 'GB', violator: null }],
-  ['Wandsworth', { country: 'GB', violator: null }],
-  ['Scarsdale', { country: 'US', violator: null }],
-  [
-    'New Canaan',
-    {
-      country: 'US',
-      violator: (
-        <Violator color='var(--international-orange)'>Currently!</Violator>
-      ),
-    },
-  ],
-  ['Santa Clara', { country: 'US', violator: null }],
-  ['San Jose', { country: 'US', violator: null }],
-  ['Upper Haight', { country: 'US', violator: null }],
-  ['Dalston', { country: 'GB', violator: null }],
-  ['Highbury', { country: 'GB', violator: null }],
-  ['Malmö', { country: 'SE', violator: null }],
-  ['Frederiksberg', { country: 'DK', violator: null }],
-  ['Stoke Newington', { country: 'GB', violator: null }],
-  ['Pacific Palisades', { country: 'US', violator: null }],
-  ['Portland', { country: 'US', violator: null }],
-  ['Alfama', { country: 'PT', violator: null }],
-  ['Costa da Caparica', { country: 'PT', violator: null }],
-  ['Figueiró dos Vinhos', { country: 'PT', violator: null }],
-  ['Oliveri', { country: 'IT', violator: null }],
-  ['Olhos de Água', { country: 'PT', violator: null }],
-  ['Assagao', { country: 'IN', violator: null }],
-  ['Campo de Ourique', { country: 'PT', violator: null }],
-  ['Tavira', { country: 'PT', violator: null }],
-  [
-    'Sainte-Agathe-des-Monts',
-    {
-      country: 'CA',
-      violator: <Violator color='var(--ultramarine)'>Soon…</Violator>,
-    },
-  ],
+  ['Putney', { country: 'GB' }],
+  ['Wandsworth', { country: 'GB' }],
+  ['Scarsdale', { country: 'US' }],
+  ['New Canaan', { country: 'US' }],
+  ['Santa Clara', { country: 'US' }],
+  ['San Jose', { country: 'US' }],
+  ['Upper Haight', { country: 'US' }],
+  ['Dalston', { country: 'GB' }],
+  ['Highbury', { country: 'GB' }],
+  ['Malmö', { country: 'SE' }],
+  ['Frederiksberg', { country: 'DK' }],
+  ['Stoke Newington', { country: 'GB' }],
+  ['Pacific Palisades', { country: 'US' }],
+  ['Portland', { country: 'US' }],
+  ['Alfama', { country: 'PT' }],
+  ['Costa da Caparica', { country: 'PT' }],
+  ['Figueiró dos Vinhos', { country: 'PT' }],
+  ['Oliveri', { country: 'IT' }],
+  ['Olhos de Água', { country: 'PT' }],
+  ['Assagao', { country: 'IN' }],
+  ['Campo de Ourique', { country: 'PT' }],
+  ['Tavira', { country: 'PT' }],
+  ['Sainte-Agathe-des-Monts', { country: 'CA' }],
 ])
 
 const countryToEmoji = (countryCode: string) => {
@@ -92,7 +51,7 @@ export const LocationsScroller: React.FC = () => {
   const animate = useCallback(() => {
     if (!isHovering && containerRef.current) {
       setScrollPosition((prevPosition) => {
-        const newPosition = prevPosition + 1
+        const newPosition = prevPosition + 0.5
         return newPosition >= containerRef.current!.children[0].clientWidth / 2
           ? 0
           : newPosition
@@ -138,21 +97,10 @@ export const LocationsScroller: React.FC = () => {
     }
   }, [])
 
-  const calculateFontWeight = useCallback(
-    (x: number): number => {
-      if (containerWidth === 0) {
-        return 400
-      }
-      const normalizedX = normalize(x, 0, containerWidth)
-      return Math.floor(normalizedX * 500 + 400) // 400 to 900
-    },
-    [containerWidth],
-  )
-
   return (
     <Flex
+      my='2'
       ref={containerRef}
-      height='128px'
       style={{
         overflow: 'hidden',
         whiteSpace: 'nowrap',
@@ -168,27 +116,22 @@ export const LocationsScroller: React.FC = () => {
         }}
       >
         {[0, 1].map((i) => (
-          <Flex
-            key={i}
-            direction='row'
-            style={{
-              fontWeight: calculateFontWeight(globalMouseX),
-            }}
-          >
-            {Array.from(locations.entries()).map(
-              ([city, { country, violator }]) => (
-                <Txt
-                  size='8'
-                  className={workSans.className}
-                  key={city}
-                  title={countryToEmoji(country)}
-                  style={{ cursor: 'default', position: 'relative' }}
-                >
-                  {violator}
-                  {city}&nbsp;&nbsp;·&nbsp;&nbsp;
-                </Txt>
-              ),
-            )}
+          <Flex key={i} direction='row'>
+            {Array.from(locations.entries()).map(([city, { country }]) => (
+              <Txt
+                size='4'
+                className={workSans.className}
+                key={city}
+                title={countryToEmoji(country)}
+                style={{
+                  cursor: 'default',
+                  position: 'relative',
+                  fontWeight: '500',
+                }}
+              >
+                {city}&nbsp;&nbsp;·&nbsp;&nbsp;
+              </Txt>
+            ))}
           </Flex>
         ))}
       </Flex>

@@ -96,9 +96,6 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           </Box>
         </Grid>
       </Container>
-      <TurtleMeander height={4} />
-      <LocationsScroller />
-      <TurtleMeander height={4} />
     </Box>
   )
 }
