@@ -49,8 +49,10 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
         img.onload = () => {
           const aspectRatio = img.height / img.width
           const height = width * aspectRatio
-          console.log(width, height)
-          setCanvasSize({ width, height })
+          setCanvasSize({
+            width: Math.round(width),
+            height: Math.round(height),
+          })
         }
         img.src = imageUrl
       }
@@ -61,9 +63,12 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
     return () => window.removeEventListener('resize', updateSize)
   }, [maxWidth, imageUrl])
 
+  console.log(canvasSize.width, canvasSize.height)
+
   return (
     <div ref={containerRef} style={{ maxWidth, width: '100%' }}>
       <Canvas
+        id='dithered-image-canvas'
         style={{ width: canvasSize.width, height: canvasSize.height }}
         orthographic
         camera={{ zoom: 1, position: [0, 0, 100] }}
@@ -94,6 +99,10 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
   const mesh = React.useRef<THREE.Mesh>(null)
   const { size } = useThree()
   const texture = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
+  const bayerTexture = useLoader(
+    THREE.TextureLoader,
+    '/bayer16.png',
+  ) as THREE.Texture
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
 
   React.useEffect(() => {
@@ -101,6 +110,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
       const material = new THREE.ShaderMaterial({
         uniforms: {
           tDiffuse: { value: texture },
+          tBayer: { value: bayerTexture },
           darkColor: {
             value: new THREE.Color(darkColor).convertLinearToSRGB(),
           },
@@ -121,13 +131,27 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
         fragmentShader,
       })
 
+      bayerTexture.minFilter = THREE.NearestFilter
+      bayerTexture.magFilter = THREE.NearestFilter
+      bayerTexture.wrapS = THREE.RepeatWrapping
+      bayerTexture.wrapT = THREE.RepeatWrapping
+
       mesh.current.material = material
       materialRef.current = material
 
       const aspectRatio = texture.image.height / texture.image.width
       mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
     }
-  }, [texture, darkColor, lightColor, size, pixelSize, toneMapLow, toneMapHigh])
+  }, [
+    texture,
+    bayerTexture,
+    darkColor,
+    lightColor,
+    size,
+    pixelSize,
+    toneMapLow,
+    toneMapHigh,
+  ])
 
   useFrame(({ clock }) => {
     if (materialRef.current) {

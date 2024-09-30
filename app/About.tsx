@@ -1,12 +1,11 @@
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
-import DitheredImageWrapper from './DitheredImageWrapper'
+import DitheredImage from './DitheredImage'
 import { workSans } from './fonts'
 import { LocationsScroller } from './LocationsScroller'
 import { Section } from './Navigation'
 import { defaultGridProps } from './theme'
 import { TurtleMeander } from './TurtleMeander'
-import DitheredImage from './DitheredImage'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -44,7 +43,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               darkColor='#285EF6'
               lightColor='#F2EBE2'
               maxWidth={352}
-              pixelSize={1.5}
+              pixelSize={2}
               gammaCorrection={0.925}
               toneMapLow={0.075}
               toneMapHigh={0.75}
