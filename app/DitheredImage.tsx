@@ -8,6 +8,8 @@ import vertexShader from './shaders/dithered.vert'
 interface DitheredMeshProps {
   /** The URL of the image to be dithered. */
   imageUrl: string
+  /** The URL of the mask image to be used as the alpha channel. */
+  maskUrl: string
   /** The color used for dark pixels in the dithered image. */
   darkColor: string
   /** The color used for light pixels in the dithered image. */
@@ -29,6 +31,7 @@ interface DitheredImageProps extends DitheredMeshProps {
 
 const DitheredImage: React.FC<DitheredImageProps> = ({
   imageUrl,
+  maskUrl,
   darkColor,
   lightColor,
   maxWidth,
@@ -75,6 +78,7 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
       >
         <DitheredMesh
           imageUrl={imageUrl}
+          maskUrl={maskUrl}
           darkColor={darkColor}
           lightColor={lightColor}
           pixelSize={pixelSize}
@@ -89,6 +93,7 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
 
 const DitheredMesh: React.FC<DitheredMeshProps> = ({
   imageUrl,
+  maskUrl,
   darkColor,
   lightColor,
   pixelSize,
@@ -98,18 +103,20 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
 }) => {
   const mesh = React.useRef<THREE.Mesh>(null)
   const { size } = useThree()
-  const texture = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
+  const image = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
   const bayerTexture = useLoader(
     THREE.TextureLoader,
     '/bayer16.png',
   ) as THREE.Texture
+  const maskTexture = useLoader(THREE.TextureLoader, maskUrl) as THREE.Texture // {{ edit_2 }}
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
 
   React.useEffect(() => {
     if (mesh.current) {
       const material = new THREE.ShaderMaterial({
         uniforms: {
-          tDiffuse: { value: texture },
+          tImage: { value: image },
+          tMask: { value: maskTexture }, // {{ edit_3 }}
           tBayer: { value: bayerTexture },
           darkColor: {
             value: new THREE.Color(darkColor).convertLinearToSRGB(),
@@ -120,7 +127,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
           resolution: { value: new THREE.Vector2(size.width, size.height) },
           pixelSize: { value: pixelSize },
           textureSize: {
-            value: new THREE.Vector2(texture.image.width, texture.image.height),
+            value: new THREE.Vector2(image.image.width, image.image.height),
           },
           gammaCorrection: { value: gammaCorrection },
           toneMapLow: { value: THREE.MathUtils.clamp(toneMapLow, 0.0, 1.0) },
@@ -139,11 +146,12 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
       mesh.current.material = material
       materialRef.current = material
 
-      const aspectRatio = texture.image.height / texture.image.width
+      const aspectRatio = image.image.height / image.image.width
       mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
     }
   }, [
-    texture,
+    image,
+    maskTexture, // {{ edit_4 }}
     bayerTexture,
     darkColor,
     lightColor,
@@ -170,7 +178,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
           size.height,
         )
 
-        const aspectRatio = texture.image.height / texture.image.width
+        const aspectRatio = image.image.height / image.image.width
         mesh.current.scale.set(size.width, size.width * aspectRatio, 1)
       }
     }
@@ -178,7 +186,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
     handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [size, texture])
+  }, [size, image])
 
   return (
     <mesh ref={mesh} position={[0, 0, 0]}>

@@ -1,5 +1,6 @@
-uniform sampler2D tDiffuse;
+uniform sampler2D tImage;
 uniform sampler2D tBayer;
+uniform sampler2D tMask;
 uniform vec3 darkColor;
 uniform vec3 lightColor;
 uniform vec2 resolution;
@@ -39,25 +40,20 @@ void main() {
   vec2 scaledUv = floor(vUv * resolution / pixelSize) * pixelSize / resolution;
   
   // Sample the texture using the scaled UV coordinates
-  vec4 texel = texture2D(tDiffuse, scaledUv);
+  vec4 texel = texture2D(tImage, scaledUv);
   
-  // Scale the alpha value
-  texel.a *= 0.9; // Scale alpha by 0.95
+  // Sample the mask texture for alpha
+  vec4 maskTexel = texture2D(tMask, scaledUv); // Use mask texture for alpha
 
   float gray;
 
   // Use the noise function to get the gray value, incorporating time for animation
   float noiseGray = noise(vec3(scaledUv * 10.0, time * 0.1)); // Adjust the scale and speed as needed
 
-  // Blend gray value based on the alpha value
-  if (texel.a == 0.0) {
-    gray = noiseGray; // Fully transparent, use noise
-  } else {
-    // Calculate gray value from the texture
-    float textureGray = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
-    // Blend using alpha
-    gray = mix(noiseGray, textureGray, texel.a);
-  }
+  // Calculate gray value from the texture
+  float textureGray = dot(texel.rgb, vec3(0.299, 0.587, 0.114));
+  // Blend using alpha
+  gray = mix(noiseGray, textureGray, pow(maskTexel.r, 3.) * 0.9);
   
   // Apply gamma correction and tone mapping
   gray = pow(gray, gammaCorrection);

@@ -39,11 +39,12 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             direction='column'
           >
             <DitheredImage
-              imageUrl='/alec-colorful.png'
+              imageUrl='/alec.jpg'
+              maskUrl='/alec-mask.png'
               darkColor='#285EF6'
               lightColor='#F2EBE2'
               maxWidth={352}
-              pixelSize={2}
+              pixelSize={1}
               gammaCorrection={0.925}
               toneMapLow={0.075}
               toneMapHigh={0.75}
