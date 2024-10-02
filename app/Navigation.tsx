@@ -1,5 +1,4 @@
 'use client'
-import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import { Flex, Text as Txt } from '@radix-ui/themes'
 import { animated, useSpring } from '@react-spring/web'
 import { Environment } from '@react-three/drei'
@@ -18,7 +17,7 @@ export const Navigation: React.FunctionComponent = () => {
   const [hoveredSection, setHoveredSection] = useState<Section | null>(null)
   const [isAutoScrolling, setIsAutoScrolling] = useState(false)
   const navRefs = useRef<{ [key: string]: HTMLElement | null }>({})
-  const navMenuRef = useRef<HTMLElement | null>(null)
+  const navMenuRef = useRef<HTMLDivElement | null>(null)
   const autoScrollTimeoutRef = useRef<number | null>(null)
 
   const [indicatorProps, api] = useSpring(() => ({
@@ -117,30 +116,28 @@ export const Navigation: React.FunctionComponent = () => {
           boxShadow: '0 0 0 1px #0001 inset',
         }}
       >
-        <NavigationMenu.Root
+        <Flex
           id='navigation-root'
           ref={navMenuRef}
           style={{
             position: 'relative',
-            display: 'flex',
             justifyContent: 'center',
             fontSize: 16,
           }}
         >
-          <NavigationMenu.List
+          <Flex
+            justify='center'
+            align='center'
             style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
               position: 'relative',
               zIndex: 1,
+              cursor: 'pointer',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
             }}
           >
             {sections.map((section) => (
-              <NavigationMenu.Item
+              <Flex
                 key={section}
                 style={{
                   userSelect: 'none',
@@ -157,7 +154,7 @@ export const Navigation: React.FunctionComponent = () => {
                   }
                 }}
               >
-                <NavigationMenu.Link
+                <a
                   href={section === 'hero' ? '#' : `#${section}`}
                   style={{
                     all: 'unset',
@@ -173,6 +170,11 @@ export const Navigation: React.FunctionComponent = () => {
                     e.preventDefault()
                     const targetElement = document.getElementById(section)
                     if (targetElement) {
+                      if (section === 'hero') {
+                        history.pushState(null, '', ' ')
+                      } else {
+                        history.pushState(null, '', `#${section}`)
+                      }
                       setIsAutoScrolling(true)
                       setActiveSection(section)
                       api.start(
@@ -226,10 +228,10 @@ export const Navigation: React.FunctionComponent = () => {
                       {section}
                     </Txt>
                   )}
-                </NavigationMenu.Link>
-              </NavigationMenu.Item>
+                </a>
+              </Flex>
             ))}
-          </NavigationMenu.List>
+          </Flex>
           <animated.div
             style={{
               position: 'absolute',
@@ -245,7 +247,7 @@ export const Navigation: React.FunctionComponent = () => {
               ...indicatorProps,
             }}
           />
-        </NavigationMenu.Root>
+        </Flex>
       </Flex>
     </Flex>
   )
