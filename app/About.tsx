@@ -2,10 +2,8 @@ import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import DitheredImage from './DitheredImage'
 import { workSans } from './fonts'
-import { LocationsScroller } from './LocationsScroller'
 import { Section } from './Navigation'
 import { defaultGridProps } from './theme'
-import { TurtleMeander } from './TurtleMeander'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt

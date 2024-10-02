@@ -2,9 +2,9 @@ import { Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import Img from 'next/image'
 import Netscape from '../public/ns-best-1.gif'
 import { workSans } from './fonts'
-import styled from 'styled-components'
-import { TurtleMeander } from './TurtleMeander'
 import { LocationsScroller } from './LocationsScroller'
+import { defaultGridProps } from './theme'
+import { TurtleMeander } from './TurtleMeander'
 
 const SocialLinkProps = {
   className: workSans.className,
@@ -15,7 +15,7 @@ export const Footer = () => {
   return (
     <>
       <Container py='8' px='4'>
-        <Grid columns='12' gap='4'>
+        <Grid {...defaultGridProps}>
           <Flex
             gridColumn='span 9'
             gapY='4'
