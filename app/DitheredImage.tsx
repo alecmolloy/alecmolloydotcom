@@ -66,8 +66,6 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
     return () => window.removeEventListener('resize', updateSize)
   }, [maxWidth, imageUrl])
 
-  console.log(canvasSize.width, canvasSize.height)
-
   return (
     <div ref={containerRef} style={{ maxWidth, width: '100%' }}>
       <Canvas
@@ -108,15 +106,15 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
     THREE.TextureLoader,
     '/bayer16.png',
   ) as THREE.Texture
-  const maskTexture = useLoader(THREE.TextureLoader, maskUrl) as THREE.Texture // {{ edit_2 }}
+  const maskTexture = useLoader(THREE.TextureLoader, maskUrl) as THREE.Texture
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
 
   React.useEffect(() => {
-    if (mesh.current) {
+    if (mesh.current != null) {
       const material = new THREE.ShaderMaterial({
         uniforms: {
           tImage: { value: image },
-          tMask: { value: maskTexture }, // {{ edit_3 }}
+          tMask: { value: maskTexture },
           tBayer: { value: bayerTexture },
           darkColor: {
             value: new THREE.Color(darkColor).convertLinearToSRGB(),
@@ -140,8 +138,6 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
 
       bayerTexture.minFilter = THREE.NearestFilter
       bayerTexture.magFilter = THREE.NearestFilter
-      bayerTexture.wrapS = THREE.RepeatWrapping
-      bayerTexture.wrapT = THREE.RepeatWrapping
 
       mesh.current.material = material
       materialRef.current = material
@@ -151,7 +147,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
     }
   }, [
     image,
-    maskTexture, // {{ edit_4 }}
+    maskTexture,
     bayerTexture,
     darkColor,
     lightColor,
