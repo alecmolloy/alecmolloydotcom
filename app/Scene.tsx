@@ -36,13 +36,12 @@ export const Scene = () => {
   // Preload the environment map
   const envMap = useLoader(EXRLoader, '/studio027-small.exr')
 
+  const voidRadius = Math.min(240, canvasWidth / 2.75, size.height / 3)
+
   return (
     <>
-      <Void
-        radius={Math.min(240, canvasWidth / 2.75, size.height / 3)}
-        position={[0, 256, 0]}
-      />
-      <TurtlePlane />
+      <Void radius={voidRadius} position={[0, 256, 0]} />
+      <TurtlePlane voidRadius={voidRadius} />
       <Environment map={envMap} environmentRotation={environmentRotation} />
     </>
   )

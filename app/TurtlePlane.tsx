@@ -2,7 +2,7 @@ import { Size, useThree } from '@react-three/fiber'
 import React from 'react'
 import * as THREE from 'three'
 
-const PixelScale = 24
+const PixelScale = 20
 
 function getCanvasCellularDimensions(size: Size) {
   return {
@@ -11,7 +11,9 @@ function getCanvasCellularDimensions(size: Size) {
   }
 }
 
-export const TurtlePlane = () => {
+export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
+  voidRadius,
+}) => {
   const { size } = useThree()
 
   const turtleCanvasRef = React.useRef<HTMLCanvasElement | null>(null)
@@ -73,6 +75,9 @@ export const TurtlePlane = () => {
     ) {
       const canvasPixelWidth = canvasCellWidth * PixelScale
       const canvasPixelHeight = canvasCellHeight * PixelScale
+      const centerX = Math.floor(canvasCellWidth / 2)
+      const centerY = Math.floor(canvasCellHeight / 2)
+      const voidRadiusCells = Math.floor(voidRadius / PixelScale + 4)
 
       const ctx = turtleCtxRef.current
       ctx.fillStyle = 'white'
@@ -86,14 +91,32 @@ export const TurtlePlane = () => {
             ctx.fillRect(x * PixelScale, y * PixelScale, PixelScale, PixelScale)
           }
           if (x >= 1 && y >= 1) {
-            const standingWaveDirection = (x + y) % 3 === 0
-            ctx.drawImage(
-              standingWaveDirection ? turtleHorizontalImg : turtleVerticalImg,
-              x * PixelScale - 6,
-              y * PixelScale - 6,
-              12,
-              12,
+            const distanceFromCenter = Math.sqrt(
+              Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2),
             )
+            const isInVoid = distanceFromCenter <= voidRadiusCells + 30
+            if (isInVoid) {
+              const isInInnerVoid = distanceFromCenter <= voidRadiusCells / 2
+              ctx.drawImage(
+                ((x + y) % 2 === 0) !=
+                  (Math.floor(distanceFromCenter / 3) % 2 === 0)
+                  ? turtleHorizontalImg
+                  : turtleVerticalImg,
+                x * PixelScale - 6,
+                y * PixelScale - 6,
+                12,
+                12,
+              )
+            } else {
+              const standingWaveDirection = (x + y) % 3 === 0
+              ctx.drawImage(
+                standingWaveDirection ? turtleHorizontalImg : turtleVerticalImg,
+                x * PixelScale - 6,
+                y * PixelScale - 6,
+                12,
+                12,
+              )
+            }
           }
         }
       }
@@ -106,6 +129,7 @@ export const TurtlePlane = () => {
     canvasCellWidth,
     turtleHorizontalImg,
     turtleVerticalImg,
+    voidRadius,
   ])
 
   return (
