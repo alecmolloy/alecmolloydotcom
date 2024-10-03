@@ -31,6 +31,12 @@ type Technology =
   | 'Figma'
   | 'Photoshop'
   | 'Midjourney'
+  | 'Next.js'
+  | 'React'
+  | 'JavaScript'
+  | 'TensorFlow.js'
+  | 'Google Apps Script'
+  | 'Zapier'
 
 interface Collaborator {
   name: string

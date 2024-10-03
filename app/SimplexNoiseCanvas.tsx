@@ -1,6 +1,7 @@
 'use client'
+import { Flex } from '@radix-ui/themes'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
-import React, { useRef, useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/simplex-noise.frag'
 import vertexShader from './shaders/simplex-noise.vert'
@@ -55,7 +56,7 @@ const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
   }, [])
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+    <Flex ref={containerRef} width='100%' height='100%' flexGrow='1'>
       <Canvas
         style={{ width: canvasSize.width, height: canvasSize.height }}
         orthographic
@@ -68,7 +69,7 @@ const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
           pixelSize={pixelSize}
         />
       </Canvas>
-    </div>
+    </Flex>
   )
 }
 
@@ -121,7 +122,7 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.time.value = clock.getElapsedTime() / 200
+      materialRef.current.uniforms.time.value = clock.getElapsedTime() / 50
     }
   })
 
