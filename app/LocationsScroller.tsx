@@ -1,7 +1,6 @@
 'use client'
-import { Box, Flex, Text as Txt } from '@radix-ui/themes'
-import React, { useRef, useState, useEffect, useCallback } from 'react'
-import { workSans } from './fonts'
+import { Flex, Text as Txt } from '@radix-ui/themes'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 const locations = new Map([
   ['Putney', { country: 'GB' }],
@@ -41,13 +40,8 @@ export const LocationsScroller: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number>()
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [globalMouseX, setGlobalMouseX] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
-  const [containerWidth, setContainerWidth] = useState(1024)
 
-  const normalize = (value: number, min: number, max: number): number => {
-    return (value - min) / (max - min)
-  }
   const animate = useCallback(() => {
     if (!isHovering && containerRef.current) {
       setScrollPosition((prevPosition) => {
@@ -68,34 +62,6 @@ export const LocationsScroller: React.FC = () => {
       }
     }
   }, [animate])
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setGlobalMouseX(e.clientX)
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (containerRef.current != null) {
-      const resizeObserver = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          setContainerWidth(entry.contentRect.width)
-        }
-      })
-
-      resizeObserver.observe(containerRef.current)
-
-      return () => {
-        resizeObserver.disconnect()
-      }
-    }
-  }, [])
 
   return (
     <Flex
@@ -119,11 +85,11 @@ export const LocationsScroller: React.FC = () => {
           <Flex key={i} direction='row'>
             {Array.from(locations.entries()).map(([city, { country }]) => (
               <Txt
-                size='4'
-                className={workSans.className}
+                size='2'
                 key={city}
                 title={countryToEmoji(country)}
                 style={{
+                  color: 'var(--slate-11)',
                   cursor: 'default',
                   position: 'relative',
                   fontWeight: '500',

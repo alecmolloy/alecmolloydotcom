@@ -16,10 +16,18 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       minHeight: '100vh',
     }}
     my='9'
+    px='4'
     py='9'
   >
     <Grid {...defaultGridProps} className='wrapper work-wrapper'>
-      <Flex gridColumn='span 5'>
+      <Flex
+        gridColumn='span 5'
+        style={{
+          boxShadow: '0 0 0 1px #0001',
+          borderRadius: '10px',
+          overflow: 'hidden',
+        }}
+      >
         {vbt.hero.type === 'image' ? (
           <Image
             width='800'
@@ -34,7 +42,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       <Flex gridColumn='span 5'>
         <SimplexNoiseCanvas
           cellSize={500}
-          darkColor='#f8f8f8'
+          darkColor='#fafafa'
           lightColor='#ffffff'
           pixelSize={10}
         />

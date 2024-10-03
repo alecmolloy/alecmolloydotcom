@@ -6,6 +6,7 @@ import { Contact } from './Contact'
 import { Navigation } from './Navigation'
 import { HeroCanvas } from './HeroCanvas'
 import { Portfolio } from './Portfolio'
+import { TurtleMeander } from './TurtleMeander'
 
 export const metadata: Metadata = {
   title: 'Alec Molloy’s Official Home on the Web',
@@ -34,6 +35,7 @@ const Index: React.FunctionComponent = () => {
         <Portfolio id='portfolio' />
         <Contact id='contact' />
       </Box>
+      <TurtleMeander height={144} />
     </>
   )
 }
