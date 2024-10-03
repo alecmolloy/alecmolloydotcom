@@ -32,7 +32,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         )}
       </Flex>
       <Flex gridColumn='span 5'>
-        <SimplexNoiseCanvas cellSize={25} />
+        <SimplexNoiseCanvas
+          cellSize={500}
+          darkColor='#f8f8f8'
+          lightColor='#ffffff'
+          pixelSize={10}
+        />
       </Flex>
       {WorkItems.map((item, i) => (
         <WorkCard key={i} item={item} />

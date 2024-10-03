@@ -2,6 +2,10 @@ varying vec2 vUv;
 uniform float time;
 uniform vec2 resolution;
 uniform float cellSize;
+uniform sampler2D tBayer;
+uniform vec3 darkColor;
+uniform vec3 lightColor;
+uniform float pixelSize;
 
 //
 // Description : Array and textureless GLSL 2D/3D/4D simplex
@@ -93,7 +97,7 @@ float snoise(vec3 v)
   vec3 p3 = vec3(a1.zw,h.w);
 
 //Normalise gradients
-  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2,p2), dot(p3,p3)));
   p0 *= norm.x;
   p1 *= norm.y;
   p2 *= norm.z;
@@ -107,23 +111,55 @@ float snoise(vec3 v)
   }
 
 void main() {
-  // Calculate the frequency based on the resolution and cell size
-  vec2 freq = resolution / cellSize;
+    // Calculate the frequency based on the resolution and cell size
+    vec2 freq = resolution / cellSize;
 
-  // Center the UV coordinates
-  vec2 centeredUv = vUv - 0.5;
+    // Calculate the dithered pixel coordinate
+    vec2 ditheredPixelCoord = floor(gl_FragCoord.xy / pixelSize);
 
-  // Scale the centered UV coordinates
-  vec2 scaledUv = centeredUv * freq;
+    // Calculate the UV for the center of the dithered pixel
+    vec2 ditheredUv = (ditheredPixelCoord * pixelSize + pixelSize * 0.5) / resolution;
 
-  // Recenter the UV coordinates
-  vec2 adjustedUv = scaledUv + 0.5;
+    // Center the UV coordinates
+    vec2 centeredUv = ditheredUv - 0.5;
 
-  float noiseValue = snoise(vec3(adjustedUv, time));
+    // Scale the centered UV coordinates
+    vec2 scaledUv = centeredUv * freq;
 
-  // Map noise from [-1, 1] to [0, 1]
-  float mappedNoise = (noiseValue + 1.0) / 2.0;
+    // Recenter the UV coordinates
+    vec2 adjustedUv = scaledUv + 0.5;
 
-  // Output grayscale color
-  gl_FragColor = vec4(vec3(mappedNoise), 1.0);
+    // Sample the noise at the center of the dithered pixel
+    float noiseValue = snoise(vec3(adjustedUv, time));
+
+    // Map noise from [-1, 1] to [0, 1]
+    float gray = (noiseValue + 1.0) / 2.0;
+
+    float highContrast = smoothstep(0.4,0.8,gray);
+
+    // Apply edge fading effect
+    vec2 edgeDistance = min(ditheredUv, 2. - ditheredUv);
+    float edgeFade = smoothstep(0.0, 0.1, min(edgeDistance.x, edgeDistance.y));
+    highContrast = mix(1.0, highContrast, edgeFade);
+
+    // Use the Bayer texture for dithering
+    vec2 bayerCoord = mod(ditheredPixelCoord, 16.0) / 16.0;
+    float threshold = texture2D(tBayer, bayerCoord).r;
+
+    float thresholdDifference = threshold - highContrast;
+
+    if (thresholdDifference > 0.0) {
+        gray = 1.0;
+    } else if (thresholdDifference == 0.0) {
+        gray = round(1.0 - threshold);
+    } else {
+        gray = 0.0;
+    }
+
+    vec3 finalColor = mix(lightColor, darkColor, gray);
+
+    // Output the final color
+    gl_FragColor = vec4(finalColor, 1.0);
+    // gl_FragColor = vec4(vec3(gray), 1.0);
+
 }

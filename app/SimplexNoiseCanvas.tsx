@@ -1,5 +1,5 @@
 'use client'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import React, { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/simplex-noise.frag'
@@ -25,10 +25,16 @@ import vertexShader from './shaders/simplex-noise.vert'
 interface SimplexNoiseCanvasProps {
   /** The size of each cell in the simplex noise grid. */
   cellSize: number
+  darkColor: string
+  lightColor: string
+  pixelSize: number
 }
 
 const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
   cellSize,
+  darkColor,
+  lightColor,
+  pixelSize,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [canvasSize, setCanvasSize] = React.useState({ width: 0, height: 0 })
@@ -55,7 +61,12 @@ const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
         orthographic
         camera={{ zoom: 1, position: [0, 0, 100] }}
       >
-        <SimplexNoiseMesh cellSize={cellSize} />
+        <SimplexNoiseMesh
+          cellSize={cellSize}
+          darkColor={darkColor}
+          lightColor={lightColor}
+          pixelSize={pixelSize}
+        />
       </Canvas>
     </div>
   )
@@ -63,12 +74,24 @@ const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
 
 interface SimplexNoiseMeshProps {
   cellSize: number
+  darkColor: string
+  lightColor: string
+  pixelSize: number
 }
 
-const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({ cellSize }) => {
+const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
+  cellSize,
+  darkColor,
+  lightColor,
+  pixelSize,
+}) => {
   const mesh = React.useRef<THREE.Mesh>(null)
   const { size } = useThree()
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
+  const bayerTexture = useLoader(
+    THREE.TextureLoader,
+    '/bayer16.png',
+  ) as THREE.Texture
 
   React.useEffect(() => {
     if (mesh.current != null) {
@@ -77,21 +100,28 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({ cellSize }) => {
           time: { value: 0 },
           resolution: { value: new THREE.Vector2(size.width, size.height) },
           cellSize: { value: cellSize },
+          tBayer: { value: bayerTexture },
+          darkColor: { value: new THREE.Color(darkColor) },
+          lightColor: { value: new THREE.Color(lightColor) },
+          pixelSize: { value: pixelSize },
         },
         vertexShader,
         fragmentShader,
       })
+
+      bayerTexture.minFilter = THREE.NearestFilter
+      bayerTexture.magFilter = THREE.NearestFilter
 
       mesh.current.material = material
       materialRef.current = material
 
       mesh.current.scale.set(size.width, size.height, 1)
     }
-  }, [size, cellSize])
+  }, [size, cellSize, darkColor, lightColor, pixelSize, bayerTexture])
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.time.value = clock.getElapsedTime()
+      materialRef.current.uniforms.time.value = clock.getElapsedTime() / 200
     }
   })
 
@@ -120,5 +150,4 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({ cellSize }) => {
     </mesh>
   )
 }
-
 export default SimplexNoiseCanvas

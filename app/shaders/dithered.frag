@@ -62,8 +62,17 @@ void main() {
   // Use the Bayer texture for dithering
   vec2 bayerCoord = mod(gl_FragCoord.xy, 16.0) / 16.0;
   float threshold = texture2D(tBayer, bayerCoord).r;
-  
-  vec3 finalColor = threshold >= gray ? darkColor : lightColor;
+
+  float thresholdDifference = threshold - gray;
+  if (thresholdDifference > 0.0) {
+      gray = 1.0;
+  } else if (thresholdDifference == 0.0) {
+      gray = round(1.0 - threshold);
+  } else {
+      gray = 0.0;
+  }
+
+  vec3 finalColor = mix(lightColor, darkColor, gray);
 
   // Debug output
   gl_FragColor = vec4(finalColor, 1.0);
