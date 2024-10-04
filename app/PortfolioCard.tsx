@@ -97,10 +97,12 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           left: '50%',
           transform: 'translateX(-50%)',
           backdropFilter: 'blur(3px)',
+          WebkitBackdropFilter: 'blur(3px)',
           backgroundColor: '#0004',
           paddingTop: '15%',
           paddingBottom: '5%',
           width: '125%',
+          textAlign: 'center',
           mask: `radial-gradient(
             ellipse at bottom center,
             rgba(0, 0, 0, 1) 33%,
