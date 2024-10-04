@@ -76,7 +76,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       </Flex>
       <PortfolioCard project={minDoktor} gridColumn='span 3' />
       <PortfolioCard project={elements3D} gridColumn='span 3' />
-      <PortfolioCard project={kano} gridColumn='span 6' />
+      <PortfolioCard project={kano} gridColumn='span 6' large />
     </Grid>
   </Container>
 )

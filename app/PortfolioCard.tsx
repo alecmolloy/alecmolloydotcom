@@ -2,6 +2,7 @@
 import { Project } from '@/app/content-types'
 import { Flex, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
+import { useWindowWidth } from '@react-hook/window-size'
 import { animated, useSpring, useSpringValue } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
 import Image from 'next/image'
@@ -21,6 +22,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   large,
   gridColumn,
 }) => {
+  const windowWidth = useWindowWidth()
+
   const [isPlaying, setIsPlaying] = React.useState(false)
   const videoRef = React.useRef<HTMLVideoElement>(null)
 
@@ -28,25 +31,28 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   const [titleProps, titleApi] = useSpring(
     () => ({
       from: { opacity: 0, bottom: -15 },
+      ...(windowWidth > 768 && { to: { opacity: 1, bottom: -5 } }),
     }),
-    [],
+    [windowWidth],
   )
 
   const bind = useGesture({
     onHover: ({ hovering }) => {
       cardScale.start(hovering ? 1.01 : 1)
-      titleApi.start(
-        hovering
-          ? {
-              opacity: 1,
-              bottom: -5,
-              config: { tension: 170 * 3 },
-            }
-          : {
-              opacity: 0,
-              bottom: -15,
-            },
-      )
+      if (windowWidth > 768) {
+        titleApi.start(
+          hovering
+            ? {
+                opacity: 1,
+                bottom: -5,
+                config: { tension: 170 * 3 },
+              }
+            : {
+                opacity: 0,
+                bottom: -15,
+              },
+        )
+      }
     },
   })
 
@@ -101,13 +107,17 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
             rgba(0, 0, 0, 0) ${(1 / Math.sqrt(2)) * 100}%
           )
           `,
-
-          ...titleProps,
+          ...(windowWidth > 768
+            ? titleProps
+            : {
+                opacity: 1,
+                bottom: -5,
+              }),
         }}
       >
         <Txt
           className={instrumentSerif.className}
-          size={large ? '8' : '7'}
+          size={{ initial: large ? '6' : '5', sm: large ? '8' : '7' }}
           style={{ color: '#fff', textShadow: '0 0 8px #0008' }}
           align='center'
         >
