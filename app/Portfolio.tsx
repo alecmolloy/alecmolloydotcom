@@ -26,7 +26,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
     py='9'
   >
     <Grid {...defaultGridProps} className='wrapper work-wrapper'>
-      <PortfolioCard project={vbt} gridColumn='span 6' />
+      <PortfolioCard project={vbt} gridColumn='span 6' large />
       <Flex gridColumn='7 / span 3' direction='column' gap='4'>
         <PortfolioCard project={retreatTechnology} />
         <SimplexNoiseCanvas
