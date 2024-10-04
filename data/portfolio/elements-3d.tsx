@@ -1,10 +1,14 @@
-import { collaborator, heroImage, project } from '@/app/content-types'
-import elementsHero from '@/public/portfolio/elements/elements-01.jpg'
+import { collaborator, heroVideo, project } from '@/app/content-types'
+import elementsPoster from '@/public/portfolio/elements-3d/elements-3d-poster.png'
 
 export const elements3D = project(
   'Elements 3D',
   'A simple 3D art coding IDE and library',
-  heroImage(elementsHero, 'Elements 3D IDE'),
+  heroVideo(
+    '/portfolio/elements-3d/elements-3d.mp4',
+    elementsPoster,
+    'Elements 3D IDE',
+  ),
   '2015',
   ['TypeScript'],
   'Code editor and live 3D scene, Imperative API',

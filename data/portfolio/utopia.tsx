@@ -1,4 +1,4 @@
-import { heroImage, heroVideo, project } from '@/app/content-types'
+import { heroVideo, project } from '@/app/content-types'
 import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
 
 export const utopia = project(

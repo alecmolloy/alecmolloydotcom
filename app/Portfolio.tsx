@@ -1,4 +1,9 @@
+import { elements3D } from '@/data/portfolio/elements-3d'
+import { localWelcome } from '@/data/portfolio/local-welcome'
+import { minDoktor } from '@/data/portfolio/min-doktor'
 import { nuclearConnections } from '@/data/portfolio/nuclear-connections'
+import { retreatTechnology } from '@/data/portfolio/retreat'
+import { utopia } from '@/data/portfolio/utopia'
 import { vbt } from '@/data/portfolio/vbt'
 import { WorkItems } from '@/data/work'
 import { Container, Flex, Grid } from '@radix-ui/themes'
@@ -8,10 +13,6 @@ import { PortfolioCard } from './PortfolioCard'
 import SimplexNoiseCanvas from './SimplexNoiseCanvas'
 import { WorkCard } from './WorkCard'
 import { defaultGridProps } from './theme'
-import { retreatTechnology } from '@/data/portfolio/retreat'
-import { localWelcome } from '@/data/portfolio/local-welcome'
-import { utopia } from '@/data/portfolio/utopia'
-import { minDoktor } from '@/data/portfolio/min-doktor'
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   <Container
@@ -55,6 +56,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         />
       </Flex>
       <PortfolioCard project={minDoktor} gridColumn='span 3' />
+      <PortfolioCard project={elements3D} gridColumn='span 3' />
       {WorkItems.map((item, i) => (
         <WorkCard key={i} item={item} />
       ))}
