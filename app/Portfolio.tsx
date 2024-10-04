@@ -13,6 +13,7 @@ import { PortfolioCard } from './PortfolioCard'
 import SimplexNoiseCanvas from './SimplexNoiseCanvas'
 import { WorkCard } from './WorkCard'
 import { defaultGridProps } from './theme'
+import { kano } from '@/data/portfolio/kano'
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   <Container
@@ -57,9 +58,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       </Flex>
       <PortfolioCard project={minDoktor} gridColumn='span 3' />
       <PortfolioCard project={elements3D} gridColumn='span 3' />
-      {WorkItems.map((item, i) => (
-        <WorkCard key={i} item={item} />
-      ))}
+      <PortfolioCard project={kano} gridColumn='span 3' />
     </Grid>
   </Container>
 )

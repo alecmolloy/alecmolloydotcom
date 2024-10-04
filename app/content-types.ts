@@ -37,6 +37,7 @@ type Technology =
   | 'TensorFlow.js'
   | 'Google Apps Script'
   | 'Zapier'
+  | 'InDesign'
 
 interface Collaborator {
   name: string

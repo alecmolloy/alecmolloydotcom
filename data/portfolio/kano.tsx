@@ -1,10 +1,10 @@
-import { collaborator, heroImage, project } from '@/app/content-types'
-import kanoHero from '@/public/portfolio/kano/kano-01.jpg'
+import { heroVideo, project } from '@/app/content-types'
+import kanoHero from '@/public/portfolio/kano/kano-01.webp'
 
 export const kano = project(
   'Kano',
   'Educational technology kits and tools',
-  heroImage(kanoHero, 'Kano Educational Tools'),
+  heroVideo('/portfolio/kano/kano.mp4', kanoHero, 'Kano Educational Tools'),
   '2016',
   ['TypeScript', 'JavaScript'],
   'Creative content system and community platform',
