@@ -52,6 +52,7 @@ export const WorkCard: React.FunctionComponent<{
             height='50%'
             style={{
               backdropFilter: 'blur(40px)',
+              WebkitBackdropFilter: 'blur(40px)',
               mask: `linear-gradient(
                 to bottom,
                 rgba(0, 0, 0, 0) 0%,

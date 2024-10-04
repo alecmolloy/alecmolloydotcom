@@ -1,6 +1,6 @@
 :root {
-  --international-orange-9: #ff4e00;
-  --ultramarine-9: #4600ff;
+  --international-orange: #ff4e00;
+  --ultramarine: #4600ff;
 }
 
 @supports (color: color(display-p3 1 1 1)) {
