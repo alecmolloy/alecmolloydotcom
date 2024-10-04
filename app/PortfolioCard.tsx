@@ -1,6 +1,7 @@
 'use client'
 import { Project } from '@/app/content-types'
-import { Text as Txt } from '@radix-ui/themes'
+import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
 import { animated, useSpring, useSpringValue } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
 import Image from 'next/image'
@@ -10,8 +11,10 @@ import { instrumentSerif } from './fonts'
 interface PortfolioCardProps {
   project: Project
   large?: boolean
-  gridColumn?: string
+  gridColumn?: Responsive<string>
 }
+
+const AnimatedFlex = animated(Flex)
 
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
@@ -66,10 +69,10 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   }, [videoRef.current])
 
   return (
-    <animated.div
+    <AnimatedFlex
+      gridColumn={gridColumn}
       {...bind()}
       style={{
-        gridColumn: gridColumn,
         flexShrink: '0',
         position: 'relative',
         boxShadow: '0 0 0 1px #0001',
@@ -154,6 +157,6 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           />
         </>
       )}
-    </animated.div>
+    </AnimatedFlex>
   )
 }

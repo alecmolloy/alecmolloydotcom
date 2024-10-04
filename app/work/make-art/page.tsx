@@ -48,7 +48,6 @@ const MakeArtCreations = async () => {
     <>
       <Navigation />
       <div
-        className='wrapper'
         style={{
           margin: '2em auto',
         }}
@@ -71,7 +70,6 @@ const MakeArtCreations = async () => {
         </p>
       </div>
       <ol
-        className='wrapper'
         style={{
           padding: '0 0.5rem 1em',
           display: 'grid',

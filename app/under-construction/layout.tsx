@@ -6,7 +6,7 @@ const UnderConstructionLayout: React.FunctionComponent<
 > = ({ children }) => (
   <>
     <Navigation />
-    <div className='wrapper' style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center' }}>
       <hr
         style={{
           height: 50,

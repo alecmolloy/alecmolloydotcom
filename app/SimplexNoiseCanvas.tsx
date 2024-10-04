@@ -1,10 +1,11 @@
 'use client'
-import { Flex } from '@radix-ui/themes'
+import { Flex, FlexProps } from '@radix-ui/themes'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/simplex-noise.frag'
 import vertexShader from './shaders/simplex-noise.vert'
+import { flexPropDefs } from '@radix-ui/themes/dist/cjs/components/flex.props'
 
 /**
  * SimplexNoiseCanvas component renders a 2D simplex noise texture
@@ -31,11 +32,12 @@ interface SimplexNoiseCanvasProps {
   pixelSize: number
 }
 
-const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
+const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps & FlexProps> = ({
   cellSize,
   darkColor,
   lightColor,
   pixelSize,
+  ...props
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [canvasSize, setCanvasSize] = React.useState({ width: 0, height: 0 })
@@ -56,7 +58,7 @@ const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps> = ({
   }, [])
 
   return (
-    <Flex ref={containerRef} width='100%' height='100%' flexGrow='1'>
+    <Flex ref={containerRef} width='100%' height='100%' flexGrow='1' {...props}>
       <Canvas
         style={{ width: canvasSize.width, height: canvasSize.height }}
         orthographic
