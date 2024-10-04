@@ -25,13 +25,18 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
     py='9'
   >
     <Grid {...defaultGridProps} className='wrapper work-wrapper'>
-      <PortfolioCard project={vbt} gridColumn='span 6' large />
+      <PortfolioCard
+        project={vbt}
+        gridColumn='span 6'
+        size='lg'
+        titleMode='light'
+      />
       <Flex
         gridColumn={{ initial: '1 / -1', sm: '7 / span 3' }}
         direction='column'
         gap='4'
       >
-        <PortfolioCard project={retreatTechnology} />
+        <PortfolioCard project={retreatTechnology} size='sm' />
         <SimplexNoiseCanvas
           display={{ initial: 'none', sm: 'flex' }}
           cellSize={500}
@@ -50,11 +55,14 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       />
       <PortfolioCard
         project={utopia}
+        titleMode='dark'
         gridColumn={{ initial: '2 / -1', sm: 'span 4' }}
+        size='lg'
       />
       <PortfolioCard
         project={nuclearConnections}
         gridColumn={{ initial: '1 / span 5', sm: 'span 4' }}
+        size='lg'
       />
       <SimplexNoiseCanvas
         display={{ initial: 'flex', sm: 'none' }}
@@ -65,7 +73,11 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         pixelSize={10}
       />
 
-      <PortfolioCard project={localWelcome} gridColumn='span 3' />
+      <PortfolioCard
+        project={localWelcome}
+        gridColumn='span 3'
+        titleMode='light'
+      />
       <Flex gridColumn='span 3'>
         <SimplexNoiseCanvas
           cellSize={500}
@@ -74,9 +86,17 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
           pixelSize={10}
         />
       </Flex>
-      <PortfolioCard project={minDoktor} gridColumn='span 3' />
-      <PortfolioCard project={elements3D} gridColumn='span 3' />
-      <PortfolioCard project={kano} gridColumn='span 6' large />
+      <PortfolioCard
+        project={minDoktor}
+        gridColumn='span 3'
+        titleMode='light'
+      />
+      <PortfolioCard
+        project={elements3D}
+        gridColumn='span 3'
+        titleMode='light'
+      />
+      <PortfolioCard project={kano} gridColumn='span 6' size='lg' />
     </Grid>
   </Container>
 )

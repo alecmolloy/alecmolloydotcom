@@ -11,7 +11,8 @@ import { instrumentSerif } from './fonts'
 
 interface PortfolioCardProps {
   project: Project
-  large?: boolean
+  titleMode?: 'light' | 'dark'
+  size?: Size
   gridColumn?: Responsive<string>
 }
 
@@ -19,7 +20,8 @@ const AnimatedFlex = animated(Flex)
 
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
-  large,
+  size = 'md',
+  titleMode = 'dark',
   gridColumn,
 }) => {
   const windowWidth = useWindowWidth()
@@ -27,29 +29,27 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   const [isPlaying, setIsPlaying] = React.useState(false)
   const videoRef = React.useRef<HTMLVideoElement>(null)
 
-  const cardScale = useSpringValue(1)
-  const [titleProps, titleApi] = useSpring(
+  const [{ bottom, scale }, titleApi] = useSpring(
     () => ({
-      from: { opacity: 0, bottom: -15 },
-      ...(windowWidth > 768 && { to: { opacity: 1, bottom: -5 } }),
+      from: { bottom: -5, scale: 1 },
+      ...(windowWidth > 768 && { to: { bottom: -5 } }),
     }),
     [windowWidth],
   )
 
   const bind = useGesture({
     onHover: ({ hovering }) => {
-      cardScale.start(hovering ? 1.01 : 1)
       if (windowWidth > 768) {
         titleApi.start(
           hovering
             ? {
-                opacity: 1,
+                scale: 1.01,
                 bottom: -5,
                 config: { tension: 170 * 3 },
               }
             : {
-                opacity: 0,
-                bottom: -15,
+                scale: 1,
+                bottom: -5,
               },
         )
       }
@@ -87,8 +87,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         width: '100%',
         height: 'auto',
         aspectRatio: '4/3',
-        scale: cardScale,
         cursor: 'pointer',
+        scale,
       }}
     >
       <animated.div
@@ -98,7 +98,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           transform: 'translateX(-50%)',
           backdropFilter: 'blur(3px)',
           WebkitBackdropFilter: 'blur(3px)',
-          backgroundColor: '#0004',
+          backgroundColor: titleMode === 'dark' ? '#fff4' : '#0004',
           paddingTop: '15%',
           paddingBottom: '5%',
           width: '125%',
@@ -110,17 +110,25 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           )
           `,
           ...(windowWidth > 768
-            ? titleProps
+            ? {
+                bottom,
+              }
             : {
-                opacity: 1,
                 bottom: -5,
               }),
         }}
       >
         <Txt
           className={instrumentSerif.className}
-          size={{ initial: large ? '6' : '5', sm: large ? '8' : '7' }}
-          style={{ color: '#fff', textShadow: '0 0 8px #0008' }}
+          size={{
+            initial: sml(size, '5', '6', '7'),
+            sm: sml(size, '6', '7', '8'),
+          }}
+          style={{
+            color: titleMode === 'dark' ? '#000' : '#fff',
+            textShadow:
+              titleMode === 'dark' ? '0 0 16px #fff4' : '0 0 8px #0008',
+          }}
           align='center'
         >
           {project.title} ({project.releaseDate})
@@ -171,4 +179,17 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
       )}
     </AnimatedFlex>
   )
+}
+
+type Size = 'sm' | 'md' | 'lg'
+
+function sml<T>(size: Size, sm: T, md: T, lg: T): T {
+  switch (size) {
+    case 'sm':
+      return sm
+    case 'md':
+      return md
+    case 'lg':
+      return lg
+  }
 }
