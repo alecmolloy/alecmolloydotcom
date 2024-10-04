@@ -1,8 +1,8 @@
-import { Instrument_Serif, Work_Sans } from 'next/font/google'
+import { Instrument_Sans, Instrument_Serif } from 'next/font/google'
 
-export const workSans = Work_Sans({
+export const instrumentSans = Instrument_Sans({
   subsets: ['latin-ext'],
-  variable: '--font-work-sans',
+  variable: '--font-instrument-sans',
   style: ['normal', 'italic'],
 })
 

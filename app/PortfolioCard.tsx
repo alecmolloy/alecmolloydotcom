@@ -1,6 +1,6 @@
 'use client'
 import { Project } from '@/app/content-types'
-import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Flex, Heading, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
 import { useWindowWidth } from '@react-hook/window-size'
 import { animated, useSpring, useSpringValue } from '@react-spring/web'
@@ -118,7 +118,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
               }),
         }}
       >
-        <Txt
+        <Heading
           className={instrumentSerif.className}
           size={{
             initial: sml(size, '5', '6', '7'),
@@ -132,7 +132,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           align='center'
         >
           {project.title} ({project.releaseDate})
-        </Txt>
+        </Heading>
       </animated.div>
       {project.hero.type === 'image' ? (
         <Image

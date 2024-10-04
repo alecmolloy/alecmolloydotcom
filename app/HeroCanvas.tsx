@@ -1,7 +1,7 @@
 'use client'
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { Canvas } from '@react-three/fiber'
-import { instrumentSerif, workSans } from './fonts'
+import { instrumentSerif, instrumentSans } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 
 export const HeroCanvas = () => {
@@ -53,7 +53,7 @@ export const HeroCanvas = () => {
             height='100%'
           >
             <Txt
-              className={workSans.className}
+              className={instrumentSans.className}
               size='5'
               weight='medium'
               style={{
@@ -65,7 +65,7 @@ export const HeroCanvas = () => {
               N.Y.C. / Lisbon
             </Txt>
             <a
-              className={['header-button', workSans.className].join(' ')}
+              className={['header-button', instrumentSans.className].join(' ')}
               href='mailto:workwith@alecmolloy.com'
               style={{
                 textDecoration: 'none',

@@ -4,7 +4,7 @@ import { Flex } from '@radix-ui/themes'
 import Image from 'next/image'
 import * as React from 'react'
 import { Text as Txt } from '@radix-ui/themes'
-import { workSans } from './fonts'
+import { instrumentSans } from './fonts'
 
 export const WorkCard: React.FunctionComponent<{
   item: WorkItem
@@ -60,7 +60,7 @@ export const WorkCard: React.FunctionComponent<{
               )`,
             }}
           >
-            <Txt size='1' className={workSans.className}>
+            <Txt size='1' className={instrumentSans.className}>
               {item.title}{' '}
               <span style={{ fontStyle: 'normal', color: '#888' }}>
                 ({item.date})

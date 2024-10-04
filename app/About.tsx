@@ -1,7 +1,7 @@
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import DitheredImage from './DitheredImage'
-import { workSans } from './fonts'
+import { instrumentSans } from './fonts'
 import { Section } from './Navigation'
 import { defaultGridProps } from './theme'
 
@@ -11,7 +11,7 @@ const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
     size='6'
     {...props}
     style={{ ...props.style, marginBottom: '1em' }}
-    className={workSans.className}
+    className={instrumentSans.className}
   />
 )
 

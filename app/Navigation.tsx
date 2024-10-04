@@ -4,7 +4,7 @@ import { animated, useSpring } from '@react-spring/web'
 import { Environment } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
-import { workSans } from './fonts'
+import { instrumentSans } from './fonts'
 import { Void } from './Void'
 
 export const sections = ['hero', 'about', 'portfolio', 'contact'] as const
@@ -218,7 +218,7 @@ export const Navigation: React.FunctionComponent = () => {
                     </Canvas>
                   ) : (
                     <Txt
-                      className={workSans.className}
+                      className={instrumentSans.className}
                       size={{ initial: '4', sm: '5' }}
                       weight='medium'
                       style={{

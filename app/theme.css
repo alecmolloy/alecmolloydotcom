@@ -1,3 +1,7 @@
+.radix-themes {
+  --default-font-family: var(--font-instrument-sans) !important;
+}
+
 :root {
   --international-orange: #ff4e00;
   --ultramarine: #4600ff;
