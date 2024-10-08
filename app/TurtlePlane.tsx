@@ -2,7 +2,9 @@ import { Size, useThree } from '@react-three/fiber'
 import React from 'react'
 import * as THREE from 'three'
 
-const PixelScale = 24
+const PixelScale = 48
+const TurtleSquareSize = 24
+const TurtleSquareHalf = TurtleSquareSize / 2
 
 function getCanvasCellularDimensions(size: Size) {
   return {
@@ -101,19 +103,19 @@ export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
                 ((x + y) % 2 === 0) != isInInnerVoid
                   ? turtleHorizontalImg
                   : turtleVerticalImg,
-                x * PixelScale - 6,
-                y * PixelScale - 6,
-                12,
-                12,
+                x * PixelScale - TurtleSquareHalf,
+                y * PixelScale - TurtleSquareHalf,
+                TurtleSquareSize,
+                TurtleSquareSize,
               )
             } else {
               const standingWaveDirection = (x + y) % 3 === 0
               ctx.drawImage(
                 standingWaveDirection ? turtleHorizontalImg : turtleVerticalImg,
-                x * PixelScale - 6,
-                y * PixelScale - 6,
-                12,
-                12,
+                x * PixelScale - TurtleSquareHalf,
+                y * PixelScale - TurtleSquareHalf,
+                TurtleSquareSize,
+                TurtleSquareSize,
               )
             }
           }
