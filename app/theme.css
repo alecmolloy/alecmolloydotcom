@@ -5,6 +5,7 @@
 :root {
   --international-orange: #ff4e00;
   --ultramarine: #4600ff;
+  --shingle: #7f6567;
 }
 
 @supports (color: color(display-p3 1 1 1)) {
@@ -12,6 +13,7 @@
     :root {
       --international-orange: color(display-p3 1 0.31 0);
       --ultramarine: color(display-p3 0.247 0 1);
+      --shingle: color(display-p3 0.482 0.4 0.404);
     }
   }
 }

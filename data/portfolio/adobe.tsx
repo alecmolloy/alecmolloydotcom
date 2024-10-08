@@ -3,7 +3,7 @@ import adobeHero from '@/public/portfolio/adobe/adobe-01.png'
 
 export const adobe = project(
   'Adobe',
-  'Learning content, product management, and experimental games for Creative Cloud',
+  'Designer and Product Manager for Learning Games',
   heroImage(adobeHero, 'Adobe Digital Media Internship and Learning Games'),
   '2014',
   ['Photoshop', 'InDesign'],

@@ -38,6 +38,7 @@ type Technology =
   | 'Google Apps Script'
   | 'Zapier'
   | 'InDesign'
+  | 'WebGL'
 
 interface Collaborator {
   name: string
@@ -59,7 +60,7 @@ export function link(title: string, url: string): Link {
 
 export interface Project {
   title: string
-  shortDescription: string
+  subtitle: string
   hero: Hero
   releaseDate: string
   technologies: Technology[]
@@ -73,7 +74,7 @@ export interface Project {
 
 export function project(
   title: string,
-  shortDescription: string,
+  subtitle: string,
   hero: Hero,
   releaseDate: string,
   technologies: Technology[],
@@ -86,7 +87,7 @@ export function project(
 ): Project {
   return {
     title,
-    shortDescription,
+    subtitle,
     hero,
     technologies,
     role,

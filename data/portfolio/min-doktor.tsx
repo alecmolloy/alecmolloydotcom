@@ -3,9 +3,9 @@ import minDoktorHero from '@/public/portfolio/min-doktor/min-doktor-01.png'
 
 export const minDoktor = project(
   'Min Doktor',
-  'Telehealth platform for remote doctor consultations',
+  'Product Management, patient app',
   heroImage(minDoktorHero, 'Min Doktor Telehealth Platform'),
-  '2017',
+  '2016–17',
   ['React Native'],
   'Patient consultation app',
   <>

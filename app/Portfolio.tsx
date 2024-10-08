@@ -1,3 +1,4 @@
+import { adobe } from '@/data/portfolio/adobe'
 import { elements3D } from '@/data/portfolio/elements-3d'
 import { kano } from '@/data/portfolio/kano'
 import { localWelcome } from '@/data/portfolio/local-welcome'
@@ -12,6 +13,15 @@ import { Section } from './Navigation'
 import { PortfolioCard } from './PortfolioCard'
 import SimplexNoiseCanvas from './SimplexNoiseCanvas'
 import { defaultGridProps } from './theme'
+import { instantReplay } from '@/data/portfolio/instant-replay'
+import { gameOfLife } from '@/data/portfolio/gameOfLife'
+
+const simplexNoiseProps = {
+  cellSize: 250,
+  darkColor: '#fafafa',
+  lightColor: '#ffffff',
+  pixelSize: 10,
+}
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
   <Container
@@ -36,23 +46,39 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         direction='column'
         gap='4'
       >
-        <PortfolioCard project={retreatTechnology} size='sm' />
+        <PortfolioCard project={utopia} size='sm' />
         <SimplexNoiseCanvas
+          {...simplexNoiseProps}
           display={{ initial: 'none', sm: 'flex' }}
-          cellSize={500}
-          darkColor='#fafafa'
-          lightColor='#ffffff'
-          pixelSize={10}
+          gridColumn='1 / 1'
         />
       </Flex>
-
-      <SimplexNoiseCanvas
-        gridColumn='1 / 1'
-        cellSize={500}
-        darkColor='#fafafa'
-        lightColor='#ffffff'
-        pixelSize={10}
+      <PortfolioCard
+        project={nuclearConnections}
+        titleMode='dark'
+        gridColumn={{ initial: '1 / -1', sm: 'span 2' }}
+        size='lg'
       />
+      <PortfolioCard
+        project={retreatTechnology}
+        titleMode='dark'
+        gridColumn={{ initial: '1 / -1', sm: 'span 2' }}
+        size='lg'
+      />
+      <PortfolioCard
+        project={gameOfLife}
+        titleMode='dark'
+        gridColumn={{ initial: '1 / -1', sm: 'span 2' }}
+        size='lg'
+      />
+      <PortfolioCard
+        project={instantReplay}
+        titleMode='dark'
+        gridColumn={{ initial: '1 / -1', sm: 'span 2' }}
+        size='lg'
+      />
+
+      <SimplexNoiseCanvas {...simplexNoiseProps} gridColumn='1 / 1' />
       <PortfolioCard
         project={utopia}
         titleMode='dark'
@@ -65,12 +91,9 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         size='lg'
       />
       <SimplexNoiseCanvas
+        {...simplexNoiseProps}
         display={{ initial: 'flex', sm: 'none' }}
         gridColumn='6 / 1'
-        cellSize={500}
-        darkColor='#fafafa'
-        lightColor='#ffffff'
-        pixelSize={10}
       />
 
       <PortfolioCard
@@ -78,7 +101,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         gridColumn='span 3'
         titleMode='light'
       />
-      <Flex gridColumn='span 3'>
+      <Flex gridColumn='span 2'>
         <SimplexNoiseCanvas
           cellSize={500}
           darkColor='#fafafa'
@@ -88,7 +111,13 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       </Flex>
       <PortfolioCard
         project={minDoktor}
-        gridColumn='span 3'
+        gridColumn='span 4'
+        titleMode='light'
+      />
+      <PortfolioCard
+        project={kano}
+        gridColumn='span 6'
+        size='lg'
         titleMode='light'
       />
       <PortfolioCard
@@ -96,7 +125,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         gridColumn='span 3'
         titleMode='light'
       />
-      <PortfolioCard project={kano} gridColumn='span 6' size='lg' />
+      <PortfolioCard
+        project={adobe}
+        gridColumn='span 6'
+        size='lg'
+        titleMode='light'
+      />
     </Grid>
   </Container>
 )

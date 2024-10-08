@@ -3,7 +3,7 @@ import elementsPoster from '@/public/portfolio/elements-3d/elements-3d-poster.pn
 
 export const elements3D = project(
   'Elements 3D',
-  'A simple 3D art coding IDE and library',
+  'Art + coding IDE and library',
   heroVideo(
     '/portfolio/elements-3d/elements-3d.mp4',
     elementsPoster,

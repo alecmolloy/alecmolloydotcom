@@ -3,9 +3,9 @@ import localWelcomeHero from '@/public/portfolio/local-welcome/local-welcome-01.
 
 export const localWelcome = project(
   'Local Welcome',
-  'Community-building app for refugees',
+  'Building community with meals for refugees and vulnerable people.',
   heroImage(localWelcomeHero, 'Local Welcome Community App'),
-  '2023',
+  '2021–23',
   ['Next.js', 'React', 'Zapier', 'Google Apps Script'],
   'Full-stack data infrastructure',
   <>

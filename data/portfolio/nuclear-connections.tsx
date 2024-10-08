@@ -3,7 +3,7 @@ import nuclearHero from '@/public/portfolio/nuclear-connections/nuclear-connecti
 
 export const nuclearConnections = project(
   'Nuclear Connections',
-  'A social word game to see how well people know each other',
+  'Social word game',
   heroImage(nuclearHero, 'Nuclear Connections Game'),
   '2024',
   ['React Native', 'TypeScript'],

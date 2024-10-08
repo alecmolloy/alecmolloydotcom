@@ -77,106 +77,98 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   return (
     <AnimatedFlex
       gridColumn={gridColumn}
+      direction='column'
       {...bind()}
       style={{
         flexShrink: '0',
         position: 'relative',
-        boxShadow: '0 0 0 1px #0001',
-        borderRadius: '10px',
-        overflow: 'hidden',
-        width: '100%',
-        height: 'auto',
-        aspectRatio: '4/3',
-        cursor: 'pointer',
-        scale,
       }}
     >
-      <animated.div
+      <AnimatedFlex
         style={{
-          position: 'absolute',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backdropFilter: 'blur(3px)',
-          WebkitBackdropFilter: 'blur(3px)',
-          backgroundColor: titleMode === 'dark' ? '#fff4' : '#0004',
-          paddingTop: '15%',
-          paddingBottom: '5%',
-          width: '125%',
-          textAlign: 'center',
-          mask: `radial-gradient(
-            ellipse at bottom center,
-            rgba(0, 0, 0, 1) 33%,
-            rgba(0, 0, 0, 0) ${(1 / Math.sqrt(2)) * 100}%
-          )
-          `,
-          ...(windowWidth > 768
-            ? {
-                bottom,
-              }
-            : {
-                bottom: -5,
-              }),
+          boxShadow: '0 0 0 1px #0003',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          width: '100%',
+          height: 'auto',
+          aspectRatio: '4/3',
+          cursor: 'pointer',
+          scale,
+        }}
+      >
+        {project.hero.type === 'image' ? (
+          <Image
+            width={1024}
+            src={project.hero.data}
+            alt={project.hero.alt}
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
+          />
+        ) : (
+          <>
+            {!isPlaying && (
+              <img
+                src='/icons/play-button.svg'
+                style={{
+                  width: 64,
+                  height: 64,
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  cursor: 'pointer',
+                }}
+                onClick={() => {
+                  if (videoRef.current?.paused === true) {
+                    videoRef.current?.play()
+                  }
+                }}
+              />
+            )}
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              controls={false}
+              src={project.hero.url}
+              poster={project.hero.poster.src}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </>
+        )}
+      </AnimatedFlex>
+      <AnimatedFlex
+        direction='column'
+        pt='8px'
+        pb='16px'
+        width='100%'
+        style={{
+          color: '#000',
         }}
       >
         <Heading
-          className={instrumentSerif.className}
           size={{
             initial: sml(size, '5', '6', '7'),
-            sm: sml(size, '6', '7', '8'),
+            sm: sml(size, '2', '3', '4'),
           }}
-          style={{
-            color: titleMode === 'dark' ? '#000' : '#fff',
-            textShadow:
-              titleMode === 'dark' ? '0 0 16px #fff4' : '0 0 8px #0008',
-          }}
-          align='center'
+          weight='bold'
+          align='left'
         >
           {project.title} ({project.releaseDate})
         </Heading>
-      </animated.div>
-      {project.hero.type === 'image' ? (
-        <Image
-          width={1024}
-          src={project.hero.data}
-          alt={project.hero.alt}
-          style={{
-            width: '100%',
-            height: 'auto',
+        <Txt
+          size={{
+            initial: sml(size, '5', '6', '7'),
+            sm: sml(size, '2', '3', '4'),
           }}
-        />
-      ) : (
-        <>
-          {!isPlaying && (
-            <img
-              src='/icons/play-button.svg'
-              style={{
-                width: 64,
-                height: 64,
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                if (videoRef.current?.paused === true) {
-                  videoRef.current?.play()
-                }
-              }}
-            />
-          )}
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            controls={false}
-            src={project.hero.url}
-            poster={project.hero.poster.src}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        </>
-      )}
+          align='left'
+        >
+          {project.subtitle}
+        </Txt>
+      </AnimatedFlex>
     </AnimatedFlex>
   )
 }

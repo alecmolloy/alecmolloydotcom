@@ -1,10 +1,14 @@
-import { collaborator, heroImage, project } from '@/app/content-types'
-import instantReplayHero from '@/public/portfolio/instant-replay/instant-replay-01.jpg'
+import { heroVideo, project } from '@/app/content-types'
+import instantReplayPoster from '@/public/portfolio/instant-replay/instant-replay-01-poster.jpg'
 
 export const instantReplay = project(
   'Instant Replay',
   'Training software for handstand practice',
-  heroImage(instantReplayHero, 'Instant Replay Handstand Training'),
+  heroVideo(
+    '/portfolio/instant-replay/instant-replay-01.mp4',
+    instantReplayPoster,
+    'Instant Replay Handstand Training',
+  ),
   '2023',
   ['TensorFlow.js', 'React', 'TypeScript'],
   'Webcam-based handstand analysis tool',

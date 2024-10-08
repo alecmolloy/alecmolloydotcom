@@ -3,9 +3,9 @@ import kanoHero from '@/public/portfolio/kano/kano-01.webp'
 
 export const kano = project(
   'Kano',
-  'Educational technology kits and tools',
+  'Product manager, Creative Technologist. Educational technology kits and tools',
   heroVideo('/portfolio/kano/kano.mp4', kanoHero, 'Kano Educational Tools'),
-  '2016',
+  '2014–16',
   ['TypeScript', 'JavaScript'],
   'Creative content system and community platform',
   <>
