@@ -143,7 +143,6 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
       <AnimatedFlex
         direction='column'
         pt='8px'
-        pb='16px'
         width='100%'
         style={{
           color: '#000',
@@ -151,8 +150,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
       >
         <Heading
           size={{
-            initial: sml(size, '5', '6', '7'),
-            sm: sml(size, '2', '3', '4'),
+            initial: sml(size, '1', '2', '3'),
+            sm: sml(size, '2', '3', '3'),
           }}
           weight='bold'
           align='left'
@@ -161,8 +160,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         </Heading>
         <Txt
           size={{
-            initial: sml(size, '5', '6', '7'),
-            sm: sml(size, '2', '3', '4'),
+            initial: sml(size, '1', '2', '3'),
+            sm: sml(size, '2', '3', '3'),
           }}
           align='left'
         >

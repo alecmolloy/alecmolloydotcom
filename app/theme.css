@@ -1,5 +1,7 @@
 .radix-themes {
-  --default-font-family: var(--font-instrument-sans) !important;
+  --default-font-family: -apple-system, BlinkMacSystemFont,
+    var(--font-instrument-sans) !important;
+  --font-weight-bold: 600 !important;
 }
 
 :root {

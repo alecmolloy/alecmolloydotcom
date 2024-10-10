@@ -92,7 +92,6 @@ export const LocationsScroller: React.FC = () => {
                   color: 'var(--slate-11)',
                   cursor: 'default',
                   position: 'relative',
-                  fontWeight: '500',
                 }}
               >
                 {city}&nbsp;&nbsp;·&nbsp;&nbsp;
