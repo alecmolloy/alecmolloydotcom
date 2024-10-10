@@ -2,8 +2,8 @@ import { Size, useThree } from '@react-three/fiber'
 import React from 'react'
 import * as THREE from 'three'
 
-const PixelScale = 48
-const TurtleSquareSize = 24
+const PixelScale = 24
+const TurtleSquareSize = 12
 const TurtleSquareHalf = TurtleSquareSize / 2
 
 function getCanvasCellularDimensions(size: Size) {
@@ -82,6 +82,7 @@ export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
       const voidRadiusCells = Math.floor(voidRadius / PixelScale + 2)
 
       const ctx = turtleCtxRef.current
+      ctx.imageSmoothingEnabled = false
       ctx.fillStyle = 'white'
       ctx.fillRect(0, 0, canvasPixelWidth, canvasPixelHeight)
 
