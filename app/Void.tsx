@@ -2,7 +2,7 @@ import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
 import fragmentShader from './shaders/void.frag'
@@ -60,12 +60,20 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   )
 
   useEffect(() => {
-    document.body.style.cursor =
-      interactionState === 'grabbing'
-        ? 'grabbing'
-        : interactionState === 'hovered'
-          ? 'grab'
-          : 'auto'
+    switch (interactionState) {
+      case 'grabbing':
+        document.body.style.cursor = 'grabbing'
+        break
+      case 'hovered':
+        document.body.style.cursor = 'grab'
+        break
+      case null:
+        document.body.style.cursor = 'auto'
+        break
+      default:
+        const error: never = interactionState
+        throw new Error(`Unhandled interaction state: ${error}`)
+    }
   }, [interactionState])
 
   const frontTexture = useTexture(
