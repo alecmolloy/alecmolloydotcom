@@ -1,17 +1,15 @@
 'use client'
 import { Project } from '@/app/content-types'
-import { Flex, Heading, Text as Txt } from '@radix-ui/themes'
+import { Box, Flex, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
 import { useWindowWidth } from '@react-hook/window-size'
-import { animated, useSpring, useSpringValue } from '@react-spring/web'
+import { animated, useSpring } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
 import Image from 'next/image'
 import React from 'react'
-import { instrumentSerif } from './fonts'
 
 interface PortfolioCardProps {
   project: Project
-  titleMode?: 'light' | 'dark'
   size?: Size
   gridColumn?: Responsive<string>
 }
@@ -21,7 +19,6 @@ const AnimatedFlex = animated(Flex)
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
   size = 'md',
-  titleMode = 'dark',
   gridColumn,
 }) => {
   const windowWidth = useWindowWidth()
@@ -96,6 +93,28 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           scale,
         }}
       >
+        {project.acquisition && (
+          <Flex
+            position='absolute'
+            top='2'
+            right='2'
+            py='1'
+            px='2'
+            style={{
+              opacity: 0.9,
+              backgroundColor: 'var(--ultramarine)',
+              color: 'white',
+              borderRadius: 4,
+            }}
+          >
+            <Txt
+              weight='medium'
+              style={{ fontSize: 10, textTransform: 'uppercase' }}
+            >
+              AQD by <Txt weight='bold'>{project.acquisition}</Txt>
+            </Txt>
+          </Flex>
+        )}
         {project.hero.type === 'image' ? (
           <Image
             width={1024}
@@ -148,16 +167,6 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           color: '#000',
         }}
       >
-        <Heading
-          size={{
-            initial: sml(size, '1', '2', '3'),
-            sm: sml(size, '2', '3', '3'),
-          }}
-          weight='bold'
-          align='left'
-        >
-          {project.title} ({project.releaseDate})
-        </Heading>
         <Txt
           size={{
             initial: sml(size, '1', '2', '3'),
@@ -165,6 +174,9 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           }}
           align='left'
         >
+          <Txt weight='bold'>
+            {project.title} ({project.releaseDate}){': '}
+          </Txt>
           {project.subtitle}
         </Txt>
       </AnimatedFlex>

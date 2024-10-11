@@ -1,7 +1,6 @@
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import DitheredImage from './DitheredImage'
-import { instrumentSans } from './fonts'
 import { Section } from './Navigation'
 import { defaultGridProps } from './theme'
 
@@ -11,7 +10,6 @@ const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
     size='6'
     {...props}
     style={{ ...props.style, marginBottom: '1em' }}
-    className={instrumentSans.className}
   />
 )
 
@@ -22,9 +20,9 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         <Grid {...defaultGridProps}>
           <Flex
             gridColumn={{
-              initial: '2 / span 4',
-              xs: '1 / span 3',
-              md: '2 / span 3',
+              initial: '2 / span 6',
+              xs: '1 / span 4',
+              md: '2 / span 4',
             }}
             pb={{ initial: '6', xs: '0' }}
             justify={{ initial: 'start', xs: 'start' }}
@@ -44,7 +42,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             />
           </Flex>
           <Box
-            gridColumn={{ initial: '1 / span 6', xs: 'span 6', md: 'span 4' }}
+            gridColumn={{ initial: '1 / span 12', xs: 'span 8', md: 'span 6' }}
           >
             <P>
               I am a creative technologist, designing and building tools for the

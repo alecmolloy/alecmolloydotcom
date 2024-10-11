@@ -3,7 +3,7 @@ import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
 
 export const utopia = project(
   'Utopia.app',
-  'React design tool. Design and code update each other, in real time.',
+  'WYSIWYG for React. Design and code update each other, in real time.',
   heroVideo('/portfolio/utopia/utopia-01.mp4', utopiaHero, 'Utopia'),
   '2017–20',
   ['React', 'TypeScript'],
@@ -21,5 +21,7 @@ export const utopia = project(
     </p>
   </>,
   'Creative Technologist',
-  [],
+  undefined,
+  undefined,
+  'Shopify',
 )

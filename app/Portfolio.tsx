@@ -35,14 +35,9 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
     py='9'
   >
     <Grid {...defaultGridProps} className='wrapper work-wrapper'>
-      <PortfolioCard
-        project={vbt}
-        gridColumn='span 6'
-        size='lg'
-        titleMode='light'
-      />
+      <PortfolioCard project={vbt} gridColumn='span 7' size='lg' />
       <Flex
-        gridColumn={{ initial: '1 / -1', xs: '7 / span 3' }}
+        gridColumn={{ initial: '1 / -1', xs: '8 / span 5' }}
         direction='column'
         gap='4'
       >
@@ -55,17 +50,15 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
       </Flex>
       <PortfolioCard
         project={nuclearConnections}
-        titleMode='dark'
-        gridColumn={{ initial: '1 / -1', xs: 'span 2' }}
+        gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
         size='sm'
       />
       <PortfolioCard
         project={retreatTechnology}
-        titleMode='dark'
-        gridColumn={{ initial: '1 / -1', xs: 'span 2' }}
+        gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
         size='sm'
       />
-      <Flex
+      {/* <Flex
         justify='center'
         pt='9'
         gridColumn={{ initial: '1 / -1', xs: 'span 1' }}
@@ -73,73 +66,28 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => (
         <Txt size='8' style={{ color: '#0003', cursor: 'default' }}>
           {'\u263A'}
         </Txt>
-      </Flex>
+      </Flex> */}
       <PortfolioCard
         project={gameOfLife}
-        titleMode='dark'
-        gridColumn={{ initial: '1 / -1', xs: 'span 2' }}
+        gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
         size='sm'
       />
       <PortfolioCard
         project={instantReplay}
-        titleMode='dark'
-        gridColumn={{ initial: '1 / -1', xs: 'span 2' }}
-        size='sm'
-      />
-
-      <SimplexNoiseCanvas {...simplexNoiseProps} gridColumn='1 / 1' />
-      <PortfolioCard
-        project={utopia}
-        titleMode='dark'
-        gridColumn={{ initial: '2 / -1', xs: 'span 4' }}
-        size='lg'
-      />
-      <PortfolioCard
-        project={nuclearConnections}
-        gridColumn={{ initial: '1 / span 5', xs: 'span 4' }}
+        gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
         size='sm'
       />
       <SimplexNoiseCanvas
         {...simplexNoiseProps}
         display={{ initial: 'flex', xs: 'none' }}
-        gridColumn='6 / 1'
+        gridColumn='8 / 1'
       />
 
-      <PortfolioCard
-        project={localWelcome}
-        gridColumn='span 3'
-        titleMode='light'
-      />
-      <Flex gridColumn='span 2'>
-        <SimplexNoiseCanvas
-          cellSize={500}
-          darkColor='#fafafa'
-          lightColor='#ffffff'
-          pixelSize={10}
-        />
-      </Flex>
-      <PortfolioCard
-        project={minDoktor}
-        gridColumn='span 4'
-        titleMode='light'
-      />
-      <PortfolioCard
-        project={kano}
-        gridColumn='span 6'
-        size='lg'
-        titleMode='dark'
-      />
-      <PortfolioCard
-        project={elements3D}
-        gridColumn='span 3'
-        titleMode='light'
-      />
-      <PortfolioCard
-        project={adobe}
-        gridColumn='span 6'
-        size='lg'
-        titleMode='light'
-      />
+      <PortfolioCard project={localWelcome} gridColumn='span 6' />
+      <PortfolioCard project={minDoktor} gridColumn='span 6' />
+      <PortfolioCard project={kano} gridColumn='span 8' size='lg' />
+      <PortfolioCard project={elements3D} gridColumn='span 4' />
+      <PortfolioCard project={adobe} gridColumn='span 8' size='lg' />
     </Grid>
   </Container>
 )
