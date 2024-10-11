@@ -107,11 +107,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
               borderRadius: 4,
             }}
           >
-            <Txt
-              weight='medium'
-              style={{ fontSize: 10, textTransform: 'uppercase' }}
-            >
-              AQD by <Txt weight='bold'>{project.acquisition}</Txt>
+            <Txt weight='medium' style={{ fontSize: 10 }}>
+              Acquired by <Txt weight='bold'>{project.acquisition}</Txt>
             </Txt>
           </Flex>
         )}
@@ -120,10 +117,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
             width={1024}
             src={project.hero.data}
             alt={project.hero.alt}
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
           <>
