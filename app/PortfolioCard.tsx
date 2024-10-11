@@ -40,7 +40,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         titleApi.start(
           hovering
             ? {
-                scale: 1.01,
+                scale: 1.02,
                 bottom: -5,
                 config: { tension: 170 * 3 },
               }
@@ -72,11 +72,12 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   }, [videoRef.current])
 
   return (
-    <AnimatedFlex
+    <Flex
       gridColumn={gridColumn}
       direction='column'
       {...bind()}
       style={{
+        cursor: 'pointer',
         flexShrink: '0',
         position: 'relative',
       }}
@@ -89,7 +90,6 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           width: '100%',
           height: 'auto',
           aspectRatio: '4/3',
-          cursor: 'pointer',
           scale,
         }}
       >
@@ -131,7 +131,6 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
                   top: '50%',
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  cursor: 'pointer',
                 }}
                 onClick={() => {
                   if (videoRef.current?.paused === true) {
@@ -153,7 +152,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           </>
         )}
       </AnimatedFlex>
-      <AnimatedFlex
+      <Flex
         direction='column'
         pt='8px'
         width='100%'
@@ -173,8 +172,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           </Txt>
           {project.subtitle}
         </Txt>
-      </AnimatedFlex>
-    </AnimatedFlex>
+      </Flex>
+    </Flex>
   )
 }
 
