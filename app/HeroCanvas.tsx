@@ -83,6 +83,9 @@ export const HeroCanvas = () => {
                   color: '#000',
                   cursor: 'pointer',
                 }}
+                onClick={() => {
+                  window.location.href = 'mailto:workwith@alecmolloy.com'
+                }}
               >
                 Contact
               </Txt>
