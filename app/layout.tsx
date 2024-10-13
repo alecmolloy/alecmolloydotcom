@@ -19,7 +19,11 @@ export default function RootLayout({
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.png' sizes='any' />
       </head>
-      <body>
+      <body
+        style={{
+          position: 'relative',
+        }}
+      >
         <Theme>{children}</Theme>
       </body>
     </html>

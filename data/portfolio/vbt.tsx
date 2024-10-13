@@ -2,6 +2,7 @@ import { collaborator, heroImage, project } from '@/app/content-types'
 import vbt01 from '@/public/portfolio/vbt/vbt-01.jpg'
 
 export const vbt = project(
+  'vbt',
   'Vijñāna Bhairava Tantra',
   'Meditation App — Design, Illustration, React Native App',
   heroImage(vbt01, 'Vijñāna Bhairava Tantra'),

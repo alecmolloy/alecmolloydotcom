@@ -2,6 +2,7 @@ import { heroImage, project } from '@/app/content-types'
 import localWelcomeHero from '@/public/portfolio/local-welcome/local-welcome-01.jpg'
 
 export const localWelcome = project(
+  'local-welcome',
   'Local Welcome',
   'Building community with meals for refugees and vulnerable people.',
   heroImage(localWelcomeHero, 'Local Welcome Community App'),

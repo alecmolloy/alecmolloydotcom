@@ -2,6 +2,7 @@ import { collaborator, heroImage, project } from '@/app/content-types'
 import nuclearHero from '@/public/portfolio/nuclear-connections/nuclear-connections-01.jpg'
 
 export const nuclearConnections = project(
+  'nuclear-connections',
   'Nuclear Connections',
   'Social word game',
   heroImage(nuclearHero, 'Nuclear Connections Game'),

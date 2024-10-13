@@ -2,6 +2,7 @@ import { heroImage, project } from '@/app/content-types'
 import adobeHero from '@/public/portfolio/adobe/adobe-01.png'
 
 export const adobe = project(
+  'adobe',
   'Adobe',
   'Designer and Product Manager for Learning Games',
   heroImage(adobeHero, 'Adobe Digital Media Internship and Learning Games'),

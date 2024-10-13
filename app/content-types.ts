@@ -1,4 +1,23 @@
+import { projects } from '@/data/portfolio'
 import { StaticImageData } from 'next/image'
+
+export type ProjectSlug =
+  | 'game-of-life'
+  | 'acroyoga-transitions'
+  | 'adobe'
+  | 'elements-3d'
+  | 'instant-replay'
+  | 'kano'
+  | 'local-welcome'
+  | 'min-doktor'
+  | 'nuclear-connections'
+  | 'retreat-technology'
+  | 'utopia'
+  | 'vbt'
+
+export function isProjectSlug(slug: string): slug is ProjectSlug {
+  return slug in projects
+}
 
 interface HeroImage {
   type: 'image'
@@ -59,8 +78,9 @@ export function link(title: string, url: string): Link {
 }
 
 export interface Project {
+  slug: ProjectSlug
   title: string
-  subtitle: string
+  subtitle?: string
   hero: Hero
   releaseDate: string
   technologies: Technology[]
@@ -73,8 +93,9 @@ export interface Project {
 }
 
 export function project(
+  slug: ProjectSlug,
   title: string,
-  subtitle: string,
+  subtitle: string | undefined,
   hero: Hero,
   releaseDate: string,
   technologies: Technology[],
@@ -86,6 +107,7 @@ export function project(
   acquisition?: string,
 ): Project {
   return {
+    slug,
     title,
     subtitle,
     hero,

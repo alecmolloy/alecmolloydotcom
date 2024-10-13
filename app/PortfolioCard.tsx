@@ -1,6 +1,6 @@
-'use client'
-import { Project } from '@/app/content-types'
-import { Box, Flex, Text as Txt } from '@radix-ui/themes'
+import { Project, ProjectSlug } from '@/app/content-types'
+import ClientOnlyPortal from '@/components/ClientOnlyPortal'
+import { Flex, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
 import { useWindowWidth } from '@react-hook/window-size'
 import { animated, useSpring } from '@react-spring/web'
@@ -12,6 +12,18 @@ interface PortfolioCardProps {
   project: Project
   size?: Size
   gridColumn?: Responsive<string>
+  onOpenModal: (
+    id: ProjectSlug,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ) => void
+}
+
+export const cardStyle = {
+  boxShadow: '0 0 0 1px #0003',
+  borderRadius: 10,
 }
 
 const AnimatedFlex = animated(Flex)
@@ -20,16 +32,19 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
   size = 'md',
   gridColumn,
+  onOpenModal,
 }) => {
   const windowWidth = useWindowWidth()
 
-  const [isPlaying, setIsPlaying] = React.useState(false)
+  const ref = React.useRef<HTMLDivElement>(null)
   const videoRef = React.useRef<HTMLVideoElement>(null)
 
-  const [{ bottom, scale }, titleApi] = useSpring(
+  const [isPlaying, setIsPlaying] = React.useState(false)
+
+  const [{ scale }, titleApi] = useSpring(
     () => ({
-      from: { bottom: -5, scale: 1 },
-      ...(windowWidth > 768 && { to: { bottom: -5 } }),
+      from: { scale: 1 },
+      ...(windowWidth > 768 && { to: { scale: 1.02 } }),
     }),
     [windowWidth],
   )
@@ -41,12 +56,10 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           hovering
             ? {
                 scale: 1.02,
-                bottom: -5,
                 config: { tension: 170 * 3 },
               }
             : {
                 scale: 1,
-                bottom: -5,
               },
         )
       }
@@ -81,11 +94,22 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         flexShrink: '0',
         position: 'relative',
       }}
+      ref={ref}
+      onClick={(e) => {
+        const boundingBox = e.currentTarget.getBoundingClientRect()
+        onOpenModal(
+          project.slug,
+          boundingBox.top,
+          boundingBox.left,
+          boundingBox.width,
+          boundingBox.height,
+        )
+      }}
     >
       <AnimatedFlex
         style={{
-          boxShadow: '0 0 0 1px #0003',
-          borderRadius: '10px',
+          ...cardStyle,
+          position: 'relative',
           overflow: 'hidden',
           width: '100%',
           height: 'auto',
@@ -168,7 +192,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           align='left'
         >
           <Txt weight='bold'>
-            {project.title} ({project.releaseDate}){': '}
+            {project.title} ({project.releaseDate})
+            {project.subtitle != null ? ': ' : null}
           </Txt>
           {project.subtitle}
         </Txt>

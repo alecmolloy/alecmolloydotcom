@@ -9,9 +9,10 @@ export const HeroCanvas = () => {
     <Container
       height={{
         initial: 'calc(100vh - 96px)',
-        md: 'calc(100vh - 32px)',
+        xs: 'calc(100vh - 32px)',
       }}
       minHeight='600px'
+      maxHeight='1200px'
       position='relative'
     >
       <Flex px='4' pb='8' direction='column' height='100%'>
@@ -61,7 +62,7 @@ export const HeroCanvas = () => {
                 cursor: 'default',
               }}
             >
-              N.Y.C. / Lisbon
+              NYC / Lisbon
             </Txt>
             <a
               className={['header-button'].join(' ')}

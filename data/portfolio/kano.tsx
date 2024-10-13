@@ -2,6 +2,7 @@ import { heroVideo, project } from '@/app/content-types'
 import kanoHero from '@/public/portfolio/kano/kano-01.webp'
 
 export const kano = project(
+  'kano',
   'Kano',
   'Product manager, Creative Technologist. Educational technology kits and tools',
   heroVideo('/portfolio/kano/kano.mp4', kanoHero, 'Kano Educational Tools'),

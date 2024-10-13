@@ -2,6 +2,7 @@ import { heroVideo, project } from '@/app/content-types'
 import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
 
 export const utopia = project(
+  'utopia',
   'Utopia.app',
   'WYSIWYG for React. Design and code update each other, in real time.',
   heroVideo('/portfolio/utopia/utopia-01.mp4', utopiaHero, 'Utopia'),

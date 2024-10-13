@@ -2,6 +2,7 @@ import { collaborator, heroVideo, project } from '@/app/content-types'
 import elementsPoster from '@/public/portfolio/elements-3d/elements-3d-poster.png'
 
 export const elements3D = project(
+  'elements-3d',
   'Elements 3D',
   'Art + coding IDE and library',
   heroVideo(

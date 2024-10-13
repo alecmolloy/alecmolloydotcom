@@ -2,6 +2,7 @@ import { heroVideo, project } from '@/app/content-types'
 import instantReplayPoster from '@/public/portfolio/instant-replay/instant-replay-01-poster.jpg'
 
 export const instantReplay = project(
+  'instant-replay',
   'Instant Replay',
   'Training software for handstand practice',
   heroVideo(
