@@ -1,5 +1,6 @@
 import { heroVideo, project } from '@/app/content-types'
 import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
+import { Text as Txt } from '@radix-ui/themes'
 
 export const utopia = project(
   'utopia',
@@ -10,16 +11,16 @@ export const utopia = project(
   ['React', 'TypeScript'],
   'Design and coding IDE',
   <>
-    <p>
+    <Txt>
       Utopia.app is a design and coding environment for React projects that runs
       entirely in the browser. It combines a code editor and design tool, with
       full two-way synchronization between design and code.
-    </p>
-    <p>
+    </Txt>
+    <Txt>
       I worked as a Creative Technologist, focusing on UI design and
       React/TypeScript development. Utopia was later acquired by Shopify and
       continues to be developed.
-    </p>
+    </Txt>
   </>,
   'Creative Technologist',
   undefined,

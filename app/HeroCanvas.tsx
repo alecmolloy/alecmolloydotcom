@@ -65,7 +65,6 @@ export const HeroCanvas = () => {
               NYC / Lisbon
             </Txt>
             <a
-              className={['header-button'].join(' ')}
               href='mailto:workwith@alecmolloy.com'
               style={{
                 textDecoration: 'none',

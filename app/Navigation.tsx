@@ -95,10 +95,11 @@ export const Navigation: React.FunctionComponent = () => {
 
   return (
     <Flex
+      id='navigation'
       position='sticky'
       top='0'
       justify={{ initial: 'center', xl: 'start' }}
-      style={{ zIndex: 1, height: 0 }}
+      style={{ zIndex: 1, height: 0, transition: 'opacity 0.15s ease-in-out' }}
     >
       <Flex
         direction='row'
@@ -129,7 +130,6 @@ export const Navigation: React.FunctionComponent = () => {
             align='center'
             style={{
               position: 'relative',
-              zIndex: 1,
               cursor: 'pointer',
               userSelect: 'none',
               WebkitUserSelect: 'none',

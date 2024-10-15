@@ -11,20 +11,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html
-      lang='en'
-      className={[instrumentSans.variable, instrumentSerif.variable].join(' ')}
-    >
+    <html lang='en'>
       <head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.png' sizes='any' />
       </head>
       <body
+        className={[instrumentSans.variable, instrumentSerif.variable].join(
+          ' ',
+        )}
         style={{
           position: 'relative',
         }}
       >
-        <Theme>{children}</Theme>
+        <Theme id='theme-root'>{children}</Theme>
       </body>
     </html>
   )

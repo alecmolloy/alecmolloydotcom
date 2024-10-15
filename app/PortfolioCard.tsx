@@ -1,8 +1,6 @@
 import { Project, ProjectSlug } from '@/app/content-types'
-import ClientOnlyPortal from '@/components/ClientOnlyPortal'
 import { Flex, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
-import { useWindowWidth } from '@react-hook/window-size'
 import { animated, useSpring } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
 import Image from 'next/image'
@@ -12,30 +10,17 @@ interface PortfolioCardProps {
   project: Project
   size?: Size
   gridColumn?: Responsive<string>
-  onOpenModal: (
-    id: ProjectSlug,
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-  ) => void
+  modalOpen: boolean
+  setOpenModal: (id: ProjectSlug | null) => void
 }
-
-export const cardStyle = {
-  boxShadow: '0 0 0 1px #0003',
-  borderRadius: 10,
-}
-
-const AnimatedFlex = animated(Flex)
 
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
   size = 'md',
   gridColumn,
-  onOpenModal,
+  modalOpen,
+  setOpenModal,
 }) => {
-  const windowWidth = useWindowWidth()
-
   const ref = React.useRef<HTMLDivElement>(null)
   const videoRef = React.useRef<HTMLVideoElement>(null)
 
@@ -43,26 +28,17 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
   const [{ scale }, titleApi] = useSpring(
     () => ({
-      from: { scale: 1 },
-      ...(windowWidth > 768 && { to: { scale: 1.02 } }),
+      scale: 1,
     }),
-    [windowWidth],
+    [],
   )
 
   const bind = useGesture({
     onHover: ({ hovering }) => {
-      if (windowWidth > 768) {
-        titleApi.start(
-          hovering
-            ? {
-                scale: 1.02,
-                config: { tension: 170 * 3 },
-              }
-            : {
-                scale: 1,
-              },
-        )
-      }
+      titleApi.start({
+        scale: hovering && !modalOpen ? cardScaleOnHover : 1,
+        config: SpringConfig,
+      })
     },
   })
 
@@ -84,8 +60,18 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
     }
   }, [videoRef.current])
 
+  React.useEffect(() => {
+    if (modalOpen) {
+      titleApi.start({
+        scale: 1,
+        config: SpringConfig,
+      })
+    }
+  }, [modalOpen])
+
   return (
     <Flex
+      id={project.slug}
       gridColumn={gridColumn}
       direction='column'
       {...bind()}
@@ -96,14 +82,11 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
       }}
       ref={ref}
       onClick={(e) => {
-        const boundingBox = e.currentTarget.getBoundingClientRect()
-        onOpenModal(
-          project.slug,
-          boundingBox.top,
-          boundingBox.left,
-          boundingBox.width,
-          boundingBox.height,
-        )
+        setOpenModal(project.slug)
+        titleApi.start({
+          scale: 1,
+          config: SpringConfig,
+        })
       }}
     >
       <AnimatedFlex
@@ -114,6 +97,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           width: '100%',
           height: 'auto',
           aspectRatio: '4/3',
+          backgroundColor: '#00000008',
           scale,
         }}
       >
@@ -141,7 +125,12 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
             width={1024}
             src={project.hero.data}
             alt={project.hero.alt}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: modalOpen ? 0 : 1,
+            }}
           />
         ) : (
           <>
@@ -213,4 +202,17 @@ function sml<T>(size: Size, sm: T, md: T, lg: T): T {
     case 'lg':
       return lg
   }
+}
+
+export const cardStyle = {
+  boxShadow: '0 0 0 1px #0002',
+  borderRadius: 10,
+}
+
+export const cardScaleOnHover = 1.02
+
+const AnimatedFlex = animated(Flex)
+
+const SpringConfig = {
+  tension: 510,
 }

@@ -1,5 +1,6 @@
 import { heroVideo, project } from '@/app/content-types'
 import instantReplayPoster from '@/public/portfolio/instant-replay/instant-replay-01-poster.jpg'
+import { Text as Txt } from '@radix-ui/themes'
 
 export const instantReplay = project(
   'instant-replay',
@@ -14,18 +15,18 @@ export const instantReplay = project(
   ['TensorFlow.js', 'React', 'TypeScript'],
   'Webcam-based handstand analysis tool',
   <>
-    <p>
+    <Txt>
       Instant Replay is training software designed to assist with handstand
       training by providing instant auto-replays. It watches your training live
       through a webcam and keeps a record of your handstands in a session.
-    </p>
-    <p>
+    </Txt>
+    <Txt>
       Developed with TensorFlow.js for full-body pose detection, the software
       helps analyze movements to detect the start and finish of handstands.
-    </p>
-    <p>
+    </Txt>
+    <Txt>
       Development is on hold due to a concussion but will resume in the future.
-    </p>
+    </Txt>
   </>,
   'Developer',
   [],

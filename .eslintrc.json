@@ -8,7 +8,7 @@
       "jsx": true
     }
   },
-  "plugins": ["react", "react-hooks", "@react-three"],
+  "plugins": ["react", "@react-three"],
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",

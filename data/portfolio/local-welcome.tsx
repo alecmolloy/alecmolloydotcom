@@ -1,5 +1,6 @@
 import { heroImage, project } from '@/app/content-types'
 import localWelcomeHero from '@/public/portfolio/local-welcome/local-welcome-01.jpg'
+import { Text as Txt } from '@radix-ui/themes'
 
 export const localWelcome = project(
   'local-welcome',
@@ -10,12 +11,12 @@ export const localWelcome = project(
   ['Next.js', 'React', 'Zapier', 'Google Apps Script'],
   'Full-stack data infrastructure',
   <>
-    <p>
+    <Txt>
       Local Welcome is a UK charity dedicated to helping refugees integrate with
       their local communities. I developed data dashboards and infrastructure to
       manage the charity’s expansion into 30 UK cities, and created full-stack
       meal ticketing and attendance systems.
-    </p>
+    </Txt>
   </>,
   'Software Developer',
   [],

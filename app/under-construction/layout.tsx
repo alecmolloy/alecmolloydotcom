@@ -1,3 +1,4 @@
+import { Text as Txt } from '@radix-ui/themes'
 import type React from 'react'
 import { Navigation } from '../Navigation'
 
@@ -15,7 +16,7 @@ const UnderConstructionLayout: React.FunctionComponent<
             'repeating-linear-gradient(45deg, yellow 0px, yellow 50px, black 50px, black 100px)',
         }}
       />
-      <p>Website Under Construction! :)</p>
+      <Txt>Website Under Construction! :)</Txt>
       {children}
       <hr
         style={{
