@@ -36,7 +36,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   const bind = useGesture({
     onHover: ({ hovering }) => {
       titleApi.start({
-        scale: hovering && !modalOpen ? cardScaleOnHover : 1,
+        scale: hovering && !modalOpen ? CardScaleOnHover : 1,
         config: SpringConfig,
       })
     },
@@ -209,7 +209,7 @@ export const cardStyle = {
   borderRadius: 10,
 }
 
-export const cardScaleOnHover = 1.02
+export const CardScaleOnHover = 1.02
 
 const AnimatedFlex = animated(Flex)
 

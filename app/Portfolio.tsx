@@ -16,11 +16,16 @@ import { utopia } from '@/data/portfolio/utopia'
 import { vbt } from '@/data/portfolio/vbt'
 import { NO_OP } from '@/utils/utils'
 import { Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
-import { animated, SpringConfig, useSpring } from '@react-spring/web'
+import {
+  animated,
+  SpringConfig,
+  useSpring,
+  useTransition,
+} from '@react-spring/web'
 import React from 'react'
 import { isProjectSlug, ProjectSlug } from './content-types'
 import { Section } from './Navigation'
-import { cardScaleOnHover, cardStyle, PortfolioCard } from './PortfolioCard'
+import { CardScaleOnHover, cardStyle, PortfolioCard } from './PortfolioCard'
 import SimplexNoiseCanvas from './SimplexNoiseCanvas'
 import { defaultGridProps } from './theme'
 
@@ -34,7 +39,7 @@ const simplexNoiseProps = {
 }
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
-  const [openModalSlug, _setOpenModalSlug] = React.useState<ProjectSlug | null>(
+  const [openModalSlug, setOpenModalSlug] = React.useState<ProjectSlug | null>(
     null,
   )
 
@@ -45,15 +50,92 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
     }
   }, [openModalSlug])
 
-  const [modalSpring, modalApi] = useSpring<{
-    top: number
-    left: number
-    width: number
-    height: number
-    x: number
-    y: number
-    scale: number
-  }>(NO_OP)
+  const [modalTransitions] = useTransition(openModalSlug, () => {
+    if (openModalSlug != null) {
+      return {
+        enter: (item: ProjectSlug) => {
+          console.log('enter', item)
+          const bentoCard = document.getElementById(openModalSlug)
+          if (bentoCard == null) {
+            throw new Error(`Card with id ${openModalSlug} not found`)
+          }
+          const {
+            top: t,
+            left,
+            width,
+            height,
+          } = bentoCard.getBoundingClientRect()
+          return {
+            left,
+            top: t,
+            width,
+            height,
+            x: 0,
+            y: 0,
+            scale: CardScaleOnHover,
+            config: DefaultSpringConfig,
+            onStart: () => {
+              modalImageApi.start({
+                from: { scale: CardScaleOnHover },
+                to: { scale: 1 },
+              })
+              modalOverlayApi.start({ opacity: 1 })
+            },
+          }
+        },
+        from: () => {
+          const modalWidth = Math.min(760, window.innerWidth * 0.8)
+          const modalHeight = window.innerHeight - 32
+          const modalX = -modalWidth / 2
+          const modalY = -modalHeight / 2
+          return {
+            left: window.innerWidth / 2,
+            top: window.innerHeight / 2,
+            width: modalWidth,
+            height: modalHeight,
+            x: modalX,
+            y: modalY,
+            scale: 1,
+            config: DefaultSpringConfig,
+          }
+        },
+        leave: () => {
+          const bentoCard = document.getElementById(openModalSlug)
+          if (bentoCard == null) {
+            throw new Error(`Card with id ${openModalSlug} not found`)
+          }
+          const {
+            top: t,
+            left,
+            width,
+            height,
+          } = bentoCard.getBoundingClientRect()
+          return {
+            left,
+            top: t,
+            width,
+            height,
+            x: 0,
+            y: 0,
+            scale: CardScaleOnHover,
+            onStart: () => {
+              modalImageApi.start({
+                from: { scale: 1 },
+                to: { scale: CardScaleOnHover },
+              })
+              modalOverlayApi.start({ opacity: 0 })
+            },
+            onRest: () => {
+              setOpenModalSlug(null)
+            },
+            config: AggressiveSpringConfig,
+          }
+        },
+      }
+    } else {
+      return {}
+    }
+  }, [openModalSlug])
 
   const [modalOverlaySpring, modalOverlayApi] = useSpring<{
     opacity: number
@@ -63,95 +145,11 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
     scale: number
   }>(NO_OP)
 
-  const setOpenModal = React.useCallback(
-    (newOpenModalSlug: ProjectSlug | null) => {
-      if (openModalSlug == null) {
-        if (newOpenModalSlug != null) {
-          _setOpenModalSlug(newOpenModalSlug)
-          const bentoCard = document.getElementById(newOpenModalSlug)
-          if (bentoCard == null) {
-            throw new Error(`Card with id ${newOpenModalSlug} not found`)
-          }
-          const {
-            top: bentoTop,
-            left: bentoLeft,
-            width: bentoWidth,
-            height: bentoHeight,
-          } = bentoCard.getBoundingClientRect()
-
-          const modalWidth = Math.min(760, window.innerWidth * 0.8)
-          const modalHeight = window.innerHeight - 32
-          const modalX = -modalWidth / 2
-          const modalY = -modalHeight / 2
-          modalImageApi.start({
-            from: { scale: 1.02 },
-            to: { scale: 1 },
-          })
-          modalApi.start({
-            from: {
-              left: bentoLeft,
-              top: bentoTop,
-              width: bentoWidth,
-              height: bentoHeight,
-              x: 0,
-              y: 0,
-              scale: cardScaleOnHover,
-            },
-            to: {
-              left: window.innerWidth / 2,
-              top: window.innerHeight / 2,
-              width: modalWidth,
-              height: modalHeight,
-              x: modalX,
-              y: modalY,
-              scale: 1,
-            },
-            config: DefaultSpringConfig,
-          })
-          modalOverlayApi.set({ opacity: 0 })
-          modalOverlayApi.start({ opacity: 1 })
-        }
-      } else {
-        if (newOpenModalSlug == null) {
-          const bentoCard = document.getElementById(openModalSlug)
-          if (bentoCard == null) {
-            throw new Error(`Card with id ${openModalSlug} not found`)
-          }
-          const {
-            top: bentoTop,
-            left: bentoLeft,
-            width: bentoWidth,
-            height: bentoHeight,
-          } = bentoCard.getBoundingClientRect()
-
-          modalApi.start({
-            left: bentoLeft,
-            top: bentoTop,
-            width: bentoWidth,
-            height: bentoHeight,
-            x: 0,
-            y: 0,
-            onRest: () => {
-              _setOpenModalSlug(null)
-            },
-            config: AggressiveSpringConfig,
-          })
-          modalImageApi.start({
-            from: { scale: 1 },
-            to: { scale: 1.02 },
-          })
-          modalOverlayApi.start({ opacity: 0 })
-        }
-      }
-    },
-    [modalApi, modalImageApi, modalOverlayApi, openModalSlug],
-  )
-
   React.useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const projectSlug = urlParams.get(ProjectSlugParam)
     if (projectSlug && isProjectSlug(projectSlug)) {
-      _setOpenModalSlug(projectSlug)
+      setOpenModalSlug(projectSlug)
     }
   }, [])
 
@@ -170,8 +168,8 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
   }, [openModalSlug])
 
   const handleCloseModal = React.useCallback(() => {
-    setOpenModal(null)
-  }, [setOpenModal])
+    setOpenModalSlug(null)
+  }, [setOpenModalSlug])
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -186,8 +184,6 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [handleCloseModal])
-
-  const project = openModalSlug != null ? projects[openModalSlug] : null
 
   return (
     <Container
@@ -205,7 +201,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           project={vbt}
           gridColumn='span 7'
           size='lg'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === vbt.slug}
         />
         <Flex
@@ -216,7 +212,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           <PortfolioCard
             project={utopia}
             size='md'
-            setOpenModal={setOpenModal}
+            setOpenModal={setOpenModalSlug}
             modalOpen={openModalSlug === utopia.slug}
           />
           <SimplexNoiseCanvas
@@ -229,35 +225,35 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           project={nuclearConnections}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
           size='sm'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === nuclearConnections.slug}
         />
         <PortfolioCard
           project={retreatTechnology}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
           size='sm'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === retreatTechnology.slug}
         />
         <PortfolioCard
           project={gameOfLife}
           gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
           size='sm'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === gameOfLife.slug}
         />
         <PortfolioCard
           project={instantReplay}
           gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
           size='sm'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === instantReplay.slug}
         />
         <PortfolioCard
           project={acroyogaTransitions}
           gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
           size='lg'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === acroyogaTransitions.slug}
         />
         <SimplexNoiseCanvas
@@ -268,96 +264,103 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         <PortfolioCard
           project={localWelcome}
           gridColumn='span 6'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === localWelcome.slug}
         />
         <PortfolioCard
           project={minDoktor}
           gridColumn='span 6'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === minDoktor.slug}
         />
         <PortfolioCard
           project={kano}
           gridColumn='span 9'
           size='lg'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === kano.slug}
         />
         <PortfolioCard
           project={elements3D}
           gridColumn='span 3'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === elements3D.slug}
         />
         <PortfolioCard
           project={adobe}
           gridColumn='span 8'
           size='lg'
-          setOpenModal={setOpenModal}
+          setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === adobe.slug}
         />
       </Grid>
-      {project != null && (
-        <ClientOnlyPortal selector='#theme-root'>
-          <AnimatedFlex
-            position='fixed'
-            top='0'
-            left='0'
-            right='0'
-            bottom='0'
-            style={{
-              backgroundColor: 'rgba(0, 0, 0, 0.15)',
-              ...modalOverlaySpring,
-            }}
-            align='center'
-            justify='center'
-            onClick={handleCloseModal}
-          />
-          <AnimatedFlex
-            direction='column'
-            justify='start'
-            overflowY='scroll'
-            style={{
-              position: 'fixed',
-              backgroundColor: 'white',
-              overflow: 'hidden',
-              borderRadius: cardStyle.borderRadius,
-              zIndex: 2,
-              boxShadow: [
-                '0 24px 36px #0001',
-                '0 24px 46px #0002',
-                cardStyle.boxShadow,
-              ].join(', '),
-              ...modalSpring,
-            }}
-            p='2'
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          >
-            <animated.img
-              src={
-                project.hero.type === 'video'
-                  ? project.hero.poster.src
-                  : project.hero.data.src
-              }
-              alt={project.title}
-              style={{
-                ...modalImageSpring,
-                display: 'block',
-                width: '100%',
-                aspectRatio: '4 / 3',
-                overflow: 'hidden',
-                borderRadius: 6,
-                flexShrink: 0,
-              }}
-            />
-            <Txt>{project.title}</Txt>
-            <Flex direction='column' flexShrink='0'>
-              {project.content}
-            </Flex>
-          </AnimatedFlex>
-        </ClientOnlyPortal>
-      )}
+      {modalTransitions((style, slug) => {
+        const project = slug != null ? projects[slug] : null
+        return (
+          <ClientOnlyPortal selector='#theme-root'>
+            {project != null && (
+              <>
+                <AnimatedFlex
+                  position='fixed'
+                  top='0'
+                  left='0'
+                  right='0'
+                  bottom='0'
+                  style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.15)',
+                    ...modalOverlaySpring,
+                  }}
+                  align='center'
+                  justify='center'
+                  onClick={handleCloseModal}
+                />
+                <AnimatedFlex
+                  direction='column'
+                  justify='start'
+                  overflowY='scroll'
+                  style={{
+                    position: 'fixed',
+                    backgroundColor: 'white',
+                    overflow: 'hidden',
+                    borderRadius: cardStyle.borderRadius,
+                    zIndex: 2,
+                    boxShadow: [
+                      '0 24px 36px #0001',
+                      '0 24px 46px #0002',
+                      cardStyle.boxShadow,
+                    ].join(', '),
+                    ...style,
+                  }}
+                  p='2'
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                >
+                  <animated.img
+                    src={
+                      project.hero.type === 'video'
+                        ? project.hero.poster.src
+                        : project.hero.data.src
+                    }
+                    alt={project.title}
+                    style={{
+                      ...modalImageSpring,
+                      display: 'block',
+                      width: '100%',
+                      aspectRatio: '4 / 3',
+                      overflow: 'hidden',
+                      borderRadius: 6,
+                      flexShrink: 0,
+                    }}
+                  />
+                  <Txt>{project.title}</Txt>
+                  <Flex direction='column' flexShrink='0'>
+                    {project.content}
+                  </Flex>
+                </AnimatedFlex>
+              </>
+            )}
+          </ClientOnlyPortal>
+        )
+      })}
     </Container>
   )
 }
