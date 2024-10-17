@@ -15,6 +15,8 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
   openModalSlug,
   setOpenModalSlug,
 }) => {
+  const [allowVideoControls, setAllowVideoControls] = React.useState(true)
+
   const handleCloseModal = React.useCallback(() => {
     setOpenModalSlug(null)
   }, [setOpenModalSlug])
@@ -58,6 +60,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       y: number
       scale: number
       overlayOpacity: number
+      allowVideoControls: boolean
     }
   >(openModalSlug, {
     from: (slug) => {
@@ -78,6 +81,8 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: 0,
         scale: CardScaleOnHover,
         overlayOpacity: 0,
+        allowVideoControls: false,
+
         config: DefaultSpringConfig,
       }
     },
@@ -99,6 +104,10 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: modalY,
         scale: 1,
         overlayOpacity: 1,
+        allowVideoControls: true,
+        onRest: () => {
+          setAllowVideoControls(true)
+        },
         config: DefaultSpringConfig,
       }
     },
@@ -120,6 +129,9 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: 0,
         scale: CardScaleOnHover,
         overlayOpacity: 0,
+        onStart: () => {
+          setAllowVideoControls(false)
+        },
         onRest: () => {
           setOpenModalSlug(null)
         },
@@ -169,22 +181,38 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                 p='2'
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
               >
-                <img
-                  src={
-                    project.hero.type === 'video'
-                      ? project.hero.poster.src
-                      : project.hero.data.src
-                  }
-                  alt={project.title}
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    aspectRatio: '4 / 3',
-                    overflow: 'hidden',
-                    borderRadius: 6,
-                    flexShrink: 0,
-                  }}
-                />
+                {project.hero.type === 'video' ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    controls={allowVideoControls}
+                    src={project.hero.url}
+                    poster={project.hero.poster.src}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      aspectRatio: '4 / 3',
+                      overflow: 'hidden',
+                      borderRadius: 6,
+                      flexShrink: 0,
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={project.hero.data.src}
+                    alt={project.title}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      aspectRatio: '4 / 3',
+                      overflow: 'hidden',
+                      borderRadius: 6,
+                      flexShrink: 0,
+                    }}
+                  />
+                )}
                 <Txt>{project.title}</Txt>
                 <Flex direction='column' flexShrink='0'>
                   {project.content}
