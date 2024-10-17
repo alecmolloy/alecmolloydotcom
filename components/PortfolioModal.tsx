@@ -58,7 +58,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       y: number
       scale: number
       overlayOpacity: number
-      allowVideoControls: boolean
     }
   >(openModalSlug, {
     from: (slug) => {
@@ -69,17 +68,24 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       if (bentoCard == null) {
         throw new Error(`Card with id ${openModalSlug} not found`)
       }
-      const { top: t, left, width, height } = bentoCard.getBoundingClientRect()
+      const {
+        top: cardTop,
+        left: cardLeft,
+        width: cardWidth,
+        height: cardHeight,
+      } = bentoCard.getBoundingClientRect()
+      const modalWidth = Math.min(760, window.innerWidth * 0.8)
+      const scale = cardWidth / modalWidth
+
       return {
-        left,
-        top: t,
-        width,
-        height,
+        left: cardLeft,
+        top: cardTop,
+        width: modalWidth,
+        height: cardHeight / scale,
         x: 0,
         y: 0,
-        scale: CardScaleOnHover,
+        scale,
         overlayOpacity: 0,
-        allowVideoControls: false,
 
         config: DefaultSpringConfig,
       }
@@ -102,7 +108,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: modalY,
         scale: 1,
         overlayOpacity: 1,
-        allowVideoControls: true,
 
         config: DefaultSpringConfig,
       }
@@ -115,15 +120,24 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       if (bentoCard == null) {
         throw new Error(`Card with id ${openModalSlug} not found`)
       }
-      const { top: t, left, width, height } = bentoCard.getBoundingClientRect()
+      const {
+        top: cardTop,
+        left: cardLeft,
+        width: cardWidth,
+        height: cardHeight,
+      } = bentoCard.getBoundingClientRect()
+      const modalWidth = Math.min(760, window.innerWidth * 0.8)
+      const scale = cardWidth / modalWidth
+      console.log('leave', scale)
+      debugger
       return {
-        left,
-        top: t,
-        width,
-        height,
+        left: cardLeft,
+        top: cardTop,
+        width: modalWidth,
+        height: cardHeight / scale,
         x: 0,
         y: 0,
-        scale: CardScaleOnHover,
+        scale,
         overlayOpacity: 0,
 
         config: AggressiveSpringConfig,
@@ -162,6 +176,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                   overflow: 'hidden',
                   borderRadius: cardStyle.borderRadius,
                   zIndex: 2,
+                  transformOrigin: 'top left',
                   boxShadow: [
                     '0 24px 36px #0001',
                     '0 24px 46px #0002',
@@ -243,10 +258,8 @@ export const usePortfolioModal = () => {
 const AnimatedFlex = animated(Flex)
 
 const AggressiveSpringConfig: SpringConfig = {
-  tension: 250,
-  friction: 20,
+  tension: 350,
   clamp: true,
-  velocity: 0.03,
 }
 
 const DefaultSpringConfig: SpringConfig = {
