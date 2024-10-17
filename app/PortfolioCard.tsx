@@ -102,6 +102,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         <Flex
           style={{
             opacity: modalOpen ? 0 : 1,
+            width: '100%',
+            height: '100%',
           }}
         >
           {project.acquisition && (
@@ -201,12 +203,15 @@ type Size = 'sm' | 'md' | 'lg'
 
 function sml<T>(size: Size, sm: T, md: T, lg: T): T {
   switch (size) {
-    case 'sm':
+    case 'sm': {
       return sm
-    case 'md':
+    }
+    case 'md': {
       return md
-    case 'lg':
+    }
+    case 'lg': {
       return lg
+    }
   }
 }
 

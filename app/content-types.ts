@@ -1,5 +1,6 @@
 import { projects } from '@/data/portfolio'
 import { StaticImageData } from 'next/image'
+import * as React from 'react'
 
 export type ProjectSlug =
   | 'game-of-life'
@@ -64,8 +65,11 @@ interface Collaborator {
   url?: string
 }
 
-export function collaborator(name: string, url?: string): Collaborator {
-  return { name, url }
+export function collaborator(
+  collaboratorName: string,
+  url?: string,
+): Collaborator {
+  return { name: collaboratorName, url }
 }
 
 interface Link {

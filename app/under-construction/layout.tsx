@@ -1,12 +1,10 @@
 import { Text as Txt } from '@radix-ui/themes'
 import type React from 'react'
-import { Navigation } from '../Navigation'
 
 const UnderConstructionLayout: React.FunctionComponent<
   React.PropsWithChildren
 > = ({ children }) => (
   <>
-    <Navigation />
     <div style={{ textAlign: 'center' }}>
       <hr
         style={{

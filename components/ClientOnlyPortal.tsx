@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import * as React from 'react'
 import { createPortal } from 'react-dom'
 
 export default function ClientOnlyPortal({
@@ -8,10 +8,10 @@ export default function ClientOnlyPortal({
   children: React.ReactNode
   selector: string
 }) {
-  const ref = useRef<Element | null>(null)
-  const [mounted, setMounted] = useState(false)
+  const ref = React.useRef<Element | null>(null)
+  const [mounted, setMounted] = React.useState(false)
 
-  useEffect(() => {
+  React.useEffect(() => {
     ref.current = document.querySelector(selector)
     setMounted(true)
   }, [selector])

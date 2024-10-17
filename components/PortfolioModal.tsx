@@ -15,8 +15,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
   openModalSlug,
   setOpenModalSlug,
 }) => {
-  const [allowVideoControls, setAllowVideoControls] = React.useState(true)
-
   const handleCloseModal = React.useCallback(() => {
     setOpenModalSlug(null)
   }, [setOpenModalSlug])
@@ -105,9 +103,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         scale: 1,
         overlayOpacity: 1,
         allowVideoControls: true,
-        onRest: () => {
-          setAllowVideoControls(true)
-        },
+
         config: DefaultSpringConfig,
       }
     },
@@ -129,12 +125,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: 0,
         scale: CardScaleOnHover,
         overlayOpacity: 0,
-        onStart: () => {
-          setAllowVideoControls(false)
-        },
-        onRest: () => {
-          setOpenModalSlug(null)
-        },
+
         config: AggressiveSpringConfig,
       }
     },
@@ -187,7 +178,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                     muted
                     loop
                     playsInline
-                    controls={allowVideoControls}
+                    controls={false}
                     src={project.hero.url}
                     poster={project.hero.poster.src}
                     style={{

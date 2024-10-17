@@ -155,6 +155,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
     pixelSize,
     toneMapLow,
     toneMapHigh,
+    gammaCorrection,
   ])
 
   useFrame(({ clock }) => {

@@ -1,4 +1,3 @@
-import { Navigation } from '@/app/Navigation'
 import { Link } from '@/components/Link'
 import { MakeArtItem, MakeArtItems } from '@/data/make-art'
 import { Text as Txt } from '@radix-ui/themes'
@@ -47,7 +46,6 @@ const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
 const MakeArtCreations = async () => {
   return (
     <>
-      <Navigation />
       <div
         style={{
           margin: '2em auto',

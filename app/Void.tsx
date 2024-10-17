@@ -61,18 +61,21 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   useEffect(() => {
     switch (interactionState) {
-      case 'grabbing':
+      case 'grabbing': {
         document.body.style.cursor = 'grabbing'
         break
-      case 'hovered':
+      }
+      case 'hovered': {
         document.body.style.cursor = 'grab'
         break
-      case null:
+      }
+      case null: {
         document.body.style.cursor = 'auto'
         break
-      default:
-        const error: never = interactionState
-        throw new Error(`Unhandled interaction state: ${error}`)
+      }
+      default: {
+        throw new Error(`Unhandled interaction state: ${interactionState}`)
+      }
     }
   }, [interactionState])
 

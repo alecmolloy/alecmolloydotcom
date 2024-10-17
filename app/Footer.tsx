@@ -1,6 +1,5 @@
-import { Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
+import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { LocationsScroller } from './LocationsScroller'
-import { defaultGridProps } from './theme'
 
 const socialLinks = [
   { href: 'https://github.com/alecmolloy', label: 'GitHub' },

@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/simplex-noise.frag'
 import vertexShader from './shaders/simplex-noise.vert'
-import { flexPropDefs } from '@radix-ui/themes/dist/cjs/components/flex.props'
 
 /**
  * SimplexNoiseCanvas component renders a 2D simplex noise texture

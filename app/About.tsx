@@ -80,7 +80,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             </P>
             <P>
               I’m actively seeking new clients and projects that are
-              purpose-driven. If you think that's you, please get in contact:
+              purpose-driven. If you think that’s you, please get in contact:
               workwith@alecmolloy.com
             </P>
             <P>ʕ •ᴥ•ʔ</P>

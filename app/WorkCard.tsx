@@ -1,9 +1,8 @@
 import { Link } from '@/components/Link'
 import { WorkItem } from '@/data/work'
-import { Flex } from '@radix-ui/themes'
-import Image from 'next/image'
+import { Flex, Text as Txt } from '@radix-ui/themes'
+import Img from 'next/image'
 import * as React from 'react'
-import { Text as Txt } from '@radix-ui/themes'
 
 export const WorkCard: React.FunctionComponent<{
   item: WorkItem
@@ -31,7 +30,7 @@ export const WorkCard: React.FunctionComponent<{
         }}
       >
         <Flex position='relative'>
-          <Image
+          <Img
             alt={item.title}
             src={item.img}
             style={{
