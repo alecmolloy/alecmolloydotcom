@@ -8,3 +8,12 @@ body {
 .header-button:hover {
   text-decoration-line: underline !important;
 }
+
+a {
+  color: inherit;
+  text-decoration-thickness: 0.0833333em;
+  text-decoration-style: wavy;
+  text-decoration-color: #888;
+  text-underline-offset: 0.25em;
+  text-decoration-skip-ink: all;
+}

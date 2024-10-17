@@ -33,10 +33,6 @@ export const Footer = () => {
                   style={{
                     color: '#0008',
                     textDecoration: 'none',
-                    textDecorationThickness: 1.5,
-                    textDecorationStyle: 'wavy',
-                    textDecorationColor: '#000',
-                    textUnderlineOffset: 4,
                   }}
                 >
                   <Txt size='2' style={{ color: 'var(--slate-11)' }}>
@@ -68,7 +64,7 @@ export const Footer = () => {
             <img
               src='/im-confused-too.svg'
               alt='Made in UK, But Raised in US, And also Irish. ¯\_(ツ)_/¯ '
-              title='But I am authorized to work in the USA, EU, UK without a visa :)'
+              title='But I can work with you in the USA, EU, and UK visa-free :)'
               width={150}
               height={150}
             />
