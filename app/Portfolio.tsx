@@ -1,6 +1,5 @@
 'use client'
-import ClientOnlyPortal from '@/components/ClientOnlyPortal'
-import { projects } from '@/data/portfolio'
+import { PortfolioModal, usePortfolioModal } from '@/components/PortfolioModal'
 import { acroyogaTransitions } from '@/data/portfolio/acroyoga-transitions'
 import { adobe } from '@/data/portfolio/adobe'
 import { elements3D } from '@/data/portfolio/elements-3d'
@@ -13,16 +12,12 @@ import { nuclearConnections } from '@/data/portfolio/nuclear-connections'
 import { retreatTechnology } from '@/data/portfolio/retreat-technology'
 import { utopia } from '@/data/portfolio/utopia'
 import { vbt } from '@/data/portfolio/vbt'
-import { Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
-import { animated, SpringConfig, useTransition } from '@react-spring/web'
+import { Container, Flex, Grid } from '@radix-ui/themes'
 import React from 'react'
-import { isProjectSlug, ProjectSlug } from './content-types'
 import { Section } from './Navigation'
-import { CardScaleOnHover, cardStyle, PortfolioCard } from './PortfolioCard'
+import { PortfolioCard } from './PortfolioCard'
 import SimplexNoiseCanvas from './SimplexNoiseCanvas'
 import { defaultGridProps } from './theme'
-
-const AnimatedFlex = animated(Flex)
 
 const simplexNoiseProps = {
   cellSize: 250,
@@ -32,105 +27,7 @@ const simplexNoiseProps = {
 }
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
-  const [openModalSlug, setOpenModalSlug] = React.useState<ProjectSlug | null>(
-    null,
-  )
-
-  React.useEffect(() => {
-    const navigationElement = document.getElementById('navigation')
-    if (navigationElement != null) {
-      navigationElement.style.opacity = openModalSlug != null ? '0' : '1'
-    }
-  }, [openModalSlug])
-
-  const modalTransitions = useTransition<
-    ProjectSlug | null,
-    {
-      left: number
-      top: number
-      width: number
-      height: number
-      x: number
-      y: number
-      scale: number
-      overlayOpacity: number
-    }
-  >(openModalSlug, {
-    from: (slug) => {
-      if (slug == null) {
-        return {}
-      }
-      const bentoCard = document.getElementById(slug)
-      if (bentoCard == null) {
-        throw new Error(`Card with id ${openModalSlug} not found`)
-      }
-      const { top: t, left, width, height } = bentoCard.getBoundingClientRect()
-      return {
-        left,
-        top: t,
-        width,
-        height,
-        x: 0,
-        y: 0,
-        scale: CardScaleOnHover,
-        overlayOpacity: 0,
-        config: DefaultSpringConfig,
-      }
-    },
-    enter: () => {
-      if (typeof window === 'undefined') {
-        return {}
-      }
-      const modalWidth = Math.min(760, window.innerWidth * 0.8)
-      const modalHeight = window.innerHeight - 32
-      const modalX = -modalWidth / 2
-      const modalY = -modalHeight / 2
-
-      return {
-        left: window.innerWidth / 2,
-        top: window.innerHeight / 2,
-        width: modalWidth,
-        height: modalHeight,
-        x: modalX,
-        y: modalY,
-        scale: 1,
-        overlayOpacity: 1,
-        config: DefaultSpringConfig,
-      }
-    },
-    leave: (slug) => {
-      if (slug == null) {
-        return {}
-      }
-      const bentoCard = document.getElementById(slug)
-      if (bentoCard == null) {
-        throw new Error(`Card with id ${openModalSlug} not found`)
-      }
-      const { top: t, left, width, height } = bentoCard.getBoundingClientRect()
-      return {
-        left,
-        top: t,
-        width,
-        height,
-        x: 0,
-        y: 0,
-        scale: CardScaleOnHover,
-        overlayOpacity: 0,
-        onRest: () => {
-          setOpenModalSlug(null)
-        },
-        config: AggressiveSpringConfig,
-      }
-    },
-  })
-
-  React.useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const projectSlug = urlParams.get(ProjectSlugParam)
-    if (projectSlug && isProjectSlug(projectSlug)) {
-      setOpenModalSlug(projectSlug)
-    }
-  }, [])
+  const { openModalSlug, setOpenModalSlug } = usePortfolioModal()
 
   React.useEffect(() => {
     if (openModalSlug) {
@@ -273,86 +170,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === adobe.slug}
         />
       </Grid>
-      {modalTransitions(({ overlayOpacity, ...style }, slug) => {
-        const project = slug != null ? projects[slug] : null
-        return (
-          project != null && (
-            <ClientOnlyPortal selector='#theme-root'>
-              <AnimatedFlex
-                position='fixed'
-                top='0'
-                left='0'
-                right='0'
-                bottom='0'
-                style={{
-                  backgroundColor: 'rgba(0, 0, 0, 0.15)',
-                  opacity: overlayOpacity,
-                }}
-                align='center'
-                justify='center'
-                onClick={handleCloseModal}
-              />
-              <AnimatedFlex
-                direction='column'
-                justify='start'
-                overflowY='scroll'
-                style={{
-                  position: 'fixed',
-                  backgroundColor: 'white',
-                  overflow: 'hidden',
-                  borderRadius: cardStyle.borderRadius,
-                  zIndex: 2,
-                  boxShadow: [
-                    '0 24px 36px #0001',
-                    '0 24px 46px #0002',
-                    cardStyle.boxShadow,
-                  ].join(', '),
-                  ...style,
-                }}
-                p='2'
-                onClick={(e: React.MouseEvent) => e.stopPropagation()}
-              >
-                <img
-                  src={
-                    project.hero.type === 'video'
-                      ? project.hero.poster.src
-                      : project.hero.data.src
-                  }
-                  alt={project.title}
-                  style={{
-                    display: 'block',
-                    width: '100%',
-                    aspectRatio: '4 / 3',
-                    overflow: 'hidden',
-                    borderRadius: 6,
-                    flexShrink: 0,
-                  }}
-                />
-                <Txt>{project.title}</Txt>
-                <Flex direction='column' flexShrink='0'>
-                  {project.content}
-                </Flex>
-              </AnimatedFlex>
-            </ClientOnlyPortal>
-          )
-        )
-      })}
+      <PortfolioModal
+        openModalSlug={openModalSlug}
+        setOpenModalSlug={setOpenModalSlug}
+      />
     </Container>
   )
 }
 
 const ProjectSlugParam = 'project'
-
-const AggressiveSpringConfig: SpringConfig = {
-  tension: 250,
-  friction: 20,
-  clamp: true,
-  velocity: 0.03,
-}
-
-const DefaultSpringConfig: SpringConfig = {
-  tension: 170,
-  friction: 26,
-  clamp: false,
-  velocity: 0,
-}
