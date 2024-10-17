@@ -3,7 +3,7 @@ import { Flex, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
 import { animated, useSpring } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
-import Image from 'next/image'
+import Img from 'next/image'
 import React from 'react'
 
 interface PortfolioCardProps {
@@ -11,7 +11,7 @@ interface PortfolioCardProps {
   size?: Size
   gridColumn?: Responsive<string>
   modalOpen: boolean
-  setOpenModal: (id: ProjectSlug | null) => void
+  setOpenModal: React.Dispatch<React.SetStateAction<ProjectSlug | null>>
 }
 
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
@@ -43,22 +43,20 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   })
 
   React.useEffect(() => {
-    const setPlay = () => {
-      setIsPlaying(true)
-    }
-    const setPause = () => {
-      setIsPlaying(false)
-    }
-    if (videoRef.current) {
-      setIsPlaying(!videoRef.current.paused)
-      videoRef.current.addEventListener('play', setPlay)
-      videoRef.current.addEventListener('pause', setPause)
+    const video = videoRef.current
+    const setPlay = () => setIsPlaying(true)
+    const setPause = () => setIsPlaying(false)
+
+    if (video != null) {
+      setIsPlaying(!video.paused)
+      video.addEventListener('play', setPlay)
+      video.addEventListener('pause', setPause)
     }
     return () => {
-      videoRef.current?.removeEventListener('play', setPlay)
-      videoRef.current?.removeEventListener('pause', setPause)
+      video?.removeEventListener('play', setPlay)
+      video?.removeEventListener('pause', setPause)
     }
-  }, [videoRef.current])
+  }, [])
 
   React.useEffect(() => {
     if (modalOpen) {
@@ -67,7 +65,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         config: SpringConfig,
       })
     }
-  }, [modalOpen])
+  }, [modalOpen, titleApi])
 
   return (
     <Flex
@@ -81,7 +79,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         position: 'relative',
       }}
       ref={ref}
-      onClick={(e) => {
+      onClick={() => {
         setOpenModal(project.slug)
         titleApi.start({
           scale: 1,
@@ -121,7 +119,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           </Flex>
         )}
         {project.hero.type === 'image' ? (
-          <Image
+          <Img
             width={1024}
             src={project.hero.data}
             alt={project.hero.alt}
@@ -136,6 +134,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           <>
             {!isPlaying && (
               <img
+                alt='Play'
                 src='/icons/play-button.svg'
                 style={{
                   width: 64,
@@ -157,6 +156,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
               autoPlay
               muted
               loop
+              playsInline
               controls={false}
               src={project.hero.url}
               poster={project.hero.poster.src}
