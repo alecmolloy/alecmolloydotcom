@@ -99,71 +99,77 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           scale,
         }}
       >
-        {project.acquisition && (
-          <Flex
-            position='absolute'
-            top='2'
-            right='2'
-            py='1'
-            px='2'
-            style={{
-              opacity: 0.9,
-              backgroundColor: 'var(--ultramarine)',
-              color: 'white',
-              borderRadius: 4,
-            }}
-          >
-            <Txt weight='medium' style={{ fontSize: 10 }}>
-              Acquired by <Txt weight='bold'>{project.acquisition}</Txt>
-            </Txt>
-          </Flex>
-        )}
-        {project.hero.type === 'image' ? (
-          <Img
-            width={1024}
-            src={project.hero.data}
-            alt={project.hero.alt}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              opacity: modalOpen ? 0 : 1,
-            }}
-          />
-        ) : (
-          <>
-            {!isPlaying && (
-              <img
-                alt='Play'
-                src='/icons/play-button.svg'
-                style={{
-                  width: 64,
-                  height: 64,
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                }}
-                onClick={() => {
-                  if (videoRef.current?.paused === true) {
-                    videoRef.current?.play()
-                  }
-                }}
-              />
-            )}
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls={false}
-              src={project.hero.url}
-              poster={project.hero.poster.src}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        <Flex
+          style={{
+            opacity: modalOpen ? 0 : 1,
+          }}
+        >
+          {project.acquisition && (
+            <Flex
+              position='absolute'
+              top='2'
+              right='2'
+              py='1'
+              px='2'
+              style={{
+                opacity: 0.9,
+                backgroundColor: 'var(--ultramarine)',
+                color: 'white',
+                borderRadius: 4,
+              }}
+            >
+              <Txt weight='medium' style={{ fontSize: 10 }}>
+                Acquired by <Txt weight='bold'>{project.acquisition}</Txt>
+              </Txt>
+            </Flex>
+          )}
+
+          {project.hero.type === 'image' ? (
+            <Img
+              width={1024}
+              src={project.hero.data}
+              alt={project.hero.alt}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
             />
-          </>
-        )}
+          ) : (
+            <>
+              {!isPlaying && (
+                <img
+                  alt='Play'
+                  src='/icons/play-button.svg'
+                  style={{
+                    width: 64,
+                    height: 64,
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                  onClick={() => {
+                    if (videoRef.current?.paused === true) {
+                      videoRef.current?.play()
+                    }
+                  }}
+                />
+              )}
+              <video
+                ref={videoRef}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls={false}
+                src={project.hero.url}
+                poster={project.hero.poster.src}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </>
+          )}
+        </Flex>
       </AnimatedFlex>
       <Flex
         direction='column'
