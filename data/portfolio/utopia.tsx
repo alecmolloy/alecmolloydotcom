@@ -5,7 +5,7 @@ import { Text as Txt } from '@radix-ui/themes'
 export const utopia = project(
   'utopia',
   'Utopia.app',
-  'WYSIWYG for React. Design and code update each other, in real time.',
+  'React Design Tool. Canvas and code update each other in real time.',
   heroVideo('/portfolio/utopia/utopia-01.mp4', utopiaHero, 'Utopia'),
   '2017–20',
   ['React', 'TypeScript'],
