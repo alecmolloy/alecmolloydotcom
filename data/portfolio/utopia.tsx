@@ -1,4 +1,4 @@
-import { heroVideo, project } from '@/app/content-types'
+import { heroVideo, link, project } from '@/app/content-types'
 import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
 
 export const utopia = project(
@@ -8,7 +8,6 @@ export const utopia = project(
   heroVideo('/portfolio/utopia/utopia-01.mp4', utopiaHero, 'Utopia'),
   '2017–2020',
   ['React', 'TypeScript'],
-  'Design and coding IDE',
   <>
     <p>
       Utopia.app is a design and coding environment for React projects that runs
@@ -21,8 +20,12 @@ export const utopia = project(
       continues to be developed.
     </p>
   </>,
+  'Design and coding IDE',
   'Creative Technologist',
   undefined,
-  undefined,
+  [
+    link('Website', 'https://utopia.app'),
+    link('GitHub', 'https://github.com/concrete-utopia/utopia'),
+  ],
   'Shopify',
 )

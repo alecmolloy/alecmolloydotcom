@@ -8,7 +8,6 @@ export const gameOfLife = project(
   heroImage(gameOfLifeHero, 'Game of Life Editor'),
   '2023',
   ['TypeScript', 'WebGL', 'React'],
-  "A web-based interactive editor for creating and simulating patterns in Conway's Game of Life",
   <>
     <p>
       The Game of Life Editor is an interactive web application that allows
@@ -24,6 +23,7 @@ export const gameOfLife = project(
       behind Conway’s Game of Life.
     </p>
   </>,
+  'A web-based interactive editor for creating and simulating patterns in Conway’s Game of Life',
   'Developer',
   [],
 )

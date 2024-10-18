@@ -8,7 +8,6 @@ export const vbt = project(
   heroImage(vbt01, 'Vijñāna Bhairava Tantra'),
   'Coming Spring 2025',
   ['React Native', 'TypeScript', 'Figma', 'Photoshop', 'Midjourney'],
-  'iOS / Android App, Landing webpage',
   <>
     <p>
       The <i>Vijñāna-bhairava-tantra</i> (VBT) is a 9th Century yogic text,
@@ -47,6 +46,7 @@ export const vbt = project(
       Vijñāna Bhairava Tantra.
     </p>
   </>,
+  'iOS / Android App, Landing webpage',
   'UX / UI Design, Developer, Artwork',
   [
     collaborator(

@@ -1,14 +1,13 @@
-import { heroVideo, project } from '@/app/content-types'
+import { collaborator, heroVideo, project } from '@/app/content-types'
 import kanoHero from '@/public/portfolio/kano/kano-01.webp'
 
 export const kano = project(
   'kano',
-  'Kano',
-  'Product manager, Creative Technologist. Educational technology kits and tools',
+  'Kano Computing',
+  'Educational technology kits, software, and community',
   heroVideo('/portfolio/kano/kano.mp4', kanoHero, 'Kano Educational Tools'),
   '2014–16',
-  ['TypeScript', 'JavaScript'],
-  'Creative content system and community platform',
+  ['Python', 'JavaScript', 'Sketch'],
   <>
     <p>
       Kano creates technology kits and educational tools designed to help people
@@ -30,6 +29,16 @@ export const kano = project(
       Light, LightBoard, Pixel Kit, Screen Kit, Camera Kit, and Speaker Kit.
     </p>
   </>,
-  'Product Manager',
-  [],
+  'Creative content system and community platform',
+  'Product Manager, Creative Technologist',
+  [
+    collaborator(
+      'Brandon Jackson',
+      'https://www.instagram.com/brandonscottjackson/',
+    ),
+    collaborator('Mathew Keegan', 'https://x.com/_welshwizard'),
+    collaborator('James Hicks', 'https://neuemodern.com'),
+    collaborator('Tommy Säl', 'https://sal.design'),
+    collaborator('Sherif Maktabi', 'https://www.linkedin.com/in/sherifmak/'),
+  ],
 )

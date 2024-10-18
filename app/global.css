@@ -17,3 +17,7 @@ a {
   text-underline-offset: 0.25em;
   text-decoration-skip-ink: all;
 }
+
+.info-block a {
+  text-decoration: none;
+}

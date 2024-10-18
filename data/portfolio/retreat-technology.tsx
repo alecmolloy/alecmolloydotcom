@@ -1,4 +1,4 @@
-import { collaborator, heroImage, project } from '@/app/content-types'
+import { heroImage, link, project } from '@/app/content-types'
 import retreatHero from '@/public/portfolio/retreat/retreat-01.jpg'
 
 export const retreatTechnology = project(
@@ -8,7 +8,6 @@ export const retreatTechnology = project(
   heroImage(retreatHero, 'Retreat.technology App'),
   '2024',
   ['React Native', 'TypeScript', 'Next.js', 'Figma'],
-  'Next.js Site, Secure Password Storage',
   <>
     <p>
       Retreat.technology locks you out of Instagram, Facebook, Twitter, or
@@ -34,6 +33,11 @@ export const retreatTechnology = project(
       plugins, timed access, and Passkey support.
     </p>
   </>,
+  'Next.js Site, Secure Password Storage',
   'Full-Stack Developer',
-  [collaborator('Antoine Sakho')],
+  undefined,
+  [
+    link('Website', 'https://retreat.technology'),
+    link('GitHub', 'https://github.com/alec-molloy/retreat-technology'),
+  ],
 )

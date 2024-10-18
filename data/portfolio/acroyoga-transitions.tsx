@@ -1,4 +1,4 @@
-import { collaborator, heroVideo, project } from '@/app/content-types'
+import { collaborator, heroVideo, link, project } from '@/app/content-types'
 import acroyogaTransitionsPoster from '@/public/portfolio/acroyoga-transitions/acroyoga-transitions-poster.png'
 
 export const acroyogaTransitions = project(
@@ -12,7 +12,6 @@ export const acroyogaTransitions = project(
   ),
   '2018-20',
   ['React'],
-  'Acroyoga is a partner sport that combines elements of yoga, dance, and martial arts. I taught acroyoga to beginners and coached advanced students to help them advance in their skills.',
   <>
     <p>
       Acroyoga is a partner sport that combines elements of yoga, dance, and
@@ -20,6 +19,8 @@ export const acroyogaTransitions = project(
       to help them advance in their skills.
     </p>
   </>,
+  'Web-based game',
   undefined,
   [collaborator('Jason Nemer', 'https://www.instagram.com/jasonnemer/')],
+  [link('Website', 'https://lw8bg.csb.app')],
 )

@@ -100,14 +100,14 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         <PortfolioCard
           project={nuclearConnections}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
-          size='sm'
+          size='lg'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === nuclearConnections.slug}
         />
         <PortfolioCard
           project={retreatTechnology}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
-          size='sm'
+          size='lg'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === retreatTechnology.slug}
         />
@@ -128,7 +128,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         <PortfolioCard
           project={acroyogaTransitions}
           gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
-          size='lg'
+          size='sm'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === acroyogaTransitions.slug}
         />

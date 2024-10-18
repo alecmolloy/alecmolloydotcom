@@ -45,15 +45,18 @@ export function heroVideo(
 
 type Hero = HeroImage | HeroVideo
 
-type Technology =
+type Tools =
+  | 'React'
   | 'React Native'
   | 'TypeScript'
   | 'Figma'
+  | 'Sketch'
   | 'Photoshop'
+  | 'Illustrator'
   | 'Midjourney'
   | 'Next.js'
-  | 'React'
   | 'JavaScript'
+  | 'Python'
   | 'TensorFlow.js'
   | 'Google Apps Script'
   | 'Zapier'
@@ -87,9 +90,9 @@ export interface Project {
   subtitle?: string
   hero: Hero
   date: string
-  technologies: Technology[]
-  deliverables: string
+  tools: Tools[]
   content: React.ReactNode
+  deliverables?: string
   role?: string
   collaborators?: Collaborator[]
   links?: Link[]
@@ -102,9 +105,9 @@ export function project(
   subtitle: string | undefined,
   hero: Hero,
   date: string,
-  technologies: Technology[],
-  deliverables: string,
+  tools: Tools[],
   content: React.ReactNode,
+  deliverables?: string,
   role?: string,
   collaborators?: Collaborator[],
   links?: Link[],
@@ -115,12 +118,12 @@ export function project(
     title,
     subtitle,
     hero,
-    technologies,
-    role,
     date,
-    collaborators,
-    deliverables,
+    tools,
     content,
+    deliverables,
+    role,
+    collaborators,
     links,
     acquisition,
   }

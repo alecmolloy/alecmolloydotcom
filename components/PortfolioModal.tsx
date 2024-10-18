@@ -222,56 +222,74 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                   {project.role && (
                     <InfoBlock header='Role' innerText={project.role} />
                   )}
-                  {project.date && (
-                    <InfoBlock header='Date' innerText={project.date} />
-                  )}
-
                   {project.collaborators && (
                     <InfoBlock
                       header='Collaborators'
-                      innerText={project.collaborators.map(
-                        (collaborator, i, arr) => (
-                          <Box key={collaborator.name}>
+                      innerText={project.collaborators.map((collaborator) => (
+                        <Box key={collaborator.name}>
+                          {collaborator.url != null ? (
                             <a
                               href={collaborator.url}
                               target='_blank'
                               rel='noreferrer'
                             >
-                              {collaborator.name}
+                              {collaborator.name} →
                             </a>
-                            {i < arr.length - 1 && ', '}
-                          </Box>
-                        ),
-                      )}
+                          ) : (
+                            collaborator.name
+                          )}
+                        </Box>
+                      ))}
+                    />
+                  )}
+                  {project.tools && (
+                    <InfoBlock
+                      header='Tools'
+                      innerText={project.tools.join(', ')}
+                    />
+                  )}
+                  {project.deliverables && (
+                    <InfoBlock
+                      header='Deliverables'
+                      innerText={project.deliverables}
                     />
                   )}
                   {project.links && (
                     <InfoBlock
                       header='Links'
-                      innerText={project.links.map((link) => (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target='_blank'
-                          rel='noreferrer'
-                        >
-                          {link.title}
-                        </a>
-                      ))}
+                      innerText={
+                        <Flex direction='column'>
+                          {project.links.map((link) => (
+                            <a
+                              key={link.url}
+                              href={link.url}
+                              target='_blank'
+                              rel='noreferrer'
+                            >
+                              {link.title} →
+                            </a>
+                          ))}
+                        </Flex>
+                      }
                     />
                   )}
                   <Box gridColumn='5 / span 8'>
                     <Heading size='8' style={{ ...instrumentSerif.style }}>
                       {project.title}
                     </Heading>
-                    {project.subtitle && (
-                      <Txt size='1' style={{ color: '#0004' }}>
-                        {project.subtitle}
+                    {(project.subtitle != null || project.date != null) && (
+                      <Txt size='1' style={{ color: '#0008' }}>
+                        <Txt weight='bold'>
+                          {project.date != null && project.date}
+                        </Txt>
+                        {project.subtitle != null &&
+                          project.date != null &&
+                          ' — '}
+                        {project.subtitle != null && project.subtitle}
                       </Txt>
                     )}
-                    <Flex direction='column'>
-                      <Txt size='4'>{project.content}</Txt>
-                    </Flex>
+
+                    <Txt size='4'>{project.content}</Txt>
                   </Box>
                 </Grid>
               </AnimatedFlex>
@@ -328,7 +346,7 @@ const InfoBlock: React.FC<{ header: string; innerText: React.ReactNode }> = ({
   header,
   innerText,
 }) => (
-  <Flex gridColumn='span 3' direction='column' py='2'>
+  <Flex gridColumn='span 3' direction='column' py='2' className='info-block'>
     <Txt size='1' weight='bold' style={{ color: '#0004' }}>
       {header}
     </Txt>

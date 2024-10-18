@@ -8,7 +8,6 @@ export const localWelcome = project(
   heroImage(localWelcomeHero, 'Local Welcome Community App'),
   '2021–23',
   ['Next.js', 'React', 'Zapier', 'Google Apps Script'],
-  'Full-stack data infrastructure',
   <>
     <p>
       Local Welcome is a UK charity dedicated to helping refugees integrate with
@@ -17,5 +16,6 @@ export const localWelcome = project(
       meal ticketing and attendance systems.
     </p>
   </>,
+  'Full-stack data infrastructure',
   'Software Developer',
 )

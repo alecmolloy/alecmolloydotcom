@@ -7,7 +7,6 @@ export const minDoktor = project(
   heroImage(minDoktorHero, 'Min Doktor Telehealth Platform'),
   '2016–17',
   ['React Native'],
-  'Patient consultation app',
   <>
     <p>
       Min Doktor is Europe’s largest telehealth provider, offering full doctor’s
@@ -19,6 +18,7 @@ export const minDoktor = project(
       improvements, and regulatory compliance for Swedish and EU markets.
     </p>
   </>,
+  'Patient consultation app',
   'Product Manager',
   [],
 )

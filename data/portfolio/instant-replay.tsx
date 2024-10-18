@@ -12,7 +12,6 @@ export const instantReplay = project(
   ),
   '2023',
   ['TensorFlow.js', 'React', 'TypeScript'],
-  'Webcam-based handstand analysis tool',
   <>
     <p>
       Instant Replay is training software designed to assist with handstand
@@ -27,6 +26,6 @@ export const instantReplay = project(
       Development is on hold due to a concussion but will resume in the future.
     </p>
   </>,
+  'Webcam-based handstand analysis tool',
   'Developer',
-  [],
 )

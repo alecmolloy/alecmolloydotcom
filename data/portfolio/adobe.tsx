@@ -8,7 +8,6 @@ export const adobe = project(
   heroImage(adobeHero, 'Adobe Digital Media Internship and Learning Games'),
   '2014',
   ['Photoshop', 'InDesign'],
-  'Learning content and experimental learning games',
   <>
     <p>
       I joined Adobe as a Digital Media Intern in the summer of 2012. I wrote,
@@ -38,6 +37,7 @@ export const adobe = project(
       teams.
     </p>
   </>,
+  'Learning content and experimental learning games',
   'Digital Media Intern, Product Manager for Learning Games',
   [
     collaborator('Luanne Seymour', 'https://www.luanneseymour.com/'),

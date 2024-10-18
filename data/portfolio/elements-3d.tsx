@@ -12,7 +12,6 @@ export const elements3D = project(
   ),
   '2015',
   ['TypeScript'],
-  'Code editor and live 3D scene, Imperative API',
   <>
     <p>
       Elements 3D is a simple 3D art coding IDE and library that allows users to
@@ -30,6 +29,7 @@ export const elements3D = project(
       generative and fractal artwork.
     </p>
   </>,
+  'Code editor and live 3D scene, Imperative API',
   'Creative Technologist',
   [collaborator('Tancredi Trugenburger')],
 )

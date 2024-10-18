@@ -1,4 +1,4 @@
-import { collaborator, heroImage, project } from '@/app/content-types'
+import { collaborator, heroImage, link, project } from '@/app/content-types'
 import nuclearHero from '@/public/portfolio/nuclear-connections/nuclear-connections-01.jpg'
 
 export const nuclearConnections = project(
@@ -7,8 +7,7 @@ export const nuclearConnections = project(
   'Social word game',
   heroImage(nuclearHero, 'Nuclear Connections Game'),
   'January 2024',
-  ['React Native', 'TypeScript'],
-  'Next.js Site',
+  ['React Native', 'TypeScript', 'Next.js'],
   <>
     <p>
       Nuclear Connections is a social word game inspired by the New York Times
@@ -26,6 +25,8 @@ export const nuclearConnections = project(
       serverless on Vercel Functions.
     </p>
   </>,
+  undefined,
   'Co-Developer',
   [collaborator('David Molloy')],
+  [link('Website', 'https://nuclearconnections.com')],
 )
