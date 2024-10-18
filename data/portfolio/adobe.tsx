@@ -1,6 +1,5 @@
-import { heroImage, project } from '@/app/content-types'
+import { collaborator, heroImage, project } from '@/app/content-types'
 import adobeHero from '@/public/portfolio/adobe/adobe-01.png'
-import { Text as Txt } from '@radix-ui/themes'
 
 export const adobe = project(
   'adobe',
@@ -11,7 +10,7 @@ export const adobe = project(
   ['Photoshop', 'InDesign'],
   'Learning content and experimental learning games',
   <>
-    <Txt>
+    <p>
       I joined Adobe as a Digital Media Intern in the summer of 2012. I wrote,
       edited, designed, and managed learning content for Photoshop, Lightroom,
       InDesign, and Acrobat. I performed analytics for the editorial team,
@@ -19,8 +18,8 @@ export const adobe = project(
       represented Adobe as a product expert in online communities. After the
       summer, my contract was extended to continue working full-time through my
       senior year at Santa Clara, just down the road from the headquarters.
-    </Txt>
-    <Txt>
+    </p>
+    <p>
       After graduation, I served as a Product Manager for Learning Games. I
       joined an intrapreneurship program and led a team responsible for building
       experimental learning games for Photoshop and Illustrator. I managed,
@@ -32,13 +31,23 @@ export const adobe = project(
       conducted in-person and remote research sessions with customers and
       articulated a product vision informed by user research and input from UX
       and Engineering teams.
-    </Txt>
-    <Txt>
+    </p>
+    <p>
       I conducted in-person and remote research sessions, articulating a product
       vision informed by user research and collaboration with UX and engineering
       teams.
-    </Txt>
+    </p>
   </>,
   'Digital Media Intern, Product Manager for Learning Games',
-  [],
+  [
+    collaborator('Luanne Seymour', 'https://www.luanneseymour.com/'),
+    collaborator('Michael Jarrott', 'https://www.behance.net/mtjarrott/'),
+    collaborator('E Larson', 'https://www.behance.net/erica-larson/'),
+    collaborator('Kendall Plant', 'https://www.behance.net/kendallplant/'),
+    collaborator('Julia Grummel', 'https://www.juliagrummel.com/'),
+    collaborator(
+      'Swapnil Shrivastava',
+      'https://www.linkedin.com/in/swapnil-shrivastava-2b493637/',
+    ),
+  ],
 )

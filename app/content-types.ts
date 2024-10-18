@@ -86,7 +86,7 @@ export interface Project {
   title: string
   subtitle?: string
   hero: Hero
-  releaseDate: string
+  date: string
   technologies: Technology[]
   deliverables: string
   content: React.ReactNode
@@ -101,7 +101,7 @@ export function project(
   title: string,
   subtitle: string | undefined,
   hero: Hero,
-  releaseDate: string,
+  date: string,
   technologies: Technology[],
   deliverables: string,
   content: React.ReactNode,
@@ -117,7 +117,7 @@ export function project(
     hero,
     technologies,
     role,
-    releaseDate,
+    date,
     collaborators,
     deliverables,
     content,

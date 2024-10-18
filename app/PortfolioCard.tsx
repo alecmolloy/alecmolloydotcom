@@ -100,6 +100,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         }}
       >
         <Flex
+          className={PortfolioArtworkClassName}
           style={{
             opacity: modalOpen ? 0 : 1,
             width: '100%',
@@ -189,7 +190,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           align='left'
         >
           <Txt weight='bold'>
-            {project.title} ({project.releaseDate})
+            {project.title} ({project.date})
             {project.subtitle != null ? ': ' : null}
           </Txt>
           {project.subtitle}
@@ -227,3 +228,5 @@ const AnimatedFlex = animated(Flex)
 const SpringConfig = {
   tension: 510,
 }
+
+export const PortfolioArtworkClassName = 'portfolio-artwork'

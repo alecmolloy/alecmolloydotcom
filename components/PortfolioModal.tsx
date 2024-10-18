@@ -1,10 +1,11 @@
+import { instrumentSerif } from '@/app/fonts'
 import ClientOnlyPortal from '@/components/ClientOnlyPortal'
 import { projects } from '@/data/portfolio'
-import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Box, Flex, Grid, Heading, Text as Txt } from '@radix-ui/themes'
 import { SpringConfig, animated, useTransition } from '@react-spring/web'
 import React from 'react'
 import { ProjectSlug, isProjectSlug } from '../app/content-types'
-import { CardScaleOnHover, cardStyle } from '../app/PortfolioCard'
+import { cardStyle, PortfolioArtworkClassName } from '../app/PortfolioCard'
 
 interface PortfolioModalProps {
   openModalSlug: ProjectSlug | null
@@ -58,23 +59,16 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       y: number
       scale: number
       overlayOpacity: number
+      boxShadow: string
     }
   >(openModalSlug, {
     from: (slug) => {
       if (slug == null) {
         return {}
       }
-      const bentoCard = document.getElementById(slug)
-      if (bentoCard == null) {
-        throw new Error(`Card with id ${openModalSlug} not found`)
-      }
-      const {
-        top: cardTop,
-        left: cardLeft,
-        width: cardWidth,
-        height: cardHeight,
-      } = bentoCard.getBoundingClientRect()
-      const modalWidth = Math.min(760, window.innerWidth * 0.8)
+      const { cardTop, cardLeft, cardWidth, cardHeight } =
+        getArtworkDimensions(slug)
+      const modalWidth = Math.min(ModalWidth, window.innerWidth - 128)
       const scale = cardWidth / modalWidth
 
       return {
@@ -86,6 +80,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: 0,
         scale,
         overlayOpacity: 0,
+        boxShadow: [
+          '0 24px 36px #0000',
+          '0 24px 46px #0000',
+          cardStyle.boxShadow,
+        ].join(', '),
 
         config: DefaultSpringConfig,
       }
@@ -94,7 +93,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       if (typeof window === 'undefined') {
         return {}
       }
-      const modalWidth = Math.min(760, window.innerWidth * 0.8)
+      const modalWidth = Math.min(ModalWidth, window.innerWidth - 128)
       const modalHeight = window.innerHeight - 32
       const modalX = -modalWidth / 2
       const modalY = -modalHeight / 2
@@ -108,6 +107,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: modalY,
         scale: 1,
         overlayOpacity: 1,
+        boxShadow: [
+          '0 24px 36px #0001',
+          '0 24px 46px #0002',
+          cardStyle.boxShadow,
+        ].join(', '),
 
         config: DefaultSpringConfig,
       }
@@ -116,20 +120,10 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       if (slug == null) {
         return {}
       }
-      const bentoCard = document.getElementById(slug)
-      if (bentoCard == null) {
-        throw new Error(`Card with id ${openModalSlug} not found`)
-      }
-      const {
-        top: cardTop,
-        left: cardLeft,
-        width: cardWidth,
-        height: cardHeight,
-      } = bentoCard.getBoundingClientRect()
-      const modalWidth = Math.min(760, window.innerWidth * 0.8)
+      const { cardTop, cardLeft, cardWidth, cardHeight } =
+        getArtworkDimensions(slug)
+      const modalWidth = Math.min(ModalWidth, window.innerWidth - 128)
       const scale = cardWidth / modalWidth
-      console.log('leave', scale)
-      debugger
       return {
         left: cardLeft,
         top: cardTop,
@@ -139,6 +133,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         y: 0,
         scale,
         overlayOpacity: 0,
+        boxShadow: [
+          '0 24px 36px #0000',
+          '0 24px 46px #0000',
+          cardStyle.boxShadow,
+        ].join(', '),
 
         config: AggressiveSpringConfig,
       }
@@ -170,59 +169,111 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                 direction='column'
                 justify='start'
                 overflowY='scroll'
+                position='fixed'
                 style={{
-                  position: 'fixed',
-                  backgroundColor: 'white',
-                  overflow: 'hidden',
                   borderRadius: cardStyle.borderRadius,
+                  backgroundColor: 'white',
                   zIndex: 2,
                   transformOrigin: 'top left',
-                  boxShadow: [
-                    '0 24px 36px #0001',
-                    '0 24px 46px #0002',
-                    cardStyle.boxShadow,
-                  ].join(', '),
                   ...style,
                 }}
                 p='2'
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
               >
-                {project.hero.type === 'video' ? (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    controls={false}
-                    src={project.hero.url}
-                    poster={project.hero.poster.src}
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      aspectRatio: '4 / 3',
-                      overflow: 'hidden',
-                      borderRadius: 6,
-                      flexShrink: 0,
-                    }}
-                  />
-                ) : (
-                  <img
-                    src={project.hero.data.src}
-                    alt={project.title}
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      aspectRatio: '4 / 3',
-                      overflow: 'hidden',
-                      borderRadius: 6,
-                      flexShrink: 0,
-                    }}
-                  />
-                )}
-                <Txt>{project.title}</Txt>
-                <Flex direction='column' flexShrink='0'>
-                  {project.content}
+                <Flex
+                  mb='4'
+                  style={{
+                    borderRadius: 6,
+                    overflow: 'hidden',
+                    flexShrink: 0,
+                    aspectRatio: '4 / 3',
+                  }}
+                >
+                  {project.hero.type === 'video' ? (
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls={false}
+                      src={project.hero.url}
+                      poster={project.hero.poster.src}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src={project.hero.data.src}
+                      alt={project.title}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                      }}
+                    />
+                  )}
                 </Flex>
+                <Grid columns='12' gap='4' px='4'>
+                  {project.role && (
+                    <InfoBlock header='Role' innerText={project.role} />
+                  )}
+                  {project.date && (
+                    <InfoBlock header='Date' innerText={project.date} />
+                  )}
+
+                  {project.collaborators && (
+                    <InfoBlock
+                      header='Collaborators'
+                      innerText={project.collaborators.map(
+                        (collaborator, i, arr) => (
+                          <Box key={collaborator.name}>
+                            <a
+                              href={collaborator.url}
+                              target='_blank'
+                              rel='noreferrer'
+                            >
+                              {collaborator.name}
+                            </a>
+                            {i < arr.length - 1 && ', '}
+                          </Box>
+                        ),
+                      )}
+                    />
+                  )}
+                  {project.links && (
+                    <InfoBlock
+                      header='Links'
+                      innerText={project.links.map((link) => (
+                        <a
+                          key={link.url}
+                          href={link.url}
+                          target='_blank'
+                          rel='noreferrer'
+                        >
+                          {link.title}
+                        </a>
+                      ))}
+                    />
+                  )}
+                  <Box gridColumn='5 / span 8'>
+                    <Heading size='8' style={{ ...instrumentSerif.style }}>
+                      {project.title}
+                    </Heading>
+                    {project.subtitle && (
+                      <Txt size='1' style={{ color: '#0004' }}>
+                        {project.subtitle}
+                      </Txt>
+                    )}
+                    <Flex direction='column'>
+                      <Txt size='4'>{project.content}</Txt>
+                    </Flex>
+                  </Box>
+                </Grid>
               </AnimatedFlex>
             </ClientOnlyPortal>
           )
@@ -258,7 +309,7 @@ export const usePortfolioModal = () => {
 const AnimatedFlex = animated(Flex)
 
 const AggressiveSpringConfig: SpringConfig = {
-  tension: 350,
+  tension: 230,
   clamp: true,
 }
 
@@ -270,3 +321,38 @@ const DefaultSpringConfig: SpringConfig = {
 }
 
 export const ProjectSlugParam = 'project'
+
+const ModalWidth = 768
+
+const InfoBlock: React.FC<{ header: string; innerText: React.ReactNode }> = ({
+  header,
+  innerText,
+}) => (
+  <Flex gridColumn='span 3' direction='column' py='2'>
+    <Txt size='1' weight='bold' style={{ color: '#0004' }}>
+      {header}
+    </Txt>
+    <Txt size='1'>{innerText}</Txt>
+  </Flex>
+)
+
+function getArtworkDimensions(slug: ProjectSlug) {
+  const bentoCard = document.querySelector(
+    `#${slug} .${PortfolioArtworkClassName}`,
+  )
+  if (bentoCard == null) {
+    throw new Error(`Card with id ${slug} not found`)
+  }
+  const {
+    top: cardTop,
+    left: cardLeft,
+    width: cardWidth,
+    height: cardHeight,
+  } = bentoCard.getBoundingClientRect()
+  return {
+    cardTop,
+    cardLeft,
+    cardWidth,
+    cardHeight,
+  }
+}
