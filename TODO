@@ -8,7 +8,12 @@ MVP: Release to testers
 - URL handling
 
 2. Portfolio Final List
+
 3. Portfolio Content
+
+- AcroYoga Transitions: upload the google sheets link again
+-
+
 4. Rewrite About
 5. Copy a good contact section
 6. Send to Brandon, Ediya, Natalija, and Grazia.
@@ -38,16 +43,16 @@ don't want to do that.
 
 - CTA stating i am looking for work (about and contact)
 - test on small and giganto screen sizes
-- Navigation void should not be grabbable
+
+# Bugs
+
+- Navigation void should not be grabbable, should not respond so much to mouse movement
 
 ---
+
+# Nice to haves
 
 - section for qualifications / certifications / photo of my bookshelf. needs to
   communicate my serious credentials and affiliations
 - “autumn color swamp” as a meander
 - no javascript fallbacks
-
-# Portfolio Tasks
-
-- AcroYoga Transitions: upload the google sheets link again
--

@@ -4,6 +4,7 @@ import type React from 'react'
 import { instrumentSerif, instrumentSans } from './fonts'
 import './global.css'
 import './theme.css'
+import { SquircleNoScript } from '@squircle-js/react'
 
 export default function RootLayout({
   children,
@@ -24,6 +25,7 @@ export default function RootLayout({
           position: 'relative',
         }}
       >
+        <SquircleNoScript />
         <Theme id='theme-root'>{children}</Theme>
       </body>
     </html>

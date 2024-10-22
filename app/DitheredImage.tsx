@@ -4,6 +4,7 @@ import React from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/dithered.frag'
 import vertexShader from './shaders/dithered.vert'
+import { Squircle } from '@squircle-js/react'
 
 interface DitheredMeshProps {
   /** The URL of the image to be dithered. */
@@ -67,24 +68,32 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
   }, [maxWidth, imageUrl])
 
   return (
-    <div ref={containerRef} style={{ maxWidth, width: '100%' }}>
-      <Canvas
-        id='dithered-image-canvas'
-        style={{ width: canvasSize.width, height: canvasSize.height }}
-        orthographic
-        camera={{ zoom: 1, position: [0, 0, 100] }}
-      >
-        <DitheredMesh
-          imageUrl={imageUrl}
-          maskUrl={maskUrl}
-          darkColor={darkColor}
-          lightColor={lightColor}
-          pixelSize={pixelSize}
-          gammaCorrection={gammaCorrection}
-          toneMapLow={toneMapLow}
-          toneMapHigh={toneMapHigh}
-        />
-      </Canvas>
+    <div
+      ref={containerRef}
+      style={{
+        maxWidth,
+        width: '100%',
+      }}
+    >
+      <Squircle cornerRadius={32} height='100%' style={{ overflow: 'hidden' }}>
+        <Canvas
+          id='dithered-image-canvas'
+          style={{ width: canvasSize.width, height: canvasSize.height }}
+          orthographic
+          camera={{ zoom: 1, position: [0, 0, 100] }}
+        >
+          <DitheredMesh
+            imageUrl={imageUrl}
+            maskUrl={maskUrl}
+            darkColor={darkColor}
+            lightColor={lightColor}
+            pixelSize={pixelSize}
+            gammaCorrection={gammaCorrection}
+            toneMapLow={toneMapLow}
+            toneMapHigh={toneMapHigh}
+          />
+        </Canvas>
+      </Squircle>
     </div>
   )
 }

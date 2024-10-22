@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "devDependencies": {
+    "@react-three/eslint-plugin": "0.1.1",
     "@types/node": "22.7.5",
     "@types/react": "18.3.11",
     "@types/react-dom": "18.3.0",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.15",
-    "@react-three/eslint-plugin": "0.1.1",
     "eslint-plugin-react-hooks": "5.0.0"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "@react-spring/web": "9.7.5",
     "@react-three/drei": "9.114.3",
     "@react-three/fiber": "8.17.10",
+    "@squircle-js/react": "1.2.0",
     "@use-gesture/react": "10.3.1",
     "moment": "2.30.1",
     "next": "14.2.15",
