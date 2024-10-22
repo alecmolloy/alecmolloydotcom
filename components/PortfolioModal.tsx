@@ -5,7 +5,7 @@ import { Box, Flex, Grid, Heading, Text as Txt } from '@radix-ui/themes'
 import { SpringConfig, animated, useTransition } from '@react-spring/web'
 import React from 'react'
 import { ProjectSlug, isProjectSlug } from '../app/content-types'
-import { cardStyle, PortfolioArtworkClassName } from '../app/PortfolioCard'
+import { PortfolioArtworkClassName, cardStyle } from '../app/PortfolioCard'
 
 interface PortfolioModalProps {
   openModalSlug: ProjectSlug | null
@@ -19,6 +19,8 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
   const handleCloseModal = React.useCallback(() => {
     setOpenModalSlug(null)
   }, [setOpenModalSlug])
+
+  const [settled, setSettled] = React.useState(false)
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -48,19 +50,9 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
     }
   }, [openModalSlug])
 
-  const modalTransitions = useTransition<
+  const modalTransition = useTransition<
     ProjectSlug | null,
-    {
-      left: number
-      top: number
-      width: number
-      height: number
-      x: number
-      y: number
-      scale: number
-      overlayOpacity: number
-      boxShadow: string
-    }
+    ModalTransitionProps
   >(openModalSlug, {
     from: (slug) => {
       if (slug == null) {
@@ -79,13 +71,13 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         x: 0,
         y: 0,
         scale,
-        overlayOpacity: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0)',
         boxShadow: [
           '0 24px 36px #0000',
           '0 24px 46px #0000',
+
           cardStyle.boxShadow,
         ].join(', '),
-
         config: DefaultSpringConfig,
       }
     },
@@ -106,7 +98,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         x: modalX,
         y: modalY,
         scale: 1,
-        overlayOpacity: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.15)',
         boxShadow: [
           '0 24px 36px #0001',
           '0 24px 46px #0002',
@@ -114,6 +106,9 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
 
         config: DefaultSpringConfig,
+        onRest: () => {
+          setSettled(true)
+        },
       }
     },
     leave: (slug) => {
@@ -132,7 +127,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         x: 0,
         y: 0,
         scale,
-        overlayOpacity: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0)',
         boxShadow: [
           '0 24px 36px #0000',
           '0 24px 46px #0000',
@@ -140,13 +135,16 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
 
         config: AggressiveSpringConfig,
+        onStart: () => {
+          setSettled(false)
+        },
       }
     },
   })
 
   return (
     <>
-      {modalTransitions(({ overlayOpacity, ...style }, slug) => {
+      {modalTransition(({ backgroundColor, boxShadow, ...style }, slug) => {
         const project = slug != null ? projects[slug] : null
         return (
           project != null && (
@@ -158,140 +156,143 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                 right='0'
                 bottom='0'
                 style={{
-                  backgroundColor: 'rgba(0, 0, 0, 0.15)',
-                  opacity: overlayOpacity,
+                  backgroundColor,
                 }}
                 align='center'
                 justify='center'
                 onClick={handleCloseModal}
-              />
-              <AnimatedFlex
-                direction='column'
-                justify='start'
-                overflowY='scroll'
-                position='fixed'
-                style={{
-                  borderRadius: cardStyle.borderRadius,
-                  backgroundColor: 'white',
-                  zIndex: 2,
-                  transformOrigin: 'top left',
-                  ...style,
-                }}
-                p='2'
-                onClick={(e: React.MouseEvent) => e.stopPropagation()}
               >
-                <Flex
-                  mb='4'
+                <AnimatedFlex
+                  direction='column'
+                  justify='start'
+                  overflowY='scroll'
+                  position='fixed'
                   style={{
-                    borderRadius: 6,
-                    overflow: 'hidden',
-                    flexShrink: 0,
-                    aspectRatio: '4 / 3',
+                    borderRadius: cardStyle.borderRadius,
+                    backgroundColor: 'white',
+                    zIndex: 2,
+                    transformOrigin: 'top left',
+                    boxShadow,
+                    maxWidth: 768,
+                    maxHeight: 'calc(100vh - 32px)',
+                    ...(!settled && style),
                   }}
+                  p='2'
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
                 >
-                  {project.hero.type === 'video' ? (
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      controls={false}
-                      src={project.hero.url}
-                      poster={project.hero.poster.src}
-                      style={{
-                        display: 'block',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src={project.hero.data.src}
-                      alt={project.title}
-                      style={{
-                        display: 'block',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                      }}
-                    />
-                  )}
-                </Flex>
-                <Grid columns='12' gap='4' px='4'>
-                  {project.role && (
-                    <InfoBlock header='Role' innerText={project.role} />
-                  )}
-                  {project.collaborators && (
-                    <InfoBlock
-                      header='Collaborators'
-                      innerText={project.collaborators.map((collaborator) => (
-                        <Box key={collaborator.name}>
-                          {collaborator.url != null ? (
-                            <a
-                              href={collaborator.url}
-                              target='_blank'
-                              rel='noreferrer'
-                            >
-                              {collaborator.name} →
-                            </a>
-                          ) : (
-                            collaborator.name
-                          )}
-                        </Box>
-                      ))}
-                    />
-                  )}
-                  {project.tools && (
-                    <InfoBlock
-                      header='Tools'
-                      innerText={project.tools.join(', ')}
-                    />
-                  )}
-                  {project.deliverables && (
-                    <InfoBlock
-                      header='Deliverables'
-                      innerText={project.deliverables}
-                    />
-                  )}
-                  {project.links && (
-                    <InfoBlock
-                      header='Links'
-                      innerText={
-                        <Flex direction='column'>
-                          {project.links.map((link) => (
-                            <a
-                              key={link.url}
-                              href={link.url}
-                              target='_blank'
-                              rel='noreferrer'
-                            >
-                              {link.title} →
-                            </a>
-                          ))}
-                        </Flex>
-                      }
-                    />
-                  )}
-                  <Box gridColumn='5 / span 8'>
-                    <Heading size='8' style={{ ...instrumentSerif.style }}>
-                      {project.title}
-                    </Heading>
-                    {(project.subtitle != null || project.date != null) && (
-                      <Txt size='1' style={{ color: '#0008' }}>
-                        <Txt weight='bold'>
-                          {project.date != null && project.date}
-                        </Txt>
-                        {project.subtitle != null &&
-                          project.date != null &&
-                          ' — '}
-                        {project.subtitle != null && project.subtitle}
-                      </Txt>
+                  <Flex
+                    mb='4'
+                    style={{
+                      borderRadius: 6,
+                      overflow: 'hidden',
+                      flexShrink: 0,
+                      aspectRatio: '4 / 3',
+                    }}
+                  >
+                    {project.hero.type === 'video' ? (
+                      <video
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        controls={false}
+                        src={project.hero.url}
+                        poster={project.hero.poster.src}
+                        style={{
+                          display: 'block',
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={project.hero.data.src}
+                        alt={project.title}
+                        style={{
+                          display: 'block',
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                        }}
+                      />
                     )}
+                  </Flex>
+                  <Grid columns='12' gap='4' px='4'>
+                    {project.role && (
+                      <InfoBlock header='Role' innerText={project.role} />
+                    )}
+                    {project.collaborators && (
+                      <InfoBlock
+                        header='Collaborators'
+                        innerText={project.collaborators.map((collaborator) => (
+                          <Box key={collaborator.name}>
+                            {collaborator.url != null ? (
+                              <a
+                                href={collaborator.url}
+                                target='_blank'
+                                rel='noreferrer'
+                              >
+                                {collaborator.name} →
+                              </a>
+                            ) : (
+                              collaborator.name
+                            )}
+                          </Box>
+                        ))}
+                      />
+                    )}
+                    {project.tools && (
+                      <InfoBlock
+                        header='Tools'
+                        innerText={project.tools.join(', ')}
+                      />
+                    )}
+                    {project.deliverables && (
+                      <InfoBlock
+                        header='Deliverables'
+                        innerText={project.deliverables}
+                      />
+                    )}
+                    {project.links && (
+                      <InfoBlock
+                        header='Links'
+                        innerText={
+                          <Flex direction='column'>
+                            {project.links.map((link) => (
+                              <a
+                                key={link.url}
+                                href={link.url}
+                                target='_blank'
+                                rel='noreferrer'
+                              >
+                                {link.title} →
+                              </a>
+                            ))}
+                          </Flex>
+                        }
+                      />
+                    )}
+                    <Box gridColumn='5 / span 8'>
+                      <Heading size='8' style={{ ...instrumentSerif.style }}>
+                        {project.title}
+                      </Heading>
+                      {(project.subtitle != null || project.date != null) && (
+                        <Txt size='1' style={{ color: '#0008' }}>
+                          <Txt weight='bold'>
+                            {project.date != null && project.date}
+                          </Txt>
+                          {project.subtitle != null &&
+                            project.date != null &&
+                            ' — '}
+                          {project.subtitle != null && project.subtitle}
+                        </Txt>
+                      )}
 
-                    <Txt size='4'>{project.content}</Txt>
-                  </Box>
-                </Grid>
+                      <Txt size='4'>{project.content}</Txt>
+                    </Box>
+                  </Grid>
+                </AnimatedFlex>
               </AnimatedFlex>
             </ClientOnlyPortal>
           )
@@ -373,4 +374,16 @@ function getArtworkDimensions(slug: ProjectSlug) {
     cardWidth,
     cardHeight,
   }
+}
+
+type ModalTransitionProps = {
+  left: number
+  top: number
+  width: number
+  height: number
+  x: number
+  y: number
+  scale: number
+  backgroundColor: string
+  boxShadow: string
 }

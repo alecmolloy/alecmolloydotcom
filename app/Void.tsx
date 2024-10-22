@@ -1,8 +1,8 @@
 import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
 import fragmentShader from './shaders/void.frag'
@@ -21,7 +21,7 @@ interface VoidProps {
 export const Void: React.FunctionComponent<VoidProps> = ({
   radius,
   position,
-  wobbleAmplitude = 0.025,
+  wobbleAmplitude = 0.05,
   wobbleFrequency = 0.5,
   rotationXOffset = Math.PI,
 }) => {
@@ -31,7 +31,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   }))
 
   const [interactionState, setInteractionState] =
-    useState<InteractionState>(null)
+    React.useState<InteractionState>(null)
 
   const bind = useGesture(
     {
@@ -59,7 +59,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
     },
   )
 
-  useEffect(() => {
+  React.useEffect(() => {
     switch (interactionState) {
       case 'grabbing': {
         document.body.style.cursor = 'grabbing'
@@ -150,7 +150,25 @@ export const Void: React.FunctionComponent<VoidProps> = ({
     return [radius, radius, 0.125 * radius] as [number, number, number]
   }, [radius])
 
-  useFrame(({ gl, clock }) => {
+  const { size, gl } = useThree()
+  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 })
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / size.width) * 2 - 1,
+        y: -(e.clientY / size.height) * 2 + 1,
+      })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [size])
+
+  useFrame(({ clock }) => {
     if (meshRef.current && meshRef.current.geometry) {
       const geometry = meshRef.current.geometry
       const positions = geometry.attributes.position
@@ -188,6 +206,18 @@ export const Void: React.FunctionComponent<VoidProps> = ({
             wobbleAmplitude -
           Math.PI
       }
+
+      // Add mouse-following rotation
+      const maxRotation = (5 * Math.PI) / 180 // 5 degrees in radians
+      meshRef.current.rotation.x +=
+        -mousePosition.y * maxRotation + rotationXOffset
+      meshRef.current.rotation.y +=
+        mousePosition.x * maxRotation +
+        Math.cos(clock.elapsedTime * wobbleFrequency * 1.3) * wobbleAmplitude -
+        Math.PI
+      meshRef.current.rotation.z +=
+        Math.sin(clock.elapsedTime * wobbleFrequency * 0.7) * wobbleAmplitude -
+        Math.PI
 
       // Update bump material time uniform
       bumpMaterial.uniforms.time.value = clock.elapsedTime
