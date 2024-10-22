@@ -1,6 +1,7 @@
 'use client'
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { Canvas } from '@react-three/fiber'
+import { BobbingText } from './components/BobbingText'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 
@@ -67,6 +68,9 @@ export const HeroCanvas = () => {
             <a
               href='mailto:workwith@alecmolloy.com'
               style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
                 textDecoration: 'none',
                 textDecorationThickness: 1.5,
                 textDecorationStyle: 'wavy',
@@ -76,19 +80,7 @@ export const HeroCanvas = () => {
                 right: 0,
               }}
             >
-              <Txt
-                size='5'
-                weight='medium'
-                style={{
-                  color: '#000',
-                  cursor: 'pointer',
-                }}
-                onClick={() => {
-                  window.location.href = 'mailto:workwith@alecmolloy.com'
-                }}
-              >
-                Contact
-              </Txt>
+              <BobbingText>Open to work</BobbingText>
             </a>
           </Flex>
         </Flex>
