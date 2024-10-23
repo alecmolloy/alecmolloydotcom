@@ -80,7 +80,7 @@ export const HeroCanvas = () => {
                 right: 0,
               }}
             >
-              <BobbingText>Open to work</BobbingText>
+              <BobbingText>Work with me →</BobbingText>
             </a>
           </Flex>
         </Flex>
