@@ -75,21 +75,21 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
       <Grid {...defaultGridProps}>
         <PortfolioCard
           project={vbt}
-          gridColumn='span 7'
+          gridColumn='span 8'
           size='lg'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === vbt.slug}
         />
         <Flex
-          gridColumn={{ initial: '1 / -1', xs: '8 / span 5' }}
+          gridColumn={{ initial: '1 / -1', xs: '9 / span 4' }}
           direction='column'
           gap={defaultGridProps.gap}
         >
           <PortfolioCard
-            project={utopia}
+            project={nuclearConnections}
             size='md'
             setOpenModal={setOpenModalSlug}
-            modalOpen={openModalSlug === utopia.slug}
+            modalOpen={openModalSlug === nuclearConnections.slug}
           />
           <SimplexNoiseCanvas
             {...simplexNoiseProps}
@@ -98,11 +98,11 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           />
         </Flex>
         <PortfolioCard
-          project={nuclearConnections}
+          project={utopia}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
           size='lg'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === nuclearConnections.slug}
+          modalOpen={openModalSlug === utopia.slug}
         />
         <PortfolioCard
           project={retreatTechnology}

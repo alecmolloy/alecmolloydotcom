@@ -2,51 +2,108 @@ MVP: Release to testers
 
 1. Portfolio Modal
 
-- Responsive
-- Mobile view
-- Fill out fully with media
+- Mobile view (same as fullscreen)
+- close / fullscreen
+- Fill Kano out fully with media
 - URL handling
 
-2. Portfolio Final List
+  create a modal component that takes the url:
+  alecmolloy.com/portfolio?id=min-doktor
 
-3. Portfolio Content
+  it should open with a spring animation from the existing card, to the middle of
+  the screen and close when clicking outside of it or the close button.
 
-- AcroYoga Transitions: upload the google sheets link again
--
+  How facebook solves keeping the video playing:
+  https://www.reddit.com/r/reactjs/comments/gp7yld/comment/frobx9q/
 
-4. Rewrite About
-5. Copy a good contact section
-6. Send to Brandon, Ediya, Natalija, and Grazia.
+  package someone made for (possibly) the same problem:
+  https://medium.com/swlh/reparenting-with-react-426d12fb6d0d
+  https://www.npmjs.com/package/react-reparenting
 
-# Modal
-
-create a modal component that takes the url:
-alecmolloy.com/portfolio?id=min-doktor
-
-it should open with a spring animation from the existing card, to the middle of
-the screen and close when clicking outside of it or the close button.
-
-How facebook solves keeping the video playing:
-https://www.reddit.com/r/reactjs/comments/gp7yld/comment/frobx9q/
-
-package someone made for (possibly) the same problem:
-https://medium.com/swlh/reparenting-with-react-426d12fb6d0d
-https://www.npmjs.com/package/react-reparenting
-
-On mobile, it should fill the screen.
+  On mobile, it should fill the screen.
 
 /////
 I think i might need to bump the modal up to the portfolio section. but maybe i
 don't want to do that.
 
-# TASKS
+2. Portfolio Final Bento Layout
 
-- CTA stating i am looking for work (about and contact)
-- test on small and giganto screen sizes
+- enforce a line height for cards
+- mobile layout
+- responsize
+- select the final content list
+- arrange them all
+- change the perlin noise filler to the wave pattern
+
+3. Portfolio Content
+
+Before writing copy, review Harry Dry's writing advice, come up with a format
+for a great portfolio write-up.
+
+- VBT App
+  - copy
+  - add artwork
+- Utopia.app
+  - copy
+  - investor video
+- Nuclear Connections
+  - copy
+  - Screenshots
+- Retreat.technology
+  - copy
+  - more screenshots
+- Game of Life Editor
+  - copy
+  - screen recording
+- Instant Replay
+  - copy (instant replay and slomo)
+- AcroYoga Transitions
+  - copy
+  - video of friends _using_ the app
+- Local Welcome
+  - copy needs to have specific projects that I did, with the tech stacks
+  - screenshots if possible
+- Min Doktor
+  - copy, link with good news articles?
+  - screenshots
+- Kano Computing
+  - copy, split into subheadings for different projects
+  - awards?
+- Elements 3D
+  - copy
+  - potter, different images
+- Adobe
+
+  - copy
+  - screenshots, imagery
+
+    3.1 Portfolio Completion
+
+  - Elements 3D: Homepage with documentation + examples
+  - Game of Life Editor: hosted, and has a way of opening up interesting RLEs
+  - AcroYoga Transitions: upload the google sheets link again
+
+4. About section rewrite
+
+- more professional, prestigious connections. imagine the Lowercase Club was
+  reading this
+
+5. Contact section
+
+- review best contact sections from the inspiration list and copy it
+
+6. Send to Brandon, Ediya, Natalija, and Grazia.
 
 # Bugs
 
-- Navigation void should not be grabbable, should not respond so much to mouse movement
+- Navigation void should not be grabbable, should not respond so much to mouse
+  movement
+- Turtle background should resize properly, it is getting outdated width data
+- navigation should change to about page much sooner
+
+# Misc
+
+- test on small and giganto screen sizes
 
 ---
 

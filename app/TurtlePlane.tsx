@@ -75,6 +75,7 @@ export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
       turtleHorizontalImg &&
       turtleVerticalImg
     ) {
+      // this is the width and height, if there was an issue, it would be here
       const canvasPixelWidth = canvasCellWidth * PixelScale
       const canvasPixelHeight = canvasCellHeight * PixelScale
       const centerX = Math.floor(canvasCellWidth / 2)
