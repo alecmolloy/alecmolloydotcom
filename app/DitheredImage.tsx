@@ -75,7 +75,12 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
         width: '100%',
       }}
     >
-      <Squircle cornerRadius={32} height='100%' style={{ overflow: 'hidden' }}>
+      <Squircle
+        cornerRadius={32}
+        // @ts-ignore
+        height='100%'
+        style={{ overflow: 'hidden' }}
+      >
         <Canvas
           id='dithered-image-canvas'
           style={{ width: canvasSize.width, height: canvasSize.height }}
