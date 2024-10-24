@@ -7,7 +7,7 @@ export const nuclearConnections = project(
   'Social word game',
   heroImage(nuclearHero, 'Nuclear Connections Game'),
   'January 2024',
-  ['React Native', 'TypeScript', 'Next.js'],
+  ['React', 'TypeScript', 'Next.js'],
   <>
     <p>
       Nuclear Connections is a social word game inspired by the New York Times

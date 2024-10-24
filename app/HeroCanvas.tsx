@@ -85,6 +85,7 @@ export const HeroCanvas = () => {
           </Flex>
         </Flex>
         <Canvas
+          id='hero-canvas'
           orthographic
           camera={{
             position: [0, CameraStartY, 0],

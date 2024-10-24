@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@radix-ui/themes'
 import React from 'react'
 import { TurtleCanvas, TurtleSize } from './TurtleCanvas'
 
@@ -24,7 +25,7 @@ export const TurtleMeander: React.FunctionComponent<TurtleMeanderProps> = ({
   }, [])
 
   return (
-    <div
+    <Box
       style={{
         position: 'relative',
         height: height * TurtleSize,
@@ -41,6 +42,6 @@ export const TurtleMeander: React.FunctionComponent<TurtleMeanderProps> = ({
           transform: 'translateX(-50%)',
         }}
       />
-    </div>
+    </Box>
   )
 }
