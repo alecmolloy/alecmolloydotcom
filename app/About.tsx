@@ -45,8 +45,8 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             gridColumn={{ initial: '1 / span 12', xs: 'span 8', md: 'span 6' }}
           >
             <P>
-              I am a creative technologist, designing and building tools for the
-              expansion of consciousness.
+              I am a creative technologist, building tools for human connection
+              and the expansion of consciousness.
             </P>
             <P>
               I’ve built creative tools and educational software at{' '}

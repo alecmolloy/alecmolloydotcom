@@ -232,6 +232,7 @@ export const Navigation: React.FunctionComponent = () => {
           </Flex>
           <animated.div
             style={{
+              zIndex: -1,
               position: 'absolute',
               left: 0,
               height: navLinkHeight,
