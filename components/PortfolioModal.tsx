@@ -1,8 +1,10 @@
 import { instrumentSerif } from '@/app/fonts'
 import ClientOnlyPortal from '@/components/ClientOnlyPortal'
 import { projects } from '@/data/portfolio'
+import closeButton from '@/public/icons/close.svg'
 import { Box, Flex, Grid, Heading, Text as Txt } from '@radix-ui/themes'
 import { SpringConfig, animated, useTransition } from '@react-spring/web'
+import Img from 'next/image'
 import React from 'react'
 import { ProjectSlug, isProjectSlug } from '../app/content-types'
 import { PortfolioArtworkClassName, cardStyle } from '../app/PortfolioCard'
@@ -16,11 +18,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
   openModalSlug,
   setOpenModalSlug,
 }) => {
+  const [settled, setSettled] = React.useState(false)
+
   const handleCloseModal = React.useCallback(() => {
     setOpenModalSlug(null)
   }, [setOpenModalSlug])
-
-  const [settled, setSettled] = React.useState(false)
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -75,9 +77,9 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         boxShadow: [
           '0 24px 36px #0000',
           '0 24px 46px #0000',
-
           cardStyle.boxShadow,
         ].join(', '),
+        closeButtonOpacity: 0,
         config: DefaultSpringConfig,
       }
     },
@@ -104,6 +106,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
           '0 24px 46px #0002',
           cardStyle.boxShadow,
         ].join(', '),
+        closeButtonOpacity: 1,
 
         config: DefaultSpringConfig,
         onRest: () => {
@@ -133,6 +136,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
           '0 24px 46px #0000',
           cardStyle.boxShadow,
         ].join(', '),
+        closeButtonOpacity: 0,
 
         config: AggressiveSpringConfig,
         onStart: () => {
@@ -144,160 +148,197 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
 
   return (
     <>
-      {modalTransition(({ backgroundColor, boxShadow, ...style }, slug) => {
-        const project = slug != null ? projects[slug] : null
-        return (
-          project != null && (
-            <ClientOnlyPortal selector='#theme-root'>
-              <AnimatedFlex
-                position='fixed'
-                top='0'
-                left='0'
-                right='0'
-                bottom='0'
-                style={{
-                  backgroundColor,
-                }}
-                align='center'
-                justify='center'
-                onClick={handleCloseModal}
-              >
+      {modalTransition(
+        (
+          { backgroundColor, boxShadow, closeButtonOpacity, ...style },
+          slug,
+        ) => {
+          const project = slug != null ? projects[slug] : null
+          return (
+            project != null && (
+              <ClientOnlyPortal selector='#theme-root'>
                 <AnimatedFlex
-                  direction='column'
-                  justify='start'
-                  overflowY='scroll'
                   position='fixed'
+                  top='0'
+                  left='0'
+                  right='0'
+                  bottom='0'
                   style={{
-                    borderRadius: cardStyle.borderRadius,
-                    backgroundColor: 'white',
-                    zIndex: 2,
-                    transformOrigin: 'top left',
-                    boxShadow,
-                    maxWidth: 768,
-                    maxHeight: 'calc(100vh - 32px)',
-                    ...(!settled && style),
+                    backgroundColor,
                   }}
-                  p='2'
-                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                  align='center'
+                  justify='center'
+                  onClick={handleCloseModal}
                 >
-                  <Flex
-                    mb='4'
+                  <AnimatedFlex
+                    position='fixed'
+                    direction='column'
+                    justify='start'
+                    overflowY='scroll'
                     style={{
-                      borderRadius: 6,
-                      overflow: 'hidden',
-                      flexShrink: 0,
-                      aspectRatio: '4 / 3',
+                      borderRadius: cardStyle.borderRadius,
+                      backgroundColor: 'white',
+                      zIndex: 2,
+                      transformOrigin: 'top left',
+                      boxShadow,
+                      maxWidth: 768,
+                      maxHeight: 'calc(100vh - 32px)',
+                      ...(!settled && style),
                     }}
+                    p='2'
+                    onClick={(e: React.MouseEvent) => e.stopPropagation()}
                   >
-                    {project.hero.type === 'video' ? (
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        controls={false}
-                        src={project.hero.url}
-                        poster={project.hero.poster.src}
-                        style={{
-                          display: 'block',
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={project.hero.data.src}
-                        alt={project.title}
-                        style={{
-                          display: 'block',
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                        }}
-                      />
-                    )}
-                  </Flex>
-                  <Grid columns='12' gap='4' px='4'>
-                    {project.role && (
-                      <InfoBlock header='Role' innerText={project.role} />
-                    )}
-                    {project.collaborators && (
-                      <InfoBlock
-                        header='Collaborators'
-                        innerText={project.collaborators.map((collaborator) => (
-                          <Box key={collaborator.name}>
-                            {collaborator.url != null ? (
-                              <a
-                                href={collaborator.url}
-                                target='_blank'
-                                rel='noreferrer'
-                              >
-                                {collaborator.name} →
-                              </a>
-                            ) : (
-                              collaborator.name
-                            )}
-                          </Box>
-                        ))}
-                      />
-                    )}
-                    {project.tools && (
-                      <InfoBlock
-                        header='Tools'
-                        innerText={project.tools.join(', ')}
-                      />
-                    )}
-                    {project.deliverables && (
-                      <InfoBlock
-                        header='Deliverables'
-                        innerText={project.deliverables}
-                      />
-                    )}
-                    {project.links && (
-                      <InfoBlock
-                        header='Links'
-                        innerText={
-                          <Flex direction='column'>
-                            {project.links.map((link) => (
-                              <a
-                                key={link.url}
-                                href={link.url}
-                                target='_blank'
-                                rel='noreferrer'
-                              >
-                                {link.title} →
-                              </a>
-                            ))}
-                          </Flex>
-                        }
-                      />
-                    )}
-                    <Box gridColumn='5 / span 8'>
-                      <Heading size='8' style={{ ...instrumentSerif.style }}>
-                        {project.title}
-                      </Heading>
-                      {(project.subtitle != null || project.date != null) && (
-                        <Txt size='1' style={{ color: '#0008' }}>
-                          <Txt weight='bold'>
-                            {project.date != null && project.date}
-                          </Txt>
-                          {project.subtitle != null &&
-                            project.date != null &&
-                            ' — '}
-                          {project.subtitle != null && project.subtitle}
-                        </Txt>
+                    <AnimatedFlex
+                      position='absolute'
+                      top='3'
+                      left='3'
+                      m='7px'
+                      style={{
+                        zIndex: 1,
+                        userSelect: 'none',
+                        cursor: 'pointer',
+                        opacity: closeButtonOpacity,
+                        backgroundColor: '#333a',
+                        boxShadow: '0 0 5px #0005',
+                        borderRadius: 10000,
+                      }}
+                    >
+                      <Flex
+                        onClick={handleCloseModal}
+                        align='center'
+                        justify='center'
+                        width='30px'
+                        height='30px'
+                      >
+                        <Img
+                          src={closeButton}
+                          alt='close modal'
+                          width={12}
+                          height={12}
+                        />
+                      </Flex>
+                    </AnimatedFlex>
+                    <Flex
+                      mb='4'
+                      style={{
+                        borderRadius: 6,
+                        overflow: 'hidden',
+                        flexShrink: 0,
+                        aspectRatio: '4 / 3',
+                      }}
+                    >
+                      {project.hero.type === 'video' ? (
+                        <video
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          controls={false}
+                          src={project.hero.url}
+                          poster={project.hero.poster.src}
+                          style={{
+                            display: 'block',
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                          }}
+                        />
+                      ) : (
+                        <img
+                          src={project.hero.data.src}
+                          alt={project.title}
+                          style={{
+                            display: 'block',
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                          }}
+                        />
                       )}
+                    </Flex>
+                    <Grid columns='12' gap='4' px='4'>
+                      {project.role && (
+                        <InfoBlock header='Role' innerText={project.role} />
+                      )}
+                      {project.collaborators && (
+                        <InfoBlock
+                          header='Collaborators'
+                          innerText={project.collaborators.map(
+                            (collaborator) => (
+                              <Box key={collaborator.name}>
+                                {collaborator.url != null ? (
+                                  <a
+                                    href={collaborator.url}
+                                    target='_blank'
+                                    rel='noreferrer'
+                                  >
+                                    {collaborator.name} →
+                                  </a>
+                                ) : (
+                                  collaborator.name
+                                )}
+                              </Box>
+                            ),
+                          )}
+                        />
+                      )}
+                      {project.tools && (
+                        <InfoBlock
+                          header='Tools'
+                          innerText={project.tools.join(', ')}
+                        />
+                      )}
+                      {project.deliverables && (
+                        <InfoBlock
+                          header='Deliverables'
+                          innerText={project.deliverables}
+                        />
+                      )}
+                      {project.links && (
+                        <InfoBlock
+                          header='Links'
+                          innerText={
+                            <Flex direction='column'>
+                              {project.links.map((link) => (
+                                <a
+                                  key={link.url}
+                                  href={link.url}
+                                  target='_blank'
+                                  rel='noreferrer'
+                                >
+                                  {link.title} →
+                                </a>
+                              ))}
+                            </Flex>
+                          }
+                        />
+                      )}
+                      <Box gridColumn='5 / span 8'>
+                        <Heading size='8' style={{ ...instrumentSerif.style }}>
+                          {project.title}
+                        </Heading>
+                        {(project.subtitle != null || project.date != null) && (
+                          <Txt size='1' style={{ color: '#0008' }}>
+                            <Txt weight='bold'>
+                              {project.date != null && project.date}
+                            </Txt>
+                            {project.subtitle != null &&
+                              project.date != null &&
+                              ' — '}
+                            {project.subtitle != null && project.subtitle}
+                          </Txt>
+                        )}
 
-                      <Txt size='4'>{project.content}</Txt>
-                    </Box>
-                  </Grid>
+                        <Txt size='4'>{project.content}</Txt>
+                      </Box>
+                    </Grid>
+                  </AnimatedFlex>
                 </AnimatedFlex>
-              </AnimatedFlex>
-            </ClientOnlyPortal>
+              </ClientOnlyPortal>
+            )
           )
-        )
-      })}
+        },
+      )}
     </>
   )
 }
@@ -386,4 +427,5 @@ type ModalTransitionProps = {
   scale: number
   backgroundColor: string
   boxShadow: string
+  closeButtonOpacity: number
 }
