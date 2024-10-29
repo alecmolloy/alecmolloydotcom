@@ -18,6 +18,16 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
   openModalSlug,
   setOpenModalSlug,
 }) => {
+  const [isMobile, setIsMobile] = React.useState(getIsMobile())
+  React.useLayoutEffect(() => {
+    const handleResize = () => {
+      setIsMobile(getIsMobile())
+    }
+    window.addEventListener('resize', handleResize)
+    setIsMobile(getIsMobile())
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const [settled, setSettled] = React.useState(false)
 
   const handleCloseModal = React.useCallback(() => {
@@ -57,13 +67,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
     ModalTransitionProps
   >(openModalSlug, {
     from: (slug) => {
-      if (slug == null) {
+      if (slug == null || typeof window === 'undefined') {
         return {}
       }
-      const { cardTop, cardLeft, cardWidth, cardHeight } =
-        getArtworkDimensions(slug)
-      const modalWidth = Math.min(ModalWidth, window.innerWidth - 128)
-      const scale = cardWidth / modalWidth
+      const { cardTop, cardLeft, modalWidth, cardHeight, scale } =
+        getModalDimensions(slug)
 
       return {
         left: cardLeft,
@@ -73,6 +81,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         x: 0,
         y: 0,
         scale,
+        borderRadius: cardStyle.borderRadius,
         backgroundColor: 'rgba(0, 0, 0, 0)',
         boxShadow: [
           '0 24px 36px #0000',
@@ -83,14 +92,18 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         config: DefaultSpringConfig,
       }
     },
-    enter: () => {
-      if (typeof window === 'undefined') {
+    enter: (slug) => {
+      if (slug == null || typeof window === 'undefined') {
         return {}
       }
-      const modalWidth = Math.min(ModalWidth, window.innerWidth - 128)
-      const modalHeight = window.innerHeight - 32
-      const modalX = -modalWidth / 2
-      const modalY = -modalHeight / 2
+
+      const {
+        modalWidth,
+        modalHeight,
+        modalX,
+        modalY,
+        borderRadius: modalBorderRadius,
+      } = getModalDimensions(slug)
 
       return {
         left: window.innerWidth / 2,
@@ -107,6 +120,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
           cardStyle.boxShadow,
         ].join(', '),
         closeButtonOpacity: 1,
+        borderRadius: modalBorderRadius,
 
         config: DefaultSpringConfig,
         onRest: () => {
@@ -115,13 +129,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
       }
     },
     leave: (slug) => {
-      if (slug == null) {
+      if (slug == null || typeof window === 'undefined') {
         return {}
       }
-      const { cardTop, cardLeft, cardWidth, cardHeight } =
-        getArtworkDimensions(slug)
-      const modalWidth = Math.min(ModalWidth, window.innerWidth - 128)
-      const scale = cardWidth / modalWidth
+      const { cardTop, cardLeft, cardHeight, scale, modalWidth } =
+        getModalDimensions(slug)
       return {
         left: cardLeft,
         top: cardTop,
@@ -137,6 +149,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
           cardStyle.boxShadow,
         ].join(', '),
         closeButtonOpacity: 0,
+        borderRadius: cardStyle.borderRadius,
 
         config: AggressiveSpringConfig,
         onStart: () => {
@@ -165,6 +178,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                   bottom='0'
                   style={{
                     backgroundColor,
+                    zIndex: 1,
                   }}
                   align='center'
                   justify='center'
@@ -176,17 +190,20 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                     justify='start'
                     overflowY='scroll'
                     style={{
-                      borderRadius: cardStyle.borderRadius,
                       backgroundColor: 'white',
                       zIndex: 2,
                       transformOrigin: 'top left',
                       boxShadow,
-                      maxWidth: 768,
-                      maxHeight: 'calc(100vh - 32px)',
+                      maxWidth: isMobile ? '100vw' : ModalMaxWidth,
+                      maxHeight: isMobile
+                        ? '100vh'
+                        : `calc(100vh - ${ModalMinPaddingY * 2}px)`,
+                      borderRadius: isMobile ? 0 : style.borderRadius,
                       ...(!settled && style),
                     }}
                     p='2'
                     onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                    onScroll={(e: React.UIEvent) => e.stopPropagation()}
                   >
                     <AnimatedFlex
                       position='absolute'
@@ -382,8 +399,6 @@ const DefaultSpringConfig: SpringConfig = {
 
 export const ProjectSlugParam = 'project'
 
-const ModalWidth = 768
-
 const InfoBlock: React.FC<{ header: string; innerText: React.ReactNode }> = ({
   header,
   innerText,
@@ -417,6 +432,45 @@ function getArtworkDimensions(slug: ProjectSlug) {
   }
 }
 
+const ModalMaxWidth = 768
+const ModalMinPaddingX = 64
+const ModalMinPaddingY = 16
+
+function getIsMobile() {
+  return window != null
+    ? window.innerWidth < ModalMaxWidth + ModalMinPaddingX * 2
+    : false
+}
+
+function getModalDimensions(slug: ProjectSlug) {
+  const isMobile = getIsMobile()
+  const { cardTop, cardLeft, cardWidth, cardHeight } =
+    getArtworkDimensions(slug)
+
+  const modalWidth = isMobile
+    ? window.innerWidth
+    : Math.min(ModalMaxWidth, window.innerWidth - ModalMinPaddingX * 2)
+  const modalHeight = isMobile
+    ? window.innerHeight
+    : window.innerHeight - ModalMinPaddingY * 2
+  const scale = cardWidth / modalWidth
+
+  const modalX = -modalWidth / 2
+  const modalY = -modalHeight / 2
+
+  return {
+    cardTop,
+    cardLeft,
+    cardHeight,
+    scale,
+    modalWidth,
+    modalHeight,
+    modalX,
+    modalY,
+    borderRadius: isMobile ? 0 : cardStyle.borderRadius,
+  }
+}
+
 type ModalTransitionProps = {
   left: number
   top: number
@@ -428,4 +482,5 @@ type ModalTransitionProps = {
   backgroundColor: string
   boxShadow: string
   closeButtonOpacity: number
+  borderRadius: number
 }

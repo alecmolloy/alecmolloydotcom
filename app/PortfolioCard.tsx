@@ -77,6 +77,8 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         cursor: 'pointer',
         flexShrink: '0',
         position: 'relative',
+        userSelect: 'none',
+        WebkitUserSelect: 'none',
       }}
       ref={ref}
       onClick={() => {
