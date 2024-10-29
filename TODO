@@ -102,6 +102,7 @@ for a great portfolio write-up.
 # Misc
 
 - test on small and giganto screen sizes
+- fix the issue where the turtle thing seems to always be one resize behind
 
 ---
 
