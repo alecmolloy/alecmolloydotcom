@@ -10,7 +10,7 @@ import { TurtleMeander } from './TurtleMeander'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://alecmolloy.com'),
-  title: 'Alec Molloy’s Official Home on the Web',
+  title: 'Alec Molloy',
   description: 'The Official Web Presence of Alec Molloy™',
   openGraph: {
     images: ['/favicon.png'],

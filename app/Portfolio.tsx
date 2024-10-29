@@ -1,5 +1,6 @@
 'use client'
 import { PortfolioModal, usePortfolioModal } from '@/components/PortfolioModal'
+import { projects } from '@/data/portfolio'
 import { acroyogaTransitions } from '@/data/portfolio/acroyoga-transitions'
 import { adobe } from '@/data/portfolio/adobe'
 import { elements3D } from '@/data/portfolio/elements-3d'
@@ -28,20 +29,6 @@ const simplexNoiseProps = {
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
   const { openModalSlug, setOpenModalSlug } = usePortfolioModal()
-
-  React.useEffect(() => {
-    if (openModalSlug) {
-      const url = new URL(window.location.href)
-      url.searchParams.set(ProjectSlugParam, openModalSlug)
-      url.hash = 'portfolio'
-      window.history.pushState({}, '', url.toString())
-    } else {
-      const url = new URL(window.location.href)
-      url.searchParams.delete(ProjectSlugParam)
-      url.hash = '#portfolio'
-      window.history.pushState({}, '', url.toString())
-    }
-  }, [openModalSlug])
 
   const handleCloseModal = React.useCallback(() => {
     setOpenModalSlug(null)

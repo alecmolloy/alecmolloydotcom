@@ -3,7 +3,6 @@ MVP: Release to testers
 1. Portfolio Modal
 
 - Fill Kano out fully with media
-- URL handling
 
   create a modal component that takes the url:
   alecmolloy.com/portfolio?id=min-doktor

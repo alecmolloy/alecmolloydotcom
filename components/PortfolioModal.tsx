@@ -48,20 +48,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
     }
   }, [handleCloseModal])
 
-  React.useEffect(() => {
-    if (openModalSlug) {
-      const url = new URL(window.location.href)
-      url.searchParams.set(ProjectSlugParam, openModalSlug)
-      url.hash = 'portfolio'
-      window.history.pushState({}, '', url.toString())
-    } else {
-      const url = new URL(window.location.href)
-      url.searchParams.delete(ProjectSlugParam)
-      url.hash = '#portfolio'
-      window.history.pushState({}, '', url.toString())
-    }
-  }, [openModalSlug])
-
   const modalTransition = useTransition<
     ProjectSlug | null,
     ModalTransitionProps
@@ -370,6 +356,11 @@ export const usePortfolioModal = () => {
     const projectSlug = urlParams.get(ProjectSlugParam)
     if (projectSlug && isProjectSlug(projectSlug)) {
       setOpenModalSlug(projectSlug)
+
+      const element = document.getElementById(projectSlug)
+      if (element) {
+        element.scrollIntoView({ behavior: 'instant' })
+      }
     }
   }, [])
 
@@ -377,6 +368,20 @@ export const usePortfolioModal = () => {
     const navigationElement = document.getElementById('navigation')
     if (navigationElement != null) {
       navigationElement.style.opacity = openModalSlug != null ? '0' : '1'
+    }
+  }, [openModalSlug])
+
+  React.useEffect(() => {
+    if (openModalSlug != null) {
+      const url = new URL(window.location.href)
+      url.searchParams.set(ProjectSlugParam, openModalSlug)
+      window.history.pushState({}, '', url.toString())
+      document.title = `Alec Molloy | ${projects[openModalSlug].title}`
+    } else {
+      const url = new URL(window.location.href)
+      url.searchParams.delete(ProjectSlugParam)
+      window.history.pushState({}, '', url.toString())
+      document.title = 'Alec Molloy'
     }
   }, [openModalSlug])
 
