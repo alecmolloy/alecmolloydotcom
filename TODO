@@ -4,21 +4,6 @@ MVP: Release to testers
 
 - Fill Kano out fully with media
 
-  create a modal component that takes the url:
-  alecmolloy.com/portfolio?id=min-doktor
-
-  it should open with a spring animation from the existing card, to the middle of
-  the screen and close when clicking outside of it or the close button.
-
-  How facebook solves keeping the video playing:
-  https://www.reddit.com/r/reactjs/comments/gp7yld/comment/frobx9q/
-
-  package someone made for (possibly) the same problem:
-  https://medium.com/swlh/reparenting-with-react-426d12fb6d0d
-  https://www.npmjs.com/package/react-reparenting
-
-  On mobile, it should fill the screen.
-
 /////
 I think i might need to bump the modal up to the portfolio section. but maybe i
 don't want to do that.
@@ -111,3 +96,10 @@ for a great portfolio write-up.
   communicate my serious credentials and affiliations
 - “autumn color swamp” as a meander
 - no javascript fallbacks
+- video that is reparented from the home screen to the modal:
+  How facebook solves keeping the video playing:
+  https://www.reddit.com/r/reactjs/comments/gp7yld/comment/frobx9q/
+
+  package someone made for (possibly) the same problem:
+  https://medium.com/swlh/reparenting-with-react-426d12fb6d0d
+  https://www.npmjs.com/package/react-reparenting
