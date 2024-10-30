@@ -86,18 +86,16 @@ export function link(title: string, url: string): Link {
 
 interface Recognition {
   title: string
-  year: string
   description: string
   url?: string
 }
 
 export function recognition(
   title: string,
-  year: string,
   description: string,
   url?: string,
 ): Recognition {
-  return { title, year, description, url }
+  return { title, description, url }
 }
 
 export interface Project {

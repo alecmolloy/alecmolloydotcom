@@ -2,7 +2,7 @@ import { instrumentSerif } from '@/app/fonts'
 import ClientOnlyPortal from '@/components/ClientOnlyPortal'
 import { projects } from '@/data/portfolio'
 import closeButton from '@/public/icons/close.svg'
-import { Box, Flex, Grid, Heading, Text as Txt } from '@radix-ui/themes'
+import { Box, Flex, Grid, Heading, Strong, Text as Txt } from '@radix-ui/themes'
 import { SpringConfig, animated, useTransition } from '@react-spring/web'
 import Img from 'next/image'
 import React from 'react'
@@ -306,26 +306,20 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                           {project.role && (
                             <InfoBlock header='Role' innerText={project.role} />
                           )}
-                          {project.collaborators && (
+                          {project.recognition && (
                             <InfoBlock
-                              header='Collaborators'
-                              innerText={project.collaborators.map(
-                                (collaborator) => (
-                                  <Box key={collaborator.name}>
-                                    {collaborator.url != null ? (
-                                      <a
-                                        href={collaborator.url}
-                                        target='_blank'
-                                        rel='noreferrer'
-                                      >
-                                        {collaborator.name} →
-                                      </a>
-                                    ) : (
-                                      collaborator.name
-                                    )}
-                                  </Box>
-                                ),
-                              )}
+                              header='Recognition'
+                              innerText={
+                                <Flex direction='column' gap='2'>
+                                  {project.recognition.map((recognition) => (
+                                    <Box key={recognition.title}>
+                                      <Strong>{recognition.title}</Strong>
+                                      <br />
+                                      {recognition.description}
+                                    </Box>
+                                  ))}
+                                </Flex>
+                              }
                             />
                           )}
                           {project.tools && (
@@ -359,13 +353,24 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                               }
                             />
                           )}
-                          {project.recognition && (
+
+                          {project.collaborators && (
                             <InfoBlock
-                              header='Recognition'
-                              innerText={project.recognition.map(
-                                (recognition) => (
-                                  <Box key={recognition.title}>
-                                    {recognition.title}
+                              header='Collaborators'
+                              innerText={project.collaborators.map(
+                                (collaborator) => (
+                                  <Box key={collaborator.name}>
+                                    {collaborator.url != null ? (
+                                      <a
+                                        href={collaborator.url}
+                                        target='_blank'
+                                        rel='noreferrer'
+                                      >
+                                        {collaborator.name} →
+                                      </a>
+                                    ) : (
+                                      collaborator.name
+                                    )}
                                   </Box>
                                 ),
                               )}

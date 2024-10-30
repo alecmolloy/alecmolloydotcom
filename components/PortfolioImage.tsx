@@ -20,11 +20,7 @@ export function PortfolioImage({ src, alt, caption }: PortfolioImageProps) {
         />
       </Squircle>
       {caption && (
-        <Txt
-          weight='medium'
-          size='1'
-          style={{ color: '#aaa', fontStyle: 'italic' }}
-        >
+        <Txt weight='medium' size='1' style={{ color: '#aaa' }}>
           {caption}
         </Txt>
       )}

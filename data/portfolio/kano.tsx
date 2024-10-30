@@ -27,14 +27,10 @@ export const kano = project({
         joined as the first product manager to launch the record-breaking
         Kickstarter-backed Kano Computer Kit.
       </p>
-      <PortfolioImage
-        src={kanoKit3dRender}
-        alt='Kano Computer Kit'
-        caption='Hello'
-      />
+      <PortfolioImage src={kanoKit3dRender} alt='Kano Computer Kit' />
       <p>
         I built user research into the company culture with regular visits to
-        customer houses, schools, and coding spaces. I transformed a product
+        customers’ houses, schools, and coding clubs. I transformed a product
         with a great 2-hour unboxing experience, but poor longevity, into a
         retention-oriented creative content system that brought kids back daily.
       </p>
@@ -53,7 +49,8 @@ export const kano = project({
       </p>
     </>
   ),
-  deliverables: 'Creative content system and community platform',
+  deliverables:
+    'Learning content, Kano Computer Kit, Pixel Kit, community platform',
   role: 'Product Manager, Creative Technologist',
   collaborators: [
     collaborator(
@@ -67,26 +64,22 @@ export const kano = project({
   ],
   recognition: [
     recognition(
-      'Cannes Lions',
-      '2014',
+      'Cannes Lions (2014)',
       'Product Design Gold',
       'https://www.theinspiration.com/2014/06/cannes2014-product-design-gold-lions-canneslions/',
     ),
     recognition(
       '$15M Series A',
-      '2015',
       'Led by Breyer Capital',
       'https://techcrunch.com/2015/05/04/kano-series-a',
     ),
     recognition(
-      'Red Dot Design Award',
-      '2015',
-      'Awarded for outstanding product design',
+      'Red Dot (2015)',
+      'Outstanding product design',
       'https://www.red-dot.org/project/kano-33536',
     ),
     recognition(
-      'Webby Award',
-      '2015',
+      'Webby Award (2015)',
       'Apps & Software',
       'https://winners.webbyawards.com/2015/apps-and-software/mobile-ott-app-features/connected-products-wearables/158738/kano-a-computer-anyone-can-make',
     ),
