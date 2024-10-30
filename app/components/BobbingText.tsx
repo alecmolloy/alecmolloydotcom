@@ -1,4 +1,5 @@
-import { Box, Text as Txt } from '@radix-ui/themes'
+import { Text as Txt } from '@radix-ui/themes'
+import { Squircle } from '@squircle-js/react'
 import React from 'react'
 import styles from './BobbingText.module.css'
 
@@ -8,14 +9,11 @@ interface BobbingTextProps {
 
 export const BobbingText: React.FC<BobbingTextProps> = ({ children }) => {
   return (
-    <Box
-      display='inline-block'
-      px={{
-        initial: '3',
-        md: '4',
-      }}
-      py='1'
+    <Squircle
+      cornerRadius={100}
       style={{
+        display: 'inline-block',
+        padding: '4px 12px',
         backgroundColor: '#fffd',
         borderRadius: 100,
       }}
@@ -34,6 +32,6 @@ export const BobbingText: React.FC<BobbingTextProps> = ({ children }) => {
           {char === ' ' ? <>&nbsp;</> : char}
         </Txt>
       ))}
-    </Box>
+    </Squircle>
   )
 }

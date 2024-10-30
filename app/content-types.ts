@@ -84,6 +84,22 @@ export function link(title: string, url: string): Link {
   return { title, url }
 }
 
+interface Recognition {
+  title: string
+  year: string
+  description: string
+  url?: string
+}
+
+export function recognition(
+  title: string,
+  year: string,
+  description: string,
+  url?: string,
+): Recognition {
+  return { title, year, description, url }
+}
+
 export interface Project {
   slug: ProjectSlug
   title: string
@@ -97,22 +113,24 @@ export interface Project {
   collaborators?: Collaborator[]
   links?: Link[]
   acquisition?: string
+  recognition?: Recognition[]
 }
 
-export function project(
-  slug: ProjectSlug,
-  title: string,
-  subtitle: string | undefined,
-  hero: Hero,
-  date: string,
-  tools: Tools[],
-  content: React.ReactNode,
-  deliverables?: string,
-  role?: string,
-  collaborators?: Collaborator[],
-  links?: Link[],
-  acquisition?: string,
-): Project {
+export function project({
+  slug,
+  title,
+  subtitle,
+  hero,
+  date,
+  tools,
+  content,
+  deliverables,
+  role,
+  collaborators,
+  links,
+  acquisition,
+  recognition,
+}: Project): Project {
   return {
     slug,
     title,
@@ -126,5 +144,6 @@ export function project(
     collaborators,
     links,
     acquisition,
+    recognition,
   }
 }

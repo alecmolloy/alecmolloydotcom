@@ -8,6 +8,7 @@ import Img from 'next/image'
 import React from 'react'
 import { ProjectSlug, isProjectSlug } from '../app/content-types'
 import { PortfolioArtworkClassName, cardStyle } from '../app/PortfolioCard'
+import { InfoBlock } from './InfoBlock'
 
 interface PortfolioModalProps {
   openModalSlug: ProjectSlug | null
@@ -176,6 +177,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                     justify='start'
                     overflowY='scroll'
                     style={{
+                      overscrollBehaviorY: 'contain',
                       backgroundColor: 'white',
                       zIndex: 2,
                       transformOrigin: 'top left',
@@ -184,12 +186,12 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                       maxHeight: isMobile
                         ? '100vh'
                         : `calc(100vh - ${ModalMinPaddingY * 2}px)`,
+                      height: '100%',
                       borderRadius: isMobile ? 0 : style.borderRadius,
                       ...(!settled && style),
                     }}
                     p='2'
                     onClick={(e: React.MouseEvent) => e.stopPropagation()}
-                    onScroll={(e: React.UIEvent) => e.stopPropagation()}
                   >
                     <AnimatedFlex
                       position='absolute'
@@ -259,64 +261,11 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                         />
                       )}
                     </Flex>
-                    <Grid columns='12' gap='4' px='4'>
-                      {project.role && (
-                        <InfoBlock header='Role' innerText={project.role} />
-                      )}
-                      {project.collaborators && (
-                        <InfoBlock
-                          header='Collaborators'
-                          innerText={project.collaborators.map(
-                            (collaborator) => (
-                              <Box key={collaborator.name}>
-                                {collaborator.url != null ? (
-                                  <a
-                                    href={collaborator.url}
-                                    target='_blank'
-                                    rel='noreferrer'
-                                  >
-                                    {collaborator.name} →
-                                  </a>
-                                ) : (
-                                  collaborator.name
-                                )}
-                              </Box>
-                            ),
-                          )}
-                        />
-                      )}
-                      {project.tools && (
-                        <InfoBlock
-                          header='Tools'
-                          innerText={project.tools.join(', ')}
-                        />
-                      )}
-                      {project.deliverables && (
-                        <InfoBlock
-                          header='Deliverables'
-                          innerText={project.deliverables}
-                        />
-                      )}
-                      {project.links && (
-                        <InfoBlock
-                          header='Links'
-                          innerText={
-                            <Flex direction='column'>
-                              {project.links.map((link) => (
-                                <a
-                                  key={link.url}
-                                  href={link.url}
-                                  target='_blank'
-                                  rel='noreferrer'
-                                >
-                                  {link.title} →
-                                </a>
-                              ))}
-                            </Flex>
-                          }
-                        />
-                      )}
-                      <Box gridColumn='5 / span 8'>
+                    <Grid columns='4' gap={{ initial: '4', xs: '5' }} px='4'>
+                      <Box
+                        gridColumn={{ initial: '1 / span 4', xs: '2 / span 3' }}
+                        gridRow='1'
+                      >
                         <Heading size='8' style={{ ...instrumentSerif.style }}>
                           {project.title}
                         </Heading>
@@ -331,9 +280,99 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                             {project.subtitle != null && project.subtitle}
                           </Txt>
                         )}
-
-                        <Txt size='4'>{project.content}</Txt>
                       </Box>
+                      <Box
+                        gridColumn={{ initial: '1 / span 4', xs: '2 / span 3' }}
+                        gridRow='2'
+                      >
+                        <Txt size='4' id='project-modal-content'>
+                          {project.content}
+                        </Txt>
+                      </Box>
+                      <Flex
+                        gridColumn={{ initial: 'span 4', xs: 'span 1' }}
+                        gridRow={{ initial: '3', xs: '2' }}
+                        justify={{ initial: 'start', xs: 'end' }}
+                      >
+                        <Grid
+                          columns={{ initial: '2', xs: '1' }}
+                          rows={{
+                            initial: 'repeat(2, 1fr)',
+                            xs: 'repeat(6, min-content)',
+                          }}
+                          gap='4'
+                          flexGrow='1'
+                        >
+                          {project.role && (
+                            <InfoBlock header='Role' innerText={project.role} />
+                          )}
+                          {project.collaborators && (
+                            <InfoBlock
+                              header='Collaborators'
+                              innerText={project.collaborators.map(
+                                (collaborator) => (
+                                  <Box key={collaborator.name}>
+                                    {collaborator.url != null ? (
+                                      <a
+                                        href={collaborator.url}
+                                        target='_blank'
+                                        rel='noreferrer'
+                                      >
+                                        {collaborator.name} →
+                                      </a>
+                                    ) : (
+                                      collaborator.name
+                                    )}
+                                  </Box>
+                                ),
+                              )}
+                            />
+                          )}
+                          {project.tools && (
+                            <InfoBlock
+                              header='Tools'
+                              innerText={project.tools.join(', ')}
+                            />
+                          )}
+                          {project.deliverables && (
+                            <InfoBlock
+                              header='Deliverables'
+                              innerText={project.deliverables}
+                            />
+                          )}
+                          {project.links && (
+                            <InfoBlock
+                              header='Links'
+                              innerText={
+                                <Flex direction='column'>
+                                  {project.links.map((link) => (
+                                    <a
+                                      key={link.url}
+                                      href={link.url}
+                                      target='_blank'
+                                      rel='noreferrer'
+                                    >
+                                      {link.title} →
+                                    </a>
+                                  ))}
+                                </Flex>
+                              }
+                            />
+                          )}
+                          {project.recognition && (
+                            <InfoBlock
+                              header='Recognition'
+                              innerText={project.recognition.map(
+                                (recognition) => (
+                                  <Box key={recognition.title}>
+                                    {recognition.title}
+                                  </Box>
+                                ),
+                              )}
+                            />
+                          )}
+                        </Grid>
+                      </Flex>
                     </Grid>
                   </AnimatedFlex>
                 </AnimatedFlex>
@@ -402,19 +441,7 @@ const DefaultSpringConfig: SpringConfig = {
   velocity: 0,
 }
 
-export const ProjectSlugParam = 'project'
-
-const InfoBlock: React.FC<{ header: string; innerText: React.ReactNode }> = ({
-  header,
-  innerText,
-}) => (
-  <Flex gridColumn='span 3' direction='column' py='2' className='info-block'>
-    <Txt size='1' weight='bold' style={{ color: '#0004' }}>
-      {header}
-    </Txt>
-    <Txt size='1'>{innerText}</Txt>
-  </Flex>
-)
+const ProjectSlugParam = 'project'
 
 function getArtworkDimensions(slug: ProjectSlug) {
   const bentoCard = document.querySelector(

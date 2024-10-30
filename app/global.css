@@ -21,3 +21,7 @@ a {
 .info-block a {
   text-decoration: none;
 }
+
+#project-modal-content > p:first-of-type {
+  margin-top: 0;
+}

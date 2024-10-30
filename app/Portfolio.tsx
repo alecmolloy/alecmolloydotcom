@@ -1,6 +1,5 @@
 'use client'
 import { PortfolioModal, usePortfolioModal } from '@/components/PortfolioModal'
-import { projects } from '@/data/portfolio'
 import { acroyogaTransitions } from '@/data/portfolio/acroyoga-transitions'
 import { adobe } from '@/data/portfolio/adobe'
 import { elements3D } from '@/data/portfolio/elements-3d'
@@ -164,5 +163,3 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
     </Container>
   )
 }
-
-const ProjectSlugParam = 'project'
