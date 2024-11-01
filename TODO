@@ -84,10 +84,11 @@ for a great portfolio write-up.
 
 # Nice to haves
 
+- fix the URLs so they are actual URLs instead of params
 - section for qualifications / certifications / photo of my bookshelf. needs to
   communicate my serious credentials and affiliations
 - “autumn color swamp” as a meander
-- no javascript fallbacks
+- no-javascript fallbacks
 - video that is reparented from the home screen to the modal:
   How facebook solves keeping the video playing:
   https://www.reddit.com/r/reactjs/comments/gp7yld/comment/frobx9q/
