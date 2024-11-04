@@ -63,7 +63,7 @@ export const HeroCanvas = () => {
                 cursor: 'default',
               }}
             >
-              Open to work
+              For Hire
             </Txt>
             <a
               href='mailto:workwith@alecmolloy.com'
@@ -80,7 +80,7 @@ export const HeroCanvas = () => {
                 right: 0,
               }}
             >
-              <BobbingText>Set up a call →</BobbingText>
+              <BobbingText>Work with me →</BobbingText>
             </a>
           </Flex>
         </Flex>

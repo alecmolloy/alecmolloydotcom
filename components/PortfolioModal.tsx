@@ -100,7 +100,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         x: modalX,
         y: modalY,
         scale: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.15)',
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
         boxShadow: [
           '0 24px 36px #0001',
           '0 24px 46px #0002',
@@ -396,12 +396,11 @@ export const usePortfolioModal = () => {
   )
 
   React.useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    const projectSlug = urlParams.get(ProjectSlugParam)
-    if (projectSlug && isProjectSlug(projectSlug)) {
-      setOpenModalSlug(projectSlug)
-
-      const element = document.getElementById(projectSlug)
+    const pathSegments = window.location.pathname.split('/')
+    const slug = pathSegments[pathSegments.length - 1] as ProjectSlug
+    if (slug && isProjectSlug(slug)) {
+      setOpenModalSlug(slug)
+      const element = document.getElementById(slug)
       if (element) {
         element.scrollIntoView({ behavior: 'instant' })
       }
@@ -417,14 +416,10 @@ export const usePortfolioModal = () => {
 
   React.useEffect(() => {
     if (openModalSlug != null) {
-      const url = new URL(window.location.href)
-      url.searchParams.set(ProjectSlugParam, openModalSlug)
-      window.history.pushState({}, '', url.toString())
+      window.history.pushState(null, '', `/p/${openModalSlug}`)
       document.title = `Alec Molloy | ${projects[openModalSlug].title}`
     } else {
-      const url = new URL(window.location.href)
-      url.searchParams.delete(ProjectSlugParam)
-      window.history.pushState({}, '', url.toString())
+      window.history.pushState(null, '', '/')
       document.title = 'Alec Molloy'
     }
   }, [openModalSlug])

@@ -59,7 +59,10 @@ export const Navigation: React.FunctionComponent = () => {
           const element = document.getElementById(section)
           if (element) {
             const rect = element.getBoundingClientRect()
-            return rect.top <= 100 && rect.bottom >= 100
+            return (
+              rect.top <= window.innerHeight / 2 &&
+              rect.bottom >= window.innerHeight / 2
+            )
           }
           return false
         })
@@ -154,7 +157,7 @@ export const Navigation: React.FunctionComponent = () => {
                 }}
               >
                 <a
-                  href={section === 'hero' ? '#' : `#${section}`}
+                  href={section === 'hero' ? '/' : `/${section}`}
                   style={{
                     all: 'unset',
                     display: 'flex',
@@ -170,9 +173,9 @@ export const Navigation: React.FunctionComponent = () => {
                     const targetElement = document.getElementById(section)
                     if (targetElement) {
                       if (section === 'hero') {
-                        history.pushState(null, '', ' ')
+                        window.history.pushState(null, '', '/')
                       } else {
-                        history.pushState(null, '', `#${section}`)
+                        window.history.pushState(null, '', `/${section}`)
                       }
                       setIsAutoScrolling(true)
                       setActiveSection(section)
