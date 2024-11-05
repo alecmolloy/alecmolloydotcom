@@ -99,21 +99,21 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         />
         <PortfolioCard
           project={gameOfLife}
-          gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
+          gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
           size='sm'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === gameOfLife.slug}
         />
         <PortfolioCard
           project={instantReplay}
-          gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
+          gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
           size='sm'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === instantReplay.slug}
         />
         <PortfolioCard
           project={acroyogaTransitions}
-          gridColumn={{ initial: '1 / -1', xs: 'span 3' }}
+          gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
           size='sm'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === acroyogaTransitions.slug}

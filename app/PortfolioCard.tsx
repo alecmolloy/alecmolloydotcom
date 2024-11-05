@@ -177,11 +177,16 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         </Flex>
       </AnimatedFlex>
       <Flex
+        className='portfolio-card-title'
         direction='column'
         pt='8px'
         width='100%'
         style={{
           color: '#000',
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
         }}
       >
         <Txt

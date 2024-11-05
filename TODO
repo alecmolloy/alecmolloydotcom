@@ -2,7 +2,6 @@ MVP: Release to testers
 
 2. Portfolio Final Bento Layout
 
-- enforce a line height for cards
 - mobile layout
 - responsize
 - select the final content list
@@ -73,7 +72,6 @@ for a great portfolio write-up.
 - Navigation void should not be grabbable, should not respond so much to mouse
   movement
 - Turtle background should resize properly, it is getting outdated width data
-- navigation should change to about page much sooner
 
 # Misc
 
