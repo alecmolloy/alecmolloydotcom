@@ -441,8 +441,6 @@ const DefaultSpringConfig: SpringConfig = {
   velocity: 0,
 }
 
-const ProjectSlugParam = 'project'
-
 function getArtworkDimensions(slug: ProjectSlug) {
   const bentoCard = document.querySelector(
     `#${slug} .${PortfolioArtworkClassName}`,
@@ -469,7 +467,7 @@ const ModalMinPaddingX = 64
 const ModalMinPaddingY = 16
 
 function getIsMobile() {
-  return window != null
+  return typeof window !== 'undefined'
     ? window.innerWidth < ModalMaxWidth + ModalMinPaddingX * 2
     : false
 }
