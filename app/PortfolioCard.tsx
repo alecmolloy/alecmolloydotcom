@@ -10,6 +10,7 @@ interface PortfolioCardProps {
   project: Project
   size?: Size
   gridColumn?: Responsive<string>
+  gridRow?: Responsive<string>
   modalOpen: boolean
   setOpenModal: React.Dispatch<React.SetStateAction<ProjectSlug | null>>
 }
@@ -18,6 +19,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
   size = 'md',
   gridColumn,
+  gridRow,
   modalOpen,
   setOpenModal,
 }) => {
@@ -71,6 +73,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
     <Flex
       id={project.slug}
       gridColumn={gridColumn}
+      gridRow={gridRow}
       direction='column'
       {...bind()}
       style={{

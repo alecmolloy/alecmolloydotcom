@@ -1,18 +1,7 @@
 'use client'
 import { PortfolioModal, usePortfolioModal } from '@/components/PortfolioModal'
-import { acroyogaTransitions } from '@/data/portfolio/acroyoga-transitions'
-import { adobe } from '@/data/portfolio/adobe'
-import { elements3D } from '@/data/portfolio/elements-3d'
-import { gameOfLife } from '@/data/portfolio/game-of-life'
-import { instantReplay } from '@/data/portfolio/instant-replay'
-import { kano } from '@/data/portfolio/kano'
-import { localWelcome } from '@/data/portfolio/local-welcome'
-import { minDoktor } from '@/data/portfolio/min-doktor'
-import { nuclearConnections } from '@/data/portfolio/nuclear-connections'
-import { retreatTechnology } from '@/data/portfolio/retreat-technology'
-import { utopia } from '@/data/portfolio/utopia'
-import { vbt } from '@/data/portfolio/vbt'
-import { Container, Flex, Grid } from '@radix-ui/themes'
+import { projects } from '@/data/portfolio'
+import { Container, Grid } from '@radix-ui/themes'
 import React from 'react'
 import { Section } from './Navigation'
 import { PortfolioCard } from './PortfolioCard'
@@ -60,63 +49,59 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
     >
       <Grid {...defaultGridProps}>
         <PortfolioCard
-          project={vbt}
+          project={projects.vbt}
           gridColumn='span 8'
+          gridRow='span 2'
           size='lg'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === vbt.slug}
+          modalOpen={openModalSlug === projects.vbt.slug}
         />
-        <Flex
+        <PortfolioCard
           gridColumn={{ initial: '1 / -1', xs: '9 / span 4' }}
-          direction='column'
-          gap={defaultGridProps.gap}
-        >
-          <PortfolioCard
-            project={nuclearConnections}
-            size='md'
-            setOpenModal={setOpenModalSlug}
-            modalOpen={openModalSlug === nuclearConnections.slug}
-          />
-          <SimplexNoiseCanvas
-            {...simplexNoiseProps}
-            display={{ initial: 'none', xs: 'flex' }}
-            gridColumn='1 / 1'
-          />
-        </Flex>
+          project={projects['nuclear-connections']}
+          size='md'
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects['nuclear-connections'].slug}
+        />
+        <SimplexNoiseCanvas
+          {...simplexNoiseProps}
+          gridColumn={'9 / span 4'}
+          display={{ initial: 'none', xs: 'flex' }}
+        />
         <PortfolioCard
-          project={utopia}
+          project={projects.utopia}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
           size='lg'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === utopia.slug}
+          modalOpen={openModalSlug === projects.utopia.slug}
         />
         <PortfolioCard
-          project={retreatTechnology}
+          project={projects['retreat-technology']}
           gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
           size='lg'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === retreatTechnology.slug}
+          modalOpen={openModalSlug === projects['retreat-technology'].slug}
         />
         <PortfolioCard
-          project={gameOfLife}
+          project={projects['game-of-life']}
           gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
           size='sm'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === gameOfLife.slug}
+          modalOpen={openModalSlug === projects['game-of-life'].slug}
         />
         <PortfolioCard
-          project={instantReplay}
+          project={projects['instant-replay']}
           gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
           size='sm'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === instantReplay.slug}
+          modalOpen={openModalSlug === projects['instant-replay'].slug}
         />
         <PortfolioCard
-          project={acroyogaTransitions}
+          project={projects['acroyoga-transitions']}
           gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
           size='sm'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === acroyogaTransitions.slug}
+          modalOpen={openModalSlug === projects['acroyoga-transitions'].slug}
         />
         <SimplexNoiseCanvas
           {...simplexNoiseProps}
@@ -124,36 +109,50 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           gridColumn='8 / 1'
         />
         <PortfolioCard
-          project={localWelcome}
+          project={projects['local-welcome']}
           gridColumn='span 6'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === localWelcome.slug}
+          modalOpen={openModalSlug === projects['local-welcome'].slug}
         />
         <PortfolioCard
-          project={minDoktor}
+          project={projects['min-doktor']}
           gridColumn='span 6'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === minDoktor.slug}
+          modalOpen={openModalSlug === projects['min-doktor'].slug}
         />
         <PortfolioCard
-          project={kano}
+          project={projects.kano}
           gridColumn='span 9'
+          gridRow='span 3'
           size='lg'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === kano.slug}
+          modalOpen={openModalSlug === projects.kano.slug}
         />
         <PortfolioCard
-          project={elements3D}
+          project={projects['elements-3d']}
           gridColumn='span 3'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === elements3D.slug}
+          modalOpen={openModalSlug === projects['elements-3d'].slug}
         />
         <PortfolioCard
-          project={adobe}
-          gridColumn='span 8'
+          project={projects['make-art']}
+          gridColumn='span 3'
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects['make-art'].slug}
+        />
+        <PortfolioCard
+          project={projects['isitavocadosornotdotcom']}
+          gridColumn='1 / span 3'
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects['isitavocadosornotdotcom'].slug}
+        />
+
+        <PortfolioCard
+          project={projects.adobe}
+          gridColumn='4 / span 9'
           size='lg'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === adobe.slug}
+          modalOpen={openModalSlug === projects.adobe.slug}
         />
       </Grid>
       <PortfolioModal

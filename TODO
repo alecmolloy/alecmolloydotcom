@@ -2,9 +2,19 @@ MVP: Release to testers
 
 2. Portfolio Final Bento Layout
 
+- select the final content list
+
+  - Sleep Sound
+  - Now That's What I call Y2K
+  - Floater
+  - Portrait of Five Cubes
+  - Avocados or Not Dot Com
+  - Highball
+  - Sleep
+  - Christmas 2014
+
 - mobile layout
 - responsize
-- select the final content list
 - arrange them all
 - change the perlin noise filler to the wave pattern
 
@@ -83,10 +93,11 @@ for a great portfolio write-up.
 # Nice to haves
 
 - fix the scaling of the bento cards so they start and finish exactly same size
-as the images
+  as the images
 - section for qualifications / certifications / photo of my bookshelf. needs to
   communicate my serious credentials and affiliations
 - “autumn color swamp” as a meander
+- remove the circle in the turtle pattern up top, add in shapes to the bottom
 - no-javascript fallbacks
 - video that is reparented from the home screen to the modal:
   How facebook solves keeping the video playing:

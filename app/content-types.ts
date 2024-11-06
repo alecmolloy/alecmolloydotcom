@@ -15,6 +15,8 @@ export type ProjectSlug =
   | 'retreat-technology'
   | 'utopia'
   | 'vbt'
+  | 'make-art'
+  | 'isitavocadosornotdotcom'
 
 export function isProjectSlug(slug: string): slug is ProjectSlug {
   return slug in projects
@@ -62,6 +64,8 @@ type Tools =
   | 'Zapier'
   | 'InDesign'
   | 'WebGL'
+  | 'CoffeeScript'
+  | 'JQuery'
 
 interface Collaborator {
   name: string
@@ -104,7 +108,7 @@ export interface Project {
   subtitle?: string
   hero: Hero
   date: string
-  tools: Tools[]
+  tools?: Tools[]
   content: React.ReactNode
   deliverables?: string
   role?: string

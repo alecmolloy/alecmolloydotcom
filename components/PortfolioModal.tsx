@@ -322,18 +322,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                               }
                             />
                           )}
-                          {project.tools && (
-                            <InfoBlock
-                              header='Tools'
-                              innerText={project.tools.join(', ')}
-                            />
-                          )}
-                          {project.deliverables && (
-                            <InfoBlock
-                              header='Deliverables'
-                              innerText={project.deliverables}
-                            />
-                          )}
                           {project.links && (
                             <InfoBlock
                               header='Links'
@@ -353,7 +341,18 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                               }
                             />
                           )}
-
+                          {project.tools && (
+                            <InfoBlock
+                              header='Tools'
+                              innerText={project.tools.join(', ')}
+                            />
+                          )}
+                          {project.deliverables && (
+                            <InfoBlock
+                              header='Deliverables'
+                              innerText={project.deliverables}
+                            />
+                          )}
                           {project.collaborators && (
                             <InfoBlock
                               header='Collaborators'
