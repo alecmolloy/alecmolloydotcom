@@ -21,9 +21,6 @@ export const isItAvocadosOrNot = project({
     </>
   ),
   links: [
-    link(
-      'isitavocadosornot.com',
-      'https://alecmolloy.github.io/isitavocadosornot',
-    ),
+    link('isitavocadosornot.com', 'https://isitavocadosornot.alecmolloy.com'),
   ],
 })

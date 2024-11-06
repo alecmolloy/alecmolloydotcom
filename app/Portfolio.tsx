@@ -141,18 +141,24 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === projects['make-art'].slug}
         />
         <PortfolioCard
+          project={projects.adobe}
+          gridColumn='4 / span 9'
+          gridRow='span 3'
+          size='lg'
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects.adobe.slug}
+        />
+        <PortfolioCard
           project={projects['isitavocadosornotdotcom']}
           gridColumn='1 / span 3'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['isitavocadosornotdotcom'].slug}
         />
-
         <PortfolioCard
-          project={projects.adobe}
-          gridColumn='4 / span 9'
-          size='lg'
+          project={projects['portrait-of-five-cubes']}
+          gridColumn='1 / span 3'
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === projects.adobe.slug}
+          modalOpen={openModalSlug === projects['portrait-of-five-cubes'].slug}
         />
       </Grid>
       <PortfolioModal

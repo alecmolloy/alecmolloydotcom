@@ -2,17 +2,6 @@ MVP: Release to testers
 
 2. Portfolio Final Bento Layout
 
-- select the final content list
-
-  - Sleep Sound
-  - Now That's What I call Y2K
-  - Floater
-  - Portrait of Five Cubes
-  - Avocados or Not Dot Com
-  - Highball
-  - Sleep
-  - Christmas 2014
-
 - mobile layout
 - responsize
 - arrange them all
@@ -90,7 +79,7 @@ for a great portfolio write-up.
 
 ---
 
-# Nice to haves
+# Post-launch
 
 - fix the scaling of the bento cards so they start and finish exactly same size
   as the images
@@ -99,6 +88,14 @@ for a great portfolio write-up.
 - “autumn color swamp” as a meander
 - remove the circle in the turtle pattern up top, add in shapes to the bottom
 - no-javascript fallbacks
+- add more items:
+  - Sleep Sound
+  - Now That's What I call Y2K
+  - Floater
+  - Highball
+  - Sleep
+  - Christmas 2014
+  - wow
 - video that is reparented from the home screen to the modal:
   How facebook solves keeping the video playing:
   https://www.reddit.com/r/reactjs/comments/gp7yld/comment/frobx9q/

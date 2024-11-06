@@ -17,6 +17,7 @@ export type ProjectSlug =
   | 'vbt'
   | 'make-art'
   | 'isitavocadosornotdotcom'
+  | 'portrait-of-five-cubes'
 
 export function isProjectSlug(slug: string): slug is ProjectSlug {
   return slug in projects

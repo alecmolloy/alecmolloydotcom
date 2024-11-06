@@ -4,7 +4,8 @@ import adobeHero from '@/public/portfolio/adobe/adobe-01.png'
 export const adobe = project({
   slug: 'adobe',
   title: 'Adobe',
-  subtitle: 'Designer and Product Manager for Learning Games',
+  subtitle:
+    'Designer and Product Manager for Learning Games in Illustrator and Photoshop CC. Digital Media Internship, Community Help and Learning.',
   hero: heroImage(
     adobeHero,
     'Adobe Digital Media Internship and Learning Games',

@@ -10,6 +10,7 @@ import { localWelcome } from './local-welcome'
 import { makeArt } from './make-art'
 import { minDoktor } from './min-doktor'
 import { nuclearConnections } from './nuclear-connections'
+import { portraitOfFiveCubes } from './portrait-of-five-cubes'
 import { retreatTechnology } from './retreat-technology'
 import { utopia } from './utopia'
 import { vbt } from './vbt'
@@ -26,6 +27,7 @@ export const projects: Record<ProjectSlug, Project> = {
   'make-art': makeArt,
   'min-doktor': minDoktor,
   'nuclear-connections': nuclearConnections,
+  'portrait-of-five-cubes': portraitOfFiveCubes,
   'retreat-technology': retreatTechnology,
   utopia,
   vbt,
