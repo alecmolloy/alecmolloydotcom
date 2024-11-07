@@ -50,115 +50,121 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
       <Grid {...defaultGridProps}>
         <PortfolioCard
           project={projects.vbt}
-          gridColumn='span 8'
+          gridColumn={{ initial: 'span 12', sm: 'span 8' }}
           gridRow='span 2'
-          size='lg'
+          size={{ initial: 'lg', sm: 'lg' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects.vbt.slug}
         />
         <PortfolioCard
-          gridColumn={{ initial: '1 / -1', xs: '9 / span 4' }}
+          gridColumn={{ initial: '1 / -1', sm: '9 / span 4' }}
           project={projects['nuclear-connections']}
-          size='md'
+          size={{ initial: 'lg', sm: 'sm' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['nuclear-connections'].slug}
         />
         <SimplexNoiseCanvas
           {...simplexNoiseProps}
           gridColumn={'9 / span 4'}
-          display={{ initial: 'none', xs: 'flex' }}
+          display={{ initial: 'none', sm: 'flex' }}
         />
         <PortfolioCard
           project={projects.utopia}
-          gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
-          size='lg'
+          gridColumn={{ initial: '1 / -1', sm: 'span 6' }}
+          size={{ initial: 'lg', sm: 'md' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects.utopia.slug}
         />
         <PortfolioCard
           project={projects['retreat-technology']}
-          gridColumn={{ initial: '1 / -1', xs: 'span 6' }}
-          size='lg'
+          gridColumn={{ initial: '1 / -1', sm: 'span 6' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['retreat-technology'].slug}
+          size={{ initial: 'lg', sm: 'md' }}
         />
         <PortfolioCard
           project={projects['game-of-life']}
-          gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
-          size='sm'
+          gridColumn={{ initial: 'span 6', sm: 'span 4' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['game-of-life'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <PortfolioCard
           project={projects['instant-replay']}
-          gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
-          size='sm'
+          gridColumn={{ initial: 'span 6', sm: 'span 4' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['instant-replay'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <PortfolioCard
           project={projects['acroyoga-transitions']}
-          gridColumn={{ initial: '1 / -1', xs: 'span 4' }}
-          size='sm'
+          gridColumn={{ initial: 'span 6', sm: 'span 4' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['acroyoga-transitions'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <SimplexNoiseCanvas
           {...simplexNoiseProps}
-          display={{ initial: 'flex', xs: 'none' }}
-          gridColumn='8 / 1'
+          gridColumn='span 6'
+          display={{ initial: 'flex', sm: 'none' }}
         />
         <PortfolioCard
           project={projects['local-welcome']}
-          gridColumn='span 6'
+          gridColumn={{ initial: 'span 12', sm: 'span 6' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['local-welcome'].slug}
+          size={{ initial: 'lg', sm: 'md' }}
         />
         <PortfolioCard
           project={projects['min-doktor']}
-          gridColumn='span 6'
+          gridColumn={{ initial: 'span 12', sm: 'span 6' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['min-doktor'].slug}
+          size={{ initial: 'lg', sm: 'md' }}
         />
         <PortfolioCard
           project={projects.kano}
-          gridColumn='span 9'
+          gridColumn={{ initial: 'span 12', sm: 'span 9' }}
           gridRow='span 3'
-          size='lg'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects.kano.slug}
+          size={{ initial: 'lg', sm: 'lg' }}
         />
         <PortfolioCard
           project={projects['elements-3d']}
-          gridColumn='span 3'
+          gridColumn={{ initial: 'span 6', sm: 'span 3' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['elements-3d'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <PortfolioCard
           project={projects['make-art']}
-          gridColumn='span 3'
+          gridColumn={{ initial: 'span 6', sm: 'span 3' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['make-art'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <PortfolioCard
           project={projects.adobe}
-          gridColumn='4 / span 9'
+          gridColumn={{ initial: 'span 12', sm: '4 / span 9' }}
           gridRow='span 3'
-          size='lg'
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects.adobe.slug}
+          size={{ initial: 'lg', sm: 'lg' }}
         />
         <PortfolioCard
           project={projects['isitavocadosornotdotcom']}
-          gridColumn='1 / span 3'
+          gridColumn={{ initial: 'span 6', sm: '1 / span 3' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['isitavocadosornotdotcom'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <PortfolioCard
           project={projects['portrait-of-five-cubes']}
-          gridColumn='1 / span 3'
+          gridColumn={{ initial: 'span 6', sm: '1 / span 3' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['portrait-of-five-cubes'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
       </Grid>
       <PortfolioModal

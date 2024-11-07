@@ -8,7 +8,7 @@ import React from 'react'
 
 interface PortfolioCardProps {
   project: Project
-  size?: Size
+  size: { initial: Size; sm: Size }
   gridColumn?: Responsive<string>
   gridRow?: Responsive<string>
   modalOpen: boolean
@@ -17,7 +17,7 @@ interface PortfolioCardProps {
 
 export const PortfolioCard: React.FC<PortfolioCardProps> = ({
   project,
-  size = 'md',
+  size,
   gridColumn,
   gridRow,
   modalOpen,
@@ -179,23 +179,12 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
           )}
         </Flex>
       </AnimatedFlex>
-      <Flex
-        className='portfolio-card-title'
-        direction='column'
-        pt='8px'
-        width='100%'
-        style={{
-          color: '#000',
-          display: '-webkit-box',
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-        }}
-      >
+      <Flex direction='column' pt='2' width='100%'>
         <Txt
           size={{
-            initial: sml(size, '1', '2', '3'),
-            sm: sml(size, '2', '3', '3'),
+            initial: sml(size.initial, '1', '2', '3'),
+            xs: sml(size.initial, '2', '2', '3'),
+            sm: sml(size.sm, '3', '4', '4'),
           }}
           align='left'
         >

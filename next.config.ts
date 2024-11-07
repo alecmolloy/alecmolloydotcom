@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
     })
     return config
   },
+  experimental: {
+    cssChunking: 'strict',
+  },
   async redirects() {
     return [
       {
