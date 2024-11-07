@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber'
 import { BobbingText } from './components/BobbingText'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
+import { defaultContainerProps } from './theme'
 
 export const HeroCanvas = () => {
   return (
@@ -15,8 +16,9 @@ export const HeroCanvas = () => {
       minHeight='600px'
       maxHeight='1200px'
       position='relative'
+      {...defaultContainerProps}
     >
-      <Flex px='4' pb='8' direction='column' height='100%'>
+      <Flex pb='8' direction='column' height='100%'>
         <Flex
           id='header'
           direction='column'

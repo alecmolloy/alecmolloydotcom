@@ -1,5 +1,6 @@
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { LocationsScroller } from './LocationsScroller'
+import { defaultContainerProps } from './theme'
 
 const socialLinks = [
   { href: 'https://github.com/alecmolloy', label: 'GitHub' },
@@ -11,7 +12,7 @@ const socialLinks = [
 export const Footer = () => {
   return (
     <>
-      <Container py='2' px='4'>
+      <Container py='2' {...defaultContainerProps}>
         <Flex direction={{ initial: 'column-reverse', sm: 'row' }} gap='4'>
           <Flex
             flexGrow='1'

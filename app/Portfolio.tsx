@@ -6,7 +6,7 @@ import React from 'react'
 import { Section } from './Navigation'
 import { PortfolioCard } from './PortfolioCard'
 import DitheredSDFWavesCanvas from './DitheredSDFWavesCanvas'
-import { defaultGridProps } from './theme'
+import { defaultContainerProps, defaultGridProps } from './theme'
 
 const simplexNoiseProps = {
   darkColor: '#faf2f2',
@@ -42,9 +42,8 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
       style={{
         minHeight: '100vh',
       }}
-      my='9'
-      mx='4'
       py='9'
+      {...defaultContainerProps}
     >
       <Grid {...defaultGridProps}>
         <PortfolioCard

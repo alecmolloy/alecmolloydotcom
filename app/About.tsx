@@ -2,7 +2,7 @@ import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
-import { defaultGridProps } from './theme'
+import { defaultContainerProps, defaultGridProps } from './theme'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -16,17 +16,22 @@ const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
 export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
   return (
     <Box id={id}>
-      <Container size='4' p='4' style={{ paddingTop: 128 }}>
+      <Container
+        size='4'
+        py='4'
+        style={{ paddingTop: 128 }}
+        {...defaultContainerProps}
+      >
         <Grid {...defaultGridProps}>
           <Flex
             gridColumn={{
-              initial: '2 / span 6',
+              initial: '3 / span 8',
               xs: '1 / span 4',
               md: '2 / span 4',
             }}
             pb={{ initial: '6', xs: '0' }}
             justify={{ initial: 'start', xs: 'start' }}
-            align='end'
+            align={{ initial: 'center', xs: 'end' }}
             direction='column'
           >
             <DitheredImage
