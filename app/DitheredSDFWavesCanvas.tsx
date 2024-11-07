@@ -1,70 +1,42 @@
 'use client'
 import { Flex, FlexProps } from '@radix-ui/themes'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
-import React, { useEffect, useRef } from 'react'
+import React, { CSSProperties } from 'react'
 import * as THREE from 'three'
-import fragmentShader from './shaders/simplex-noise.frag'
-import vertexShader from './shaders/simplex-noise.vert'
+import fragmentShader from './shaders/dithered-sdf-waves.frag'
+import vertexShader from './shaders/dithered-sdf-waves.vert'
 
 /**
- * SimplexNoiseCanvas component renders a 2D simplex noise texture
+ * DitheredSDFWavesCanvas component renders a 2D dithered SDF waves texture
  * using react-three-fiber and a custom shader material.
  *
  * - It creates a canvas that fills its parent container using WebGL.
  * - A plane is rendered, which is assigned a custom ShaderMaterial
  *   using imported GLSL vertex and fragment shaders.
- * - The fragment shader generates simplex noise, which is used
- *   to color the plane, producing a grayscale noise texture.
- *
- * ### Features:
- * - The simplices in the noise grid are spaced based on the cellSize prop.
- * - The noise values are mapped from the range [-1, 1] to [0, 1] for
- *   proper display as grayscale values.
- * - The component is responsive and updates on window resize.
- * - Continuous animation is achieved using the useFrame hook.
+ * - The fragment shader generates dithered SDF waves, which is used
+ *   to color the plane, producing a dithered SDF waves texture.
  */
-interface SimplexNoiseCanvasProps {
+
+interface DitheredSDFWavesCanvasProps {
   /** The size of each cell in the simplex noise grid. */
-  cellSize: number
   darkColor: string
   lightColor: string
   pixelSize: number
+  aspectRatio: CSSProperties['aspectRatio']
 }
 
-const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps & FlexProps> = ({
-  cellSize,
-  darkColor,
-  lightColor,
-  pixelSize,
-  ...props
-}) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [canvasSize, setCanvasSize] = React.useState({ width: 0, height: 0 })
-
-  useEffect(() => {
-    const updateSize = () => {
-      if (containerRef.current) {
-        setCanvasSize({
-          width: containerRef.current.clientWidth,
-          height: containerRef.current.clientHeight,
-        })
-      }
-    }
-
-    updateSize()
-    window.addEventListener('resize', updateSize)
-    return () => window.removeEventListener('resize', updateSize)
-  }, [])
-
+const DitheredSDFWavesCanvas: React.FC<
+  DitheredSDFWavesCanvasProps & FlexProps
+> = ({ darkColor, lightColor, pixelSize, aspectRatio, style, ...props }) => {
   return (
-    <Flex ref={containerRef} width='100%' height='100%' flexGrow='1' {...props}>
-      <Canvas
-        style={{ width: canvasSize.width, height: canvasSize.height }}
-        orthographic
-        camera={{ zoom: 1, position: [0, 0, 100] }}
-      >
+    <Flex
+      width='100%'
+      flexGrow='1'
+      style={{ aspectRatio, minWidth: 0, minHeight: 0, ...style }}
+      {...props}
+    >
+      <Canvas orthographic camera={{ zoom: 1, position: [0, 0, 100] }}>
         <SimplexNoiseMesh
-          cellSize={cellSize}
           darkColor={darkColor}
           lightColor={lightColor}
           pixelSize={pixelSize}
@@ -75,14 +47,12 @@ const SimplexNoiseCanvas: React.FC<SimplexNoiseCanvasProps & FlexProps> = ({
 }
 
 interface SimplexNoiseMeshProps {
-  cellSize: number
   darkColor: string
   lightColor: string
   pixelSize: number
 }
 
 const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
-  cellSize,
   darkColor,
   lightColor,
   pixelSize,
@@ -100,8 +70,12 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
       const material = new THREE.ShaderMaterial({
         uniforms: {
           time: { value: 0 },
-          resolution: { value: new THREE.Vector2(size.width, size.height) },
-          cellSize: { value: cellSize },
+          resolution: {
+            value: new THREE.Vector2(
+              Math.floor(size.width),
+              Math.floor(size.height),
+            ),
+          },
           tBayer: { value: bayerTexture },
           darkColor: { value: new THREE.Color(darkColor) },
           lightColor: { value: new THREE.Color(lightColor) },
@@ -119,11 +93,11 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
 
       mesh.current.scale.set(size.width, size.height, 1)
     }
-  }, [size, cellSize, darkColor, lightColor, pixelSize, bayerTexture])
+  }, [size, darkColor, lightColor, pixelSize, bayerTexture])
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
-      materialRef.current.uniforms.time.value = clock.getElapsedTime() / 50
+      materialRef.current.uniforms.time.value = clock.getElapsedTime()
     }
   })
 
@@ -152,4 +126,4 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
     </mesh>
   )
 }
-export default SimplexNoiseCanvas
+export default DitheredSDFWavesCanvas

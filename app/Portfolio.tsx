@@ -5,14 +5,13 @@ import { Container, Grid } from '@radix-ui/themes'
 import React from 'react'
 import { Section } from './Navigation'
 import { PortfolioCard } from './PortfolioCard'
-import SimplexNoiseCanvas from './SimplexNoiseCanvas'
+import DitheredSDFWavesCanvas from './DitheredSDFWavesCanvas'
 import { defaultGridProps } from './theme'
 
 const simplexNoiseProps = {
-  cellSize: 250,
-  darkColor: '#fafafa',
-  lightColor: '#ffffff',
-  pixelSize: 10,
+  darkColor: '#faf2f2',
+  lightColor: '#fff',
+  pixelSize: 15,
 }
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
@@ -56,17 +55,18 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects.vbt.slug}
         />
-        <PortfolioCard
-          gridColumn={{ initial: '1 / -1', sm: '9 / span 4' }}
-          project={projects['nuclear-connections']}
-          size={{ initial: 'lg', sm: 'sm' }}
-          setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === projects['nuclear-connections'].slug}
-        />
-        <SimplexNoiseCanvas
+        <DitheredSDFWavesCanvas
           {...simplexNoiseProps}
           gridColumn={'9 / span 4'}
           display={{ initial: 'none', sm: 'flex' }}
+          aspectRatio='4 / 2.925'
+        />
+        <PortfolioCard
+          gridColumn={{ initial: '1 / -1', sm: '9 / span 4' }}
+          project={projects['nuclear-connections']}
+          size={{ initial: 'lg', sm: 'md' }}
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects['nuclear-connections'].slug}
         />
         <PortfolioCard
           project={projects.utopia}
@@ -103,10 +103,11 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === projects['acroyoga-transitions'].slug}
           size={{ initial: 'sm', sm: 'sm' }}
         />
-        <SimplexNoiseCanvas
+        <DitheredSDFWavesCanvas
           {...simplexNoiseProps}
           gridColumn='span 6'
           display={{ initial: 'flex', sm: 'none' }}
+          aspectRatio='4 / 2.95'
         />
         <PortfolioCard
           project={projects['local-welcome']}
@@ -130,6 +131,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === projects.kano.slug}
           size={{ initial: 'lg', sm: 'lg' }}
         />
+        <DitheredSDFWavesCanvas
+          {...simplexNoiseProps}
+          gridColumn={{ initial: 'span 6', sm: 'span 3' }}
+          display={{ initial: 'none', sm: 'flex' }}
+          aspectRatio='4 / 1.9'
+        />
         <PortfolioCard
           project={projects['elements-3d']}
           gridColumn={{ initial: 'span 6', sm: 'span 3' }}
@@ -143,6 +150,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['make-art'].slug}
           size={{ initial: 'sm', sm: 'sm' }}
+        />
+        <DitheredSDFWavesCanvas
+          {...simplexNoiseProps}
+          gridColumn={{ initial: 'span 0', sm: '1 / span 3' }}
+          display={{ initial: 'none', sm: 'flex' }}
+          aspectRatio='4 / 1.9'
         />
         <PortfolioCard
           project={projects.adobe}

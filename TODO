@@ -1,9 +1,5 @@
 MVP: Release to testers
 
-2. Portfolio Final Bento Layout
-
-- change the perlin noise filler to the wave pattern
-
 3. Portfolio Content
 
 Before writing copy, review Harry Dry's writing advice, come up with a format
@@ -85,6 +81,7 @@ for a great portfolio write-up.
 - “autumn color swamp” as a meander
 - remove the circle in the turtle pattern up top, add in shapes to the bottom
 - no-javascript fallbacks
+- figure out how to fix the aspect ratio issues with the filler boxes
 - add more items:
   - Sleep Sound
   - Now That's What I call Y2K
