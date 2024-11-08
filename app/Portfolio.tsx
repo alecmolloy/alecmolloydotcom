@@ -150,11 +150,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === projects['make-art'].slug}
           size={{ initial: 'sm', sm: 'sm' }}
         />
-        <DitheredSDFWavesCanvas
-          {...simplexNoiseProps}
-          gridColumn={{ initial: 'span 0', sm: '1 / span 3' }}
-          display={{ initial: 'none', sm: 'flex' }}
-          aspectRatio='4 / 1.9'
+        <PortfolioCard
+          project={projects['isitavocadosornotdotcom']}
+          gridColumn={{ initial: 'span 6', sm: '1 / span 3' }}
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects['isitavocadosornotdotcom'].slug}
+          size={{ initial: 'sm', sm: 'sm' }}
         />
         <PortfolioCard
           project={projects.adobe}
@@ -165,18 +166,17 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           size={{ initial: 'lg', sm: 'lg' }}
         />
         <PortfolioCard
-          project={projects['isitavocadosornotdotcom']}
-          gridColumn={{ initial: 'span 6', sm: '1 / span 3' }}
-          setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === projects['isitavocadosornotdotcom'].slug}
-          size={{ initial: 'sm', sm: 'sm' }}
-        />
-        <PortfolioCard
           project={projects['portrait-of-five-cubes']}
           gridColumn={{ initial: 'span 6', sm: '1 / span 3' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['portrait-of-five-cubes'].slug}
           size={{ initial: 'sm', sm: 'sm' }}
+        />
+        <DitheredSDFWavesCanvas
+          {...simplexNoiseProps}
+          gridColumn={{ initial: 'span 0', sm: '1 / span 3' }}
+          display={{ initial: 'none', sm: 'flex' }}
+          aspectRatio='4 / 1.9'
         />
       </Grid>
       <PortfolioModal

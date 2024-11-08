@@ -6,19 +6,7 @@ import * as THREE from 'three'
 import fragmentShader from './shaders/dithered-sdf-waves.frag'
 import vertexShader from './shaders/dithered-sdf-waves.vert'
 
-/**
- * DitheredSDFWavesCanvas component renders a 2D dithered SDF waves texture
- * using react-three-fiber and a custom shader material.
- *
- * - It creates a canvas that fills its parent container using WebGL.
- * - A plane is rendered, which is assigned a custom ShaderMaterial
- *   using imported GLSL vertex and fragment shaders.
- * - The fragment shader generates dithered SDF waves, which is used
- *   to color the plane, producing a dithered SDF waves texture.
- */
-
 interface DitheredSDFWavesCanvasProps {
-  /** The size of each cell in the simplex noise grid. */
   darkColor: string
   lightColor: string
   pixelSize: number
