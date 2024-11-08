@@ -1,4 +1,4 @@
-import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Flex, type FlexProps, Text as Txt } from '@radix-ui/themes'
 import { Squircle } from '@squircle-js/react'
 import Img, { StaticImageData } from 'next/image'
 import React from 'react'
@@ -9,9 +9,14 @@ interface PortfolioImageProps {
   caption?: React.ReactNode
 }
 
-export function PortfolioImage({ src, alt, caption }: PortfolioImageProps) {
+export function PortfolioImage({
+  src,
+  alt,
+  caption,
+  ...props
+}: PortfolioImageProps & FlexProps) {
   return (
-    <Flex direction='column' gap='2'>
+    <Flex direction='column' gap='2' my='4' {...props}>
       <Squircle cornerRadius={8}>
         <Img
           src={src}
