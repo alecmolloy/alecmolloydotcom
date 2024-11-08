@@ -2,7 +2,7 @@ import {
   collaborator,
   heroVideo,
   project,
-  recognition,
+  recognitions,
 } from '@/app/content-types'
 import { PortfolioImage } from '@/components/PortfolioImage'
 import kanoKit3dRender from '@/public/portfolio/kano/kano-kit-3d-render.webp'
@@ -63,22 +63,22 @@ export const kano = project({
     collaborator('Sherif Maktabi', 'https://www.linkedin.com/in/sherifmak/'),
   ],
   recognition: [
-    recognition(
+    recognitions(
       'Cannes Lions (2014)',
       'Product Design Gold',
       'https://www.theinspiration.com/2014/06/cannes2014-product-design-gold-lions-canneslions/',
     ),
-    recognition(
+    recognitions(
       '$15M Series A',
       'Led by Breyer Capital',
       'https://techcrunch.com/2015/05/04/kano-series-a',
     ),
-    recognition(
+    recognitions(
       'Red Dot (2015)',
       'Outstanding product design',
       'https://www.red-dot.org/project/kano-33536',
     ),
-    recognition(
+    recognitions(
       'Webby Award (2015)',
       'Apps & Software',
       'https://winners.webbyawards.com/2015/apps-and-software/mobile-ott-app-features/connected-products-wearables/158738/kano-a-computer-anyone-can-make',

@@ -95,7 +95,7 @@ interface Recognition {
   url?: string
 }
 
-export function recognition(
+export function recognitions(
   title: string,
   description: string,
   url?: string,

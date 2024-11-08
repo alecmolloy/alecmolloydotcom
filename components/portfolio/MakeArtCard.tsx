@@ -1,41 +1,51 @@
 import { MakeArtItem } from '@/data/make-art'
-import { Link } from '@radix-ui/themes'
-import React from 'react'
+import { Flex, Link, Text as Txt } from '@radix-ui/themes'
+import { Squircle } from '@squircle-js/react'
 import Img from 'next/image'
-import { Text as Txt } from '@radix-ui/themes'
+import React from 'react'
 
 export const MakeArtCard: React.FunctionComponent<{ item: MakeArtItem }> = ({
   item,
 }) => {
   return (
-    <Link
+    <Flex
+      direction='column'
       id={item.title}
-      href={item.thumbnail.src}
-      style={{ textDecoration: 'none', color: 'initial' }}
-      target='_blank'
+      className='make-art-item'
+      style={{ cursor: 'pointer' }}
+      onClick={() => {
+        window.open(item.thumbnail.src, '_blank')
+      }}
     >
-      <Img
-        alt={item.title}
-        src={item.thumbnail}
-        style={{
-          width: '100%',
-          height: 'auto',
-          backgroundColor: 'white',
-        }}
-      />
-      <Txt
-        style={{
-          fontSize: '.75em',
-          lineHeight: '1.33em',
-        }}
-      >
-        <div>
-          <span style={{ fontStyle: 'italic' }}>{item.title}</span>{' '}
-          <span style={{ color: '#888' }}>({item.date.getFullYear()})</span>{' '}
-          <Link href={`/portfolio/make-art/${item.code}`}>[Code]</Link>
-        </div>
-        {item.description}
+      <Squircle cornerRadius={8}>
+        <Img
+          alt={item.title}
+          src={item.thumbnail}
+          style={{
+            display: 'block',
+            width: '100%',
+            height: 'auto',
+            backgroundColor: 'white',
+          }}
+        />
+      </Squircle>
+      <Txt size='2'>
+        <em>{item.title} </em>
+        <Txt style={{ color: '#888' }}>
+          ({item.date.getFullYear()}){' '}
+          <Link
+            className='make-art-code-link'
+            href={`/portfolio/make-art/${item.code}`}
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+            target='_blank'
+            style={{ color: 'inherit', opacity: 0 }}
+          >
+            Code&nbsp;→
+          </Link>
+        </Txt>
       </Txt>
-    </Link>
+    </Flex>
   )
 }

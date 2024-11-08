@@ -2,11 +2,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-.header-button:hover {
-  text-decoration-line: underline !important;
 }
 
 a {
@@ -24,4 +19,8 @@ a {
 
 #project-modal-content > p:first-of-type {
   margin-top: 0;
+}
+
+.make-art-item:hover .make-art-code-link {
+  opacity: 1 !important;
 }

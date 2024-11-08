@@ -231,13 +231,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   return (
     // @ts-ignore
-    <a.group
-      position={position}
-      {...styles}
-      {...bind()}
-      onPointerOver={() => setInteractionState('hovered')}
-      onPointerOut={() => setInteractionState(null)}
-    >
+    <a.group position={position} {...styles} {...bind()}>
       <mesh
         ref={meshRef}
         scale={scale}
@@ -245,7 +239,6 @@ export const Void: React.FunctionComponent<VoidProps> = ({
         onPointerOver={() => setInteractionState('hovered')}
         onPointerOut={() => setInteractionState(null)}
       >
-        {/* <meshBasicMaterial map={uvGridTexture} />{' '} */}
         <MeshTransmissionMaterial
           transmissionSampler={false}
           backside={false}
@@ -268,6 +261,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
           bumpScale={0.05 * radius}
         />
       </mesh>
+      {/* @ts-ignore */}
     </a.group>
   )
 }

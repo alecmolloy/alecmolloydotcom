@@ -334,7 +334,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                                       target='_blank'
                                       rel='noreferrer'
                                     >
-                                      {link.title} →
+                                      {link.title}&nbsp;→
                                     </a>
                                   ))}
                                 </Flex>
@@ -365,7 +365,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                                         target='_blank'
                                         rel='noreferrer'
                                       >
-                                        {collaborator.name} →
+                                        {collaborator.name}&nbsp;→
                                       </a>
                                     ) : (
                                       collaborator.name

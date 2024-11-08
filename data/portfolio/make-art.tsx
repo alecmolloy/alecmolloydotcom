@@ -28,7 +28,7 @@ export const makeArt = project({
         <a href='https://world.kano.me/users/alec'>world.kano.me</a> but sadly
         both are poorly maintained, so I’ve archived them here.
       </p>
-      <Grid columns='2' gapX='3' gapY='4' my='4'>
+      <Grid columns='2' gapX='4' gapY='6' my='4'>
         {MakeArtItems.map((item, i) => (
           <MakeArtCard key={i} item={item} />
         ))}
