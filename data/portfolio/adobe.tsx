@@ -1,5 +1,7 @@
-import { collaborator, heroImage, project } from '@/app/content-types'
+import { collaborator, heroImage, link, project } from '@/app/content-types'
+import { PortfolioImage } from '@/components/PortfolioImage'
 import adobeHero from '@/public/portfolio/adobe/adobe-01.png'
+import nimbusTeam from '@/public/portfolio/adobe/nimbus-team.jpg'
 
 export const adobe = project({
   slug: 'adobe',
@@ -10,36 +12,61 @@ export const adobe = project({
     adobeHero,
     'Adobe Digital Media Internship and Learning Games',
   ),
-  date: '2014',
+  date: '2012–2014',
   tools: ['Photoshop', 'InDesign'],
   content: (
     <>
       <p>
-        I joined Adobe as a Digital Media Intern in the summer of 2012. I wrote,
-        edited, designed, and managed learning content for Photoshop, Lightroom,
-        InDesign, and Acrobat. I performed analytics for the editorial team,
-        researched user experiences for data-driven design projects, and
-        represented Adobe as a product expert in online communities. After the
-        summer, my contract was extended to continue working full-time through
-        my senior year at Santa Clara, just down the road from the headquarters.
+        I joined Adobe as a Digital Media Intern in the summer of 2012, and was
+        later a Product Manager for Learning Games. I wrote, edited, designed,
+        and managed learning content for Creative Cloud apps.
       </p>
+      <PortfolioImage
+        src={nimbusTeam}
+        alt='Project Nimbus team'
+        caption='The Project Nimbus learning games team'
+      />
       <p>
-        After graduation, I served as a Product Manager for Learning Games. I
-        joined an intrapreneurship program and led a team responsible for
+        I joined Adobe’s intrapreneurship program and led a team responsible for
         building experimental learning games for Photoshop and Illustrator. I
-        managed, researched, developed, QA’d, and launched learning games that
-        were given placement on the Creative Cloud app welcome splash screens,
-        shown to 5+ million users, and contributed to a $10M ARR bump in trial
-        conversions. By validating early MVPs with customers, I proved the
-        profitability of games as a learning solution and secured funding for
-        further development. I conducted in-person and remote research sessions
-        with customers and articulated a product vision informed by user
-        research and input from UX and Engineering teams.
+        managed, researched, developed, marketed, and launched learning games
+        that headlined the Creative Cloud app welcome splash screens for a
+        number of years, shown to millions of users.
+      </p>
+      <blockquote className='twitter-tweet'>
+        <p lang='en' dir='ltr'>
+          <a href='https://twitter.com/Illustrator?ref_src=twsrc%5Etfw'>
+            @Illustrator
+          </a>{' '}
+          If those cool tutorials didn’t pop up in the new CC, I would never
+          have used Shape Builder.{' '}
+          <a href='https://twitter.com/hashtag/thankyou?src=hash&amp;ref_src=twsrc%5Etfw'>
+            #thankyou
+          </a>
+        </p>
+        &mdash; andy rolfes (@AndrewRolfes){' '}
+        <a href='https://twitter.com/AndrewRolfes/status/488714861530992641?ref_src=twsrc%5Etfw'>
+          July 14, 2014
+        </a>
+      </blockquote>{' '}
+      <script
+        async
+        src='https://platform.twitter.com/widgets.js'
+        charSet='utf-8'
+      ></script>
+      <p>
+        By validating early MVPs with customers, I proved the trial conversion
+        impact of learning games, and secured funding for further development. I
+        conducted research sessions with customers and articulated a product
+        vision informed by user research and input from UX and Engineering
+        teams.
       </p>
       <p>
-        I conducted in-person and remote research sessions, articulating a
-        product vision informed by user research and collaboration with UX and
-        engineering teams.
+        You can still play the first game we built, the pen tool game on{' '}
+        <a href='https://helpx.adobe.com/illustrator/games/pen-tool-game/'>
+          Adobe.com
+        </a>
+        .
       </p>
     </>
   ),
@@ -54,6 +81,12 @@ export const adobe = project({
     collaborator(
       'Swapnil Shrivastava',
       'https://www.linkedin.com/in/swapnil-shrivastava-2b493637/',
+    ),
+  ],
+  links: [
+    link(
+      'Pen Tool Game',
+      'https://helpx.adobe.com/illustrator/games/pen-tool-game/',
     ),
   ],
 })
