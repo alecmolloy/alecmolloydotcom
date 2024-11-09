@@ -22,10 +22,11 @@ export const kano = project({
   content: (
     <>
       <p>
-        Kano creates technology kits and educational tools designed to help
-        people of all ages learn to code, create, and understand technology. I
-        joined as the first product manager to launch the record-breaking
-        Kickstarter-backed Kano Computer Kit.
+        I joined as the startup’s first product manager to launch the{' '}
+        <a href='https://www.kickstarter.com/projects/alexklein/kano-a-computer-anyone-can-make'>
+          record-breaking, Kickstarter-backed
+        </a>{' '}
+        Kano Computer Kit.
       </p>
       <PortfolioImage src={kanoKit3dRender} alt='Kano Computer Kit' />
       <p>
@@ -40,12 +41,14 @@ export const kano = project({
         caption='Remixing is how creativity works, and it is how we should teach it. Building our learning content strategy around remixing, our online community became a thriving hub for creative exchange.'
       />
       <p>
-        Eventually, I managed the web, creative tools, and Kano World community.
-        I developed a remix-oriented learning content model that spurred
-        significant platform growth. Later, I transitioned into a creative
-        technologist role, working on new hardware products and digital creative
-        tools like Make Light, LightBoard, Pixel Kit, Screen Kit, Camera Kit,
-        and Speaker Kit.
+        Next I took charge of web products, creative tools, and Kano World
+        community. I developed a remix-oriented learning content model that grew
+        beyond the Computer Kit, and brought new users into the ecosystem.
+      </p>
+      <p>
+        Later, I transitioned into a creative technologist role, working on new
+        hardware products and digital creative tools like Make Light,
+        LightBoard, Pixel Kit, Screen Kit, Camera Kit, and Speaker Kit.
       </p>
     </>
   ),
