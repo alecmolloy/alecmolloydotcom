@@ -10,14 +10,16 @@ export const minDoktor = project({
   content: (
     <>
       <p>
-        Min Doktor is Europe’s largest telehealth provider, offering full
-        doctor’s visits via smartphone. I managed the React Native Patient App,
-        overseeing tools that connected thousands of patients with doctors
-        daily.
+        Min Doktor was Europe’s largest telehealth provider, when I joined as
+        Product Manager for their React Native Patient App. They offered full
+        doctor’s visits via smartphone, connecting thousands of patients with
+        doctors daily, especially those in Sweden’s sparsely populated
+        countryside.
       </p>
       <p>
-        I managed the expansion into new types of visits, patient conversion
-        improvements, and regulatory compliance for Swedish and EU markets.
+        I managed the expansion into new types of visits, including mental
+        health, conversion improvements, and regulatory compliance for Swedish
+        and other future EU markets.
       </p>
     </>
   ),
