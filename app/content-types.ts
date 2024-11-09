@@ -66,7 +66,7 @@ type Tools =
   | 'InDesign'
   | 'WebGL'
   | 'CoffeeScript'
-  | 'JQuery'
+  | 'Vercel'
 
 interface Collaborator {
   name: string
