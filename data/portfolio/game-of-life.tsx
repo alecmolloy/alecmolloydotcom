@@ -5,7 +5,6 @@ export const gameOfLife = project(
   project({
     slug: 'game-of-life',
     title: 'Game of Life Editor',
-    subtitle: undefined,
     hero: heroImage(gameOfLifeHero, 'Game of Life Editor'),
     date: '2023',
     tools: ['TypeScript', 'WebGL', 'React'],
@@ -26,9 +25,5 @@ export const gameOfLife = project(
         </p>
       </>
     ),
-    deliverables:
-      'A web-based interactive editor for creating and simulating patterns in Conway’s Game of Life',
-    role: 'Developer',
-    collaborators: [],
   }),
 )

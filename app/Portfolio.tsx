@@ -81,7 +81,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === projects['retreat-technology'].slug}
           size={{ initial: 'lg', sm: 'md' }}
         />
-        <PortfolioCard
+        {/* <PortfolioCard
           project={projects['game-of-life']}
           gridColumn={{ initial: 'span 6', sm: 'span 4' }}
           setOpenModal={setOpenModalSlug}
@@ -107,7 +107,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           gridColumn='span 6'
           display={{ initial: 'flex', sm: 'none' }}
           aspectRatio='4 / 2.95'
-        />
+        /> */}
         <PortfolioCard
           project={projects['local-welcome']}
           gridColumn={{ initial: 'span 12', sm: 'span 6' }}
@@ -153,17 +153,10 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         <PortfolioCard
           project={projects['isitavocadosornotdotcom']}
           gridColumn={{ initial: 'span 6', sm: '1 / span 3' }}
+          gridRow={{ initial: '13', sm: '8' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['isitavocadosornotdotcom'].slug}
           size={{ initial: 'sm', sm: 'sm' }}
-        />
-        <PortfolioCard
-          project={projects.adobe}
-          gridColumn={{ initial: 'span 12', sm: '4 / span 9' }}
-          gridRow='span 3'
-          setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === projects.adobe.slug}
-          size={{ initial: 'lg', sm: 'lg' }}
         />
         <PortfolioCard
           project={projects['portrait-of-five-cubes']}
@@ -177,6 +170,14 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           gridColumn={{ initial: 'span 0', sm: '1 / span 3' }}
           display={{ initial: 'none', sm: 'flex' }}
           aspectRatio='4 / 1.9'
+        />
+        <PortfolioCard
+          project={projects.adobe}
+          gridColumn={{ initial: 'span 12', sm: '4 / span 9' }}
+          gridRow={{ initial: '12', sm: '8 / span 3' }}
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects.adobe.slug}
+          size={{ initial: 'lg', sm: 'lg' }}
         />
       </Grid>
       <PortfolioModal
