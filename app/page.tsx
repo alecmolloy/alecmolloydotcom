@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: 'Alec Molloy',
   description: 'The Official Web Presence of Alec Molloy™',
   openGraph: {
-    images: ['/favicon.png'],
+    images: ['/opengraph-image.png'],
   },
 }
 
