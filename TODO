@@ -4,8 +4,6 @@ MVP: Release to testers
 
 # Bugs
 
-- Navigation void should not be grabbable, should not respond so much to mouse
-  movement
 - Turtle background should resize properly, it is getting outdated width data
 
 # Misc

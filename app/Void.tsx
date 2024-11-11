@@ -13,6 +13,7 @@ type InteractionState = null | 'hovered' | 'grabbing'
 interface VoidProps {
   position: [number, number, number]
   radius: number
+  affectedByMouse: boolean
   wobbleAmplitude?: number
   wobbleFrequency?: number
   rotationXOffset?: number
@@ -21,6 +22,7 @@ interface VoidProps {
 export const Void: React.FunctionComponent<VoidProps> = ({
   radius,
   position,
+  affectedByMouse,
   wobbleAmplitude = 0.05,
   wobbleFrequency = 0.5,
   rotationXOffset = Math.PI,
@@ -154,17 +156,19 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 })
 
   React.useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / size.width) * 2 - 1,
-        y: -(e.clientY / size.height) * 2 + 1,
-      })
-    }
+    if (affectedByMouse === true) {
+      const handleMouseMove = (e: MouseEvent) => {
+        setMousePosition({
+          x: (e.clientX / size.width) * 2 - 1,
+          y: -(e.clientY / size.height) * 2 + 1,
+        })
+      }
 
-    window.addEventListener('mousemove', handleMouseMove)
+      window.addEventListener('mousemove', handleMouseMove)
 
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove)
+      }
     }
   }, [size])
 
@@ -231,7 +235,11 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   return (
     // @ts-ignore
-    <a.group position={position} {...styles} {...bind()}>
+    <a.group
+      position={position}
+      {...styles}
+      {...(affectedByMouse ? bind() : {})}
+    >
       <mesh
         ref={meshRef}
         scale={scale}

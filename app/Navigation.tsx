@@ -213,8 +213,9 @@ export const Navigation: React.FunctionComponent = () => {
                       <Void
                         position={[0, 0, 0]}
                         radius={24}
-                        wobbleAmplitude={0.4}
-                        wobbleFrequency={0.1}
+                        wobbleAmplitude={0.05}
+                        wobbleFrequency={0.4}
+                        affectedByMouse={false}
                       />
                     </Canvas>
                   ) : (
