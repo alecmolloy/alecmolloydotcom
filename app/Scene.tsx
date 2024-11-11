@@ -40,7 +40,7 @@ export const Scene = () => {
 
   return (
     <>
-      <Void radius={voidRadius} position={[0, 256, 0]} />
+      <Void radius={voidRadius} position={[0, 256, 0]} affectedByMouse />
       <TurtlePlane voidRadius={voidRadius} />
       <Environment map={envMap} environmentRotation={environmentRotation} />
     </>
