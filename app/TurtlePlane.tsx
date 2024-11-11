@@ -95,31 +95,14 @@ export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
             ctx.fillRect(x * PixelScale, y * PixelScale, PixelScale, PixelScale)
           }
           if (x >= 1 && y >= 1) {
-            const distanceFromCenter = Math.sqrt(
-              Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2),
+            const standingWaveDirection = (x + y) % 3 === 0
+            ctx.drawImage(
+              standingWaveDirection ? turtleHorizontalImg : turtleVerticalImg,
+              x * PixelScale - TurtleSquareHalf,
+              y * PixelScale - TurtleSquareHalf,
+              TurtleSquareSize,
+              TurtleSquareSize,
             )
-            const isInVoid = distanceFromCenter <= voidRadiusCells
-            if (isInVoid) {
-              const isInInnerVoid = distanceFromCenter <= voidRadiusCells / 2
-              ctx.drawImage(
-                ((x + y) % 2 === 0) != isInInnerVoid
-                  ? turtleHorizontalImg
-                  : turtleVerticalImg,
-                x * PixelScale - TurtleSquareHalf,
-                y * PixelScale - TurtleSquareHalf,
-                TurtleSquareSize,
-                TurtleSquareSize,
-              )
-            } else {
-              const standingWaveDirection = (x + y) % 3 === 0
-              ctx.drawImage(
-                standingWaveDirection ? turtleHorizontalImg : turtleVerticalImg,
-                x * PixelScale - TurtleSquareHalf,
-                y * PixelScale - TurtleSquareHalf,
-                TurtleSquareSize,
-                TurtleSquareSize,
-              )
-            }
           }
         }
       }
