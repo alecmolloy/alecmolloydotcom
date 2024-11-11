@@ -5,6 +5,7 @@ import { BobbingText } from './components/BobbingText'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
+import { CTA } from '@/components/CTA'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -90,30 +91,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               I’m actively seeking new projects and clients. If you think that’s
               you, let’s talk. :)
             </P>
-            <a
-              href='mailto:workwith@alecmolloy.com'
-              style={{
-                alignItems: 'center',
-                textDecoration: 'none',
-                textDecorationThickness: 1.5,
-                textDecorationStyle: 'wavy',
-                textDecorationColor: '#000',
-                textUnderlineOffset: 4,
-              }}
-            >
-              <Squircle
-                cornerRadius={100}
-                style={{
-                  display: 'inline-block',
-                  padding: '4px 12px',
-                  borderRadius: 100,
-                  backgroundColor: 'var(--international-orange)',
-                  color: 'white',
-                }}
-              >
-                <BobbingText>Work with me →</BobbingText>
-              </Squircle>
-            </a>
+            <CTA />
           </Box>
         </Grid>
       </Container>

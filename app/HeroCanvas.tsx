@@ -1,11 +1,10 @@
 'use client'
+import { CTA } from '@/components/CTA'
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
 import { Canvas } from '@react-three/fiber'
-import { BobbingText } from './components/BobbingText'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 import { defaultContainerProps } from './theme'
-import { Squircle } from '@squircle-js/react'
 
 export const HeroCanvas = () => {
   return (
@@ -68,32 +67,7 @@ export const HeroCanvas = () => {
             >
               For Hire
             </Txt>
-            <a
-              href='mailto:workwith@alecmolloy.com'
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                textDecoration: 'none',
-                textDecorationThickness: 1.5,
-                textDecorationStyle: 'wavy',
-                textDecorationColor: '#000',
-                textUnderlineOffset: 4,
-                position: 'absolute',
-                right: 0,
-              }}
-            >
-              <Squircle
-                cornerRadius={100}
-                style={{
-                  display: 'inline-block',
-                  padding: '4px 12px',
-                  backgroundColor: '#fffd',
-                  borderRadius: 100,
-                }}
-              >
-                <BobbingText>Work with me →</BobbingText>
-              </Squircle>
-            </a>
+            <CTA variant='white' />
           </Flex>
         </Flex>
         <Canvas
