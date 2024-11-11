@@ -34,8 +34,8 @@ const Index: React.FunctionComponent = () => {
         <Navigation />
         <About id='about' />
         <Portfolio id='portfolio' />
-        <Contact id='contact' />
       </Box>
+      <Contact id='contact' />
       <TurtleMeander height={144} />
     </>
   )

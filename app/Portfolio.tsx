@@ -47,7 +47,7 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
       style={{
         minHeight: '100vh',
       }}
-      py='9'
+      pt='9'
       {...defaultContainerProps}
     >
       <Grid {...defaultGridProps}>
