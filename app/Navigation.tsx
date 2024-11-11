@@ -9,7 +9,8 @@ import { Void } from './Void'
 export const sections = ['hero', 'about', 'portfolio', 'contact'] as const
 export type Section = (typeof sections)[number]
 
-const navLinkHeight = 60
+export const NavLinkHeight = 60
+export const NavLinkMargin = 16
 
 export const Navigation: React.FunctionComponent = () => {
   const [activeSection, setActiveSection] = React.useState<Section | null>(null)
@@ -20,7 +21,7 @@ export const Navigation: React.FunctionComponent = () => {
   const autoScrollTimeoutRef = useRef<number | null>(null)
 
   const [indicatorProps, api] = useSpring(() => ({
-    width: navLinkHeight,
+    width: NavLinkHeight,
     x: 0,
     config: { tension: 300, friction: 30 },
   }))
@@ -107,7 +108,7 @@ export const Navigation: React.FunctionComponent = () => {
       <Flex
         direction='row'
         align='center'
-        m='4'
+        m={`${NavLinkMargin}px`}
         p='3'
         style={{
           position: 'relative',
@@ -164,7 +165,7 @@ export const Navigation: React.FunctionComponent = () => {
                     padding: section === 'hero' ? 0 : '0 12px',
                     alignItems: 'center',
                     color: '#000',
-                    height: navLinkHeight,
+                    height: NavLinkHeight,
                     WebkitTapHighlightColor: 'transparent',
                     outline: 'none',
                   }}
@@ -198,8 +199,8 @@ export const Navigation: React.FunctionComponent = () => {
                   {section === 'hero' ? (
                     <Canvas
                       style={{
-                        width: navLinkHeight,
-                        height: navLinkHeight,
+                        width: NavLinkHeight,
+                        height: NavLinkHeight,
                         opacity: activeSection !== 'hero' ? 1 : 0,
                         transition: 'opacity 0.3s ease-in-out',
                       }}
@@ -238,7 +239,7 @@ export const Navigation: React.FunctionComponent = () => {
               zIndex: -1,
               position: 'absolute',
               left: 0,
-              height: navLinkHeight,
+              height: NavLinkHeight,
               borderRadius: 1000,
               pointerEvents: 'none',
               backgroundImage: `radial-gradient(

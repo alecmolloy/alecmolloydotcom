@@ -66,8 +66,8 @@ export const Footer = () => {
               src='/im-confused-too.svg'
               alt='Made in UK, But Raised in US, And also Irish. ¯\_(ツ)_/¯ '
               title='But I can work with you in the USA, EU, and UK visa-free :)'
-              width={150}
-              height={150}
+              width={100}
+              height={100}
             />
           </Flex>
         </Flex>
