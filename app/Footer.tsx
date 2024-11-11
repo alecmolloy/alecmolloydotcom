@@ -23,7 +23,7 @@ export const Footer = () => {
             <Flex
               direction='row'
               gapX='4'
-              align={{ initial: 'center', sm: 'start' }}
+              justify={{ initial: 'center', sm: 'start' }}
             >
               {socialLinks.map((link) => (
                 <a
@@ -36,7 +36,11 @@ export const Footer = () => {
                     textDecoration: 'none',
                   }}
                 >
-                  <Txt size='2' style={{ color: 'var(--slate-11)' }}>
+                  <Txt
+                    size='2'
+                    style={{ color: 'var(--slate-11)' }}
+                    align={{ initial: 'center', sm: 'left' }}
+                  >
                     {link.label}
                   </Txt>
                 </a>
@@ -61,7 +65,12 @@ export const Footer = () => {
               © {new Date().getFullYear()} Alec Molloy. All rights reserved.
             </Txt>
           </Flex>
-          <Flex direction='row' align='end' gapY='4'>
+          <Flex
+            direction='row'
+            align='end'
+            gapY='4'
+            display={{ initial: 'none', sm: 'flex' }}
+          >
             <img
               src='/im-confused-too.svg'
               alt='Made in UK, But Raised in US, And also Irish. ¯\_(ツ)_/¯ '

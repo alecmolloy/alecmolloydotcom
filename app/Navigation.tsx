@@ -5,12 +5,10 @@ import { Environment } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
 import { Void } from './Void'
+import { NavLinkHeight, NavLinkMargin } from './theme'
 
 export const sections = ['hero', 'about', 'portfolio', 'contact'] as const
 export type Section = (typeof sections)[number]
-
-export const NavLinkHeight = 60
-export const NavLinkMargin = 16
 
 export const Navigation: React.FunctionComponent = () => {
   const [activeSection, setActiveSection] = React.useState<Section | null>(null)

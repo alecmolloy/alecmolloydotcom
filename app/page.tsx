@@ -3,8 +3,9 @@ import { Metadata } from 'next'
 import React from 'react'
 import { About } from './About'
 import { Contact } from './Contact'
-import { Navigation } from './Navigation'
+import { Footer } from './Footer'
 import { HeroCanvas } from './HeroCanvas'
+import { Navigation } from './Navigation'
 import { Portfolio } from './Portfolio'
 import { TurtleMeander } from './TurtleMeander'
 
@@ -36,7 +37,8 @@ const Index: React.FunctionComponent = () => {
         <Portfolio id='portfolio' />
       </Box>
       <Contact id='contact' />
-      <TurtleMeander height={144} />
+      <Footer />
+      <TurtleMeander height={8} />
     </>
   )
 }
