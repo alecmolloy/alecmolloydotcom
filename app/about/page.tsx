@@ -1,2 +1,5 @@
-import Index from '../page'
-export default Index
+import Index from '@/app/page'
+
+export default function About() {
+  return <Index />
+}

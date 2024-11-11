@@ -1,17 +1,33 @@
-import './global.css'
+import { Theme } from '@radix-ui/themes'
+import '@radix-ui/themes/styles.css'
 import type React from 'react'
+import { instrumentSerif, instrumentSans } from './fonts'
+import './global.css'
+import './theme.css'
+import { SquircleNoScript } from '@squircle-js/react'
 
 export default function RootLayout({
-  // Layouts must accept a children prop.
-  // This will be populated with nested layouts or pages
   children,
 }: {
   children: React.ReactNode
-  params: any
 }) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.png' sizes='any' />
+      </head>
+      <body
+        className={[instrumentSans.variable, instrumentSerif.variable].join(
+          ' ',
+        )}
+        style={{
+          position: 'relative',
+        }}
+      >
+        <SquircleNoScript />
+        <Theme id='theme-root'>{children}</Theme>
+      </body>
     </html>
   )
 }

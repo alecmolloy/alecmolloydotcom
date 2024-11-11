@@ -1,49 +1,26 @@
-/* Boilerplate */
-
-body * {
-  box-sizing: border-box;
-}
-
+html,
 body {
-  margin: 0 auto;
-  padding: 0 0 2rem;
-  font-size: 22px;
-  width: 100%;
-  line-height: 1.5em;
-  -webkit-font-smoothing: antialiased;
-  color: #444;
-  font-family: serif;
+  margin: 0;
+  padding: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
+a {
+  color: inherit;
+  text-decoration-thickness: 0.0833333em;
+  text-decoration-style: wavy;
+  text-decoration-color: #888;
+  text-underline-offset: 0.25em;
+  text-decoration-skip-ink: all;
 }
 
-/* Text Templates */
-.wrapper {
-  margin: 1em auto 0;
-  max-width: 34em;
-  width: 100%;
-  padding: 0 0.5rem;
+.info-block a {
+  text-decoration: none;
 }
 
-@media (min-width: 80em) {
-  .wrapper {
-    max-width: 50em;
-  }
+#project-modal-content > p:first-of-type {
+  margin-top: 0;
 }
 
-.things-wrapper {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 500px) {
-  .things-wrapper {
-    grid-template-columns: 1fr;
-  }
+.make-art-item:hover .make-art-code-link {
+  opacity: 1 !important;
 }
