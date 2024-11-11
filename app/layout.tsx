@@ -1,10 +1,11 @@
 import { Theme } from '@radix-ui/themes'
 import '@radix-ui/themes/styles.css'
+import { SquircleNoScript } from '@squircle-js/react'
+import { Analytics } from '@vercel/analytics/react'
 import type React from 'react'
-import { instrumentSerif, instrumentSans } from './fonts'
+import { instrumentSans, instrumentSerif } from './fonts'
 import './global.css'
 import './theme.css'
-import { SquircleNoScript } from '@squircle-js/react'
 
 export default function RootLayout({
   children,
@@ -25,6 +26,7 @@ export default function RootLayout({
         }}
       >
         <SquircleNoScript />
+        <Analytics />
         <Theme id='theme-root'>{children}</Theme>
       </body>
     </html>
