@@ -9,10 +9,8 @@ export const PortfolioCaption: React.FC<PortfolioCaptionProps> = ({
   caption,
 }) => {
   return (
-    <Flex direction='column' mt='2'>
-      <Txt size='1' weight='medium' style={{ color: '#aaa' }}>
-        {caption}
-      </Txt>
-    </Flex>
+    <Txt as='p' size='1' mt='2' weight='medium' style={{ color: '#aaa' }}>
+      {caption}
+    </Txt>
   )
 }

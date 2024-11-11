@@ -73,6 +73,8 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
       style={{
         maxWidth,
         width: '100%',
+        position: 'sticky',
+        top: 128,
       }}
     >
       <Squircle

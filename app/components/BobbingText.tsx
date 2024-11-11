@@ -8,30 +8,17 @@ interface BobbingTextProps {
 }
 
 export const BobbingText: React.FC<BobbingTextProps> = ({ children }) => {
-  return (
-    <Squircle
-      cornerRadius={100}
+  return Array.from(children).map((char, index) => (
+    <Txt
+      key={index}
+      weight='bold'
       style={{
         display: 'inline-block',
-        padding: '4px 12px',
-        backgroundColor: '#fffd',
-        borderRadius: 100,
+        animation: `${styles.bob} 2s ease-in-out infinite`,
+        animationDelay: `${-children.length + index * 0.5}s`,
       }}
     >
-      {Array.from(children).map((char, index) => (
-        <Txt
-          key={index}
-          weight='bold'
-          style={{
-            display: 'inline-block',
-            animation: `${styles.bob} 2s ease-in-out infinite`,
-            animationDelay: `${-children.length + index * 0.5}s`,
-            color: 'black',
-          }}
-        >
-          {char === ' ' ? <>&nbsp;</> : char}
-        </Txt>
-      ))}
-    </Squircle>
-  )
+      {char === ' ' ? <>&nbsp;</> : char}
+    </Txt>
+  ))
 }

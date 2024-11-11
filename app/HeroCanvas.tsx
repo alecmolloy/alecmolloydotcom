@@ -5,6 +5,7 @@ import { BobbingText } from './components/BobbingText'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 import { defaultContainerProps } from './theme'
+import { Squircle } from '@squircle-js/react'
 
 export const HeroCanvas = () => {
   return (
@@ -72,7 +73,6 @@ export const HeroCanvas = () => {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 8,
                 textDecoration: 'none',
                 textDecorationThickness: 1.5,
                 textDecorationStyle: 'wavy',
@@ -82,7 +82,17 @@ export const HeroCanvas = () => {
                 right: 0,
               }}
             >
-              <BobbingText>Work with me →</BobbingText>
+              <Squircle
+                cornerRadius={100}
+                style={{
+                  display: 'inline-block',
+                  padding: '4px 12px',
+                  backgroundColor: '#fffd',
+                  borderRadius: 100,
+                }}
+              >
+                <BobbingText>Work with me →</BobbingText>
+              </Squircle>
             </a>
           </Flex>
         </Flex>

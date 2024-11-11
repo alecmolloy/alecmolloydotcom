@@ -28,7 +28,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
   const [isPlaying, setIsPlaying] = React.useState(false)
 
-  const [{ scale }, titleApi] = useSpring(
+  const [{ scale }, cardApi] = useSpring(
     () => ({
       scale: 1,
     }),
@@ -37,7 +37,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
   const bind = useGesture({
     onHover: ({ hovering }) => {
-      titleApi.start({
+      cardApi.start({
         scale: hovering && !modalOpen ? CardScaleOnHover : 1,
         config: SpringConfig,
       })
@@ -62,12 +62,12 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
   React.useEffect(() => {
     if (modalOpen) {
-      titleApi.start({
+      cardApi.start({
         scale: 1,
         config: SpringConfig,
       })
     }
-  }, [modalOpen, titleApi])
+  }, [modalOpen, cardApi])
 
   return (
     <Flex
@@ -86,7 +86,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
       ref={ref}
       onClick={() => {
         setOpenModal(project.slug)
-        titleApi.start({
+        cardApi.start({
           scale: 1,
           config: SpringConfig,
         })

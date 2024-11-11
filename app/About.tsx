@@ -1,5 +1,7 @@
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
+import { Squircle } from '@squircle-js/react'
 import React from 'react'
+import { BobbingText } from './components/BobbingText'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
@@ -9,7 +11,7 @@ const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
     as='p'
     size='6'
     {...props}
-    style={{ ...props.style, marginBottom: '1em' }}
+    style={{ ...props.style, marginBottom: '1em', lineHeight: '1.5' }}
   />
 )
 
@@ -58,37 +60,60 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               <a href='http://adobe.com'>Adobe</a>,{' '}
               <a href='http://kano.me'>Kano Computing</a>, and{' '}
               <a href='https://utopia.app'>Utopia</a>, and managed mobile
-              healthcare at <a href='http://mindoktor.se'>Min Doktor</a>.
+              healthcare at <a href='http://mindoktor.se'>Min Doktor</a>. I
+              presently work freelance, building with React, Next.js, and React
+              Native apps.
             </P>
             <P>
-              I’ve built React Native apps, and an integrated design/development
-              environment at Utopia. I presently work with React/Next.js and
-              have started building native iOS apps with SwiftUI.
-            </P>
-            <P>
-              My first job though, was as an editorial designer—starting at
-              Adobe, helping publishing dinosaurs transition to digital. While
-              there I built learning games for Photoshop and Illustrator, and
-              got hooked on creating tools for{' '}
+              Over the last decade I have been obsessed with building tools for{' '}
               <a href='https://worrydream.com/MediaForThinkingTheUnthinkable/'>
                 thinking unthinkable thoughts
               </a>
-              .
+              . Opinionated creative tools that abstract away complexity for
+              higher-level thinking, or integrate modes of thinking (component
+              UI design, state, and logic) into a single environment. Or tools
+              that can help us go to where thoughts cannot—into pure embodied
+              awareness.
             </P>
             <P>
-              I’m living on the road, studying nondual philosophy and
-              meditation, and building my own software development studio. I’m
-              currently building{' '}
-              <a href='https://retreat.technology'>retreat.technology</a>, and a
-              meditation app with Hareesh Wallace for his translation of the
-              1100-year-old <i>Vijñana-bhairava-tantra</i>.
+              My current projects mostly explore these themes, the forthcoming{' '}
+              VBT app, and Retreat.Technology. And I also just like to have fun
+              with family and friends, so I’m building Nuclear Connections .
             </P>
             <P>
-              I’m actively seeking new clients and projects that are
-              purpose-driven. If you think that’s you, please get in contact:
-              workwith@alecmolloy.com
+              Away from my keyboard, I study nondual philosophy and meditation,
+              and am practicing handbalancing, partner acrobatics, and
+              freediving. For 2025 you can mostly find me in Bali and the GMT+8
+              timezone.
             </P>
-            <P>ʕ •ᴥ•ʔ</P>
+            <P>
+              I’m actively seeking new projects and clients. If you think that’s
+              you, let’s talk. :)
+            </P>
+            <a
+              href='mailto:workwith@alecmolloy.com'
+              style={{
+                alignItems: 'center',
+                textDecoration: 'none',
+                textDecorationThickness: 1.5,
+                textDecorationStyle: 'wavy',
+                textDecorationColor: '#000',
+                textUnderlineOffset: 4,
+              }}
+            >
+              <Squircle
+                cornerRadius={100}
+                style={{
+                  display: 'inline-block',
+                  padding: '4px 12px',
+                  borderRadius: 100,
+                  backgroundColor: 'var(--international-orange)',
+                  color: 'white',
+                }}
+              >
+                <BobbingText>Work with me →</BobbingText>
+              </Squircle>
+            </a>
           </Box>
         </Grid>
       </Container>
