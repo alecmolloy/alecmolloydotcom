@@ -67,6 +67,7 @@ type Tools =
   | 'WebGL'
   | 'CoffeeScript'
   | 'Vercel'
+  | 'React Spring'
 
 interface Collaborator {
   name: string

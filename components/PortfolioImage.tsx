@@ -8,17 +8,19 @@ interface PortfolioImageProps {
   src: StaticImageData
   alt: string
   caption?: React.ReactNode
+  radius?: number
 }
 
 export function PortfolioImage({
   src,
   alt,
   caption,
+  radius = 16,
   ...props
 }: PortfolioImageProps & FlexProps) {
   return (
     <Flex direction='column' my='4' {...props}>
-      <Squircle cornerRadius={16}>
+      <Squircle cornerRadius={radius}>
         <Img
           src={src}
           alt={alt}
