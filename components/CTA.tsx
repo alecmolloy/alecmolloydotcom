@@ -1,5 +1,6 @@
 import { BobbingText } from '@/app/components/BobbingText'
 import { Squircle } from '@squircle-js/react'
+import * as React from 'react'
 
 interface CTAProps {
   variant?: 'primary' | 'white'

@@ -1,5 +1,4 @@
 import { Text as Txt } from '@radix-ui/themes'
-import { Squircle } from '@squircle-js/react'
 import React from 'react'
 import styles from './BobbingText.module.css'
 

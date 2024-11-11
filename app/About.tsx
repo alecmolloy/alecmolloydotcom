@@ -1,11 +1,9 @@
+import { CTA } from '@/components/CTA'
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
-import { Squircle } from '@squircle-js/react'
 import React from 'react'
-import { BobbingText } from './components/BobbingText'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
-import { CTA } from '@/components/CTA'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt

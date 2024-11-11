@@ -1,4 +1,4 @@
-import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 
 interface PortfolioCaptionProps {

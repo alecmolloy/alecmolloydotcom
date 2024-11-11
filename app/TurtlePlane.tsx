@@ -78,9 +78,6 @@ export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
       // this is the width and height, if there was an issue, it would be here
       const canvasPixelWidth = canvasCellWidth * PixelScale
       const canvasPixelHeight = canvasCellHeight * PixelScale
-      const centerX = Math.floor(canvasCellWidth / 2)
-      const centerY = Math.floor(canvasCellHeight / 2)
-      const voidRadiusCells = Math.floor(voidRadius / PixelScale + 2)
 
       const ctx = turtleCtxRef.current
       ctx.imageSmoothingEnabled = false

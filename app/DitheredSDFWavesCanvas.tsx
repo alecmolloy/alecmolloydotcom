@@ -122,7 +122,18 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
 
       mesh.current.scale.set(size.width, size.height, 1)
     }
-  }, [size, darkColor, lightColor, pixelSize, noiseTexture])
+  }, [
+    size,
+    darkColor,
+    lightColor,
+    pixelSize,
+    noiseTexture,
+    smoothstepWidth,
+    bandWidth,
+    numBands,
+    waveSize,
+    speed,
+  ])
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
