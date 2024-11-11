@@ -1,10 +1,17 @@
 varying vec2 vUv;
 uniform float time;
 uniform vec2 resolution;
-uniform sampler2D tBayer;
+uniform sampler2D tNoise;
 uniform vec3 darkColor;
 uniform vec3 lightColor;
 uniform float pixelSize;
+uniform float smoothstepWidth;
+uniform float bandWidth;
+uniform float numBands;
+uniform float waveSize;
+uniform float speed;
+uniform float seed;
+uniform float noiseTextureSize;
 
 vec2 GetGradient(vec2 intPos, float t) {
     float rand = fract(sin(dot(intPos, vec2(12.9898, 78.233))) * 43758.5453);;
@@ -33,20 +40,16 @@ return noiseVal;
 }
 
 float ditheredSDFWaves(vec2 uv) {
-    const float SMOOTHSTEP_WIDTH = 0.015;
-    const float BAND_WIDTH = 0.25;
-    const float LOWER_BAND_START = 0.5 - BAND_WIDTH;
-    const float UPPER_BAND_START = 0.5 + BAND_WIDTH;
-    const float NUM_BANDS = 10.0;
-    const float SIZE = 1.0;
+    float lowerBandStart = 0.5 - bandWidth;
+    float upperBandStart = 0.5 + bandWidth;
 
-    float t = time * 0.0125;
+    float t = time * speed + seed;
 
-    float noiseVal = 0.5 + 0.5 * Pseudo3dNoise(vec3(uv * SIZE, t));
+    float noiseVal = 0.5 + 0.5 * Pseudo3dNoise(vec3(uv * waveSize, t));
 
     float waves = 1.0 - 
-      smoothstep(LOWER_BAND_START - SMOOTHSTEP_WIDTH, LOWER_BAND_START + SMOOTHSTEP_WIDTH, fract((abs(noiseVal) * NUM_BANDS) + t)) *
-      smoothstep(UPPER_BAND_START + SMOOTHSTEP_WIDTH, UPPER_BAND_START - SMOOTHSTEP_WIDTH, fract((abs(noiseVal) * NUM_BANDS) + t));
+      smoothstep(lowerBandStart - smoothstepWidth, lowerBandStart + smoothstepWidth, fract((abs(noiseVal) * numBands) + t)) *
+      smoothstep(upperBandStart + smoothstepWidth, upperBandStart - smoothstepWidth, fract((abs(noiseVal) * numBands) + t));
 
     return waves;
 }
@@ -60,9 +63,9 @@ float dither(float color, vec2 ditheredUv, vec2 ditheredPixelCoord) {
     float edgeFade = smoothstep(0.0, 0.125, min(edgeDistance.x, edgeDistance.y));
     gray = mix(1.0, gray, edgeFade);
 
-    // Use the Bayer texture for dithering
-    vec2 bayerCoord = mod(ditheredPixelCoord, 16.0) / 16.0;
-    float threshold = texture2D(tBayer, bayerCoord).r;
+    // Use the noise texture for dithering
+    vec2 noiseCoord = mod(ditheredPixelCoord, noiseTextureSize) / noiseTextureSize;
+    float threshold = texture2D(tNoise, noiseCoord).r;
 
     float thresholdDifference = threshold - gray;
 

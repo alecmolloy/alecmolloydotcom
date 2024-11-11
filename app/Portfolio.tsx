@@ -11,7 +11,12 @@ import { defaultContainerProps, defaultGridProps } from './theme'
 const simplexNoiseProps = {
   darkColor: '#faf2f2',
   lightColor: '#fff',
-  pixelSize: 15,
+  pixelSize: 3,
+  smoothstepWidth: 0.15,
+  bandWidth: 0.25,
+  numBands: 6,
+  waveSize: 1,
+  speed: 0.0125 / 1,
 }
 
 export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
@@ -132,6 +137,8 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         />
         <DitheredSDFWavesCanvas
           {...simplexNoiseProps}
+          waveSize={2}
+          numBands={3}
           gridColumn={{ initial: 'span 6', sm: 'span 3' }}
           display={{ initial: 'none', sm: 'flex' }}
           aspectRatio='4 / 1.9'
@@ -167,6 +174,8 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
         />
         <DitheredSDFWavesCanvas
           {...simplexNoiseProps}
+          waveSize={2}
+          numBands={3}
           gridColumn={{ initial: 'span 0', sm: '1 / span 3' }}
           display={{ initial: 'none', sm: 'flex' }}
           aspectRatio='4 / 1.9'

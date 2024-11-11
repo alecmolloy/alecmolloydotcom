@@ -18,9 +18,15 @@ export const utopia = project({
       </p>
       <p>
         I worked as a Creative Technologist, focusing on UI design and
-        React/TypeScript development. Utopia was later acquired by Shopify and
-        continues to be developed.
+        React/TypeScript development. Utopia was acquired by Shopify and .
       </p>
+      <iframe
+        src='https://www.youtube.com/embed/aoxnciKRZGU'
+        frameBorder='0'
+        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+        allowFullScreen
+        style={{ width: '100%' }}
+      />
     </>
   ),
   deliverables: 'Design and coding IDE',

@@ -11,11 +11,28 @@ interface DitheredSDFWavesCanvasProps {
   lightColor: string
   pixelSize: number
   aspectRatio: CSSProperties['aspectRatio']
+  smoothstepWidth: number
+  bandWidth: number
+  numBands: number
+  waveSize: number
+  speed: number
 }
 
 const DitheredSDFWavesCanvas: React.FC<
   DitheredSDFWavesCanvasProps & FlexProps
-> = ({ darkColor, lightColor, pixelSize, aspectRatio, style, ...props }) => {
+> = ({
+  darkColor,
+  lightColor,
+  pixelSize,
+  aspectRatio,
+  smoothstepWidth,
+  bandWidth,
+  numBands,
+  waveSize,
+  speed,
+  style,
+  ...props
+}) => {
   return (
     <Flex
       width='100%'
@@ -28,6 +45,11 @@ const DitheredSDFWavesCanvas: React.FC<
           darkColor={darkColor}
           lightColor={lightColor}
           pixelSize={pixelSize}
+          smoothstepWidth={smoothstepWidth}
+          bandWidth={bandWidth}
+          numBands={numBands}
+          waveSize={waveSize}
+          speed={speed}
         />
       </Canvas>
     </Flex>
@@ -38,20 +60,32 @@ interface SimplexNoiseMeshProps {
   darkColor: string
   lightColor: string
   pixelSize: number
+  smoothstepWidth: number
+  bandWidth: number
+  numBands: number
+  waveSize: number
+  speed: number
 }
 
 const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
   darkColor,
   lightColor,
   pixelSize,
+  smoothstepWidth,
+  bandWidth,
+  numBands,
+  waveSize,
+  speed,
 }) => {
   const mesh = React.useRef<THREE.Mesh>(null)
   const { size } = useThree()
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
-  const bayerTexture = useLoader(
+  const noiseTexture = useLoader(
     THREE.TextureLoader,
-    '/bayer16.png',
+    '/blue-noise-512.png',
   ) as THREE.Texture
+
+  const seed = React.useRef(Math.random())
 
   React.useEffect(() => {
     if (mesh.current != null) {
@@ -64,24 +98,31 @@ const SimplexNoiseMesh: React.FC<SimplexNoiseMeshProps> = ({
               Math.floor(size.height),
             ),
           },
-          tBayer: { value: bayerTexture },
+          tNoise: { value: noiseTexture },
+          noiseTextureSize: { value: 512 },
           darkColor: { value: new THREE.Color(darkColor) },
           lightColor: { value: new THREE.Color(lightColor) },
           pixelSize: { value: pixelSize },
+          smoothstepWidth: { value: smoothstepWidth },
+          bandWidth: { value: bandWidth },
+          numBands: { value: numBands },
+          waveSize: { value: waveSize },
+          speed: { value: speed },
+          seed: { value: seed.current * 10000 },
         },
         vertexShader,
         fragmentShader,
       })
 
-      bayerTexture.minFilter = THREE.NearestFilter
-      bayerTexture.magFilter = THREE.NearestFilter
+      noiseTexture.minFilter = THREE.NearestFilter
+      noiseTexture.magFilter = THREE.NearestFilter
 
       mesh.current.material = material
       materialRef.current = material
 
       mesh.current.scale.set(size.width, size.height, 1)
     }
-  }, [size, darkColor, lightColor, pixelSize, bayerTexture])
+  }, [size, darkColor, lightColor, pixelSize, noiseTexture])
 
   useFrame(({ clock }) => {
     if (materialRef.current) {

@@ -118,7 +118,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
   const image = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
   const bayerTexture = useLoader(
     THREE.TextureLoader,
-    '/bayer16.png',
+    '/bayer-16.png',
   ) as THREE.Texture
   const maskTexture = useLoader(THREE.TextureLoader, maskUrl) as THREE.Texture
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
