@@ -1,7 +1,8 @@
-import { Flex, type FlexProps, Text as Txt } from '@radix-ui/themes'
+import { Flex, type FlexProps } from '@radix-ui/themes'
 import { Squircle } from '@squircle-js/react'
 import Img, { StaticImageData } from 'next/image'
 import React from 'react'
+import { PortfolioCaption } from './PortfolioCaption'
 
 interface PortfolioImageProps {
   src: StaticImageData
@@ -16,19 +17,15 @@ export function PortfolioImage({
   ...props
 }: PortfolioImageProps & FlexProps) {
   return (
-    <Flex direction='column' gap='2' my='4' {...props}>
-      <Squircle cornerRadius={8}>
+    <Flex direction='column' my='4' {...props}>
+      <Squircle cornerRadius={16}>
         <Img
           src={src}
           alt={alt}
           style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
         />
       </Squircle>
-      {caption && (
-        <Txt weight='medium' size='1' style={{ color: '#aaa' }}>
-          {caption}
-        </Txt>
-      )}
+      {caption && <PortfolioCaption caption={caption} />}
     </Flex>
   )
 }

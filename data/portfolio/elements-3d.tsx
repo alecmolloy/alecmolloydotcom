@@ -5,6 +5,7 @@ import capacativeTouchScreen from '@/public/portfolio/elements-3d/interactive-ca
 import elementsTree from '@/public/portfolio/elements-3d/elements-tree.png'
 import snowflake from '@/public/portfolio/elements-3d/snowflake.png'
 import { Text as Txt } from '@radix-ui/themes'
+import { PortfolioCaption } from '@/components/PortfolioCaption'
 
 export const elements3D = project({
   slug: 'elements-3d',
@@ -55,11 +56,11 @@ export const elements3D = project({
         />
       </div>
       <script src='https://player.vimeo.com/api/player.js'></script>
-      <Txt weight='medium' size='1' style={{ color: '#aaa' }}>
-        Early work integrating the L-System interpreter into the editor.
-        Language features could first be programmed inside the editor before
-        moving into the official API.
-      </Txt>
+      <PortfolioCaption
+        caption={
+          'Early work integrating the L-System interpreter into the editor. Language features could first be programmed inside the editor before moving into the official API.'
+        }
+      />
       <PortfolioImage
         src={capacativeTouchScreen}
         alt='Capacitive touch screen'

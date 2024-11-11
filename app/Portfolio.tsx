@@ -73,18 +73,18 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
           modalOpen={openModalSlug === projects['nuclear-connections'].slug}
         />
         <PortfolioCard
-          project={projects.utopia}
-          gridColumn={{ initial: '1 / -1', sm: 'span 6' }}
-          size={{ initial: 'lg', sm: 'md' }}
-          setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === projects.utopia.slug}
-        />
-        <PortfolioCard
           project={projects['retreat-technology']}
           gridColumn={{ initial: '1 / -1', sm: 'span 6' }}
           setOpenModal={setOpenModalSlug}
           modalOpen={openModalSlug === projects['retreat-technology'].slug}
           size={{ initial: 'lg', sm: 'md' }}
+        />
+        <PortfolioCard
+          project={projects.utopia}
+          gridColumn={{ initial: '1 / -1', sm: 'span 6' }}
+          size={{ initial: 'lg', sm: 'md' }}
+          setOpenModal={setOpenModalSlug}
+          modalOpen={openModalSlug === projects.utopia.slug}
         />
         {/* <PortfolioCard
           project={projects['game-of-life']}

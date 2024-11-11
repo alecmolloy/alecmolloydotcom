@@ -1,5 +1,7 @@
 import { heroVideo, link, project } from '@/app/content-types'
+import { PortfolioCaption } from '@/components/PortfolioCaption'
 import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
+import { Squircle } from '@squircle-js/react'
 
 export const utopia = project({
   slug: 'utopia',
@@ -17,16 +19,29 @@ export const utopia = project({
         with full two-way synchronization between design and code.
       </p>
       <p>
-        I worked as a Creative Technologist, focusing on UI design and
-        React/TypeScript development. Utopia was acquired by Shopify and .
+        I worked as a Creative Technologist, designing the UI and writing the
+        React/TypeScript/CSS interpreters they were coupled to. I set goalposts
+        by designing the kinds of beautiful, physically-based interactions we
+        wanted to make easy in the app, and built roadmaps to achieve them.
       </p>
-      <iframe
-        src='https://www.youtube.com/embed/aoxnciKRZGU'
-        frameBorder='0'
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-        allowFullScreen
-        style={{ width: '100%' }}
+      <Squircle cornerRadius={16}>
+        <iframe
+          src='https://www.youtube.com/embed/aoxnciKRZGU'
+          frameBorder='0'
+          allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+          style={{ width: '100%', aspectRatio: '16 / 9', display: 'block' }}
+        />
+      </Squircle>
+      <PortfolioCaption
+        caption={
+          'Founder Malte Nuhn showing off how Utopia has evolved inside Shopify. (I left before the acquisition, but the core has remained the same.)'
+        }
       />
+      <p>
+        Utopia was acquired by Shopify and is currently being integrated into
+        their Hydrogen shop-building platform.
+      </p>
     </>
   ),
   deliverables: 'Design and coding IDE',
