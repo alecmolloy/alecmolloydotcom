@@ -71,8 +71,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               . Opinionated creative tools that abstract away complexity for
               higher-level thinking, or integrate modes of thinking (component
               UI design, state, and logic) into a single environment. Or tools
-              that can help us go to where thoughts cannot—into pure embodied
-              awareness.
+              that can help us go to where thoughts cannot.
             </P>
             <P>
               My current projects mostly explore these themes, the forthcoming{' '}
