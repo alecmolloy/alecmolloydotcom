@@ -77,6 +77,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
         closeButtonOpacity: 0,
         config: DefaultSpringConfig,
+        heroPadding: 0,
       }
     },
     enter: (slug) => {
@@ -108,6 +109,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
         closeButtonOpacity: 1,
         borderRadius: modalBorderRadius,
+        heroPadding: 8,
 
         config: DefaultSpringConfig,
         onRest: () => {
@@ -137,6 +139,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
         closeButtonOpacity: 0,
         borderRadius: cardStyle.borderRadius,
+        heroPadding: 0,
 
         config: AggressiveSpringConfig,
         onStart: () => {
@@ -150,7 +153,13 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
     <>
       {modalTransition(
         (
-          { backgroundColor, boxShadow, closeButtonOpacity, ...style },
+          {
+            backgroundColor,
+            boxShadow,
+            closeButtonOpacity,
+            heroPadding,
+            ...style
+          },
           slug,
         ) => {
           const project = slug != null ? projects[slug] : null
@@ -190,16 +199,16 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                         : `calc(100vh - ${ModalMinPaddingY * 2}px)`,
                       height: '100%',
                       borderRadius: isMobile ? 0 : style.borderRadius,
+                      padding: heroPadding,
                       ...(!settled && style),
                     }}
-                    p='2'
                     onClick={(e: React.MouseEvent) => e.stopPropagation()}
                   >
                     <AnimatedFlex
                       position='absolute'
                       top='3'
                       left='3'
-                      m='7px'
+                      m='2'
                       style={{
                         zIndex: 1,
                         userSelect: 'none',
@@ -518,4 +527,5 @@ type ModalTransitionProps = {
   boxShadow: string
   closeButtonOpacity: number
   borderRadius: number
+  heroPadding: number
 }
