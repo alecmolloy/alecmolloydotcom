@@ -1,9 +1,5 @@
 MVP: Release to testers
 
-# Bugs
-
-- Turtle background should resize properly, it is getting outdated width data
-
 # Misc
 
 - test on small and giganto screen sizes

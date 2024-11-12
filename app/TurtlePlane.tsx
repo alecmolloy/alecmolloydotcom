@@ -16,9 +16,6 @@ function getCanvasCellularDimensions(size: Size) {
 export const TurtlePlane: React.FunctionComponent = () => {
   const { size } = useThree()
 
-  const turtleCanvasRef = React.useRef<HTMLCanvasElement | null>(null)
-  const turtleCtxRef = React.useRef<CanvasRenderingContext2D | null>(null)
-  const canvasTextureRef = React.useRef<THREE.CanvasTexture | null>(null)
   const mousePosition = React.useRef<null | { x: number; y: number }>(null)
   const { canvasCellWidth, canvasCellHeight } = React.useMemo(
     () => getCanvasCellularDimensions(size),
@@ -29,6 +26,10 @@ export const TurtlePlane: React.FunctionComponent = () => {
     React.useState<HTMLImageElement | null>(null)
   const [turtleVerticalImg, setTurtleVerticalImg] =
     React.useState<HTMLImageElement | null>(null)
+
+  const [canvas, setCanvas] = React.useState<HTMLCanvasElement | null>(null)
+  const [canvasTexture, setCanvasTexture] =
+    React.useState<THREE.CanvasTexture | null>(null)
 
   React.useEffect(() => {
     const loadImage = (src: string): Promise<HTMLImageElement> => {
@@ -52,33 +53,40 @@ export const TurtlePlane: React.FunctionComponent = () => {
   }, [])
 
   React.useEffect(() => {
-    const canvas = document.createElement('canvas')
-    canvas.width = canvasCellWidth * PixelScale
-    canvas.height = canvasCellHeight * PixelScale
-    turtleCanvasRef.current = canvas
-    turtleCtxRef.current = canvas.getContext('2d')
-    canvasTextureRef.current = new THREE.CanvasTexture(
-      canvas,
+    if (canvasTexture) {
+      canvasTexture.dispose()
+    }
+    const newCanvas = document.createElement('canvas')
+    newCanvas.width = canvasCellWidth * PixelScale
+    newCanvas.height = canvasCellHeight * PixelScale
+    const ctx = newCanvas.getContext('2d')
+    if (ctx) {
+      ctx.imageSmoothingEnabled = false
+    }
+    const newTexture = new THREE.CanvasTexture(
+      newCanvas,
       undefined,
       undefined,
       undefined,
       THREE.NearestFilter,
     )
+    setCanvas(newCanvas)
+    setCanvasTexture(newTexture)
+
+    return () => {
+      newTexture.dispose()
+    }
   }, [canvasCellWidth, canvasCellHeight])
 
   React.useEffect(() => {
-    if (
-      turtleCtxRef.current != null &&
-      turtleCanvasRef.current != null &&
-      turtleHorizontalImg &&
-      turtleVerticalImg
-    ) {
-      // this is the width and height, if there was an issue, it would be here
+    if (canvas && turtleHorizontalImg && turtleVerticalImg && canvasTexture) {
+      const ctx = canvas.getContext('2d')
+      if (!ctx) return
+
       const canvasPixelWidth = canvasCellWidth * PixelScale
       const canvasPixelHeight = canvasCellHeight * PixelScale
 
-      const ctx = turtleCtxRef.current
-      ctx.imageSmoothingEnabled = false
+      ctx.clearRect(0, 0, canvasPixelWidth, canvasPixelHeight)
       ctx.fillStyle = 'white'
       ctx.fillRect(0, 0, canvasPixelWidth, canvasPixelHeight)
 
@@ -101,22 +109,23 @@ export const TurtlePlane: React.FunctionComponent = () => {
           }
         }
       }
-      if (canvasTextureRef.current) {
-        canvasTextureRef.current.needsUpdate = true
-      }
+      canvasTexture.needsUpdate = true
     }
   }, [
-    canvasCellHeight,
+    canvas,
+    canvasTexture,
     canvasCellWidth,
+    canvasCellHeight,
     turtleHorizontalImg,
     turtleVerticalImg,
-    voidRadius,
   ])
 
   return (
     turtleHorizontalImg &&
-    turtleVerticalImg && (
+    turtleVerticalImg &&
+    canvasTexture && (
       <mesh
+        key={`${canvasCellWidth}-${canvasCellHeight}`}
         onPointerMove={(e) => {
           if (e.uv != null) {
             mousePosition.current = {
@@ -133,10 +142,7 @@ export const TurtlePlane: React.FunctionComponent = () => {
         <planeGeometry
           args={[canvasCellWidth * PixelScale, canvasCellHeight * PixelScale]}
         />
-        <meshBasicMaterial
-          map={canvasTextureRef.current}
-          side={THREE.DoubleSide}
-        />
+        <meshBasicMaterial map={canvasTexture} side={THREE.DoubleSide} />
       </mesh>
     )
   )
