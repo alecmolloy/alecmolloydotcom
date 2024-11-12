@@ -24,3 +24,17 @@ a {
 .make-art-item:hover .make-art-code-link {
   opacity: 1 !important;
 }
+
+@media (min-width: 1640px) {
+  html,
+  body {
+    zoom: 1.1;
+  }
+}
+
+@media (min-width: 2000px) {
+  html,
+  body {
+    zoom: 1.2;
+  }
+}

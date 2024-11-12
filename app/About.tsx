@@ -1,10 +1,11 @@
 import { CTA } from '@/components/CTA'
+import alecDithered from '@/public/alec-dithered.png'
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
+import { projectURL } from './content-types'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
-import { projectURL } from './content-types'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -46,6 +47,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               gammaCorrection={0.925}
               toneMapLow={0.075}
               toneMapHigh={0.75}
+              noScript={alecDithered}
             />
           </Flex>
           <Box

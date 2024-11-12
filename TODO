@@ -1,22 +1,11 @@
-MVP: Release to testers
-
-# Misc
-
-- test on small and giganto screen sizes
-
----
-
 # Post-launch
 
 - fix the scaling of the bento cards so they start and finish exactly same size
   as the images
-- add illusion shapes to the bottom
 - section for qualifications / certifications / photo of my bookshelf. needs to
   communicate my serious credentials and affiliations
-- “autumn color swamp” as a meander
-- remove the circle in the turtle pattern up top, add in shapes to the bottom
-- no-javascript fallbacks
-- figure out how to fix the aspect ratio issues with the filler boxes
+- page for portfolio items
+
 - add more items:
   - Sleep Sound
   - Now That's What I call Y2K

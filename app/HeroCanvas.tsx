@@ -5,6 +5,8 @@ import { Canvas } from '@react-three/fiber'
 import { instrumentSerif } from './fonts'
 import { CameraStartY, Scene } from './Scene'
 import { defaultContainerProps } from './theme'
+import Img from 'next/image'
+import heroNoscript from '@/public/hero-noscript.png'
 
 export const HeroCanvas = () => {
   return (
@@ -33,6 +35,7 @@ export const HeroCanvas = () => {
               sm: 'auto',
             }}
             justify='center'
+            align='center'
           >
             <Txt
               style={{
@@ -70,6 +73,26 @@ export const HeroCanvas = () => {
             <CTA variant='white' />
           </Flex>
         </Flex>
+        <noscript
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
+          <Img
+            src={heroNoscript}
+            alt='hero'
+            style={{
+              width: 'auto',
+              height: 'auto',
+              maxWidth: '100%',
+              maxHeight: '100%',
+              display: 'block',
+            }}
+          />
+        </noscript>
         <Canvas
           id='hero-canvas'
           orthographic

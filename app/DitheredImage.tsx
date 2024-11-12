@@ -1,10 +1,12 @@
 'use client'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import { Squircle } from '@squircle-js/react'
+import { StaticImport } from 'next/dist/shared/lib/get-img-props'
+import Img from 'next/image'
 import React from 'react'
 import * as THREE from 'three'
 import fragmentShader from './shaders/dithered.frag'
 import vertexShader from './shaders/dithered.vert'
-import { Squircle } from '@squircle-js/react'
 
 interface DitheredMeshProps {
   /** The URL of the image to be dithered. */
@@ -23,6 +25,8 @@ interface DitheredMeshProps {
   toneMapLow: number
   /** The upper bound for tone mapping, should be in the range [0, 1]. */
   toneMapHigh: number
+  /** The URL of the dithered image to use if noScript is true. */
+  noScript?: StaticImport
 }
 
 interface DitheredImageProps extends DitheredMeshProps {
@@ -40,6 +44,7 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
   gammaCorrection,
   toneMapLow,
   toneMapHigh,
+  noScript,
 }) => {
   const [canvasSize, setCanvasSize] = React.useState({ width: 0, height: 0 })
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -83,6 +88,15 @@ const DitheredImage: React.FC<DitheredImageProps> = ({
         height='100%'
         style={{ overflow: 'hidden' }}
       >
+        {noScript != null && (
+          <noscript>
+            <Img
+              src={noScript}
+              alt='Alec'
+              style={{ width: '100%', height: '100%' }}
+            />
+          </noscript>
+        )}
         <Canvas
           id='dithered-image-canvas'
           style={{ width: canvasSize.width, height: canvasSize.height }}
