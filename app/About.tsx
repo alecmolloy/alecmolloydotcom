@@ -4,6 +4,7 @@ import React from 'react'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
+import { projectURL } from './content-types'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt
@@ -51,17 +52,17 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             gridColumn={{ initial: '1 / span 12', xs: 'span 8', md: 'span 6' }}
           >
             <P>
-              I am a creative technologist, building things with React and
-              Next.js. I work in the pursuit of connection, beauty, and the
-              expansion of consciousness, and I’m looking for new freelance
-              projects. ʕ&nbsp;•ᴥ•ʔ
+              I’m a creative technologist specializing in React and Next.js. I
+              work in the pursuit of connection, beauty, and the expansion of
+              consciousness through intentional design. And I’m open to new
+              freelance projects. ʕ&nbsp;•ᴥ•ʔ
             </P>
             <P>
-              I’ve built creative tools and educational software at{' '}
+              I’ve developed creative tools and educational software at{' '}
               <a href='http://adobe.com'>Adobe</a>,{' '}
               <a href='http://kano.me'>Kano Computing</a>, and{' '}
-              <a href='https://utopia.app'>Utopia</a>, and managed mobile
-              healthcare at <a href='http://mindoktor.se'>Min Doktor</a>.
+              <a href='https://utopia.app'>Utopia</a>, and led mobile healthcare
+              at <a href='http://mindoktor.se'>Min Doktor</a>.
             </P>
             <P>
               Over the last decade I have been obsessed with building tools for{' '}
@@ -74,9 +75,32 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               that can help us go to where thoughts cannot.
             </P>
             <P>
-              My most recent projects explore these themes—the forthcoming VBT
-              app, and Retreat.Technology. And I also just like to have fun with
-              family and friends, which is where Nuclear Connections came from.
+              My latest projects, including the upcoming{' '}
+              <a
+                href={projectURL('vbt')}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                VBT app
+              </a>{' '}
+              and{' '}
+              <a
+                href={projectURL('retreat-technology')}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Retreat.Technology
+              </a>
+              , embody these themes. But I also just like to have fun with
+              family and friends, which is where{' '}
+              <a
+                href={projectURL('nuclear-connections')}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                Nuclear Connections
+              </a>{' '}
+              came from.
             </P>
             <P>
               Away from my keyboard, I study nondual philosophy and meditation,
