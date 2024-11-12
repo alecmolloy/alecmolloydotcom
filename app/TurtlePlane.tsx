@@ -13,9 +13,7 @@ function getCanvasCellularDimensions(size: Size) {
   }
 }
 
-export const TurtlePlane: React.FunctionComponent<{ voidRadius: number }> = ({
-  voidRadius,
-}) => {
+export const TurtlePlane: React.FunctionComponent = () => {
   const { size } = useThree()
 
   const turtleCanvasRef = React.useRef<HTMLCanvasElement | null>(null)

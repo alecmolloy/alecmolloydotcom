@@ -47,7 +47,7 @@ export const Scene = () => {
         wobbleAmplitude={0.3}
         wobbleFrequency={0.15}
       />
-      <TurtlePlane voidRadius={voidRadius} />
+      <TurtlePlane />
       <Environment map={envMap} environmentRotation={environmentRotation} />
     </>
   )
