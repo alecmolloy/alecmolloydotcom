@@ -51,17 +51,17 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             gridColumn={{ initial: '1 / span 12', xs: 'span 8', md: 'span 6' }}
           >
             <P>
-              I am a creative technologist, building tools for human connection
-              and the expansion of consciousness.
+              I am a creative technologist, building things with React and
+              Next.js. I work in the pursuit of connection, beauty, and the
+              expansion of consciousness, and I’m looking for new freelance
+              projects. ʕ&nbsp;•ᴥ•ʔ
             </P>
             <P>
               I’ve built creative tools and educational software at{' '}
               <a href='http://adobe.com'>Adobe</a>,{' '}
               <a href='http://kano.me'>Kano Computing</a>, and{' '}
               <a href='https://utopia.app'>Utopia</a>, and managed mobile
-              healthcare at <a href='http://mindoktor.se'>Min Doktor</a>. I
-              presently work freelance, building with React, Next.js, and React
-              Native apps.
+              healthcare at <a href='http://mindoktor.se'>Min Doktor</a>.
             </P>
             <P>
               Over the last decade I have been obsessed with building tools for{' '}
@@ -74,9 +74,9 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               that can help us go to where thoughts cannot.
             </P>
             <P>
-              My current projects mostly explore these themes, the forthcoming{' '}
-              VBT app, and Retreat.Technology. And I also just like to have fun
-              with family and friends, so I’m building Nuclear Connections .
+              My most recent projects explore these themes—the forthcoming VBT
+              app, and Retreat.Technology. And I also just like to have fun with
+              family and friends, which is where Nuclear Connections came from.
             </P>
             <P>
               Away from my keyboard, I study nondual philosophy and meditation,
@@ -85,8 +85,8 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               timezone.
             </P>
             <P>
-              I’m actively seeking new projects and clients. If you think that’s
-              you, let’s talk. :)
+              I’m actively seeking new opportunities. If you think you’ve got
+              one for me, let’s talk. &#x263A;
             </P>
             <CTA />
           </Box>
