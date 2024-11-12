@@ -50,6 +50,10 @@ export function heroVideo(
   return { type: 'video', url, poster, posterAlt }
 }
 
+export function isHeroVideo(hero: Hero): hero is HeroVideo {
+  return hero.type === 'video'
+}
+
 type Hero = HeroImage | HeroVideo
 
 type Tools =

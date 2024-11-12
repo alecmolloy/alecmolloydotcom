@@ -6,7 +6,7 @@ import { Box, Flex, Grid, Heading, Strong, Text as Txt } from '@radix-ui/themes'
 import { SpringConfig, animated, useTransition } from '@react-spring/web'
 import Img from 'next/image'
 import React from 'react'
-import { ProjectSlug, isProjectSlug } from '../app/content-types'
+import { ProjectSlug, isHeroVideo, isProjectSlug } from '../app/content-types'
 import { PortfolioArtworkClassName, cardStyle } from '../app/PortfolioCard'
 import { InfoBlock } from './InfoBlock'
 
@@ -154,8 +154,10 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
           slug,
         ) => {
           const project = slug != null ? projects[slug] : null
+          const hero = project?.hero
           return (
-            project != null && (
+            project != null &&
+            hero != null && (
               <ClientOnlyPortal selector='#theme-root'>
                 <AnimatedFlex
                   position='fixed'
@@ -232,15 +234,19 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                         aspectRatio: '4 / 3',
                       }}
                     >
-                      {project.hero.type === 'video' ? (
+                      {isHeroVideo(hero) ? (
                         <video
                           autoPlay
                           muted
                           loop
                           playsInline
                           controls={false}
-                          src={project.hero.url}
-                          poster={project.hero.poster.src}
+                          src={hero.url}
+                          poster={undefined}
+                          onError={(e) => {
+                            const video = e.currentTarget
+                            video.poster = hero.type
+                          }}
                           style={{
                             display: 'block',
                             width: '100%',
@@ -250,7 +256,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                         />
                       ) : (
                         <img
-                          src={project.hero.data.src}
+                          src={hero.data.src}
                           alt={project.title}
                           style={{
                             display: 'block',
