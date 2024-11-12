@@ -248,7 +248,6 @@ export const Void: React.FunctionComponent<VoidProps> = ({
         onPointerOut={() => setInteractionState(null)}
       >
         <MeshTransmissionMaterial
-          transmissionSampler={false}
           backside={false}
           samples={16}
           resolution={2048}
