@@ -1,6 +1,13 @@
 import { CTA } from '@/components/CTA'
 import alecDithered from '@/public/alec-dithered.png'
-import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  Strong,
+  Text as Txt,
+} from '@radix-ui/themes'
 import React from 'react'
 import { projectURLPath } from './content-types'
 import DitheredImage from './DitheredImage'
@@ -57,7 +64,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               I’m a creative technologist specializing in React and Next.js. I
               work in the pursuit of connection, beauty, and the expansion of
               consciousness through intentional design. And I’m open to new
-              freelance projects. ʕ&nbsp;•ᴥ•ʔ
+              projects. ʕ&nbsp;•ᴥ•ʔ
             </P>
             <P>
               I’ve developed creative tools and educational software at{' '}
@@ -110,8 +117,9 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               freediving.
             </P>
             <P>
-              I’m actively seeking new opportunities. If you think you’ve got
-              one for me, let’s talk. &#x263A;
+              I’m actively seeking new <Strong>fully-remote</Strong>{' '}
+              opportunities. If you think you’ve got one for me, let’s talk.
+              &#x263A;
             </P>
             <CTA />
           </Box>
