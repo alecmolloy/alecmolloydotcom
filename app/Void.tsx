@@ -170,7 +170,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
         window.removeEventListener('mousemove', handleMouseMove)
       }
     }
-  }, [size, affectedByMouse])
+  }, [affectedByMouse])
 
   useFrame(({ clock }) => {
     if (meshRef.current && meshRef.current.geometry) {
