@@ -1,5 +1,5 @@
 import { Project, ProjectSlug } from '@/app/content-types'
-import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Flex, Link, Text as Txt } from '@radix-ui/themes'
 import { Responsive } from '@radix-ui/themes/dist/cjs/props/prop-def'
 import { animated, useSpring } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
@@ -84,117 +84,130 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
         WebkitUserSelect: 'none',
       }}
       ref={ref}
-      onClick={() => {
-        setOpenModal(project.slug)
-        cardApi.start({
-          scale: 1,
-          config: SpringConfig,
-        })
+      onClick={(e) => {
+        if (videoRef.current?.paused === true) {
+          videoRef.current?.play()
+        }
+        if (!(e.ctrlKey || e.metaKey)) {
+          e.preventDefault()
+          setOpenModal(project.slug)
+          cardApi.start({
+            scale: 1,
+            config: SpringConfig,
+          })
+        }
       }}
     >
-      <AnimatedFlex
-        style={{
-          ...cardStyle,
-          position: 'relative',
-          overflow: 'hidden',
-          width: '100%',
-          height: 'auto',
-          aspectRatio: '4/3',
-          backgroundColor: '#00000008',
-          scale,
-        }}
+      <Link
+        href={`/p/${project.slug}`}
+        style={{ textDecoration: 'none', color: 'inherit' }}
       >
-        <Flex
-          className={PortfolioArtworkClassName}
+        <AnimatedFlex
           style={{
-            opacity: modalOpen ? 0 : 1,
+            ...cardStyle,
+            position: 'relative',
+            overflow: 'hidden',
             width: '100%',
-            height: '100%',
+            height: 'auto',
+            aspectRatio: '4/3',
+            backgroundColor: '#00000008',
+            scale,
           }}
         >
-          {project.acquisition && (
-            <Flex
-              position='absolute'
-              top='2'
-              right='2'
-              py='1'
-              px='2'
-              style={{
-                opacity: 0.9,
-                backgroundColor: 'var(--ultramarine)',
-                color: 'white',
-                borderRadius: 4,
-              }}
-            >
-              <Txt weight='medium' style={{ fontSize: 10 }}>
-                Acquired by <Txt weight='bold'>{project.acquisition}</Txt>
-              </Txt>
-            </Flex>
-          )}
+          <Flex
+            className={PortfolioArtworkClassName}
+            style={{
+              opacity: modalOpen ? 0 : 1,
+              width: '100%',
+              height: '100%',
+            }}
+          >
+            {project.acquisition && (
+              <Flex
+                position='absolute'
+                top='2'
+                right='2'
+                py='1'
+                px='2'
+                style={{
+                  opacity: 0.9,
+                  backgroundColor: 'var(--ultramarine)',
+                  color: 'white',
+                  borderRadius: 4,
+                }}
+              >
+                <Txt weight='medium' style={{ fontSize: 10 }}>
+                  Acquired by <Txt weight='bold'>{project.acquisition}</Txt>
+                </Txt>
+              </Flex>
+            )}
 
-          {project.hero.type === 'image' ? (
-            <Img
-              width={1024}
-              src={project.hero.data}
-              alt={project.hero.alt}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-              }}
-            />
-          ) : (
-            <>
-              {!isPlaying && (
-                <img
-                  alt='Play'
-                  src='/icons/play-button.svg'
-                  style={{
-                    width: 64,
-                    height: 64,
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                  onClick={() => {
-                    if (videoRef.current?.paused === true) {
-                      videoRef.current?.play()
-                    }
-                  }}
-                />
-              )}
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls={false}
-                src={project.hero.url}
-                poster={project.hero.poster.src}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            {project.hero.type === 'image' ? (
+              <Img
+                width={1024}
+                src={project.hero.data}
+                alt={project.hero.alt}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
               />
-            </>
-          )}
-        </Flex>
-      </AnimatedFlex>
-      <Flex direction='column' pt='2' width='100%'>
-        <Txt
-          size={{
-            initial: sml(size.initial, '1', '2', '3'),
-            xs: sml(size.initial, '2', '2', '3'),
-            sm: sml(size.sm, '3', '4', '4'),
-          }}
-          align='left'
-        >
-          <Txt weight='bold'>
-            {project.title} ({project.date})
-            {project.subtitle != null ? ': ' : null}
+            ) : (
+              <>
+                {!isPlaying && (
+                  <img
+                    alt='Play'
+                    src='/icons/play-button.svg'
+                    style={{
+                      width: 64,
+                      height: 64,
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    onClick={(e) => {
+                      if (videoRef.current?.paused === true) {
+                        e.stopPropagation()
+                        e.preventDefault()
+                        videoRef.current?.play()
+                      }
+                    }}
+                  />
+                )}
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls={false}
+                  src={project.hero.url}
+                  poster={project.hero.poster.src}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </>
+            )}
+          </Flex>
+        </AnimatedFlex>
+        <Flex direction='column' pt='2' width='100%'>
+          <Txt
+            size={{
+              initial: sml(size.initial, '1', '2', '3'),
+              xs: sml(size.initial, '2', '2', '3'),
+              sm: sml(size.sm, '3', '4', '4'),
+            }}
+            align='left'
+          >
+            <Txt weight='bold'>
+              {project.title} ({project.date})
+              {project.subtitle != null ? ': ' : null}
+            </Txt>
+            {project.subtitle}
           </Txt>
-          {project.subtitle}
-        </Txt>
-      </Flex>
+        </Flex>
+      </Link>
     </Flex>
   )
 }
