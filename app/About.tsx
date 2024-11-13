@@ -107,8 +107,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             <P>
               Away from my keyboard, I study nondual philosophy and meditation,
               and am practicing handbalancing, partner acrobatics, and
-              freediving. For 2025 you can mostly find me in Bali and the GMT+8
-              timezone.
+              freediving.
             </P>
             <P>
               I’m actively seeking new opportunities. If you think you’ve got
