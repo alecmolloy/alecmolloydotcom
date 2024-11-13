@@ -76,7 +76,7 @@ export const TurtlePlane: React.FunctionComponent = () => {
     return () => {
       newTexture.dispose()
     }
-  }, [canvasCellWidth, canvasCellHeight])
+  }, [canvasCellWidth, canvasCellHeight, canvasTexture])
 
   React.useEffect(() => {
     if (canvas && turtleHorizontalImg && turtleVerticalImg && canvasTexture) {

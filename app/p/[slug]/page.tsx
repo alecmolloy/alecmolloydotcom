@@ -1,6 +1,5 @@
 import { isHeroVideo, isProjectSlug, projectURLPath } from '@/app/content-types'
 import { Header } from '@/app/Header'
-import { defaultContainerProps } from '@/app/theme'
 import { PortfolioPage } from '@/components/PortfolioPage'
 import { projects } from '@/data/portfolio'
 import { Container } from '@radix-ui/themes'

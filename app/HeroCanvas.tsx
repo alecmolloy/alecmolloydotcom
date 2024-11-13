@@ -1,6 +1,6 @@
 'use client'
 import heroNoscript from '@/public/hero-noscript.png'
-import { Container, Flex } from '@radix-ui/themes'
+import { Flex } from '@radix-ui/themes'
 import { Canvas } from '@react-three/fiber'
 import Img from 'next/image'
 import { Header } from './Header'
