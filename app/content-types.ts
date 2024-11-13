@@ -23,7 +23,7 @@ export function isProjectSlug(slug: string): slug is ProjectSlug {
   return slug in projects
 }
 
-export function projectURL(slug: ProjectSlug): string {
+export function projectURLPath(slug: ProjectSlug): string {
   return `/p/${slug}`
 }
 

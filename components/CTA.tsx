@@ -3,7 +3,7 @@ import { Squircle } from '@squircle-js/react'
 import * as React from 'react'
 
 interface CTAProps {
-  variant?: 'primary' | 'white'
+  variant?: CTAVariant
 }
 
 export const CTA: React.FunctionComponent<CTAProps> = ({
@@ -36,3 +36,5 @@ export const CTA: React.FunctionComponent<CTAProps> = ({
     </a>
   )
 }
+
+export type CTAVariant = 'primary' | 'white'

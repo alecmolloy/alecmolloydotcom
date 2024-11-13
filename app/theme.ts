@@ -7,5 +7,5 @@ export const defaultGridProps = {
 }
 
 export const defaultContainerProps = {
-  mx: { initial: '4', xs: '5', md: '6' },
+  px: { initial: '4', xs: '5', md: '6' },
 }

@@ -2,7 +2,7 @@ import { CTA } from '@/components/CTA'
 import alecDithered from '@/public/alec-dithered.png'
 import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
-import { projectURL } from './content-types'
+import { projectURLPath } from './content-types'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
@@ -79,7 +79,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             <P>
               My latest projects, including the upcoming{' '}
               <a
-                href={projectURL('vbt')}
+                href={projectURLPath('vbt')}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -87,7 +87,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               </a>{' '}
               and{' '}
               <a
-                href={projectURL('retreat-technology')}
+                href={projectURLPath('retreat-technology')}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -96,7 +96,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               , embody these themes. But I also just like to have fun with
               family and friends, which is where{' '}
               <a
-                href={projectURL('nuclear-connections')}
+                href={projectURLPath('nuclear-connections')}
                 target='_blank'
                 rel='noopener noreferrer'
               >
