@@ -1,3 +1,4 @@
+import { useTexture } from '@react-three/drei'
 import { Size, useThree } from '@react-three/fiber'
 import React from 'react'
 import * as THREE from 'three'
@@ -147,3 +148,6 @@ export const TurtlePlane: React.FunctionComponent = () => {
     )
   )
 }
+
+useTexture.preload('/images/turtle-corner-horizontal-square.png')
+useTexture.preload('/images/turtle-corner-vertical-square.png')

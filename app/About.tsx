@@ -13,6 +13,7 @@ import { projectURLPath } from './content-types'
 import DitheredImage from './DitheredImage'
 import { Section } from './Navigation'
 import { defaultContainerProps, defaultGridProps } from './theme'
+import { useTexture } from '@react-three/drei'
 
 const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
   <Txt

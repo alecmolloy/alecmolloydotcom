@@ -1,5 +1,6 @@
 'use client'
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
+import { useTexture } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Squircle } from '@squircle-js/react'
 import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import Img from 'next/image'
@@ -131,12 +132,9 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
 }) => {
   const mesh = React.useRef<THREE.Mesh>(null)
   const { size } = useThree()
-  const image = useLoader(THREE.TextureLoader, imageUrl) as THREE.Texture
-  const bayerTexture = useLoader(
-    THREE.TextureLoader,
-    '/bayer-16.png',
-  ) as THREE.Texture
-  const maskTexture = useLoader(THREE.TextureLoader, maskUrl) as THREE.Texture
+  const image = useTexture(imageUrl)
+  const bayerTexture = useTexture('/bayer-16.png')
+  const maskTexture = useTexture(maskUrl)
   const materialRef = React.useRef<THREE.ShaderMaterial | null>(null)
 
   React.useEffect(() => {
@@ -223,3 +221,7 @@ const DitheredMesh: React.FC<DitheredMeshProps> = ({
 }
 
 export default DitheredImage
+
+useTexture.preload('/bayer-16.png')
+useTexture.preload('/alec.jpg')
+useTexture.preload('/alec-mask.png')
