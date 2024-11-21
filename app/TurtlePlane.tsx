@@ -114,7 +114,7 @@ export const TurtlePlane: React.FunctionComponent = () => {
     }
   }, [
     canvas,
-    canvasTexture,
+
     canvasCellWidth,
     canvasCellHeight,
     turtleHorizontalImg,

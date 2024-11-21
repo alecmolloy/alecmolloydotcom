@@ -1,77 +1,40 @@
 import js from '@eslint/js'
-import reactThree from '@react-three/eslint-plugin'
+import next from '@next/eslint-plugin-next'
 import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
 import globals from 'globals'
+import reactThree from '@react-three/eslint-plugin'
 
 const config = [
   js.configs.recommended,
-  js.configs.all,
-  ...compat.extends(
-    'next/core-web-vitals',
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:@react-three/recommended',
-  ),
+  react.configs.flat.recommended,
+  react.configs.flat['jsx-runtime'],
   {
-    plugins: {
-      react,
-      '@react-three': reactThree,
-    },
-
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        require: true,
-        document: true,
-        console: true,
-      },
-
-      ecmaVersion: 6,
-      sourceType: 'module',
-
+      globals: globals.browser,
       parserOptions: {
         ecmaFeatures: {
-          modules: true,
           jsx: true,
+          modules: true,
         },
       },
+      sourceType: 'module',
     },
-
+    plugins: {
+      '@react-three': reactThree,
+      '@next/next': next,
+      'react-hooks': reactHooks,
+    },
     rules: {
-      'no-console': [
-        'error',
-        {
-          allow: ['info', 'warn', 'error'],
-        },
-      ],
-
-      'no-unused-expressions': 'warn',
-      'array-callback-return': 'warn',
-      'no-param-reassign': 'error',
-      'react/jsx-no-comment-textnodes': 'error',
-
-      'react/jsx-key': [
-        'error',
-        {
-          checkFragmentShorthand: true,
-        },
-      ],
-
-      'no-useless-escape': 'warn',
-      'no-var': 'warn',
-      'prefer-const': 'warn',
-
-      'no-shadow': [
-        'error',
-        {
-          builtinGlobals: true,
-        },
-      ],
-
-      'react/prop-types': 'off',
+      ...next.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...reactThree.configs.all.rules,
       '@next/next/no-img-element': 'off',
-      'react/no-unknown-property': 'off',
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
 ]
