@@ -167,6 +167,7 @@ export const Navigation: React.FunctionComponent = () => {
                     WebkitTapHighlightColor: 'transparent',
                     outline: 'none',
                   }}
+                  aria-label={section}
                   onClick={(e) => {
                     e.preventDefault()
                     const targetElement = document.getElementById(section)
