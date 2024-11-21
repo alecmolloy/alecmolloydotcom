@@ -28,7 +28,7 @@ export const PortfolioPage = ({ slug }: { slug: ProjectSlug }) => {
             loop
             playsInline
             controls={false}
-            src={hero.url}
+            src={hero.largeUrl}
             poster={undefined}
             onError={(e) => {
               const video = e.currentTarget

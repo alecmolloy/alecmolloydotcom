@@ -1,3 +1,9 @@
+# Performance
+
+- make hero canvas load + render much eariler
+- make sure portfolio images are served at smaller sizes
+- serve posters in optimized formats
+
 # Post-launch
 
 - section for qualifications / certifications

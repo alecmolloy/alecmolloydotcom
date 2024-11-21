@@ -1,18 +1,18 @@
 import { collaborator, heroVideo, project } from '@/app/content-types'
-import { PortfolioImage } from '@/components/PortfolioImage'
-import elementsPoster from '@/public/portfolio/elements-3d/elements-3d-poster.png'
-import capacativeTouchScreen from '@/public/portfolio/elements-3d/interactive-capacitive-touch-screen.png'
-import elementsTree from '@/public/portfolio/elements-3d/elements-tree.png'
-import snowflake from '@/public/portfolio/elements-3d/snowflake.png'
-import { Text as Txt } from '@radix-ui/themes'
 import { PortfolioCaption } from '@/components/PortfolioCaption'
+import { PortfolioImage } from '@/components/PortfolioImage'
+import elementsPoster from '@/public/portfolio/elements-3d/elements-3d-poster.jpg'
+import elementsTree from '@/public/portfolio/elements-3d/elements-tree.png'
+import capacativeTouchScreen from '@/public/portfolio/elements-3d/interactive-capacitive-touch-screen.png'
+import snowflake from '@/public/portfolio/elements-3d/snowflake.png'
 
 export const elements3D = project({
   slug: 'elements-3d',
   title: 'Elements 3D',
   subtitle: 'Art + coding IDE and library',
   hero: heroVideo(
-    '/portfolio/elements-3d/elements-3d.mp4',
+    '/portfolio/elements-3d/elements-3d-large.mp4',
+    '/portfolio/elements-3d/elements-3d-small.mp4',
     elementsPoster,
     'Elements 3D IDE',
   ),

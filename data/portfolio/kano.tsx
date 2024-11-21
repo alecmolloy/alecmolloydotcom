@@ -5,6 +5,7 @@ import {
   recognitions,
 } from '@/app/content-types'
 import { PortfolioImage } from '@/components/PortfolioImage'
+import kanoPoster from '@/public/portfolio/kano/kano-poster.jpg'
 import kanoKit3dRender from '@/public/portfolio/kano/kano-kit-3d-render.webp'
 import remixPresentation from '@/public/portfolio/kano/remix-presentation.jpg'
 
@@ -14,7 +15,8 @@ export const kano = project({
   subtitle: 'Educational technology kits, software, and community',
   hero: heroVideo(
     '/portfolio/kano/kano.mp4',
-    kanoKit3dRender,
+    '/portfolio/kano/kano.mp4',
+    kanoPoster,
     'Kano Educational Tools',
   ),
   date: '2014–16',

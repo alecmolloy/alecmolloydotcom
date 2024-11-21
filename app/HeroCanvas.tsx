@@ -1,8 +1,10 @@
 'use client'
 import heroNoscript from '@/public/hero-noscript.png'
 import { Flex } from '@radix-ui/themes'
+import { Loader } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import Img from 'next/image'
+import { Suspense } from 'react'
 import { Header } from './Header'
 import { CameraStartY, Scene } from './Scene'
 import { defaultContainerProps } from './theme'
@@ -18,6 +20,7 @@ export const HeroCanvas = () => {
       }}
       minHeight={{ initial: '300px', sm: '600px' }}
       maxWidth='1136px'
+      maxHeight='1500px'
       mx='auto'
       {...defaultContainerProps}
     >
@@ -42,6 +45,7 @@ export const HeroCanvas = () => {
           }}
         />
       </noscript>
+      <Loader />
       <Canvas
         style={{ flexGrow: 1 }}
         id='hero-canvas'
@@ -52,7 +56,9 @@ export const HeroCanvas = () => {
           far: 5000,
         }}
       >
-        <Scene />
+        <Suspense fallback={null}>
+          <Scene />
+        </Suspense>
       </Canvas>
     </Flex>
   )

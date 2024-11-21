@@ -1,14 +1,21 @@
 import { heroVideo, link, project } from '@/app/content-types'
 import { PortfolioCaption } from '@/components/PortfolioCaption'
-import utopiaHero from '@/public/portfolio/utopia/utopia-02.png'
+import utopiaPoster from '@/public/portfolio/utopia/utopia-poster.jpg'
+import utopiaLogo from '@/public/portfolio/utopia/utopia-02.png'
 import { Squircle } from '@squircle-js/react'
+import { PortfolioImage } from '@/components/PortfolioImage'
 
 export const utopia = project({
   slug: 'utopia',
   title: 'Utopia.app',
   subtitle:
     'React Design Tool. Canvas and code update each other in real time.',
-  hero: heroVideo('/portfolio/utopia/utopia-01.mp4', utopiaHero, 'Utopia'),
+  hero: heroVideo(
+    '/portfolio/utopia/utopia-large.mp4',
+    '/portfolio/utopia/utopia-small.mp4',
+    utopiaPoster,
+    'Utopia',
+  ),
   date: '2017–2020',
   tools: ['React', 'TypeScript'],
   content: (
@@ -42,6 +49,11 @@ export const utopia = project({
         Utopia was acquired by Shopify and is currently being integrated into
         their Hydrogen shop-building platform.
       </p>
+      <PortfolioImage
+        src={utopiaLogo}
+        caption='The Utopia logo I designed, affectionately referred to as the "Smiangle". The first of many smiley face logos.'
+        alt='Utopia logo'
+      />
     </>
   ),
   deliverables: 'Design and coding IDE',

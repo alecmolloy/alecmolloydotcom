@@ -38,16 +38,18 @@ export function heroImage(data: StaticImageData, alt: string): HeroImage {
 
 interface HeroVideo {
   type: 'video'
-  url: string
+  largeUrl: string
+  smallUrl: string
   poster: StaticImageData
   posterAlt: string
 }
 export function heroVideo(
-  url: string,
+  largeUrl: string,
+  smallUrl: string,
   poster: StaticImageData,
   posterAlt: string,
 ): HeroVideo {
-  return { type: 'video', url, poster, posterAlt }
+  return { type: 'video', largeUrl, smallUrl, poster, posterAlt }
 }
 
 export function isHeroVideo(hero: Hero): hero is HeroVideo {

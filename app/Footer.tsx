@@ -1,4 +1,5 @@
 import { Container, Flex, Text as Txt } from '@radix-ui/themes'
+import Img from 'next/image'
 import { LocationsScroller } from './LocationsScroller'
 import { defaultContainerProps } from './theme'
 
@@ -71,8 +72,9 @@ export const Footer = () => {
             gapY='4'
             display={{ initial: 'none', sm: 'flex' }}
           >
-            <img
+            <Img
               src='/im-confused-too.svg'
+              loading='lazy'
               alt='Made in UK, But Raised in US, And also Irish. ¯\_(ツ)_/¯ '
               title='But I can work with you in the USA, EU, and UK visa-free :)'
               width={100}

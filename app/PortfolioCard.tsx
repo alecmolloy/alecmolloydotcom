@@ -144,24 +144,26 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
             {project.hero.type === 'image' ? (
               <Img
-                width={1024}
+                placeholder='blur'
                 src={project.hero.data}
                 alt={project.hero.alt}
+                width={700}
+                height={700}
                 style={{
                   width: '100%',
-                  height: '100%',
+                  height: 'auto',
                   objectFit: 'cover',
                 }}
               />
             ) : (
               <>
                 {!isPlaying && (
-                  <img
+                  <Img
                     alt='Play'
                     src='/icons/play-button.svg'
+                    width={64}
+                    height={64}
                     style={{
-                      width: 64,
-                      height: 64,
                       position: 'absolute',
                       top: '50%',
                       left: '50%',
@@ -183,9 +185,10 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
                   loop
                   playsInline
                   controls={false}
-                  src={project.hero.url}
+                  src={project.hero.smallUrl}
                   poster={project.hero.poster.src}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  preload='none'
                 />
               </>
             )}
