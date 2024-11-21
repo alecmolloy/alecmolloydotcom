@@ -16,6 +16,7 @@ export const HeroCanvas = () => {
         initial: 'calc(100vh - 96px)',
         sm: 'calc(100vh - 32px)',
       }}
+      minHeight={{ initial: '300px', sm: '600px' }}
       maxWidth='1136px'
       mx='auto'
       {...defaultContainerProps}
