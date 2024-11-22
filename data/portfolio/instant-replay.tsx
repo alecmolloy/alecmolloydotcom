@@ -7,6 +7,7 @@ export const instantReplay = project({
   subtitle: 'Training software for handstand practice',
   hero: heroVideo(
     '/portfolio/instant-replay/instant-replay-01.mp4',
+    '/portfolio/instant-replay/instant-replay-01.mp4',
     instantReplayPoster,
     'Instant Replay Handstand Training',
   ),

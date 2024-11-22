@@ -1,7 +1,7 @@
 # Performance
 
+- make sure portfolio images are served at sizes commensurate with their actual size
 - make hero canvas load + render much eariler
-- make sure portfolio images are served at smaller sizes
 - serve posters in optimized formats
 
 # Post-launch

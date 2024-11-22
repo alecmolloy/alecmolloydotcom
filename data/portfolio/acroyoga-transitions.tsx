@@ -8,6 +8,7 @@ export const acroyogaTransitions = project(
     subtitle: 'Acro game and training tool',
     hero: heroVideo(
       '/portfolio/acroyoga-transitions/acroyoga-transitions.mp4',
+      '/portfolio/acroyoga-transitions/acroyoga-transitions.mp4',
       acroyogaTransitionsPoster,
       'Acroyoga Transitions',
     ),

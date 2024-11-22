@@ -144,16 +144,11 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
             {project.hero.type === 'image' ? (
               <Img
-                placeholder='blur'
+                quality={50}
+                width={350}
                 src={project.hero.data}
                 alt={project.hero.alt}
-                width={700}
-                height={700}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'cover',
-                }}
+                style={{ width: '100%', height: 'auto' }}
               />
             ) : (
               <>
