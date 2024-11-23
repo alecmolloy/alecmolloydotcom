@@ -1,12 +1,13 @@
 import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import React from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
 import fragmentShader from './shaders/void.frag'
 import vertexShader from './shaders/void.vert'
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 type InteractionState = null | 'hovered' | 'grabbing'
 
@@ -82,7 +83,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
   }, [interactionState])
 
   const frontTexture = useTexture(
-    '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
+    '/void/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
     (texture) => {
       texture.minFilter = THREE.NearestFilter
       texture.magFilter = THREE.NearestFilter
@@ -274,7 +275,6 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 }
 
 useTexture.preload(
-  '/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
+  '/void/xp29_y4gg0s4x63x36x4s0ggzy0okkjgf811xgy1gx118fgjkkozw6226w1y2111x111y21w6226z462y227yd72y2264z264y24eyde4y2462zw64kmggoy28o8x8o8y2oggmk46zy0122cgv1o8y98o1vgc221zy732x6cxc6x23.png',
 )
 useTexture.preload('/void/ajnanam-bandhah.png')
-useTexture.preload('/studio027-small.exr')

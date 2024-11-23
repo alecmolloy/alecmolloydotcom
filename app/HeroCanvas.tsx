@@ -8,6 +8,7 @@ import { Suspense } from 'react'
 import { Header } from './Header'
 import { CameraStartY, Scene } from './Scene'
 import { defaultContainerProps } from './theme'
+import { TurtleMeander } from './TurtleMeander'
 
 export const HeroCanvas = () => {
   return (
@@ -45,21 +46,20 @@ export const HeroCanvas = () => {
           }}
         />
       </noscript>
-      <Loader />
-      <Canvas
-        style={{ flexGrow: 1 }}
-        id='hero-canvas'
-        orthographic
-        camera={{
-          position: [0, CameraStartY, 0],
-          near: 0,
-          far: 5000,
-        }}
-      >
-        <Suspense fallback={null}>
+      <Suspense fallback={<TurtleMeander height={20} />}>
+        <Canvas
+          style={{ flexGrow: 1 }}
+          id='hero-canvas'
+          orthographic
+          camera={{
+            position: [0, CameraStartY, 0],
+            near: 0,
+            far: 5000,
+          }}
+        >
           <Scene />
-        </Suspense>
-      </Canvas>
+        </Canvas>
+      </Suspense>
     </Flex>
   )
 }

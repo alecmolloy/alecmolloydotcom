@@ -31,8 +31,8 @@ export const TurtleCanvas: React.FC<TurtleCanvasProps> = ({
     }
 
     Promise.all([
-      loadImage('/images/turtle-corner-horizontal-square.png'),
-      loadImage('/images/turtle-corner-vertical-square.png'),
+      loadImage('/void/turtle-corner-horizontal-square.png'),
+      loadImage('/void/turtle-corner-vertical-square.png'),
     ])
       .then(([horizontalImg, verticalImg]) => {
         setTurtleHorizontalImg(horizontalImg)

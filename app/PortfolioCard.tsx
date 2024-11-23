@@ -5,6 +5,7 @@ import { animated, useSpring } from '@react-spring/web'
 import { useGesture } from '@use-gesture/react'
 import Img from 'next/image'
 import React from 'react'
+import { LazyVideo } from '@/components/LazyVideo'
 
 interface PortfolioCardProps {
   project: Project
@@ -173,7 +174,7 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
                     }}
                   />
                 )}
-                <video
+                <LazyVideo
                   ref={videoRef}
                   autoPlay
                   muted

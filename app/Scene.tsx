@@ -1,9 +1,8 @@
 'use client'
-import { Environment } from '@react-three/drei'
-import { useLoader, useThree } from '@react-three/fiber'
-import { useEffect, useState } from 'react'
+import { Environment, Preload } from '@react-three/drei'
+import { useThree } from '@react-three/fiber'
+import { Suspense, useEffect, useState } from 'react'
 import * as THREE from 'three'
-import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader'
 import { TurtlePlane } from './TurtlePlane'
 import { Void } from './Void'
 
@@ -33,22 +32,25 @@ export const Scene = () => {
     setEnvironmentRotation(new THREE.Euler(-rotationY, +rotationY / 8, 0))
   }, [viewportScrollY])
 
-  // Preload the environment map
-  const envMap = useLoader(EXRLoader, '/studio027-small.exr')
-
   const voidRadius = Math.min(240, canvasWidth / 2.75, size.height / 3)
 
   return (
     <>
-      <Void
-        radius={voidRadius}
-        position={[0, 256, 0]}
-        affectedByMouse
-        wobbleAmplitude={0.3}
-        wobbleFrequency={0.15}
-      />
       <TurtlePlane />
-      <Environment map={envMap} environmentRotation={environmentRotation} />
+      <Preload all />
+      <Suspense>
+        <Void
+          radius={voidRadius}
+          position={[0, 256, 0]}
+          affectedByMouse
+          wobbleAmplitude={0.3}
+          wobbleFrequency={0.15}
+        />
+        <Environment
+          files='/void/studio027small.exr'
+          environmentRotation={environmentRotation}
+        />
+      </Suspense>
     </>
   )
 }

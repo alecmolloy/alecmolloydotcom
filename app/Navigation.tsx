@@ -1,10 +1,9 @@
 'use client'
+import { NavigationScene } from '@/components/NavigationScene'
 import { Flex, Text as Txt } from '@radix-ui/themes'
 import { animated, useSpring } from '@react-spring/web'
-import { Environment } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
-import { Void } from './Void'
 import { NavLinkHeight, NavLinkMargin } from './theme'
 
 export const sections = ['hero', 'about', 'portfolio', 'contact'] as const
@@ -210,14 +209,7 @@ export const Navigation: React.FunctionComponent = () => {
                         far: 5000,
                       }}
                     >
-                      <Environment files='/studio027-small.exr' />
-                      <Void
-                        position={[0, 0, 0]}
-                        radius={24}
-                        wobbleAmplitude={0.05}
-                        wobbleFrequency={0.4}
-                        affectedByMouse={false}
-                      />
+                      <NavigationScene />
                     </Canvas>
                   ) : (
                     <Txt
