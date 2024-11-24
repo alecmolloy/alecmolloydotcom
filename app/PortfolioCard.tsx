@@ -145,8 +145,10 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
             {project.hero.type === 'image' ? (
               <Img
-                quality={50}
-                width={350}
+                width={breakpoint({
+                  initial: sml(size.initial, 350, 400, 450),
+                  sm: sml(size.sm, 300, 300, 600),
+                })}
                 src={project.hero.data}
                 alt={project.hero.alt}
                 style={{ width: '100%', height: 'auto' }}
@@ -224,6 +226,14 @@ function sml<T>(size: Size, sm: T, md: T, lg: T): T {
     case 'lg': {
       return lg
     }
+  }
+}
+
+function breakpoint(input: { initial: number; sm: number }): number {
+  if (window.innerWidth < 768) {
+    return input.initial
+  } else {
+    return input.sm
   }
 }
 
