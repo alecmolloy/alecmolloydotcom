@@ -229,8 +229,13 @@ function sml<T>(size: Size, sm: T, md: T, lg: T): T {
   }
 }
 
-function breakpoint(input: { initial: number; sm: number }): number {
-  if (window.innerWidth < 768) {
+function breakpoint(input: {
+  initial: number
+  sm: number
+}): number | undefined {
+  if (typeof window === 'undefined') {
+    return undefined
+  } else if (window.innerWidth < 768) {
     return input.initial
   } else {
     return input.sm
