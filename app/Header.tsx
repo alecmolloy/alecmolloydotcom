@@ -1,16 +1,27 @@
+'use client'
+
 import { CTA, CTAVariant } from '@/components/CTA'
 import { Flex, Link, Text as Txt } from '@radix-ui/themes'
-import { instrumentSerif } from './fonts'
 import { defaultContainerProps } from './theme'
-
+import { animated, useTransition } from '@react-spring/web'
+import { AlecMolloyDotCom } from './AlecMolloyDotCom'
 export const Header = ({
   ctaVariant,
-  portfolioPage,
+  portfolioPage = false,
 }: {
   ctaVariant: CTAVariant
   portfolioPage?: boolean
 }) => {
-  return (
+  const transition = useTransition(portfolioPage, {
+    from: {
+      opacity: 0,
+    },
+    enter: {
+      opacity: 1,
+    },
+    delay: 2000,
+  })
+  return transition(({ opacity }) => (
     <Flex
       id='header'
       direction='column'
@@ -20,31 +31,8 @@ export const Header = ({
       position='relative'
       {...(portfolioPage ? defaultContainerProps : {})}
     >
-      <Flex
-        width={{
-          initial: '20em',
-          sm: 'auto',
-        }}
-        justify='center'
-        align='center'
-        style={{ zIndex: 1 }}
-      >
-        <Txt
-          style={{
-            whiteSpace: 'pre-wrap',
-          }}
-          my={{ initial: '3', sm: '4' }}
-          mb={{ initial: '0', sm: '4' }}
-          size='9'
-          align='center'
-          className={instrumentSerif.className}
-        >
-          <Link href='/' style={{ color: '#000', textDecoration: 'none' }}>
-            Alec&nbsp;Molloy Dot&nbsp;Com
-          </Link>
-        </Txt>
-      </Flex>
-      <Flex
+      <AlecMolloyDotCom portfolioPage={portfolioPage} />
+      <AnimatedFlex
         direction='row'
         align='center'
         justify='between'
@@ -52,6 +40,7 @@ export const Header = ({
         position={{ xs: 'absolute' }}
         my={{ initial: '2', sm: 'auto' }}
         height='100%'
+        style={{ opacity }}
       >
         <Txt
           size='5'
@@ -71,7 +60,9 @@ export const Header = ({
           )}
         </Txt>
         <CTA variant={ctaVariant} />
-      </Flex>
+      </AnimatedFlex>
     </Flex>
-  )
+  ))
 }
+
+const AnimatedFlex = animated(Flex)

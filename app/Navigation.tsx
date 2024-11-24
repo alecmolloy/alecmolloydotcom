@@ -74,7 +74,6 @@ export const Navigation: React.FunctionComponent = () => {
     }
   }, [isAutoScrolling])
 
-  // Add this new effect
   React.useEffect(() => {
     const determineInitialActiveSection = () => {
       for (const section of sections) {

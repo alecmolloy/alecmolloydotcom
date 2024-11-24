@@ -1,13 +1,12 @@
 import { a, useSpring } from '@react-spring/three'
 import { MeshTransmissionMaterial, useTexture } from '@react-three/drei'
-import { useFrame, useLoader, useThree } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { useGesture } from '@use-gesture/react'
 import React from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
 import fragmentShader from './shaders/void.frag'
 import vertexShader from './shaders/void.vert'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
 
 type InteractionState = null | 'hovered' | 'grabbing'
 
