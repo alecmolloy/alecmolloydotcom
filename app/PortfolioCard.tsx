@@ -145,10 +145,6 @@ export const PortfolioCard: React.FC<PortfolioCardProps> = ({
 
             {project.hero.type === 'image' ? (
               <Img
-                width={breakpoint({
-                  initial: sml(size.initial, 350, 400, 450),
-                  sm: sml(size.sm, 300, 300, 600),
-                })}
                 src={project.hero.data}
                 alt={project.hero.alt}
                 style={{ width: '100%', height: 'auto' }}
