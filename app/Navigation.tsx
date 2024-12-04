@@ -98,7 +98,7 @@ export const Navigation: React.FunctionComponent = () => {
       id='navigation'
       position='sticky'
       top='0'
-      justify={{ initial: 'center', xl: 'start' }}
+      justify='center'
       style={{ zIndex: 1, height: 0, transition: 'opacity 0.15s ease-in-out' }}
     >
       <Flex
