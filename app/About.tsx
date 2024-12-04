@@ -26,12 +26,7 @@ const P: React.FC<React.ComponentProps<typeof Txt>> = (props) => (
 export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
   return (
     <Box id={id}>
-      <Container
-        size='4'
-        py='4'
-        style={{ paddingTop: 128 }}
-        {...defaultContainerProps}
-      >
+      <Container size='4' pb='4' pt='9' mt='9' {...defaultContainerProps}>
         <Grid {...defaultGridProps}>
           <Flex
             gridColumn={{
