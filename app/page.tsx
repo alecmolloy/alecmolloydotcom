@@ -31,7 +31,7 @@ const Index: React.FunctionComponent = () => {
         '/alec.jpg',
         '/alec-mask.png',
       ].map((src) => (
-        <link rel='preload' href={src} as='image' type='image/png' />
+        <link key={src} rel='preload' href={src} as='image' type='image/png' />
       ))}
       <Box
         id='hero'
