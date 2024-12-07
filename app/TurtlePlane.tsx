@@ -29,7 +29,7 @@ export const TurtlePlane: React.FunctionComponent = () => {
 
   const [canvas, setCanvas] = React.useState<HTMLCanvasElement | null>(null)
   const [canvasTexture, setCanvasTexture] =
-    React.useState<THREE.CanvasTexture | null>(null)
+    React.useState<THREE.Texture | null>(null)
 
   React.useEffect(() => {
     const loadImage = (src: string): Promise<HTMLImageElement> => {

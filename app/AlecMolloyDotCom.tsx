@@ -1,7 +1,7 @@
 'use client'
 
-import { Flex, Link, Text as Txt } from '@radix-ui/themes'
-import { a, useTransition } from '@react-spring/web'
+import { Box, Flex, Link, Text as Txt } from '@radix-ui/themes'
+import { animated, useTransition } from '@react-spring/web'
 import { instrumentSerif } from './fonts'
 
 export const AlecMolloyDotCom = ({
@@ -45,7 +45,7 @@ export const AlecMolloyDotCom = ({
           </Link>
         ) : (
           transition(({ y }) => (
-            <a.div
+            <AnimatedBox
               className={'title-loading-animation'}
               style={{
                 y,
@@ -53,13 +53,15 @@ export const AlecMolloyDotCom = ({
               }}
             >
               Alec&nbsp;Molloy Dot&nbsp;Com
-            </a.div>
+            </AnimatedBox>
           ))
         )}
       </Txt>
     </Flex>
   )
 }
+
+const AnimatedBox = animated(Box)
 
 const AlecMolloyDotComWrapperStyle = {
   display: 'block',

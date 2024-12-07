@@ -13,9 +13,9 @@ export const Scene = () => {
   const canvasWidth = size.width
 
   const [viewportScrollY, setViewportScrollY] = useState(0)
-  const [environmentRotation, setEnvironmentRotation] = useState<THREE.Euler>(
-    new THREE.Euler(0, 0, 0),
-  )
+  const [environmentRotation, setEnvironmentRotation] = useState<
+    [number, number, number]
+  >([0, 0, 0])
 
   useEffect(() => {
     const handleScroll = () => setViewportScrollY(window.scrollY)
@@ -29,7 +29,7 @@ export const Scene = () => {
       Math.min(1, viewportScrollY / window.innerHeight),
     )
     const rotationY = normalizedScrollY * Math.PI * 2
-    setEnvironmentRotation(new THREE.Euler(-rotationY, +rotationY / 8, 0))
+    setEnvironmentRotation([-rotationY, +rotationY / 8, 0])
   }, [viewportScrollY])
 
   const voidRadius = Math.min(240, canvasWidth / 2.75, size.height / 3)

@@ -1,6 +1,6 @@
 'use client'
 import { NavigationScene } from '@/components/NavigationScene'
-import { Flex, Text as Txt } from '@radix-ui/themes'
+import { Box, Flex, Text as Txt } from '@radix-ui/themes'
 import { animated, useSpring } from '@react-spring/web'
 import { Canvas } from '@react-three/fiber'
 import React, { useEffect, useRef, useState } from 'react'
@@ -225,7 +225,7 @@ export const Navigation: React.FunctionComponent = () => {
               </Flex>
             ))}
           </Flex>
-          <animated.div
+          <AnimatedBox
             style={{
               zIndex: -1,
               position: 'absolute',
@@ -246,3 +246,5 @@ export const Navigation: React.FunctionComponent = () => {
     </Flex>
   )
 }
+
+const AnimatedBox = animated(Box)

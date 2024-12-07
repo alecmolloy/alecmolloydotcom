@@ -38,7 +38,7 @@ const countryToEmoji = (countryCode: string) => {
 
 export const LocationsScroller: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [isHovering, setIsHovering] = useState(false)
 
@@ -57,7 +57,7 @@ export const LocationsScroller: React.FC = () => {
   useEffect(() => {
     animationRef.current = requestAnimationFrame(animate)
     return () => {
-      if (animationRef.current) {
+      if (animationRef.current != null) {
         cancelAnimationFrame(animationRef.current)
       }
     }

@@ -1,4 +1,4 @@
-import { BobbingText } from '@/app/components/BobbingText'
+import { BobbingText } from '@/components/BobbingText'
 import { Squircle } from '@squircle-js/react'
 import * as React from 'react'
 

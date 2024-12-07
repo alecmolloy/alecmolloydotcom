@@ -5,8 +5,8 @@ import { useGesture } from '@use-gesture/react'
 import React from 'react'
 import { createNoise4D } from 'simplex-noise'
 import * as THREE from 'three'
-import fragmentShader from './shaders/void.frag'
-import vertexShader from './shaders/void.vert'
+import fragmentShader from '../shaders/void.frag'
+import vertexShader from '../shaders/void.vert'
 
 type InteractionState = null | 'hovered' | 'grabbing'
 
@@ -96,7 +96,7 @@ export const Void: React.FunctionComponent<VoidProps> = ({
 
   const meshRef = React.useRef<THREE.Mesh>(null)
   const noise4D = React.useMemo(() => createNoise4D(), [])
-  const originalPositions = React.useRef<Float32Array>()
+  const originalPositions = React.useRef<Float32Array>(null)
 
   // Create a render target for the custom bump map
   const bumpRenderTarget = React.useMemo(() => {

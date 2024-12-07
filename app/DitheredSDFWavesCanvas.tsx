@@ -3,8 +3,8 @@ import { Flex, FlexProps } from '@radix-ui/themes'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import React, { CSSProperties } from 'react'
 import * as THREE from 'three'
-import fragmentShader from './shaders/dithered-sdf-waves.frag'
-import vertexShader from './shaders/dithered-sdf-waves.vert'
+import fragmentShader from '../shaders/dithered-sdf-waves.frag'
+import vertexShader from '../shaders/dithered-sdf-waves.vert'
 
 interface DitheredSDFWavesCanvasProps {
   darkColor: string

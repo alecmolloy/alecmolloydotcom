@@ -5,7 +5,7 @@ interface LazyVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src: string
   poster?: string
   threshold?: number
-  ref: React.RefObject<HTMLVideoElement>
+  ref: React.RefObject<HTMLVideoElement | null>
 }
 
 export const LazyVideo: React.FunctionComponent<LazyVideoProps> = ({

@@ -6,8 +6,8 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props'
 import Img from 'next/image'
 import React from 'react'
 import * as THREE from 'three'
-import fragmentShader from './shaders/dithered.frag'
-import vertexShader from './shaders/dithered.vert'
+import fragmentShader from '../shaders/dithered.frag'
+import vertexShader from '../shaders/dithered.vert'
 
 interface DitheredMeshProps {
   /** The URL of the image to be dithered. */
