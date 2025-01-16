@@ -9,33 +9,32 @@
     "lint": "next lint"
   },
   "devDependencies": {
-    "@eslint/js": "9.16.0",
-    "@next/eslint-plugin-next": "15.0.4",
-    "@react-three/eslint-plugin": "0.1.1",
-    "@types/node": "22.10.1",
-    "@types/react": "19.0.1",
-    "@types/react-dom": "19.0.1",
-    "@types/three": "0.170.0",
-    "eslint": "9.16.0",
+    "@eslint/js": "9.18.0",
+    "@next/eslint-plugin-next": "15.1.4",
+    "@react-three/eslint-plugin": "0.1.2",
+    "@types/node": "22.10.7",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "@types/three": "0.172.0",
+    "eslint": "9.18.0",
     "eslint-plugin-react-hooks": "5.1.0",
-    "globals": "15.13.0"
+    "globals": "15.14.0"
   },
   "dependencies": {
     "@radix-ui/themes": "3.1.6",
     "@react-spring/three": "9.7.5",
     "@react-spring/web": "9.7.5",
-    "@react-three/drei": "9.120.3",
-    "@react-three/fiber": "9.0.0-rc.1",
+    "@react-three/drei": "9.121.2",
+    "@react-three/fiber": "9.0.0-rc.4",
     "@squircle-js/react": "1.2.0",
     "@use-gesture/react": "10.3.1",
     "@vercel/analytics": "1.4.1",
-    "eslint-config-next": "15.0.4",
-    "next": "15.0.4",
+    "eslint-config-next": "15.1.4",
+    "next": "15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "sharp": "0.33.5",
     "simplex-noise": "4.0.3",
-    "three": "0.171.0",
-    "typescript": "5.7.2"
+    "three": "0.172.0",
+    "typescript": "5.7.3"
   }
 }
