@@ -66,7 +66,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         height: cardHeight / scale,
         x: 0,
         y: 0,
-        scale,
+        scale: scale,
         borderRadius: cardStyle.borderRadius,
         backgroundColor: 'rgba(0, 0, 0, 0)',
         boxShadow: [
@@ -76,7 +76,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
         closeButtonOpacity: 0,
         config: DefaultSpringConfig,
-        heroPadding: 0,
       }
     },
     enter: (slug) => {
@@ -108,7 +107,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
         closeButtonOpacity: 1,
         borderRadius: modalBorderRadius,
-        heroPadding: 8,
 
         config: DefaultSpringConfig,
         onRest: () => {
@@ -129,7 +127,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         height: cardHeight / scale,
         x: 0,
         y: 0,
-        scale,
+        scale: scale,
         backgroundColor: 'rgba(0, 0, 0, 0)',
         boxShadow: [
           '0 24px 36px #0000',
@@ -138,7 +136,6 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
         ].join(', '),
         closeButtonOpacity: 0,
         borderRadius: cardStyle.borderRadius,
-        heroPadding: 0,
 
         config: AggressiveSpringConfig,
         onStart: () => {
@@ -152,13 +149,7 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
     <>
       {modalTransition(
         (
-          {
-            backgroundColor,
-            boxShadow,
-            closeButtonOpacity,
-            heroPadding,
-            ...style
-          },
+          { backgroundColor, boxShadow, closeButtonOpacity, ...style },
           slug,
         ) => {
           const project = slug != null ? projects[slug] : null
@@ -196,8 +187,8 @@ export const PortfolioModal: React.FC<PortfolioModalProps> = ({
                         : `calc(100vh - ${ModalMinPaddingY * 2}px)`,
                       height: '100%',
                       borderRadius: isMobile ? 0 : style.borderRadius,
-                      padding: heroPadding,
                       ...(!settled && style),
+                      padding: 8,
                     }}
                     onClick={(e: React.MouseEvent) => e.stopPropagation()}
                   >
@@ -366,5 +357,4 @@ type ModalTransitionProps = {
   boxShadow: string
   closeButtonOpacity: number
   borderRadius: number
-  heroPadding: number
 }
