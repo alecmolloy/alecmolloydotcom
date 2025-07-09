@@ -56,10 +56,17 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             gridColumn={{ initial: '1 / span 12', xs: 'span 8', md: 'span 6' }}
           >
             <P>
-              I’m a creative technologist specializing in React and Next.js. I
-              work in the pursuit of connection, beauty, and the expansion of
-              consciousness through intentional design. And I’m open to new
-              projects. ʕ&nbsp;•ᴥ•ʔ
+              I’m a creative technologist, and React, React Native, and Next.js
+              specialist. I work in the pursuit of presence, beauty, and the
+              expansion of consciousness through intentional design. And I’m
+              looking for new projects. ʕ&nbsp;•ᴥ•ʔ
+            </P>
+            <P>
+              I’m currently building{' '}
+              <a href='https://tantra112.app'>TANTRA 112</a> with bestselling
+              author and sanskritist Dr. Hareesh Wallis, bringing the revered
+              9th-century yogic practice guide, the{' '}
+              <i>Vijñana-bhairava-tantra</i>, into a guided meditation app.
             </P>
             <P>
               I’ve developed creative tools and educational software at{' '}
@@ -69,7 +76,8 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               at <a href='http://mindoktor.se'>Min Doktor</a>.
             </P>
             <P>
-              Over the last decade I have been obsessed with building tools for{' '}
+              Over the last decade plus, I have been obsessed with building
+              tools for{' '}
               <a href='https://worrydream.com/MediaForThinkingTheUnthinkable/'>
                 thinking unthinkable thoughts
               </a>
@@ -81,7 +89,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             <P>
               My latest projects, including the upcoming{' '}
               <a
-                href={projectURLPath('vbt')}
+                href={projectURLPath('tantra-112')}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -95,8 +103,8 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               >
                 Retreat.Technology
               </a>
-              , embody these themes. But I also just like to have fun with
-              family and friends, which is where{' '}
+              , embody these themes. But family is just as important to me,
+              which is where{' '}
               <a
                 href={projectURLPath('nuclear-connections')}
                 target='_blank'
@@ -108,8 +116,7 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             </P>
             <P>
               Away from my keyboard, I study nondual philosophy and meditation,
-              and am practicing handbalancing, partner acrobatics, and
-              freediving.
+              and practice handbalancing, partner acrobatics, and freediving.
             </P>
             <P>
               I’m actively seeking new <Strong>fully-remote</Strong>{' '}

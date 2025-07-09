@@ -14,7 +14,7 @@ export type ProjectSlug =
   | 'nuclear-connections'
   | 'retreat-technology'
   | 'utopia'
-  | 'vbt'
+  | 'tantra-112'
   | 'make-art'
   | 'isitavocadosornotdotcom'
   | 'portrait-of-five-cubes'
@@ -78,6 +78,7 @@ type Tools =
   | 'CoffeeScript'
   | 'Vercel'
   | 'React Spring'
+  | 'Expo'
 
 interface Collaborator {
   name: string

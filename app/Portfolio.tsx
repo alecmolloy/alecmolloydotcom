@@ -3,9 +3,9 @@ import { PortfolioModal, usePortfolioModal } from '@/components/PortfolioModal'
 import { projects } from '@/data/portfolio'
 import { Container, Grid } from '@radix-ui/themes'
 import React from 'react'
+import DitheredSDFWavesCanvas from './DitheredSDFWavesCanvas'
 import { Section } from './Navigation'
 import { PortfolioCard } from './PortfolioCard'
-import DitheredSDFWavesCanvas from './DitheredSDFWavesCanvas'
 import { defaultContainerProps, defaultGridProps } from './theme'
 
 const simplexNoiseProps = {
@@ -52,12 +52,12 @@ export const Portfolio: React.FunctionComponent<{ id: Section }> = ({ id }) => {
     >
       <Grid {...defaultGridProps}>
         <PortfolioCard
-          project={projects.vbt}
+          project={projects['tantra-112']}
           gridColumn={{ initial: 'span 12', sm: 'span 8' }}
           gridRow='span 2'
           size={{ initial: 'lg', sm: 'lg' }}
           setOpenModal={setOpenModalSlug}
-          modalOpen={openModalSlug === projects.vbt.slug}
+          modalOpen={openModalSlug === projects['tantra-112'].slug}
         />
         <DitheredSDFWavesCanvas
           {...simplexNoiseProps}

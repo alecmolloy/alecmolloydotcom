@@ -12,8 +12,8 @@ import { minDoktor } from './min-doktor'
 import { nuclearConnections } from './nuclear-connections'
 import { portraitOfFiveCubes } from './portrait-of-five-cubes'
 import { retreatTechnology } from './retreat-technology'
+import { tantra112 } from './tantra-112'
 import { utopia } from './utopia'
-import { vbt } from './vbt'
 
 export const projects: Record<ProjectSlug, Project> = {
   'acroyoga-transitions': acroyogaTransitions,
@@ -30,5 +30,5 @@ export const projects: Record<ProjectSlug, Project> = {
   'portrait-of-five-cubes': portraitOfFiveCubes,
   'retreat-technology': retreatTechnology,
   utopia,
-  vbt,
+  'tantra-112': tantra112,
 }

@@ -26,6 +26,8 @@ const locations = new Map([
   ['Campo de Ourique', { country: 'PT' }],
   ['Tavira', { country: 'PT' }],
   ['Sainte-Agathe-des-Monts', { country: 'CA' }],
+  ['Lapa', { country: 'PT' }],
+  ['Ubud', { country: 'ID' }],
 ])
 
 const countryToEmoji = (countryCode: string) => {

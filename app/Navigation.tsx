@@ -109,7 +109,7 @@ export const Navigation: React.FunctionComponent = () => {
         style={{
           position: 'relative',
           height: 84,
-          backgroundColor: '#FFFC',
+          backgroundColor: '#FFF8',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
           borderRadius: 1000,

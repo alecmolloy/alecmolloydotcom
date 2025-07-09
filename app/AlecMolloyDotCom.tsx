@@ -11,10 +11,10 @@ export const AlecMolloyDotCom = ({
 }) => {
   const transition = useTransition(portfolioPage, {
     from: {
-      y: portfolioPage ? 0 : '27vh',
+      y: portfolioPage ? '0vh' : '27vh',
     },
     enter: {
-      y: '0%',
+      y: '0vh',
     },
     delay: 1500,
   })

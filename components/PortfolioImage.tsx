@@ -15,7 +15,7 @@ export function PortfolioImage({
   src,
   alt,
   caption,
-  radius = 16,
+  radius = 24,
   ...props
 }: PortfolioImageProps & FlexProps) {
   return (
