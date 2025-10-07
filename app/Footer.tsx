@@ -63,7 +63,8 @@ export const Footer = () => {
               style={{ color: 'var(--slate-11)' }}
               align={{ initial: 'center', sm: 'left' }}
             >
-              © {new Date().getFullYear()} Alec Molloy. All rights reserved.
+              © {new Date().getFullYear()} Alexander Vincent Molloy. All rights
+              reserved.
             </Txt>
           </Flex>
           <Flex
