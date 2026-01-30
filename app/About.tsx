@@ -1,13 +1,5 @@
-import { CTA } from '@/components/CTA'
 import alecDithered from '@/public/alec-dithered.png'
-import {
-  Box,
-  Container,
-  Flex,
-  Grid,
-  Strong,
-  Text as Txt,
-} from '@radix-ui/themes'
+import { Box, Container, Flex, Grid, Text as Txt } from '@radix-ui/themes'
 import React from 'react'
 import { projectURLPath } from './content-types'
 import DitheredImage from './DitheredImage'
@@ -56,10 +48,9 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
             gridColumn={{ initial: '1 / span 12', xs: 'span 8', md: 'span 6' }}
           >
             <P>
-              I’m a creative technologist, and React, React Native, and Next.js
-              specialist. I work in the pursuit of presence, beauty, and the
-              expansion of consciousness through intentional design. And I’m
-              looking for new projects. ʕ&nbsp;•ᴥ•ʔ
+              I’m a creative technologist, working in the pursuit of presence,
+              beauty, and the expansion of consciousness through intentional
+              design. ʕ&nbsp;•ᴥ•ʔ
             </P>
             <P>
               I’m currently building{' '}
@@ -87,13 +78,13 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               that can help us go to where thoughts cannot.
             </P>
             <P>
-              My latest projects, including the upcoming{' '}
+              My latest projects, including{' '}
               <a
                 href={projectURLPath('tantra-112')}
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                VBT app
+                TANTRA 112
               </a>{' '}
               and{' '}
               <a
@@ -118,12 +109,6 @@ export const About: React.FunctionComponent<{ id: Section }> = ({ id }) => {
               Away from my keyboard, I study nondual philosophy and meditation,
               and practice handbalancing, partner acrobatics, and freediving.
             </P>
-            <P>
-              I’m actively seeking new <Strong>fully-remote</Strong>{' '}
-              opportunities. If you think you’ve got one for me, let’s talk.
-              &#x263A;
-            </P>
-            <CTA />
           </Box>
         </Grid>
       </Container>

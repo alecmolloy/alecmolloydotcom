@@ -16,7 +16,9 @@ export const CTA: React.FunctionComponent<CTAProps> = ({
 
   return (
     <a
-      href='mailto:workwith@alecmolloy.com'
+      href='https://tantra112.app'
+      target='_blank'
+      rel='noopener noreferrer'
       style={{
         textDecoration: 'none',
       }}
@@ -31,7 +33,7 @@ export const CTA: React.FunctionComponent<CTAProps> = ({
           color: textColor,
         }}
       >
-        <BobbingText>Work with me →</BobbingText>
+        <BobbingText>Tantra 112 →</BobbingText>
       </Squircle>
     </a>
   )

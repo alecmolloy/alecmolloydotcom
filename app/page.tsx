@@ -3,7 +3,6 @@ import { Box } from '@radix-ui/themes'
 import { Metadata } from 'next'
 import React from 'react'
 import { About } from './About'
-import { Contact } from './Contact'
 import { Footer } from './Footer'
 import { HeroArtwork } from './HeroArtwork'
 import { Navigation } from './Navigation'
@@ -48,7 +47,6 @@ const Index: React.FunctionComponent = () => {
         <About id='about' />
         <Portfolio id={PortfolioId} />
       </Box>
-      <Contact id='contact' />
       <Footer />
       <TurtleMeander height={8} />
     </>

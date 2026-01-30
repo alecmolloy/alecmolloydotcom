@@ -2,9 +2,9 @@
 
 import { CTA, CTAVariant } from '@/components/CTA'
 import { Flex, Link, Text as Txt } from '@radix-ui/themes'
-import { defaultContainerProps } from './theme'
 import { animated, useTransition } from '@react-spring/web'
 import { AlecMolloyDotCom } from './AlecMolloyDotCom'
+import { defaultContainerProps } from './theme'
 export const Header = ({
   ctaVariant,
   portfolioPage = false,
@@ -56,7 +56,7 @@ export const Header = ({
               ← Home
             </Link>
           ) : (
-            'For Hire'
+            'Ubud, Bali'
           )}
         </Txt>
         <CTA variant={ctaVariant} />

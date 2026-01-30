@@ -14,7 +14,7 @@ export const tantra112 = project({
   title: 'TANTRA 112',
   subtitle: 'Meditation App — Design, Illustration, React Native App',
   hero: heroImage(vbt01, 'Vijñāna Bhairava Tantra'),
-  date: 'Coming August 2025',
+  date: 'In private beta',
   tools: ['React Native', 'Expo', 'TypeScript', 'Figma', 'Midjourney'],
   content: (
     <>
