@@ -1,14 +1,31 @@
-import { Instrument_Sans, Instrument_Serif } from 'next/font/google'
+import localFont from 'next/font/local'
 
-export const instrumentSans = Instrument_Sans({
-  subsets: ['latin-ext'],
+export const instrumentSans = localFont({
+  src: [
+    {
+      path: '../public/fonts/InstrumentSans-App.woff2',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/InstrumentSans-App-Italic.woff2',
+      style: 'italic',
+    },
+  ],
   variable: '--font-instrument-sans',
-  style: ['normal', 'italic'],
 })
 
-export const instrumentSerif = Instrument_Serif({
-  weight: '400',
-  subsets: ['latin-ext'],
-  style: 'normal',
+export const instrumentSerif = localFont({
+  src: [
+    {
+      path: '../public/fonts/InstrumentSerif-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/InstrumentSerif-Italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+  ],
   variable: '--font-instrument-serif',
 })
